@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment": "ordered_sector_harmonic_grid_oracle",
+  "particles": 3,
+  "continuum_energy": 4.5,
+  "points": [
+    {
+      "grid_points": 7,
+      "spacing": 0.6,
+      "grid_min": -1.7999999999999998,
+      "grid_max": 1.7999999999999998,
+      "ordered_dimension": 35,
+      "matrix_max_abs_difference": 0.0,
+      "ordered_ground_energy": 4.5606908570289875,
+      "exterior_ground_energy": 4.5606908570289875,
+      "occupied_orbital_energy_sum": 4.5606908570289875,
+      "ordered_exterior_absolute_difference": 0.0,
+      "ordered_orbital_absolute_difference": 0.0,
+      "error_vs_continuum": 0.060690857028987466
+    },
+    {
+      "grid_points": 9,
+      "spacing": 0.6,
+      "grid_min": -2.4,
+      "grid_max": 2.4,
+      "ordered_dimension": 84,
+      "matrix_max_abs_difference": 0.0,
+      "ordered_ground_energy": 4.30847634618061,
+      "exterior_ground_energy": 4.30847634618061,
+      "occupied_orbital_energy_sum": 4.308476346180591,
+      "ordered_exterior_absolute_difference": 0.0,
+      "ordered_orbital_absolute_difference": 1.9539925233402755e-14,
+      "error_vs_continuum": -0.19152365381938985
+    },
+    {
+      "grid_points": 11,
+      "spacing": 0.6,
+      "grid_min": -3.0,
+      "grid_max": 3.0,
+      "ordered_dimension": 165,
+      "matrix_max_abs_difference": 0.0,
+      "ordered_ground_energy": 4.274903349634691,
+      "exterior_ground_energy": 4.274903349634691,
+      "occupied_orbital_energy_sum": 4.274903349634659,
+      "ordered_exterior_absolute_difference": 0.0,
+      "ordered_orbital_absolute_difference": 3.197442310920451e-14,
+      "error_vs_continuum": -0.2250966503653089
+    },
+    {
+      "grid_points": 13,
+      "spacing": 0.6,
+      "grid_min": -3.5999999999999996,
+      "grid_max": 3.5999999999999996,
+      "ordered_dimension": 286,
+      "matrix_max_abs_difference": 0.0,
+      "ordered_ground_energy": 4.2727468835109095,
+      "exterior_ground_energy": 4.2727468835109095,
+      "occupied_orbital_energy_sum": 4.272746883510953,
+      "ordered_exterior_absolute_difference": 0.0,
+      "ordered_orbital_absolute_difference": 4.3520742565306136e-14,
+      "error_vs_continuum": -0.22725311648909052
+    }
+  ]
+}

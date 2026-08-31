@@ -6,6 +6,8 @@ flowchart LR
     Operators --> Hamiltonian[Continuous Hamiltonian]
     Basis --> Exterior[Exterior algebra]
     Exterior --> State[FEMPS state]
+    Grid[Coordinate grid] --> Ordered[Ordered Weyl chamber]
+    Ordered --> OrderedOracle[Ordered-sector oracle]
     Lattice[latticeTN AD/MPS backend] --> Baseline[2201 baseline]
     Hamiltonian --> Baseline
     Hamiltonian --> Contract[Exterior contraction engine]
@@ -23,6 +25,8 @@ flowchart LR
 - `femps.baselines`: reproducible non-fermionic functional-TN baselines.
 - `femps.exterior`: wedge/forms/reference materialization and the conditionally
   admitted fixed-number Pfaffian contraction engine.
+- `femps.ordered_sector`: exact normalized chamber maps and local coordinate-grid
+  hard-wall oracles for small-system representation comparisons.
 - `femps.states`: Slater, explicit antisymmetric, and FEMPS states.
 - `femps.algorithms`: contractions and optimization admitted after exact tests.
 - `math/`: proof and certificate pipelines, isolated from production solvers.

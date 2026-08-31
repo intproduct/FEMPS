@@ -98,3 +98,17 @@
   `(1,6,15,20,15,6,1)` versus FEMPS correlation bond one; at
   `D=10,kappa=0.1`, greedy K=2 reaches `4.765e-6` finite-basis error while the
   explicit ordinary tensor has full internal ranks `(10,45,120,45,10)`.
+- Started Phase 8 with a non-materialized `N=8,D=10` Blackwell benchmark. Blind
+  polynomial K=1 training reaches energy `32` within `2.81e-13` of an
+  independent 45-dimensional exterior truth while avoiding the `10^8`-entry
+  ordinary particle tensor.
+- Defined the normalized ordered-coordinate isometry, collision-wall boundary,
+  distance-coordinate kinetic operator, and a three-way comparison protocol.
+  A local harmonic-grid oracle agrees entrywise with independent exterior
+  Hamiltonians for four `N=3` grid sizes.
+- Completed the interacting `N=8,D=10,kappa=0.02` point without ordinary-tensor
+  materialization. Single-AGP continuation reaches `3.709e-6` finite-basis
+  error with polynomial/exterior agreement at `7.82e-14`.
+- Gate B keeps finite-AGP FEMPS as the E6 production solver and the exact
+  ordered-sector grid path as a complementary small-system control; no
+  asymptotic superiority claim is made.

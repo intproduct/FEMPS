@@ -30,8 +30,11 @@ is gated by an explicit contraction-complexity audit.
   noninteracting fermions have ordinary ranks `(1,6,15,20,15,6,1)` versus
   FEMPS correlation bond one; the interacting `N=6,D=10,K=2` benchmark reaches
   `4.765e-6` finite-basis error with independent exterior truth.
+- Phase 8 reaches `N=8` without materializing the `10^8`-entry particle tensor
+  and adds an exact ordered-coordinate hard-wall oracle as an independent
+  competing-representation control.
 
-See [the active competing-representation plan](docs/exec-plans/active/phase8.md),
+See [the active soft-Coulomb plan](docs/exec-plans/active/phase9.md),
 [the Pfaffian theory](docs/theory/pfaffian_subclass.md), and
 [the 2201 reproduction report](docs/experiments/2201_baseline_report.md).
 

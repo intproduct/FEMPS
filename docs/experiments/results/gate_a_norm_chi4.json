@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment": "gate_a_exact_norm_scaling",
+  "environment": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128",
+    "device": "cpu",
+    "dtype": "complex128"
+  },
+  "scan": {
+    "n_min": 5,
+    "n_max": 5,
+    "chi": 4,
+    "repeats": 2,
+    "output": "docs\\experiments\\results\\gate_a_norm_chi4.json"
+  },
+  "records": [
+    {
+      "N": 5,
+      "D": 10,
+      "chi": 4,
+      "timing_seconds_median": {
+        "exterior": 0.16943494998849928,
+        "paths": 3.369188849988859
+      },
+      "norm_values": {
+        "exterior": 3.6016713291547355,
+        "paths": 3.601671329154824
+      },
+      "relative_disagreement": {
+        "exterior": 0.0,
+        "paths": 2.4536873213498524e-14
+      },
+      "structural_counts": {
+        "full_tensor_coefficients": 100000,
+        "virtual_paths": 256,
+        "path_pair_determinants": 65536,
+        "exterior_dp_multiply_adds": 25720,
+        "exterior_dp_peak_coefficients": 840,
+        "final_exterior_coefficients": 252
+      }
+    }
+  ]
+}

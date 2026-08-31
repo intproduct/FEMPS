@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "experiment": "fermion_e4_oracle_finite_agp_rank_sweep",
+  "interpretation": "Exact finite-basis eigenvectors are used for span fitting; this is a representation diagnostic and initializer, not blind optimization.",
+  "D": 10,
+  "N": 4,
+  "kappa": 0.35,
+  "continuum_reference_energy": 12.118950038622252,
+  "finite_basis_reference_energy": 12.119974234823253,
+  "exterior_dimension": 210,
+  "steps": 1500,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "all_runs": [
+    {
+      "K": 1,
+      "seed": 0,
+      "infidelity": 0.00043699464540636335,
+      "explicit_exterior_energy": 12.12269327667815,
+      "error_vs_finite_basis": 0.0027190418548972417,
+      "elapsed_seconds": 1.5676039999816567
+    },
+    {
+      "K": 2,
+      "seed": 0,
+      "infidelity": 6.962175005398308e-07,
+      "explicit_exterior_energy": 12.11998278450311,
+      "error_vs_finite_basis": 8.549679856528769e-06,
+      "elapsed_seconds": 2.1406106000067666
+    },
+    {
+      "K": 4,
+      "seed": 0,
+      "infidelity": 3.6609153508671e-07,
+      "explicit_exterior_energy": 12.11997971106653,
+      "error_vs_finite_basis": 5.476243277513504e-06,
+      "elapsed_seconds": 2.2393118999898434
+    },
+    {
+      "K": 8,
+      "seed": 0,
+      "infidelity": 4.752583349088013e-08,
+      "explicit_exterior_energy": 12.1199752638439,
+      "error_vs_finite_basis": 1.0290206464702578e-06,
+      "elapsed_seconds": 2.3112050000345334
+    },
+    {
+      "K": 1,
+      "seed": 1,
+      "infidelity": 0.00047831037737322557,
+      "explicit_exterior_energy": 12.122825769223093,
+      "error_vs_finite_basis": 0.0028515343998396503,
+      "elapsed_seconds": 1.4729595999233425
+    },
+    {
+      "K": 2,
+      "seed": 1,
+      "infidelity": 7.717152634700852e-07,
+      "explicit_exterior_energy": 12.119984223318587,
+      "error_vs_finite_basis": 9.988495333956848e-06,
+      "elapsed_seconds": 2.1489604000234976
+    },
+    {
+      "K": 4,
+      "seed": 1,
+      "infidelity": 3.6663400715397643e-07,
+      "explicit_exterior_energy": 12.119979551949104,
+      "error_vs_finite_basis": 5.317125850723414e-06,
+      "elapsed_seconds": 2.2343873999780044
+    },
+    {
+      "K": 8,
+      "seed": 1,
+      "infidelity": 7.410966984533474e-08,
+      "explicit_exterior_energy": 12.119975740518147,
+      "error_vs_finite_basis": 1.5056948932112846e-06,
+      "elapsed_seconds": 2.4080822999821976
+    },
+    {
+      "K": 1,
+      "seed": 2,
+      "infidelity": 0.0004856083762710961,
+      "explicit_exterior_energy": 12.122866262347127,
+      "error_vs_finite_basis": 0.0028920275238739634,
+      "elapsed_seconds": 1.5130426000105217
+    },
+    {
+      "K": 2,
+      "seed": 2,
+      "infidelity": 5.095928803378058e-07,
+      "explicit_exterior_energy": 12.1199804723408,
+      "error_vs_finite_basis": 6.2375175460260834e-06,
+      "elapsed_seconds": 2.1619931999593973
+    },
+    {
+      "K": 4,
+      "seed": 2,
+      "infidelity": 2.3552963090978096e-07,
+      "explicit_exterior_energy": 12.119978012694492,
+      "error_vs_finite_basis": 3.777871238952457e-06,
+      "elapsed_seconds": 2.250851499964483
+    },
+    {
+      "K": 8,
+      "seed": 2,
+      "infidelity": 3.884709742774106e-08,
+      "explicit_exterior_energy": 12.119975013271644,
+      "error_vs_finite_basis": 7.784483901929207e-07,
+      "elapsed_seconds": 2.454034899943508
+    }
+  ],
+  "best_by_K": [
+    {
+      "K": 1,
+      "selected_seed": 0,
+      "infidelity": 0.00043699464540636335,
+      "explicit_exterior_energy": 12.12269327667815,
+      "polynomial_energy": 12.122693276678147,
+      "polynomial_explicit_absolute_difference": 3.552713678800501e-15,
+      "error_vs_finite_basis": 0.002719041854893689,
+      "error_vs_continuum": 0.0037432380558950484,
+      "polynomial_norm": 0.9995630053190103,
+      "polynomial_evaluation_seconds": 0.01556870003696531,
+      "ordinary_particle_tt_ranks": [
+        10,
+        45,
+        10
+      ]
+    },
+    {
+      "K": 2,
+      "selected_seed": 2,
+      "infidelity": 5.095928803378058e-07,
+      "explicit_exterior_energy": 12.1199804723408,
+      "polynomial_energy": 12.119980472340806,
+      "polynomial_explicit_absolute_difference": 7.105427357601002e-15,
+      "error_vs_finite_basis": 6.237517553131511e-06,
+      "error_vs_continuum": 0.001030433718554491,
+      "polynomial_norm": 0.999999490360181,
+      "polynomial_evaluation_seconds": 0.04258030001074076,
+      "ordinary_particle_tt_ranks": [
+        10,
+        45,
+        10
+      ]
+    },
+    {
+      "K": 4,
+      "selected_seed": 2,
+      "infidelity": 2.3552963090978096e-07,
+      "explicit_exterior_energy": 12.119978012694492,
+      "polynomial_energy": 12.119978012694494,
+      "polynomial_explicit_absolute_difference": 1.7763568394002505e-15,
+      "error_vs_finite_basis": 3.777871240728814e-06,
+      "error_vs_continuum": 0.0010279740722420883,
+      "polynomial_norm": 0.9999997644279806,
+      "polynomial_evaluation_seconds": 0.16622229991480708,
+      "ordinary_particle_tt_ranks": [
+        10,
+        45,
+        10
+      ]
+    },
+    {
+      "K": 8,
+      "selected_seed": 2,
+      "infidelity": 3.884709742774106e-08,
+      "explicit_exterior_energy": 12.119975013271644,
+      "polynomial_energy": 12.119975013271638,
+      "polynomial_explicit_absolute_difference": 5.329070518200751e-15,
+      "error_vs_finite_basis": 7.784483848638502e-07,
+      "error_vs_continuum": 0.0010249746493862233,
+      "polynomial_norm": 0.9999999611151152,
+      "polynomial_evaluation_seconds": 0.674287399975583,
+      "ordinary_particle_tt_ranks": [
+        10,
+        45,
+        10
+      ]
+    }
+  ]
+}

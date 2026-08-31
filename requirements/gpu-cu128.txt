@@ -1,0 +1,12 @@
+--index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0
+
+# Resolve the remaining packages from PyPI rather than the PyTorch wheel index.
+--extra-index-url https://pypi.org/simple
+numpy==2.3.5
+pytest==8.4.2
+pytest-cov==7.0.0
+tqdm==4.67.1
+matplotlib==3.10.6
+scipy==1.16.2
+

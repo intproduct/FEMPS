@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "experiment": "fermion_e4_exterior_truth_sweep",
+  "particles": 4,
+  "omega": 1.0,
+  "dtype": "complex128",
+  "formula": "omega/2 + (N^2-1)/2*sqrt(omega^2+N*kappa)",
+  "records": [
+    {
+      "kappa": 0.0,
+      "continuum_energy": 8.0,
+      "basis_scan": [
+        {
+          "D": 4,
+          "exterior_dimension": 1,
+          "finite_basis_energy": 8.0,
+          "error_vs_continuum": 0.0,
+          "elapsed_seconds": 0.002584500005468726
+        },
+        {
+          "D": 6,
+          "exterior_dimension": 15,
+          "finite_basis_energy": 8.0,
+          "error_vs_continuum": 0.0,
+          "elapsed_seconds": 0.005600999924354255
+        },
+        {
+          "D": 8,
+          "exterior_dimension": 70,
+          "finite_basis_energy": 8.0,
+          "error_vs_continuum": 0.0,
+          "elapsed_seconds": 0.044109500013291836
+        },
+        {
+          "D": 10,
+          "exterior_dimension": 210,
+          "finite_basis_energy": 8.0,
+          "error_vs_continuum": 0.0,
+          "elapsed_seconds": 0.23164180002640933
+        },
+        {
+          "D": 12,
+          "exterior_dimension": 495,
+          "finite_basis_energy": 8.0,
+          "error_vs_continuum": 0.0,
+          "elapsed_seconds": 0.584133299998939
+        }
+      ]
+    },
+    {
+      "kappa": 0.1,
+      "continuum_energy": 9.374119674649425,
+      "basis_scan": [
+        {
+          "D": 4,
+          "exterior_dimension": 1,
+          "finite_basis_energy": 9.5,
+          "error_vs_continuum": 0.12588032535057536,
+          "elapsed_seconds": 0.002189899911172688
+        },
+        {
+          "D": 6,
+          "exterior_dimension": 15,
+          "finite_basis_energy": 9.377127455451346,
+          "error_vs_continuum": 0.0030077808019211005,
+          "elapsed_seconds": 0.05023329996038228
+        },
+        {
+          "D": 8,
+          "exterior_dimension": 70,
+          "finite_basis_energy": 9.374163278745822,
+          "error_vs_continuum": 4.3604096397587e-05,
+          "elapsed_seconds": 0.3156225000275299
+        },
+        {
+          "D": 10,
+          "exterior_dimension": 210,
+          "finite_basis_energy": 9.37412014176566,
+          "error_vs_continuum": 4.6711623546968895e-07,
+          "elapsed_seconds": 1.198201399995014
+        },
+        {
+          "D": 12,
+          "exterior_dimension": 495,
+          "finite_basis_energy": 9.374119678810201,
+          "error_vs_continuum": 4.160776612138761e-09,
+          "elapsed_seconds": 3.731379700009711
+        }
+      ]
+    },
+    {
+      "kappa": 0.35,
+      "continuum_energy": 12.118950038622252,
+      "basis_scan": [
+        {
+          "D": 4,
+          "exterior_dimension": 1,
+          "finite_basis_energy": 13.25,
+          "error_vs_continuum": 1.131049961377748,
+          "elapsed_seconds": 0.002279600012116134
+        },
+        {
+          "D": 6,
+          "exterior_dimension": 15,
+          "finite_basis_energy": 12.259823862175296,
+          "error_vs_continuum": 0.14087382355304356,
+          "elapsed_seconds": 0.05042879993561655
+        },
+        {
+          "D": 8,
+          "exterior_dimension": 70,
+          "finite_basis_energy": 12.132671582575963,
+          "error_vs_continuum": 0.013721543953710835,
+          "elapsed_seconds": 0.36388270009774715
+        },
+        {
+          "D": 10,
+          "exterior_dimension": 210,
+          "finite_basis_energy": 12.119974234823253,
+          "error_vs_continuum": 0.0010241962010013594,
+          "elapsed_seconds": 1.4100285999011248
+        },
+        {
+          "D": 12,
+          "exterior_dimension": 495,
+          "finite_basis_energy": 12.119013172498388,
+          "error_vs_continuum": 6.313387613587906e-05,
+          "elapsed_seconds": 3.8651544000022113
+        }
+      ]
+    },
+    {
+      "kappa": 0.8,
+      "continuum_energy": 15.8704261489394,
+      "basis_scan": [
+        {
+          "D": 4,
+          "exterior_dimension": 1,
+          "finite_basis_energy": 20.0,
+          "error_vs_continuum": 4.1295738510606,
+          "elapsed_seconds": 0.0021838999819010496
+        },
+        {
+          "D": 6,
+          "exterior_dimension": 15,
+          "finite_basis_energy": 16.873194640479625,
+          "error_vs_continuum": 1.002768491540225,
+          "elapsed_seconds": 0.051025800057686865
+        },
+        {
+          "D": 8,
+          "exterior_dimension": 70,
+          "finite_basis_energy": 16.10379928188361,
+          "error_vs_continuum": 0.23337313294421058,
+          "elapsed_seconds": 0.3653620999539271
+        },
+        {
+          "D": 10,
+          "exterior_dimension": 210,
+          "finite_basis_energy": 15.91712337007618,
+          "error_vs_continuum": 0.04669722113677999,
+          "elapsed_seconds": 1.5778999000322074
+        },
+        {
+          "D": 12,
+          "exterior_dimension": 495,
+          "finite_basis_energy": 15.878381332756332,
+          "error_vs_continuum": 0.007955183816932276,
+          "elapsed_seconds": 3.745140500017442
+        }
+      ]
+    }
+  ]
+}

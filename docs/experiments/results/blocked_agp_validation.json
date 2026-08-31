@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment": "blocked_agp_exact_and_gpu_validation",
+  "small_truth": {
+    "D": 5,
+    "N": 3,
+    "femps_coefficient_max_abs_error": 2.306595211858756e-16,
+    "norm_absolute_error": 4.440892098500626e-16,
+    "overlap_absolute_error": 4.577566798522237e-16,
+    "one_body_absolute_error": 7.366438825762332e-15,
+    "two_body_absolute_error": 4.946214420749287e-16,
+    "norm_gradient_max_abs_error": 1.130466570252318e-14
+  },
+  "gpu_parity": {
+    "D": 32,
+    "N": 21,
+    "pairs": 10,
+    "dtype": "complex128",
+    "device": "cuda:2",
+    "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+    "compute_capability": [
+      12,
+      0
+    ],
+    "cpu_energy": -0.383815895040597,
+    "gpu_energy": -0.38381589498986024,
+    "energy_absolute_difference": 5.0736748136159804e-11,
+    "pair_gradient_max_abs_difference": 4.557129487955522e-12,
+    "blocked_gradient_max_abs_difference": 5.8032147682195535e-12
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "absolute_error": 4.928041627594304e-05,
+  "best_recorded_absolute_error": 4.928041627594304e-05,
+  "best_recorded_energy": 1.8787441451997815,
+  "config": {
+    "basis_order": 6,
+    "bond_dimension": 16,
+    "device": "auto",
+    "final_learning_rate": 1e-05,
+    "gamma": -0.5,
+    "learning_rate": 0.01,
+    "num_oscillators": 4,
+    "omega": 1.0,
+    "record_points": 20,
+    "seed": 0,
+    "steps": 1500
+  },
+  "elapsed_seconds": 40.41248459997587,
+  "energy_history": [
+    {
+      "energy": 12.47273908061039,
+      "learning_rate": 0.01,
+      "step": 0
+    },
+    {
+      "energy": 1.8822457883369836,
+      "learning_rate": 0.009938503261272725,
+      "step": 75
+    },
+    {
+      "energy": 1.879078853805049,
+      "learning_rate": 0.009755527298894309,
+      "step": 150
+    },
+    {
+      "energy": 1.8788733036697773,
+      "learning_rate": 0.009455577588320909,
+      "step": 225
+    },
+    {
+      "energy": 1.8788127678204831,
+      "learning_rate": 0.009046039886902875,
+      "step": 300
+    },
+    {
+      "energy": 1.8787862233619237,
+      "learning_rate": 0.008536998372026804,
+      "step": 375
+    },
+    {
+      "energy": 1.878772012327022,
+      "learning_rate": 0.007940987335200904,
+      "step": 450
+    },
+    {
+      "energy": 1.878763416839776,
+      "learning_rate": 0.007272682546199036,
+      "step": 525
+    },
+    {
+      "energy": 1.8787577665137096,
+      "learning_rate": 0.006548539886902863,
+      "step": 600
+    },
+    {
+      "energy": 1.8787538444505252,
+      "learning_rate": 0.005786390152875954,
+      "step": 675
+    },
+    {
+      "energy": 1.878751031056596,
+      "learning_rate": 0.005004999999999998,
+      "step": 750
+    },
+    {
+      "energy": 1.878748975833457,
+      "learning_rate": 0.004223609847124048,
+      "step": 825
+    },
+    {
+      "energy": 1.878747462602698,
+      "learning_rate": 0.003461460113097139,
+      "step": 900
+    },
+    {
+      "energy": 1.8787463498219332,
+      "learning_rate": 0.0027373174538009655,
+      "step": 975
+    },
+    {
+      "energy": 1.8787455409754856,
+      "learning_rate": 0.0020690126647990984,
+      "step": 1050
+    },
+    {
+      "energy": 1.8787449679051944,
+      "learning_rate": 0.0014730016279731965,
+      "step": 1125
+    },
+    {
+      "energy": 1.8787445803382246,
+      "learning_rate": 0.000963960113097139,
+      "step": 1200
+    },
+    {
+      "energy": 1.8787443386605187,
+      "learning_rate": 0.0005544224116791031,
+      "step": 1275
+    },
+    {
+      "energy": 1.8787442084655612,
+      "learning_rate": 0.0002544727011057078,
+      "step": 1350
+    },
+    {
+      "energy": 1.8787441561312674,
+      "learning_rate": 7.149673872728745e-05,
+      "step": 1425
+    },
+    {
+      "energy": 1.8787441451997815,
+      "learning_rate": 1e-05,
+      "step": 1500
+    }
+  ],
+  "environment": {
+    "compute_capability": [
+      12,
+      0
+    ],
+    "cuda_runtime": "12.8",
+    "device": "cuda:2",
+    "femps": "0.0.1",
+    "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+    "latticetn": "0.1.0",
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128"
+  },
+  "experiment": "2201_two_body_functional_mps",
+  "final_energy": 1.8787441451997815,
+  "initial_energy": 12.47273908061039,
+  "parameter_count": 1224,
+  "peak_cuda_memory_bytes": 17497600,
+  "reference_energy": 1.8786948647835056,
+  "schema_version": 1,
+  "variational_margin": 4.928041627594304e-05
+}

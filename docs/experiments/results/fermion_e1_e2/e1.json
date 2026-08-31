@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "experiment": "functional_pfaffian_harmonic_pair",
+  "benchmark": "E1",
+  "config": {
+    "basis_order": 12,
+    "kappa": 0.0,
+    "omega": 1.0,
+    "steps": 1000,
+    "learning_rate": 0.03,
+    "final_learning_rate": 1e-05,
+    "seed": 0,
+    "device": "auto",
+    "record_points": 20,
+    "checkpoint_every": 100
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128",
+    "device": "cuda:2",
+    "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+    "compute_capability": [
+      12,
+      0
+    ]
+  },
+  "resumed": false,
+  "completed": true,
+  "completed_steps": 1000,
+  "continuum_reference_energy": 2.0,
+  "truncated_reference_energy": 1.9999999999999993,
+  "initial_energy": 11.1617192247394,
+  "final_energy": 2.0,
+  "error_vs_continuum": 0.0,
+  "error_vs_truncated": 6.661338147750939e-16,
+  "variational_margin_truncated": 6.661338147750939e-16,
+  "pair_decomposition_length": 1,
+  "ordinary_particle_tt_ranks": [
+    2
+  ],
+  "antisymmetry_residual": 0.0,
+  "energy_history": [
+    {
+      "step": 0,
+      "energy": 11.1617192247394,
+      "learning_rate": 0.03
+    },
+    {
+      "step": 50,
+      "energy": 2.002189617915508,
+      "learning_rate": 0.029815386667224074
+    },
+    {
+      "step": 100,
+      "energy": 2.0000338225721164,
+      "learning_rate": 0.02926609246184581
+    },
+    {
+      "step": 150,
+      "energy": 2.000169754735174,
+      "learning_rate": 0.028365642830204558
+    },
+    {
+      "step": 200,
+      "energy": 2.000333852653597,
+      "learning_rate": 0.027136209830652323
+    },
+    {
+      "step": 250,
+      "energy": 2.0000158729626922,
+      "learning_rate": 0.025608066183892275
+    },
+    {
+      "step": 300,
+      "energy": 2.0006991398620904,
+      "learning_rate": 0.023818839858125634
+    },
+    {
+      "step": 350,
+      "energy": 2.0000033734778255,
+      "learning_rate": 0.02181258754359451
+    },
+    {
+      "step": 400,
+      "energy": 2.000000016964204,
+      "learning_rate": 0.019638709830652343
+    },
+    {
+      "step": 450,
+      "energy": 2.000000000054021,
+      "learning_rate": 0.017350734803278273
+    },
+    {
+      "step": 500,
+      "energy": 2.000000000000237,
+      "learning_rate": 0.015005000000000006
+    },
+    {
+      "step": 550,
+      "energy": 2.000000000000001,
+      "learning_rate": 0.01265926519672175
+    },
+    {
+      "step": 600,
+      "energy": 2.0,
+      "learning_rate": 0.01037129016934768
+    },
+    {
+      "step": 650,
+      "energy": 2.0,
+      "learning_rate": 0.008197412456405507
+    },
+    {
+      "step": 700,
+      "energy": 2.0,
+      "learning_rate": 0.006191160141874373
+    },
+    {
+      "step": 750,
+      "energy": 2.0,
+      "learning_rate": 0.004401933816107723
+    },
+    {
+      "step": 800,
+      "energy": 2.0,
+      "learning_rate": 0.002873790169347667
+    },
+    {
+      "step": 850,
+      "energy": 2.0,
+      "learning_rate": 0.0016443571697954264
+    },
+    {
+      "step": 900,
+      "energy": 2.0,
+      "learning_rate": 0.0007439075381541731
+    },
+    {
+      "step": 950,
+      "energy": 2.0,
+      "learning_rate": 0.00019461333277591086
+    },
+    {
+      "step": 1000,
+      "energy": 2.0,
+      "learning_rate": 1e-05
+    }
+  ],
+  "elapsed_seconds_this_call": 25.206254899967462,
+  "peak_cuda_memory_bytes": 19277312
+}

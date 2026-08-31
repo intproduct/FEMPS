@@ -1,0 +1,207 @@
+{
+  "basis_sweep": [
+    {
+      "D": 2,
+      "absolute_error": 0.027108297539122805,
+      "chi": 16,
+      "elapsed_seconds": 40.62908039998729,
+      "final_energy": 1.9058031623226284,
+      "parameter_count": 40,
+      "peak_cuda_memory_bytes": 17093120,
+      "seed": 0,
+      "variational_margin": 0.027108297539122805
+    },
+    {
+      "D": 4,
+      "absolute_error": 0.0011324835463821792,
+      "chi": 16,
+      "elapsed_seconds": 40.22265040001366,
+      "final_energy": 1.8798273483298877,
+      "parameter_count": 544,
+      "peak_cuda_memory_bytes": 17266688,
+      "seed": 0,
+      "variational_margin": 0.0011324835463821792
+    },
+    {
+      "D": 6,
+      "absolute_error": 4.928041627594304e-05,
+      "chi": 16,
+      "elapsed_seconds": 40.41248459997587,
+      "final_energy": 1.8787441451997815,
+      "parameter_count": 1224,
+      "peak_cuda_memory_bytes": 17497600,
+      "seed": 0,
+      "variational_margin": 4.928041627594304e-05
+    },
+    {
+      "D": 8,
+      "absolute_error": 1.159953014551185e-05,
+      "chi": 16,
+      "elapsed_seconds": 40.48564660002012,
+      "final_energy": 1.878706464313651,
+      "parameter_count": 2176,
+      "peak_cuda_memory_bytes": 17791488,
+      "seed": 0,
+      "variational_margin": 1.159953014551185e-05
+    },
+    {
+      "D": 10,
+      "absolute_error": 9.013741474550585e-06,
+      "chi": 16,
+      "elapsed_seconds": 40.722890399978496,
+      "final_energy": 1.87870387852498,
+      "parameter_count": 3400,
+      "peak_cuda_memory_bytes": 18211328,
+      "seed": 0,
+      "variational_margin": 9.013741474550585e-06
+    },
+    {
+      "D": 12,
+      "absolute_error": 1.0888553356513953e-05,
+      "chi": 16,
+      "elapsed_seconds": 40.363952999934554,
+      "final_energy": 1.878705753336862,
+      "parameter_count": 4896,
+      "peak_cuda_memory_bytes": 18694144,
+      "seed": 0,
+      "variational_margin": 1.0888553356513953e-05
+    }
+  ],
+  "bond_sweep": [
+    {
+      "D": 8,
+      "absolute_error": 0.008072421377741668,
+      "chi": 2,
+      "elapsed_seconds": 40.396042500040494,
+      "final_energy": 1.8867672861612472,
+      "parameter_count": 96,
+      "peak_cuda_memory_bytes": 17094144,
+      "seed": 0,
+      "variational_margin": 0.008072421377741668
+    },
+    {
+      "D": 8,
+      "absolute_error": 0.00011591379110909017,
+      "chi": 4,
+      "elapsed_seconds": 40.41023659997154,
+      "final_energy": 1.8788107785746146,
+      "parameter_count": 320,
+      "peak_cuda_memory_bytes": 17155072,
+      "seed": 0,
+      "variational_margin": 0.00011591379110909017
+    },
+    {
+      "D": 8,
+      "absolute_error": 2.3264031123071405e-05,
+      "chi": 8,
+      "elapsed_seconds": 40.42873090005014,
+      "final_energy": 1.8787181288146286,
+      "parameter_count": 1152,
+      "peak_cuda_memory_bytes": 17431040,
+      "seed": 0,
+      "variational_margin": 2.3264031123071405e-05
+    },
+    {
+      "D": 8,
+      "absolute_error": 1.3903436627105137e-05,
+      "chi": 12,
+      "elapsed_seconds": 40.447809299919754,
+      "final_energy": 1.8787087682201327,
+      "parameter_count": 1664,
+      "peak_cuda_memory_bytes": 17611264,
+      "seed": 0,
+      "variational_margin": 1.3903436627105137e-05
+    },
+    {
+      "D": 8,
+      "absolute_error": 1.159953014551185e-05,
+      "chi": 16,
+      "elapsed_seconds": 40.48564660002012,
+      "final_energy": 1.878706464313651,
+      "parameter_count": 2176,
+      "peak_cuda_memory_bytes": 17791488,
+      "seed": 0,
+      "variational_margin": 1.159953014551185e-05
+    },
+    {
+      "D": 8,
+      "absolute_error": 9.003997529122287e-06,
+      "chi": 20,
+      "elapsed_seconds": 40.36993899999652,
+      "final_energy": 1.8787038687810347,
+      "parameter_count": 2688,
+      "peak_cuda_memory_bytes": 17979904,
+      "seed": 0,
+      "variational_margin": 9.003997529122287e-06
+    }
+  ],
+  "experiment": "2201_two_body_functional_mps_sweep",
+  "scan": {
+    "D_values": [
+      2,
+      4,
+      6,
+      8,
+      10,
+      12
+    ],
+    "N": 4,
+    "anchor_D": 8,
+    "anchor_chi": 16,
+    "chi_values": [
+      2,
+      4,
+      8,
+      12,
+      16,
+      20
+    ],
+    "device": "auto",
+    "final_learning_rate": 1e-05,
+    "gamma": -0.5,
+    "learning_rate": 0.01,
+    "omega": 1.0,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "steps": 1500
+  },
+  "schema_version": 1,
+  "seed_sweep": [
+    {
+      "D": 8,
+      "absolute_error": 1.0461319583709994e-05,
+      "chi": 16,
+      "elapsed_seconds": 40.396628099959344,
+      "final_energy": 1.8787053261030893,
+      "parameter_count": 2176,
+      "peak_cuda_memory_bytes": 17791488,
+      "seed": 1,
+      "variational_margin": 1.0461319583709994e-05
+    },
+    {
+      "D": 8,
+      "absolute_error": 1.0928157485157186e-05,
+      "chi": 16,
+      "elapsed_seconds": 40.53557920001913,
+      "final_energy": 1.8787057929409907,
+      "parameter_count": 2176,
+      "peak_cuda_memory_bytes": 17791488,
+      "seed": 2,
+      "variational_margin": 1.0928157485157186e-05
+    },
+    {
+      "D": 8,
+      "absolute_error": 1.4159785506118183e-05,
+      "chi": 16,
+      "elapsed_seconds": 40.484613699954934,
+      "final_energy": 1.8787090245690117,
+      "parameter_count": 2176,
+      "peak_cuda_memory_bytes": 17791488,
+      "seed": 3,
+      "variational_margin": 1.4159785506118183e-05
+    }
+  ]
+}

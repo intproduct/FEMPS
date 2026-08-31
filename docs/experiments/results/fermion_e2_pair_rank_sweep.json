@@ -1,0 +1,916 @@
+{
+  "schema_version": 1,
+  "experiment": "functional_pfaffian_e2_basis_pair_rank_sweep",
+  "kappa": 0.35,
+  "continuum_reference_energy": 2.455760721560795,
+  "basis_scan": [
+    {
+      "D": 4,
+      "truncated_exact_energy": 2.4567703262676246,
+      "error_vs_continuum": 0.0010096047068297587
+    },
+    {
+      "D": 6,
+      "truncated_exact_energy": 2.455771253450081,
+      "error_vs_continuum": 1.0531889286014007e-05
+    },
+    {
+      "D": 8,
+      "truncated_exact_energy": 2.455760810489801,
+      "error_vs_continuum": 8.892900638102219e-08
+    },
+    {
+      "D": 10,
+      "truncated_exact_energy": 2.455760722224629,
+      "error_vs_continuum": 6.638343208464903e-10
+    },
+    {
+      "D": 12,
+      "truncated_exact_energy": 2.4557607215653707,
+      "error_vs_continuum": 4.575895218295045e-12
+    },
+    {
+      "D": 14,
+      "truncated_exact_energy": 2.455760721560824,
+      "error_vs_continuum": 2.930988785010413e-14
+    }
+  ],
+  "pair_rank_scan": [
+    {
+      "schema_version": 1,
+      "experiment": "functional_factorized_pfaffian_harmonic_pair",
+      "config": {
+        "basis_order": 12,
+        "pair_channels": 1,
+        "kappa": 0.35,
+        "omega": 1.0,
+        "steps": 1000,
+        "learning_rate": 0.02,
+        "final_learning_rate": 1e-05,
+        "seed": 1,
+        "device": "cpu",
+        "record_points": 20
+      },
+      "environment": {
+        "torch": "2.11.0+cu128",
+        "device": "cpu",
+        "gpu": null
+      },
+      "initial_energy": 2.456039394700227,
+      "initialization": "truncated_real_skew_reference",
+      "final_energy": 2.456030532989884,
+      "terminal_energy_before_best_restore": 2.4560305329898844,
+      "best_recorded_energy": 2.456030532989884,
+      "continuum_reference_energy": 2.455760721560795,
+      "truncated_reference_energy": 2.4557607215653707,
+      "error_vs_continuum": 0.00026981142908910627,
+      "error_vs_truncated": 0.00026981142451321105,
+      "variational_margin_truncated": 0.00026981142451321105,
+      "requested_pair_channels": 1,
+      "observed_pair_decomposition_length": 1,
+      "ordinary_particle_tt_ranks": [
+        2
+      ],
+      "antisymmetry_residual": 0.0,
+      "energy_history": [
+        {
+          "step": 0,
+          "energy": 2.456039394700227,
+          "learning_rate": 0.02
+        },
+        {
+          "step": 50,
+          "energy": 2.4561281556219976,
+          "learning_rate": 0.019876944964248407
+        },
+        {
+          "step": 100,
+          "energy": 2.4560306764624373,
+          "learning_rate": 0.019510809880370062
+        },
+        {
+          "step": 150,
+          "energy": 2.456030535416831,
+          "learning_rate": 0.01891061020926273
+        },
+        {
+          "step": 200,
+          "energy": 2.4560305330095185,
+          "learning_rate": 0.018091124858777605
+        },
+        {
+          "step": 250,
+          "energy": 2.45603053298993,
+          "learning_rate": 0.01707253227795955
+        },
+        {
+          "step": 300,
+          "energy": 2.4560305329898844,
+          "learning_rate": 0.01587991359666328
+        },
+        {
+          "step": 350,
+          "energy": 2.456030532989885,
+          "learning_rate": 0.014542635044896788
+        },
+        {
+          "step": 400,
+          "energy": 2.4560305329898844,
+          "learning_rate": 0.013093624858777617
+        },
+        {
+          "step": 450,
+          "energy": 2.4560305329898844,
+          "learning_rate": 0.01156856247807713
+        },
+        {
+          "step": 500,
+          "energy": 2.456030532989884,
+          "learning_rate": 0.010005000000000014
+        },
+        {
+          "step": 550,
+          "energy": 2.4560305329898844,
+          "learning_rate": 0.008441437521922902
+        },
+        {
+          "step": 600,
+          "energy": 2.456030532989884,
+          "learning_rate": 0.006916375141222413
+        },
+        {
+          "step": 650,
+          "energy": 2.456030532989885,
+          "learning_rate": 0.005467364955103236
+        },
+        {
+          "step": 700,
+          "energy": 2.4560305329898844,
+          "learning_rate": 0.004130086403336738
+        },
+        {
+          "step": 750,
+          "energy": 2.4560305329898844,
+          "learning_rate": 0.002937467722040461
+        },
+        {
+          "step": 800,
+          "energy": 2.4560305329898844,
+          "learning_rate": 0.0019188751412224023
+        },
+        {
+          "step": 850,
+          "energy": 2.456030532989885,
+          "learning_rate": 0.001099389790737265
+        },
+        {
+          "step": 900,
+          "energy": 2.4560305329898844,
+          "learning_rate": 0.0004991901196299408
+        },
+        {
+          "step": 950,
+          "energy": 2.456030532989885,
+          "learning_rate": 0.0001330550357515992
+        },
+        {
+          "step": 1000,
+          "energy": 2.4560305329898844,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 7.7518535000272095,
+      "peak_cuda_memory_bytes": null
+    },
+    {
+      "schema_version": 1,
+      "experiment": "functional_factorized_pfaffian_harmonic_pair",
+      "config": {
+        "basis_order": 12,
+        "pair_channels": 2,
+        "kappa": 0.35,
+        "omega": 1.0,
+        "steps": 1000,
+        "learning_rate": 0.02,
+        "final_learning_rate": 1e-05,
+        "seed": 2,
+        "device": "cpu",
+        "record_points": 20
+      },
+      "environment": {
+        "torch": "2.11.0+cu128",
+        "device": "cpu",
+        "gpu": null
+      },
+      "initial_energy": 2.4557607395434076,
+      "initialization": "truncated_real_skew_reference",
+      "final_energy": 2.455760739244681,
+      "terminal_energy_before_best_restore": 2.455760739244682,
+      "best_recorded_energy": 2.455760739244681,
+      "continuum_reference_energy": 2.455760721560795,
+      "truncated_reference_energy": 2.4557607215653707,
+      "error_vs_continuum": 1.7683886355257528e-08,
+      "error_vs_truncated": 1.7679310460039233e-08,
+      "variational_margin_truncated": 1.7679310460039233e-08,
+      "requested_pair_channels": 2,
+      "observed_pair_decomposition_length": 2,
+      "ordinary_particle_tt_ranks": [
+        4
+      ],
+      "antisymmetry_residual": 0.0,
+      "energy_history": [
+        {
+          "step": 0,
+          "energy": 2.4557607395434076,
+          "learning_rate": 0.02
+        },
+        {
+          "step": 50,
+          "energy": 2.45580706362057,
+          "learning_rate": 0.019876944964248407
+        },
+        {
+          "step": 100,
+          "energy": 2.455761028661651,
+          "learning_rate": 0.019510809880370062
+        },
+        {
+          "step": 150,
+          "energy": 2.455760741629565,
+          "learning_rate": 0.01891061020926273
+        },
+        {
+          "step": 200,
+          "energy": 2.4557607392573058,
+          "learning_rate": 0.018091124858777605
+        },
+        {
+          "step": 250,
+          "energy": 2.455760739244731,
+          "learning_rate": 0.01707253227795955
+        },
+        {
+          "step": 300,
+          "energy": 2.455760739244682,
+          "learning_rate": 0.01587991359666328
+        },
+        {
+          "step": 350,
+          "energy": 2.4557607392446825,
+          "learning_rate": 0.014542635044896788
+        },
+        {
+          "step": 400,
+          "energy": 2.4557607392446816,
+          "learning_rate": 0.013093624858777617
+        },
+        {
+          "step": 450,
+          "energy": 2.455760739244682,
+          "learning_rate": 0.01156856247807713
+        },
+        {
+          "step": 500,
+          "energy": 2.455760739244682,
+          "learning_rate": 0.010005000000000014
+        },
+        {
+          "step": 550,
+          "energy": 2.455760739244682,
+          "learning_rate": 0.008441437521922902
+        },
+        {
+          "step": 600,
+          "energy": 2.455760739244681,
+          "learning_rate": 0.006916375141222413
+        },
+        {
+          "step": 650,
+          "energy": 2.4557607392446816,
+          "learning_rate": 0.005467364955103236
+        },
+        {
+          "step": 700,
+          "energy": 2.4557607392446816,
+          "learning_rate": 0.004130086403336738
+        },
+        {
+          "step": 750,
+          "energy": 2.4557607392446816,
+          "learning_rate": 0.002937467722040461
+        },
+        {
+          "step": 800,
+          "energy": 2.455760739244682,
+          "learning_rate": 0.0019188751412224023
+        },
+        {
+          "step": 850,
+          "energy": 2.4557607392446816,
+          "learning_rate": 0.001099389790737265
+        },
+        {
+          "step": 900,
+          "energy": 2.4557607392446816,
+          "learning_rate": 0.0004991901196299408
+        },
+        {
+          "step": 950,
+          "energy": 2.4557607392446816,
+          "learning_rate": 0.0001330550357515992
+        },
+        {
+          "step": 1000,
+          "energy": 2.455760739244682,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 7.918870200053789,
+      "peak_cuda_memory_bytes": null
+    },
+    {
+      "schema_version": 1,
+      "experiment": "functional_factorized_pfaffian_harmonic_pair",
+      "config": {
+        "basis_order": 12,
+        "pair_channels": 3,
+        "kappa": 0.35,
+        "omega": 1.0,
+        "steps": 1000,
+        "learning_rate": 0.02,
+        "final_learning_rate": 1e-05,
+        "seed": 3,
+        "device": "cpu",
+        "record_points": 20
+      },
+      "environment": {
+        "torch": "2.11.0+cu128",
+        "device": "cpu",
+        "gpu": null
+      },
+      "initial_energy": 2.4557607215660995,
+      "initialization": "truncated_real_skew_reference",
+      "final_energy": 2.4557607215660995,
+      "terminal_energy_before_best_restore": 2.4557607241266592,
+      "best_recorded_energy": 2.4557607215660995,
+      "continuum_reference_energy": 2.455760721560795,
+      "truncated_reference_energy": 2.4557607215653707,
+      "error_vs_continuum": 5.304645611658998e-12,
+      "error_vs_truncated": 7.287503933639528e-13,
+      "variational_margin_truncated": 7.287503933639528e-13,
+      "requested_pair_channels": 3,
+      "observed_pair_decomposition_length": 3,
+      "ordinary_particle_tt_ranks": [
+        6
+      ],
+      "antisymmetry_residual": 0.0,
+      "energy_history": [
+        {
+          "step": 0,
+          "energy": 2.4557607215660995,
+          "learning_rate": 0.02
+        },
+        {
+          "step": 50,
+          "energy": 2.4558098725314945,
+          "learning_rate": 0.019876944964248407
+        },
+        {
+          "step": 100,
+          "energy": 2.455761062666742,
+          "learning_rate": 0.019510809880370062
+        },
+        {
+          "step": 150,
+          "energy": 2.455760724924934,
+          "learning_rate": 0.01891061020926273
+        },
+        {
+          "step": 200,
+          "energy": 2.4557607241899095,
+          "learning_rate": 0.018091124858777605
+        },
+        {
+          "step": 250,
+          "energy": 2.4557607241736545,
+          "learning_rate": 0.01707253227795955
+        },
+        {
+          "step": 300,
+          "energy": 2.455760724168057,
+          "learning_rate": 0.01587991359666328
+        },
+        {
+          "step": 350,
+          "energy": 2.455760724162444,
+          "learning_rate": 0.014542635044896788
+        },
+        {
+          "step": 400,
+          "energy": 2.455760724156913,
+          "learning_rate": 0.013093624858777617
+        },
+        {
+          "step": 450,
+          "energy": 2.455760724151606,
+          "learning_rate": 0.01156856247807713
+        },
+        {
+          "step": 500,
+          "energy": 2.455760724146649,
+          "learning_rate": 0.010005000000000014
+        },
+        {
+          "step": 550,
+          "energy": 2.4557607241421473,
+          "learning_rate": 0.008441437521922902
+        },
+        {
+          "step": 600,
+          "energy": 2.4557607241381842,
+          "learning_rate": 0.006916375141222413
+        },
+        {
+          "step": 650,
+          "energy": 2.455760724134815,
+          "learning_rate": 0.005467364955103236
+        },
+        {
+          "step": 700,
+          "energy": 2.455760724132071,
+          "learning_rate": 0.004130086403336738
+        },
+        {
+          "step": 750,
+          "energy": 2.455760724129954,
+          "learning_rate": 0.002937467722040461
+        },
+        {
+          "step": 800,
+          "energy": 2.4557607241284325,
+          "learning_rate": 0.0019188751412224023
+        },
+        {
+          "step": 850,
+          "energy": 2.4557607241274493,
+          "learning_rate": 0.001099389790737265
+        },
+        {
+          "step": 900,
+          "energy": 2.455760724126911,
+          "learning_rate": 0.0004991901196299408
+        },
+        {
+          "step": 950,
+          "energy": 2.4557607241266974,
+          "learning_rate": 0.0001330550357515992
+        },
+        {
+          "step": 1000,
+          "energy": 2.4557607241266592,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 7.807010999997146,
+      "peak_cuda_memory_bytes": null
+    },
+    {
+      "schema_version": 1,
+      "experiment": "functional_factorized_pfaffian_harmonic_pair",
+      "config": {
+        "basis_order": 12,
+        "pair_channels": 4,
+        "kappa": 0.35,
+        "omega": 1.0,
+        "steps": 1000,
+        "learning_rate": 0.02,
+        "final_learning_rate": 1e-05,
+        "seed": 4,
+        "device": "cpu",
+        "record_points": 20
+      },
+      "environment": {
+        "torch": "2.11.0+cu128",
+        "device": "cpu",
+        "gpu": null
+      },
+      "initial_energy": 2.455760721565372,
+      "initialization": "truncated_real_skew_reference",
+      "final_energy": 2.455760721565372,
+      "terminal_energy_before_best_restore": 2.455760738489295,
+      "best_recorded_energy": 2.455760721565372,
+      "continuum_reference_energy": 2.455760721560795,
+      "truncated_reference_energy": 2.4557607215653707,
+      "error_vs_continuum": 4.577227485924595e-12,
+      "error_vs_truncated": 1.3322676295501878e-15,
+      "variational_margin_truncated": 1.3322676295501878e-15,
+      "requested_pair_channels": 4,
+      "observed_pair_decomposition_length": 4,
+      "ordinary_particle_tt_ranks": [
+        8
+      ],
+      "antisymmetry_residual": 0.0,
+      "energy_history": [
+        {
+          "step": 0,
+          "energy": 2.455760721565372,
+          "learning_rate": 0.02
+        },
+        {
+          "step": 50,
+          "energy": 2.4557871912539304,
+          "learning_rate": 0.019876944964248407
+        },
+        {
+          "step": 100,
+          "energy": 2.455760934803535,
+          "learning_rate": 0.019510809880370062
+        },
+        {
+          "step": 150,
+          "energy": 2.455760739908307,
+          "learning_rate": 0.01891061020926273
+        },
+        {
+          "step": 200,
+          "energy": 2.4557607387014424,
+          "learning_rate": 0.018091124858777605
+        },
+        {
+          "step": 250,
+          "energy": 2.455760738682408,
+          "learning_rate": 0.01707253227795955
+        },
+        {
+          "step": 300,
+          "energy": 2.4557607386692806,
+          "learning_rate": 0.01587991359666328
+        },
+        {
+          "step": 350,
+          "energy": 2.4557607386542597,
+          "learning_rate": 0.014542635044896788
+        },
+        {
+          "step": 400,
+          "energy": 2.45576073863741,
+          "learning_rate": 0.013093624858777617
+        },
+        {
+          "step": 450,
+          "energy": 2.4557607386190043,
+          "learning_rate": 0.01156856247807713
+        },
+        {
+          "step": 500,
+          "energy": 2.4557607385994924,
+          "learning_rate": 0.010005000000000014
+        },
+        {
+          "step": 550,
+          "energy": 2.455760738579519,
+          "learning_rate": 0.008441437521922902
+        },
+        {
+          "step": 600,
+          "energy": 2.4557607385598916,
+          "learning_rate": 0.006916375141222413
+        },
+        {
+          "step": 650,
+          "energy": 2.45576073854151,
+          "learning_rate": 0.005467364955103236
+        },
+        {
+          "step": 700,
+          "energy": 2.4557607385252513,
+          "learning_rate": 0.004130086403336738
+        },
+        {
+          "step": 750,
+          "energy": 2.4557607385118363,
+          "learning_rate": 0.002937467722040461
+        },
+        {
+          "step": 800,
+          "energy": 2.4557607385016995,
+          "learning_rate": 0.0019188751412224023
+        },
+        {
+          "step": 850,
+          "energy": 2.4557607384949023,
+          "learning_rate": 0.001099389790737265
+        },
+        {
+          "step": 900,
+          "energy": 2.4557607384911,
+          "learning_rate": 0.0004991901196299408
+        },
+        {
+          "step": 950,
+          "energy": 2.455760738489574,
+          "learning_rate": 0.0001330550357515992
+        },
+        {
+          "step": 1000,
+          "energy": 2.455760738489295,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 7.909666699939407,
+      "peak_cuda_memory_bytes": null
+    },
+    {
+      "schema_version": 1,
+      "experiment": "functional_factorized_pfaffian_harmonic_pair",
+      "config": {
+        "basis_order": 12,
+        "pair_channels": 5,
+        "kappa": 0.35,
+        "omega": 1.0,
+        "steps": 1000,
+        "learning_rate": 0.02,
+        "final_learning_rate": 1e-05,
+        "seed": 5,
+        "device": "cpu",
+        "record_points": 20
+      },
+      "environment": {
+        "torch": "2.11.0+cu128",
+        "device": "cpu",
+        "gpu": null
+      },
+      "initial_energy": 2.455760721565372,
+      "initialization": "truncated_real_skew_reference",
+      "final_energy": 2.455760721565372,
+      "terminal_energy_before_best_restore": 2.4557607346027517,
+      "best_recorded_energy": 2.455760721565372,
+      "continuum_reference_energy": 2.455760721560795,
+      "truncated_reference_energy": 2.4557607215653707,
+      "error_vs_continuum": 4.577227485924595e-12,
+      "error_vs_truncated": 1.3322676295501878e-15,
+      "variational_margin_truncated": 1.3322676295501878e-15,
+      "requested_pair_channels": 5,
+      "observed_pair_decomposition_length": 5,
+      "ordinary_particle_tt_ranks": [
+        10
+      ],
+      "antisymmetry_residual": 0.0,
+      "energy_history": [
+        {
+          "step": 0,
+          "energy": 2.455760721565372,
+          "learning_rate": 0.02
+        },
+        {
+          "step": 50,
+          "energy": 2.4557902457838514,
+          "learning_rate": 0.019876944964248407
+        },
+        {
+          "step": 100,
+          "energy": 2.455760937207769,
+          "learning_rate": 0.019510809880370062
+        },
+        {
+          "step": 150,
+          "energy": 2.4557607359248803,
+          "learning_rate": 0.01891061020926273
+        },
+        {
+          "step": 200,
+          "energy": 2.4557607348926767,
+          "learning_rate": 0.018091124858777605
+        },
+        {
+          "step": 250,
+          "energy": 2.4557607348599655,
+          "learning_rate": 0.01707253227795955
+        },
+        {
+          "step": 300,
+          "energy": 2.4557607348315575,
+          "learning_rate": 0.01587991359666328
+        },
+        {
+          "step": 350,
+          "energy": 2.4557607348022996,
+          "learning_rate": 0.014542635044896788
+        },
+        {
+          "step": 400,
+          "energy": 2.4557607347729498,
+          "learning_rate": 0.013093624858777617
+        },
+        {
+          "step": 450,
+          "energy": 2.455760734744296,
+          "learning_rate": 0.01156856247807713
+        },
+        {
+          "step": 500,
+          "energy": 2.455760734717079,
+          "learning_rate": 0.010005000000000014
+        },
+        {
+          "step": 550,
+          "energy": 2.4557607346919808,
+          "learning_rate": 0.008441437521922902
+        },
+        {
+          "step": 600,
+          "energy": 2.455760734669572,
+          "learning_rate": 0.006916375141222413
+        },
+        {
+          "step": 650,
+          "energy": 2.455760734650299,
+          "learning_rate": 0.005467364955103236
+        },
+        {
+          "step": 700,
+          "energy": 2.4557607346344454,
+          "learning_rate": 0.004130086403336738
+        },
+        {
+          "step": 750,
+          "energy": 2.4557607346221135,
+          "learning_rate": 0.002937467722040461
+        },
+        {
+          "step": 800,
+          "energy": 2.455760734613204,
+          "learning_rate": 0.0019188751412224023
+        },
+        {
+          "step": 850,
+          "energy": 2.455760734607417,
+          "learning_rate": 0.001099389790737265
+        },
+        {
+          "step": 900,
+          "energy": 2.455760734604242,
+          "learning_rate": 0.0004991901196299408
+        },
+        {
+          "step": 950,
+          "energy": 2.4557607346029804,
+          "learning_rate": 0.0001330550357515992
+        },
+        {
+          "step": 1000,
+          "energy": 2.4557607346027517,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 7.922934400034137,
+      "peak_cuda_memory_bytes": null
+    },
+    {
+      "schema_version": 1,
+      "experiment": "functional_factorized_pfaffian_harmonic_pair",
+      "config": {
+        "basis_order": 12,
+        "pair_channels": 6,
+        "kappa": 0.35,
+        "omega": 1.0,
+        "steps": 1000,
+        "learning_rate": 0.02,
+        "final_learning_rate": 1e-05,
+        "seed": 6,
+        "device": "cpu",
+        "record_points": 20
+      },
+      "environment": {
+        "torch": "2.11.0+cu128",
+        "device": "cpu",
+        "gpu": null
+      },
+      "initial_energy": 2.455760721565372,
+      "initialization": "truncated_real_skew_reference",
+      "final_energy": 2.455760721565372,
+      "terminal_energy_before_best_restore": 2.4557607267021395,
+      "best_recorded_energy": 2.455760721565372,
+      "continuum_reference_energy": 2.455760721560795,
+      "truncated_reference_energy": 2.4557607215653707,
+      "error_vs_continuum": 4.577227485924595e-12,
+      "error_vs_truncated": 1.3322676295501878e-15,
+      "variational_margin_truncated": 1.3322676295501878e-15,
+      "requested_pair_channels": 6,
+      "observed_pair_decomposition_length": 6,
+      "ordinary_particle_tt_ranks": [
+        12
+      ],
+      "antisymmetry_residual": 0.0,
+      "energy_history": [
+        {
+          "step": 0,
+          "energy": 2.455760721565372,
+          "learning_rate": 0.02
+        },
+        {
+          "step": 50,
+          "energy": 2.4557940642381353,
+          "learning_rate": 0.019876944964248407
+        },
+        {
+          "step": 100,
+          "energy": 2.455760905832618,
+          "learning_rate": 0.019510809880370062
+        },
+        {
+          "step": 150,
+          "energy": 2.4557607314402405,
+          "learning_rate": 0.01891061020926273
+        },
+        {
+          "step": 200,
+          "energy": 2.4557607278220095,
+          "learning_rate": 0.018091124858777605
+        },
+        {
+          "step": 250,
+          "energy": 2.455760727362594,
+          "learning_rate": 0.01707253227795955
+        },
+        {
+          "step": 300,
+          "energy": 2.4557607271505697,
+          "learning_rate": 0.01587991359666328
+        },
+        {
+          "step": 350,
+          "energy": 2.4557607270077595,
+          "learning_rate": 0.014542635044896788
+        },
+        {
+          "step": 400,
+          "energy": 2.4557607269094786,
+          "learning_rate": 0.013093624858777617
+        },
+        {
+          "step": 450,
+          "energy": 2.4557607268423634,
+          "learning_rate": 0.01156856247807713
+        },
+        {
+          "step": 500,
+          "energy": 2.4557607267966155,
+          "learning_rate": 0.010005000000000014
+        },
+        {
+          "step": 550,
+          "energy": 2.4557607267653125,
+          "learning_rate": 0.008441437521922902
+        },
+        {
+          "step": 600,
+          "energy": 2.4557607267437613,
+          "learning_rate": 0.006916375141222413
+        },
+        {
+          "step": 650,
+          "energy": 2.4557607267288604,
+          "learning_rate": 0.005467364955103236
+        },
+        {
+          "step": 700,
+          "energy": 2.4557607267185824,
+          "learning_rate": 0.004130086403336738
+        },
+        {
+          "step": 750,
+          "energy": 2.4557607267116057,
+          "learning_rate": 0.002937467722040461
+        },
+        {
+          "step": 800,
+          "energy": 2.4557607267070414,
+          "learning_rate": 0.0019188751412224023
+        },
+        {
+          "step": 850,
+          "energy": 2.4557607267042707,
+          "learning_rate": 0.001099389790737265
+        },
+        {
+          "step": 900,
+          "energy": 2.4557607267028105,
+          "learning_rate": 0.0004991901196299408
+        },
+        {
+          "step": 950,
+          "energy": 2.4557607267022417,
+          "learning_rate": 0.0001330550357515992
+        },
+        {
+          "step": 1000,
+          "energy": 2.4557607267021395,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 7.863393299980089,
+      "peak_cuda_memory_bytes": null
+    }
+  ]
+}

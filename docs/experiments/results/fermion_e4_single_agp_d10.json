@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "experiment": "fermion_e4_blind_single_agp_sweep",
+  "particles": 4,
+  "pairs": 2,
+  "basis_order": 10,
+  "steps": 600,
+  "learning_rate": 0.02,
+  "final_learning_rate": 1e-05,
+  "device": "cuda:2",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "runs": [
+    {
+      "kappa": 0.35,
+      "seed": 0,
+      "continuum_reference_energy": 12.118950038622252,
+      "finite_basis_reference_energy": 12.119974234823252,
+      "basis_error_vs_continuum": 0.001024196200999583,
+      "initial_energy": 31.510382129029786,
+      "terminal_energy_before_best_restore": 12.122484102076266,
+      "final_energy": 12.122484102076266,
+      "explicit_exterior_energy": 12.122484102076355,
+      "polynomial_explicit_absolute_difference": 8.881784197001252e-14,
+      "error_vs_finite_basis": 0.002509867253014164,
+      "error_vs_continuum": 0.0035340634540137472,
+      "finite_basis_ground_fidelity": 0.999423849957379,
+      "pair_matrix_channel_length": 5,
+      "exterior_support_dimension": 210,
+      "exterior_dimension": 210,
+      "ordinary_particle_tt_ranks": [
+        10,
+        45,
+        10
+      ],
+      "antisymmetry_residual": 0.0,
+      "history": [
+        {
+          "step": 0,
+          "energy": 31.510382129029786,
+          "learning_rate": 0.02
+        },
+        {
+          "step": 30,
+          "energy": 12.14295214717794,
+          "learning_rate": 0.0198769449642484
+        },
+        {
+          "step": 60,
+          "energy": 12.123206564771344,
+          "learning_rate": 0.019510809880370072
+        },
+        {
+          "step": 90,
+          "energy": 12.122531970827984,
+          "learning_rate": 0.018910610209262747
+        },
+        {
+          "step": 120,
+          "energy": 12.122504701519171,
+          "learning_rate": 0.0180911248587776
+        },
+        {
+          "step": 150,
+          "energy": 12.122501410846024,
+          "learning_rate": 0.017072532277959546
+        },
+        {
+          "step": 180,
+          "energy": 12.122499427501387,
+          "learning_rate": 0.015879913596663266
+        },
+        {
+          "step": 210,
+          "energy": 12.122497444284713,
+          "learning_rate": 0.014542635044896765
+        },
+        {
+          "step": 240,
+          "energy": 12.122495461875483,
+          "learning_rate": 0.013093624858777598
+        },
+        {
+          "step": 270,
+          "energy": 12.122493531171541,
+          "learning_rate": 0.011568562478077105
+        },
+        {
+          "step": 300,
+          "energy": 12.122491702162783,
+          "learning_rate": 0.010005
+        },
+        {
+          "step": 330,
+          "energy": 12.12249001997701,
+          "learning_rate": 0.008441437521922895
+        },
+        {
+          "step": 360,
+          "energy": 12.122488522669922,
+          "learning_rate": 0.0069163751412224025
+        },
+        {
+          "step": 390,
+          "energy": 12.122487239113346,
+          "learning_rate": 0.005467364955103231
+        },
+        {
+          "step": 420,
+          "energy": 12.12248618711951,
+          "learning_rate": 0.004130086403336734
+        },
+        {
+          "step": 450,
+          "energy": 12.12248537198848,
+          "learning_rate": 0.0029374677220404596
+        },
+        {
+          "step": 480,
+          "energy": 12.122484785625373,
+          "learning_rate": 0.0019188751412224027
+        },
+        {
+          "step": 510,
+          "energy": 12.122484406310125,
+          "learning_rate": 0.001099389790737265
+        },
+        {
+          "step": 540,
+          "energy": 12.122484199126324,
+          "learning_rate": 0.0004991901196299412
+        },
+        {
+          "step": 570,
+          "energy": 12.122484116980727,
+          "learning_rate": 0.00013305503575159936
+        },
+        {
+          "step": 600,
+          "energy": 12.122484102076266,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 39.73534490005113,
+      "peak_cuda_memory_bytes": 17261568
+    }
+  ]
+}

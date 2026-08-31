@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment": "agp_stability_stress",
+  "dimension": 64,
+  "particles": 64,
+  "pairs": 32,
+  "seed": 94,
+  "device": "cpu",
+  "torch": "2.11.0+cu128",
+  "reference_log_norm": 122.3326523282607,
+  "legacy_newton_norm": -3.450873173395282e+70,
+  "legacy_relative_error": 2.5676341049549168e+17,
+  "legacy_seconds": 0.021761400043033063,
+  "stable_norm": 1.343989459688198e+53,
+  "stable_relative_error": 1.9305605628589964e-14,
+  "stable_seconds": 0.0026433999883010983,
+  "scale_stress": [
+    {
+      "pair_scale": 1e-12,
+      "log_norm": -1646.0526990911665,
+      "log_norm_absolute_error": 2.2737367544323206e-13,
+      "ordinary_norm_is_finite": true,
+      "ordinary_norm_is_nonzero": false
+    },
+    {
+      "pair_scale": 1e-06,
+      "log_norm": -761.8600233814528,
+      "log_norm_absolute_error": 0.0,
+      "ordinary_norm_is_finite": true,
+      "ordinary_norm_is_nonzero": false
+    },
+    {
+      "pair_scale": 1.0,
+      "log_norm": 122.3326523282607,
+      "log_norm_absolute_error": 0.0,
+      "ordinary_norm_is_finite": true,
+      "ordinary_norm_is_nonzero": true
+    },
+    {
+      "pair_scale": 1000000.0,
+      "log_norm": 1006.5253280379743,
+      "log_norm_absolute_error": 1.1368683772161603e-13,
+      "ordinary_norm_is_finite": false,
+      "ordinary_norm_is_nonzero": true
+    },
+    {
+      "pair_scale": 1000000000000.0,
+      "log_norm": 1890.7180037476878,
+      "log_norm_absolute_error": 0.0,
+      "ordinary_norm_is_finite": false,
+      "ordinary_norm_is_nonzero": true
+    }
+  ],
+  "reciprocal_transition_scale": 1e+120,
+  "transition_pairs": 8,
+  "scaled_transition_relative_error": 3.599130140085202e-15
+}

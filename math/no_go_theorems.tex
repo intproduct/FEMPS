@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newcommand{\TT}{\mathrm{TT}}
+\newcommand{\rank}{\operatorname{rank}}
+
+\begin{document}
+\section{Particle-TT obstruction for alternating tensors}
+
+Let $V$ be a finite-dimensional real or complex Hilbert space and identify
+$\Lambda^N V$ with the alternating subspace of $V^{\otimes N}$. For
+$C\in V^{\otimes N}$, write $C_{(k)}$ for its $k\mid N-k$ particle
+matricization.
+
+\begin{theorem}[Exact particle-TT ranks]
+For $1\le k<N$, the minimal exact ordinary-TT bond dimension satisfies
+\[
+ r_k^{\TT}(C)=\rank C_{(k)}.
+\]
+\end{theorem}
+\begin{proof}
+Any TT cut factors $C_{(k)}$ through its bond space, which gives the lower
+bound. Successive exact singular-value decompositions attain all unfolding
+ranks simultaneously.
+\end{proof}
+
+\begin{theorem}[Exchange rank floor]
+If $0\ne C\in\Lambda^N V$, then
+\[
+ \rank C_{(k)}\ge \binom{N}{k},\qquad 1\le k<N.
+\]
+The bound is attained by every nonzero decomposable $N$-form.
+\end{theorem}
+\begin{proof}
+Choose a nonzero alternating coefficient $c_I$ supported on an $N$-element
+index set $I$. Restrict rows to $k$-subsets $A\subset I$ and match them to
+columns $I\setminus A$. The resulting $\binom{N}{k}$ square submatrix is
+diagonal up to signs, with diagonal entries $\pm c_I$: an off-diagonal entry
+repeats an index and vanishes. A decomposable form supported on an
+$N$-dimensional space has no larger contraction image.
+\end{proof}
+
+\begin{corollary}[No strict-antisymmetry truncation below the floor]
+If $\widetilde C\ne0$ and
+$r_k^{\TT}(\widetilde C)<\binom{N}{k}$ for some $k$, then
+$\widetilde C\notin\Lambda^N V$.
+\end{corollary}
+
+Use the normalized Slater convention
+\[
+ \Phi=\frac1{\sqrt{N!}}\sum_{\pi\in S_N}\mathrm{sgn}(\pi)
+ u_{\pi(1)}\otimes\cdots\otimes u_{\pi(N)},
+\]
+where the $u_i$ are orthonormal.
+
+\begin{theorem}[Flat particle-Schmidt spectrum]
+At the $k\mid N-k$ particle cut,
+\[
+ \Phi=\frac1{\sqrt{\binom{N}{k}}}\sum_{|I|=k}
+ (-1)^{\epsilon(I)}\Phi_I\otimes\Phi_{I^c}.
+\]
+This is a Schmidt decomposition. Its $\binom{N}{k}$ nonzero singular values
+all equal $\binom{N}{k}^{-1/2}$.
+\end{theorem}
+\begin{proof}
+Partition the signed permutation sum by the orbital subset occupying the first
+$k$ particle slots. Each class factors into normalized internal Slater sums.
+Its coefficient is
+$\sqrt{k!(N-k)!/N!}=\binom{N}{k}^{-1/2}$. Distinct orbital subsets give
+orthonormal Slater states on each side.
+\end{proof}
+
+\begin{corollary}[Approximate bond lower bound]
+For $0\le r\le \binom{N}{k}$, the best cut-rank-$r$ approximation has relative
+squared error
+\[
+ \epsilon_{k,r}^2=1-\frac{r}{\binom{N}{k}}.
+\]
+Thus every ordinary TT with relative error at most $\epsilon$ must obey
+\[
+ r_k^{\TT}\ge\left\lceil(1-\epsilon^2)\binom{N}{k}\right\rceil.
+\]
+\end{corollary}
+\begin{proof}
+Apply the Eckart--Young theorem to the flat singular-value list.
+\end{proof}
+
+These statements concern ordinary particle-site TT coordinates. They do not
+exclude ordered-sector, exterior-carrier, determinant-sum, or occupation-space
+representations. Nor is spectral flatness asserted for a general element of
+$\Lambda^N V$.
+\end{document}

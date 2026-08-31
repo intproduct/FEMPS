@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "experiment": "gate_a_exact_norm_scaling",
+  "environment": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128",
+    "device": "cpu",
+    "dtype": "complex128"
+  },
+  "scan": {
+    "n_min": 2,
+    "n_max": 7,
+    "chi": 2,
+    "repeats": 2,
+    "output": "docs\\experiments\\results\\gate_a_norm_scaling.json"
+  },
+  "records": [
+    {
+      "N": 2,
+      "D": 4,
+      "chi": 2,
+      "timing_seconds_median": {
+        "exterior": 0.0008749000262469053,
+        "paths": 0.0007309500360861421,
+        "full_tensor": 0.000570950040128082
+      },
+      "norm_values": {
+        "exterior": 2.9016872276920034,
+        "paths": 2.901687227692004,
+        "full_tensor": 2.901687227692004
+      },
+      "relative_disagreement": {
+        "exterior": 0.0,
+        "paths": 1.5304516820832215e-16,
+        "full_tensor": 1.5304516820832215e-16
+      },
+      "structural_counts": {
+        "full_tensor_coefficients": 16,
+        "virtual_paths": 2,
+        "path_pair_determinants": 4,
+        "exterior_dp_multiply_adds": 32,
+        "exterior_dp_peak_coefficients": 8,
+        "final_exterior_coefficients": 6
+      }
+    },
+    {
+      "N": 3,
+      "D": 6,
+      "chi": 2,
+      "timing_seconds_median": {
+        "exterior": 0.003629449987784028,
+        "paths": 0.0012240500072948635,
+        "full_tensor": 0.001187249959912151
+      },
+      "norm_values": {
+        "exterior": 2.027665903388626,
+        "paths": 2.027665903388627,
+        "full_tensor": 2.027665903388626
+      },
+      "relative_disagreement": {
+        "exterior": 0.0,
+        "paths": 4.38029962537618e-16,
+        "full_tensor": 0.0
+      },
+      "structural_counts": {
+        "full_tensor_coefficients": 216,
+        "virtual_paths": 4,
+        "path_pair_determinants": 16,
+        "exterior_dp_multiply_adds": 252,
+        "exterior_dp_peak_coefficients": 30,
+        "final_exterior_coefficients": 20
+      }
+    },
+    {
+      "N": 4,
+      "D": 8,
+      "chi": 2,
+      "timing_seconds_median": {
+        "exterior": 0.020093250030186027,
+        "paths": 0.003963950031902641,
+        "full_tensor": 0.004561099922284484
+      },
+      "norm_values": {
+        "exterior": 1.0747897417964902,
+        "paths": 1.0747897417964904,
+        "full_tensor": 1.0747897417964904
+      },
+      "relative_disagreement": {
+        "exterior": 0.0,
+        "paths": 2.0659352828757748e-16,
+        "full_tensor": 2.0659352828757748e-16
+      },
+      "structural_counts": {
+        "full_tensor_coefficients": 4096,
+        "virtual_paths": 8,
+        "path_pair_determinants": 64,
+        "exterior_dp_multiply_adds": 1472,
+        "exterior_dp_peak_coefficients": 112,
+        "final_exterior_coefficients": 70
+      }
+    },
+    {
+      "N": 5,
+      "D": 10,
+      "chi": 2,
+      "timing_seconds_median": {
+        "exterior": 0.10903324995888397,
+        "paths": 0.014125549991149455
+      },
+      "norm_values": {
+        "exterior": 10.55607818308626,
+        "paths": 10.55607818308626
+      },
+      "relative_disagreement": {
+        "exterior": 0.0,
+        "paths": 0.0
+      },
+      "structural_counts": {
+        "full_tensor_coefficients": 100000,
+        "virtual_paths": 16,
+        "path_pair_determinants": 256,
+        "exterior_dp_multiply_adds": 7700,
+        "exterior_dp_peak_coefficients": 420,
+        "final_exterior_coefficients": 252
+      }
+    },
+    {
+      "N": 6,
+      "D": 12,
+      "chi": 2,
+      "timing_seconds_median": {
+        "exterior": 0.48523780005052686,
+        "paths": 0.05453299998771399
+      },
+      "norm_values": {
+        "exterior": 4.322899019500178,
+        "paths": 4.322899019500178
+      },
+      "relative_disagreement": {
+        "exterior": 0.0,
+        "paths": 0.0
+      },
+      "structural_counts": {
+        "full_tensor_coefficients": 2985984,
+        "virtual_paths": 32,
+        "path_pair_determinants": 1024,
+        "exterior_dp_multiply_adds": 38040,
+        "exterior_dp_peak_coefficients": 1584,
+        "final_exterior_coefficients": 924
+      }
+    },
+    {
+      "N": 7,
+      "D": 14,
+      "chi": 2,
+      "timing_seconds_median": {
+        "exterior": 2.2870462500141002,
+        "paths": 0.22656255000038072
+      },
+      "norm_values": {
+        "exterior": 16.31689729867967,
+        "paths": 16.316897298679706
+      },
+      "relative_disagreement": {
+        "exterior": 0.0,
+        "paths": 2.1773218362341343e-15
+      },
+      "structural_counts": {
+        "full_tensor_coefficients": 105413504,
+        "virtual_paths": 64,
+        "path_pair_determinants": 4096,
+        "exterior_dp_multiply_adds": 181300,
+        "exterior_dp_peak_coefficients": 6006,
+        "final_exterior_coefficients": 3432
+      }
+    }
+  ]
+}

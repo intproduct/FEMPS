@@ -1,0 +1,31 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Research outputs and local machine state
+artifacts/
+checkpoints/
+outputs/
+tmp/
+*.log
+*_checkpoint.pt
+
+# Papers are local research inputs, not repository source.
+refs/*.pdf
+references/local_pdfs/
+
+# A local checkout may be present here for development; the canonical upstream
+# is the separate latticeTN repository and must not be vendored into FEMPS.
+latticeTN/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

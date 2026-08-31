@@ -1,0 +1,516 @@
+{
+  "schema_version": 1,
+  "experiment": "fermion_e4_finite_agp_polynomial_energy_refinement",
+  "D": 8,
+  "N": 4,
+  "K": 2,
+  "kappa": 0.35,
+  "steps": 200,
+  "learning_rate": 0.005,
+  "final_learning_rate": 1e-05,
+  "finite_basis_reference_energy": 12.132671582575963,
+  "device": "cuda:2",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "runs": [
+    {
+      "initialization": "oracle",
+      "seed": 1,
+      "initial_energy": 12.132682652579827,
+      "terminal_energy_before_best_restore": 12.13268198090832,
+      "final_energy": 12.13268198090832,
+      "explicit_exterior_energy": 12.132681980908393,
+      "polynomial_explicit_absolute_difference": 7.283063041541027e-14,
+      "error_vs_finite_basis": 1.039833235694232e-05,
+      "finite_basis_ground_fidelity": 0.9999990274869089,
+      "ordinary_particle_tt_ranks": [
+        8,
+        28,
+        8
+      ],
+      "history": [
+        {
+          "step": 0,
+          "energy": 12.132682652579827,
+          "learning_rate": 0.005
+        },
+        {
+          "step": 10,
+          "energy": 12.161393867932235,
+          "learning_rate": 0.0049692824097848694
+        },
+        {
+          "step": 20,
+          "energy": 12.135054382347752,
+          "learning_rate": 0.004877886008156411
+        },
+        {
+          "step": 30,
+          "energy": 12.134541892146977,
+          "learning_rate": 0.004728061277849979
+        },
+        {
+          "step": 40,
+          "energy": 12.133366506224316,
+          "learning_rate": 0.004523497400965496
+        },
+        {
+          "step": 50,
+          "energy": 12.132762894243761,
+          "learning_rate": 0.004269231419060439
+        },
+        {
+          "step": 60,
+          "energy": 12.132766820602418,
+          "learning_rate": 0.003971524204469722
+        },
+        {
+          "step": 70,
+          "energy": 12.132718976395838,
+          "learning_rate": 0.0036377062968501704
+        },
+        {
+          "step": 80,
+          "energy": 12.132686797232694,
+          "learning_rate": 0.003275997400965495
+        },
+        {
+          "step": 90,
+          "energy": 12.132685935829745,
+          "learning_rate": 0.002895303990275377
+        },
+        {
+          "step": 100,
+          "energy": 12.132683557682649,
+          "learning_rate": 0.002505
+        },
+        {
+          "step": 110,
+          "energy": 12.132682461213845,
+          "learning_rate": 0.002114696009724624
+        },
+        {
+          "step": 120,
+          "energy": 12.132682210253142,
+          "learning_rate": 0.0017340025990345064
+        },
+        {
+          "step": 130,
+          "energy": 12.132682128323646,
+          "learning_rate": 0.0013722937031498304
+        },
+        {
+          "step": 140,
+          "energy": 12.132682055761327,
+          "learning_rate": 0.001038475795530279
+        },
+        {
+          "step": 150,
+          "energy": 12.132682020104205,
+          "learning_rate": 0.0007407685809395634
+        },
+        {
+          "step": 160,
+          "energy": 12.132682000640475,
+          "learning_rate": 0.0004865025990345058
+        },
+        {
+          "step": 170,
+          "energy": 12.132681989318852,
+          "learning_rate": 0.00028193872215002204
+        },
+        {
+          "step": 180,
+          "energy": 12.132681983835592,
+          "learning_rate": 0.0001321139918435918
+        },
+        {
+          "step": 190,
+          "energy": 12.132681981503664,
+          "learning_rate": 4.0717590215131505e-05
+        },
+        {
+          "step": 200,
+          "energy": 12.13268198090832,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 51.23159460001625,
+      "peak_cuda_memory_bytes": 17496576
+    },
+    {
+      "initialization": "random",
+      "seed": 0,
+      "initial_energy": 27.80305708406308,
+      "terminal_energy_before_best_restore": 12.13693273623945,
+      "final_energy": 12.13693273623945,
+      "explicit_exterior_energy": 12.136932736239427,
+      "polynomial_explicit_absolute_difference": 2.3092638912203256e-14,
+      "error_vs_finite_basis": 0.004261153663486894,
+      "finite_basis_ground_fidelity": 0.9991263862668575,
+      "ordinary_particle_tt_ranks": [
+        8,
+        28,
+        8
+      ],
+      "history": [
+        {
+          "step": 0,
+          "energy": 27.80305708406308,
+          "learning_rate": 0.005
+        },
+        {
+          "step": 10,
+          "energy": 17.010523008057664,
+          "learning_rate": 0.0049692824097848694
+        },
+        {
+          "step": 20,
+          "energy": 14.03499929428636,
+          "learning_rate": 0.004877886008156411
+        },
+        {
+          "step": 30,
+          "energy": 13.068604513145042,
+          "learning_rate": 0.004728061277849979
+        },
+        {
+          "step": 40,
+          "energy": 12.484746818729281,
+          "learning_rate": 0.004523497400965496
+        },
+        {
+          "step": 50,
+          "energy": 12.247432430128201,
+          "learning_rate": 0.004269231419060439
+        },
+        {
+          "step": 60,
+          "energy": 12.177253995019138,
+          "learning_rate": 0.003971524204469722
+        },
+        {
+          "step": 70,
+          "energy": 12.148774563436978,
+          "learning_rate": 0.0036377062968501704
+        },
+        {
+          "step": 80,
+          "energy": 12.139980258110363,
+          "learning_rate": 0.003275997400965495
+        },
+        {
+          "step": 90,
+          "energy": 12.138497659942534,
+          "learning_rate": 0.002895303990275377
+        },
+        {
+          "step": 100,
+          "energy": 12.137954491757236,
+          "learning_rate": 0.002505
+        },
+        {
+          "step": 110,
+          "energy": 12.137527594834872,
+          "learning_rate": 0.002114696009724624
+        },
+        {
+          "step": 120,
+          "energy": 12.137332401761185,
+          "learning_rate": 0.0017340025990345064
+        },
+        {
+          "step": 130,
+          "energy": 12.137192054373681,
+          "learning_rate": 0.0013722937031498304
+        },
+        {
+          "step": 140,
+          "energy": 12.137092928661643,
+          "learning_rate": 0.001038475795530279
+        },
+        {
+          "step": 150,
+          "energy": 12.13702549802836,
+          "learning_rate": 0.0007407685809395634
+        },
+        {
+          "step": 160,
+          "energy": 12.136981460413928,
+          "learning_rate": 0.0004865025990345058
+        },
+        {
+          "step": 170,
+          "energy": 12.136954595409737,
+          "learning_rate": 0.00028193872215002204
+        },
+        {
+          "step": 180,
+          "energy": 12.136940224122824,
+          "learning_rate": 0.0001321139918435918
+        },
+        {
+          "step": 190,
+          "energy": 12.136934274028622,
+          "learning_rate": 4.0717590215131505e-05
+        },
+        {
+          "step": 200,
+          "energy": 12.13693273623945,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 50.631308699958026,
+      "peak_cuda_memory_bytes": 17494528
+    },
+    {
+      "initialization": "random",
+      "seed": 1,
+      "initial_energy": 28.163556257497774,
+      "terminal_energy_before_best_restore": 12.134772902626537,
+      "final_energy": 12.134772902626537,
+      "explicit_exterior_energy": 12.134772902626576,
+      "polynomial_explicit_absolute_difference": 3.907985046680551e-14,
+      "error_vs_finite_basis": 0.0021013200505741736,
+      "finite_basis_ground_fidelity": 0.9995909225389084,
+      "ordinary_particle_tt_ranks": [
+        8,
+        28,
+        8
+      ],
+      "history": [
+        {
+          "step": 0,
+          "energy": 28.163556257497774,
+          "learning_rate": 0.005
+        },
+        {
+          "step": 10,
+          "energy": 18.145002523609023,
+          "learning_rate": 0.0049692824097848694
+        },
+        {
+          "step": 20,
+          "energy": 13.367860059601817,
+          "learning_rate": 0.004877886008156411
+        },
+        {
+          "step": 30,
+          "energy": 12.640106244042226,
+          "learning_rate": 0.004728061277849979
+        },
+        {
+          "step": 40,
+          "energy": 12.377220839001907,
+          "learning_rate": 0.004523497400965496
+        },
+        {
+          "step": 50,
+          "energy": 12.215558975185715,
+          "learning_rate": 0.004269231419060439
+        },
+        {
+          "step": 60,
+          "energy": 12.158944160356192,
+          "learning_rate": 0.003971524204469722
+        },
+        {
+          "step": 70,
+          "energy": 12.14051841650165,
+          "learning_rate": 0.0036377062968501704
+        },
+        {
+          "step": 80,
+          "energy": 12.136905604896135,
+          "learning_rate": 0.003275997400965495
+        },
+        {
+          "step": 90,
+          "energy": 12.135815802877069,
+          "learning_rate": 0.002895303990275377
+        },
+        {
+          "step": 100,
+          "energy": 12.135500785812232,
+          "learning_rate": 0.002505
+        },
+        {
+          "step": 110,
+          "energy": 12.135250004968524,
+          "learning_rate": 0.002114696009724624
+        },
+        {
+          "step": 120,
+          "energy": 12.135078622845668,
+          "learning_rate": 0.0017340025990345064
+        },
+        {
+          "step": 130,
+          "energy": 12.13496723674563,
+          "learning_rate": 0.0013722937031498304
+        },
+        {
+          "step": 140,
+          "energy": 12.134891901702074,
+          "learning_rate": 0.001038475795530279
+        },
+        {
+          "step": 150,
+          "energy": 12.134842332293518,
+          "learning_rate": 0.0007407685809395634
+        },
+        {
+          "step": 160,
+          "energy": 12.134809665428026,
+          "learning_rate": 0.0004865025990345058
+        },
+        {
+          "step": 170,
+          "energy": 12.134789479744,
+          "learning_rate": 0.00028193872215002204
+        },
+        {
+          "step": 180,
+          "energy": 12.13477859881302,
+          "learning_rate": 0.0001321139918435918
+        },
+        {
+          "step": 190,
+          "energy": 12.134774074499045,
+          "learning_rate": 4.0717590215131505e-05
+        },
+        {
+          "step": 200,
+          "energy": 12.134772902626537,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 50.36427929997444,
+      "peak_cuda_memory_bytes": 17494528
+    },
+    {
+      "initialization": "random",
+      "seed": 2,
+      "initial_energy": 24.311704691306698,
+      "terminal_energy_before_best_restore": 12.135997388617216,
+      "final_energy": 12.135997388617216,
+      "explicit_exterior_energy": 12.135997388617232,
+      "polynomial_explicit_absolute_difference": 1.5987211554602254e-14,
+      "error_vs_finite_basis": 0.003325806041253543,
+      "finite_basis_ground_fidelity": 0.9993614816715488,
+      "ordinary_particle_tt_ranks": [
+        8,
+        28,
+        8
+      ],
+      "history": [
+        {
+          "step": 0,
+          "energy": 24.311704691306698,
+          "learning_rate": 0.005
+        },
+        {
+          "step": 10,
+          "energy": 14.811421767805923,
+          "learning_rate": 0.0049692824097848694
+        },
+        {
+          "step": 20,
+          "energy": 12.82194555161469,
+          "learning_rate": 0.004877886008156411
+        },
+        {
+          "step": 30,
+          "energy": 12.430365674838173,
+          "learning_rate": 0.004728061277849979
+        },
+        {
+          "step": 40,
+          "energy": 12.207098434580534,
+          "learning_rate": 0.004523497400965496
+        },
+        {
+          "step": 50,
+          "energy": 12.158211138952478,
+          "learning_rate": 0.004269231419060439
+        },
+        {
+          "step": 60,
+          "energy": 12.144321642987885,
+          "learning_rate": 0.003971524204469722
+        },
+        {
+          "step": 70,
+          "energy": 12.13985715414002,
+          "learning_rate": 0.0036377062968501704
+        },
+        {
+          "step": 80,
+          "energy": 12.138214658354501,
+          "learning_rate": 0.003275997400965495
+        },
+        {
+          "step": 90,
+          "energy": 12.136914518421257,
+          "learning_rate": 0.002895303990275377
+        },
+        {
+          "step": 100,
+          "energy": 12.13650231942309,
+          "learning_rate": 0.002505
+        },
+        {
+          "step": 110,
+          "energy": 12.136331384155543,
+          "learning_rate": 0.002114696009724624
+        },
+        {
+          "step": 120,
+          "energy": 12.136222543763834,
+          "learning_rate": 0.0017340025990345064
+        },
+        {
+          "step": 130,
+          "energy": 12.13614519110408,
+          "learning_rate": 0.0013722937031498304
+        },
+        {
+          "step": 140,
+          "energy": 12.136090632190744,
+          "learning_rate": 0.001038475795530279
+        },
+        {
+          "step": 150,
+          "energy": 12.136052391211138,
+          "learning_rate": 0.0007407685809395634
+        },
+        {
+          "step": 160,
+          "energy": 12.136026673552012,
+          "learning_rate": 0.0004865025990345058
+        },
+        {
+          "step": 170,
+          "energy": 12.136010635463666,
+          "learning_rate": 0.00028193872215002204
+        },
+        {
+          "step": 180,
+          "energy": 12.13600194739484,
+          "learning_rate": 0.0001321139918435918
+        },
+        {
+          "step": 190,
+          "energy": 12.135998327107828,
+          "learning_rate": 4.0717590215131505e-05
+        },
+        {
+          "step": 200,
+          "energy": 12.135997388617216,
+          "learning_rate": 1e-05
+        }
+      ],
+      "elapsed_seconds": 51.00514959997963,
+      "peak_cuda_memory_bytes": 17494528
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "femps"
+version = "0.0.1"
+description = "First-quantized functional exterior tensor networks for continuous fermions"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.0,<3",
+    "torch>=2.8,<2.12",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9",
+    "pytest-cov>=5,<8",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = [
+    "integration: requires the sibling latticeTN package",
+    "gpu: opt-in CUDA validation",
+]
+

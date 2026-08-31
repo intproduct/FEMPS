@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "experiment": "gate_a_fixed_number_pfaffian_scaling",
+  "environment": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128",
+    "device": "cpu",
+    "dtype": "complex128",
+    "torch_threads": 48
+  },
+  "scan": {
+    "dimensions": [
+      16,
+      32,
+      64,
+      128
+    ],
+    "repeats": 3,
+    "two_body_max_d": 32
+  },
+  "records": [
+    {
+      "D": 16,
+      "N": 8,
+      "pairs": 4,
+      "channels": 8,
+      "timing_seconds_median": {
+        "norm": 0.0006262999959290028,
+        "one_body": 0.0010834999848157167,
+        "two_body_L2": 0.021221900009550154
+      },
+      "values": {
+        "norm": [
+          4.082731540711553,
+          0.0
+        ],
+        "one_body": [
+          3.2272906181630314,
+          0.0
+        ],
+        "two_body_L2": [
+          0.2421188865294801,
+          0.0
+        ]
+      },
+      "analytic_canonical_norm": 4.0827315407115545,
+      "norm_relative_error": 4.3509028739388044e-16,
+      "structural_counts": {
+        "particles": 8,
+        "pair_matrix_parameters": 120,
+        "femps_internal_bond": 8,
+        "nonzero_ordered_paths": 70,
+        "unrestricted_path_bound": 2097152,
+        "full_particle_coefficients": 4294967296,
+        "exterior_coefficients": 12870,
+        "dense_complex_pair_matrix_bytes": 4096,
+        "generating_recurrence_dense_matmuls": 5,
+        "generating_recurrence_asymptotic_memory_entries": 264
+      }
+    },
+    {
+      "D": 32,
+      "N": 16,
+      "pairs": 8,
+      "channels": 16,
+      "timing_seconds_median": {
+        "norm": 0.001527199987322092,
+        "one_body": 0.00422229990363121,
+        "two_body_L2": 0.11541239998769015
+      },
+      "values": {
+        "norm": [
+          43.1936544984887,
+          0.0
+        ],
+        "one_body": [
+          -38.47956541278337,
+          0.0
+        ],
+        "two_body_L2": [
+          11.137464198167695,
+          0.0
+        ]
+      },
+      "analytic_canonical_norm": 43.19365449848871,
+      "norm_relative_error": 3.2900329643788815e-16,
+      "structural_counts": {
+        "particles": 16,
+        "pair_matrix_parameters": 496,
+        "femps_internal_bond": 16,
+        "nonzero_ordered_paths": 12870,
+        "unrestricted_path_bound": "1152921504606846976",
+        "full_particle_coefficients": "1208925819614629174706176",
+        "exterior_coefficients": 601080390,
+        "dense_complex_pair_matrix_bytes": 16384,
+        "generating_recurrence_dense_matmuls": 9,
+        "generating_recurrence_asymptotic_memory_entries": 1040
+      }
+    },
+    {
+      "D": 64,
+      "N": 32,
+      "pairs": 16,
+      "channels": 32,
+      "timing_seconds_median": {
+        "norm": 0.005943500087596476,
+        "one_body": 0.0066992000211030245
+      },
+      "values": {
+        "norm": [
+          6700.942382584391,
+          0.0
+        ],
+        "one_body": [
+          -71109.80955024276,
+          0.0
+        ]
+      },
+      "analytic_canonical_norm": 6700.942382584324,
+      "norm_relative_error": 1.00437526677017e-14,
+      "structural_counts": {
+        "particles": 32,
+        "pair_matrix_parameters": 2016,
+        "femps_internal_bond": 32,
+        "nonzero_ordered_paths": 601080390,
+        "unrestricted_path_bound": "45671926166590716193865151022383844364247891968",
+        "full_particle_coefficients": "6277101735386680763835789423207666416102355444464034512896",
+        "exterior_coefficients": "1832624140942590534",
+        "dense_complex_pair_matrix_bytes": 65536,
+        "generating_recurrence_dense_matmuls": 17,
+        "generating_recurrence_asymptotic_memory_entries": 4128
+      }
+    },
+    {
+      "D": 128,
+      "N": 64,
+      "pairs": 32,
+      "channels": 64,
+      "timing_seconds_median": {
+        "norm": 0.011258200043812394,
+        "one_body": 0.02745579998008907
+      },
+      "values": {
+        "norm": [
+          225721493.3078878,
+          0.0
+        ],
+        "one_body": [
+          -711432337.7091761,
+          0.0
+        ]
+      },
+      "analytic_canonical_norm": 225721493.30788007,
+      "norm_relative_error": 3.4196129864712436e-14,
+      "structural_counts": {
+        "particles": 64,
+        "pair_matrix_parameters": 8128,
+        "femps_internal_bond": 64,
+        "nonzero_ordered_paths": "1832624140942590534",
+        "unrestricted_path_bound": "615656346818663737691860001564743965704370926101022604186692084441339402679643915803347910232576806887603562348544",
+        "full_particle_coefficients": "726838724295606890549323807888004534353641360687318060281490199180639288113397923326191050713763565560762521606266177933534601628614656",
+        "exterior_coefficients": "23951146041928082866135587776380551750",
+        "dense_complex_pair_matrix_bytes": 262144,
+        "generating_recurrence_dense_matmuls": 33,
+        "generating_recurrence_asymptotic_memory_entries": 16448
+      }
+    }
+  ]
+}

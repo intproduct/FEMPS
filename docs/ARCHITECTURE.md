@@ -11,6 +11,8 @@ flowchart LR
     Lattice[latticeTN AD/MPS backend] --> Baseline[2201 baseline]
     Hamiltonian --> Baseline
     Hamiltonian --> Contract[Exterior contraction engine]
+    Operators --> SoftCoulomb[Soft-Coulomb quadrature / factorization]
+    SoftCoulomb --> Hamiltonian
     State --> Contract
     Contract --> Optimizer[AD optimizer]
     Reference[Small full tensor / exact solver] --> Validation[Validation]
@@ -27,6 +29,8 @@ flowchart LR
   admitted fixed-number Pfaffian contraction engine.
 - `femps.ordered_sector`: exact normalized chamber maps and local coordinate-grid
   hard-wall oracles for small-system representation comparisons.
+- `femps.hamiltonians.soft_coulomb`: Gauss--Hermite two-body integrals,
+  symmetric kernel factorization, and an independent `N=2` relative-grid oracle.
 - `femps.states`: Slater, explicit antisymmetric, and FEMPS states.
 - `femps.algorithms`: contractions and optimization admitted after exact tests.
 - `math/`: proof and certificate pipelines, isolated from production solvers.

@@ -112,3 +112,22 @@
 - Gate B keeps finite-AGP FEMPS as the E6 production solver and the exact
   ordered-sector grid path as a complementary small-system control; no
   asymptotic superiority claim is made.
+- Started E6 with a factorized Gauss--Hermite soft-Coulomb operator. Direct
+  `Q=96` and `Q=128` tensors agree to `2.25e-11`; a `1e-14` kernel threshold
+  retains 50 of 128 modes at `D=8` with `6.54e-13` dense reconstruction error.
+- The `N=2,D=16` exterior energy `2.553831818868` agrees within `8.49e-8` with
+  an independent second-order-extrapolated odd relative-coordinate grid result.
+  Polynomial AGP energies and gradients pass explicit exterior checks.
+- Blind `N=2,D=12` soft-Coulomb training resumes from step 200 and reaches the
+  finite-basis truth within `2.13e-14`, with fidelity one and independent
+  exterior agreement at `2.09e-14`. The resumed 600 steps take 490.9 seconds,
+  exposing factor-axis batching as the next performance requirement.
+- Replaced per-factor nested autograd by a batched mixed-derivative Newton
+  recurrence. A matched N=2 per-step timing improves by 19.9x to `0.0411`
+  seconds per step without changing explicit energy or gradient tests.
+- Blind/restarted `N=4,D=8,Q=96,K=1` training reaches `1.446e-3` finite-basis
+  error and `0.9996928` fidelity, with polynomial/exterior agreement at
+  `1.60e-14`; finite-AGP growth remains necessary.
+- Soft-Coulomb N=4 greedy K=2 reaches `7.445e-5` finite-basis error with stable
+  overlap conditioning; a safe `N=6,D=8,K=1` attempt reaches `1.725e-3` error
+  and polynomial/exterior agreement at `1.19e-12` in 33.7 seconds.

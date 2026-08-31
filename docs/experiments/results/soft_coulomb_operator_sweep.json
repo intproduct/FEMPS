@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "experiment": "soft_coulomb_operator_and_n2_basis_sweep",
+  "hamiltonian": {
+    "domain": "R",
+    "particles": 2,
+    "spin_sector": "spin-polarized spinless fermions",
+    "trap_frequency": 1.0,
+    "coupling": 1.0,
+    "softening": 1.0,
+    "pair_potential": "g/sqrt((x_i-x_j)^2+a^2)",
+    "units": "hbar=m=omega=1"
+  },
+  "reference_quadrature_order": 128,
+  "relative_factorization_threshold": 1e-14,
+  "quadrature_probe_basis": 8,
+  "quadrature_scan": [
+    {
+      "quadrature_order": 24,
+      "direct_quadrature_relative_error_vs_q_reference": 8.076103903214649e-05,
+      "factorized_relative_error_vs_q_reference": 8.076103906897052e-05,
+      "diagnostics": {
+        "basis_order": 8,
+        "quadrature_order": 24,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 22,
+        "discarded_rank": 2,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152736708637697,
+        "discarded_kernel_eigenvalue_magnitude": 2.0818385037755616e-16,
+        "dense_relative_factorization_error": 2.7566215823114037e-13,
+        "dense_hermiticity_residual": 3.807118760155151e-17,
+        "exchange_symmetry_residual": 2.7753358310317384e-16
+      }
+    },
+    {
+      "quadrature_order": 32,
+      "direct_quadrature_relative_error_vs_q_reference": 4.192197976474114e-06,
+      "factorized_relative_error_vs_q_reference": 4.1921981164928925e-06,
+      "diagnostics": {
+        "basis_order": 8,
+        "quadrature_order": 32,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 26,
+        "discarded_rank": 6,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152722158946773,
+        "discarded_kernel_eigenvalue_magnitude": 1.845247983974324e-16,
+        "dense_relative_factorization_error": 1.3332002449131613e-12,
+        "dense_hermiticity_residual": 3.6044652700092735e-17,
+        "exchange_symmetry_residual": 2.958761836493167e-16
+      }
+    },
+    {
+      "quadrature_order": 48,
+      "direct_quadrature_relative_error_vs_q_reference": 9.72012262738546e-08,
+      "factorized_relative_error_vs_q_reference": 9.720180538708669e-08,
+      "diagnostics": {
+        "basis_order": 8,
+        "quadrature_order": 48,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 32,
+        "discarded_rank": 16,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.415272039667766,
+        "discarded_kernel_eigenvalue_magnitude": 6.736255014377081e-16,
+        "dense_relative_factorization_error": 4.921732080802522e-12,
+        "dense_hermiticity_residual": 4.623504300631438e-17,
+        "exchange_symmetry_residual": 2.7039397033861457e-16
+      }
+    },
+    {
+      "quadrature_order": 64,
+      "direct_quadrature_relative_error_vs_q_reference": 4.219464956253855e-09,
+      "factorized_relative_error_vs_q_reference": 4.219090298634123e-09,
+      "diagnostics": {
+        "basis_order": 8,
+        "quadrature_order": 64,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 36,
+        "discarded_rank": 28,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720353238553,
+        "discarded_kernel_eigenvalue_magnitude": 3.8930955657677156e-15,
+        "dense_relative_factorization_error": 2.6976111215471745e-12,
+        "dense_hermiticity_residual": 3.8478110931784283e-17,
+        "exchange_symmetry_residual": 3.2844626635756604e-16
+      }
+    },
+    {
+      "quadrature_order": 96,
+      "direct_quadrature_relative_error_vs_q_reference": 2.2460959834495116e-11,
+      "factorized_relative_error_vs_q_reference": 2.2619630047118542e-11,
+      "diagnostics": {
+        "basis_order": 8,
+        "quadrature_order": 96,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 44,
+        "discarded_rank": 52,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.415272035118904,
+        "discarded_kernel_eigenvalue_magnitude": 2.2514326719458594e-15,
+        "dense_relative_factorization_error": 5.225676733421007e-12,
+        "dense_hermiticity_residual": 6.740405423010159e-17,
+        "exchange_symmetry_residual": 3.3684618492179035e-16
+      }
+    },
+    {
+      "quadrature_order": 128,
+      "direct_quadrature_relative_error_vs_q_reference": 0.0,
+      "factorized_relative_error_vs_q_reference": 6.542905166393247e-13,
+      "diagnostics": {
+        "basis_order": 8,
+        "quadrature_order": 128,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 50,
+        "discarded_rank": 78,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+        "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+        "dense_relative_factorization_error": 6.542905166393247e-13,
+        "dense_hermiticity_residual": 5.406715630794387e-17,
+        "exchange_symmetry_residual": 3.9555158819194954e-16
+      }
+    }
+  ],
+  "factorization_threshold_scan": [
+    {
+      "basis_order": 8,
+      "quadrature_order": 128,
+      "coupling": 1.0,
+      "softening": 1.0,
+      "retained_rank": 32,
+      "discarded_rank": 96,
+      "relative_threshold": 1e-08,
+      "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+      "discarded_kernel_eigenvalue_magnitude": 5.579474149629895e-09,
+      "dense_relative_factorization_error": 4.783846126978287e-05,
+      "dense_hermiticity_residual": 5.406715630794387e-17,
+      "exchange_symmetry_residual": 3.9555158819194954e-16
+    },
+    {
+      "basis_order": 8,
+      "quadrature_order": 128,
+      "coupling": 1.0,
+      "softening": 1.0,
+      "retained_rank": 38,
+      "discarded_rank": 90,
+      "relative_threshold": 1e-10,
+      "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+      "discarded_kernel_eigenvalue_magnitude": 9.888131528102606e-11,
+      "dense_relative_factorization_error": 4.3834545711464706e-07,
+      "dense_hermiticity_residual": 5.406715630794387e-17,
+      "exchange_symmetry_residual": 3.9555158819194954e-16
+    },
+    {
+      "basis_order": 8,
+      "quadrature_order": 128,
+      "coupling": 1.0,
+      "softening": 1.0,
+      "retained_rank": 44,
+      "discarded_rank": 84,
+      "relative_threshold": 1e-12,
+      "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+      "discarded_kernel_eigenvalue_magnitude": 7.538162416607739e-13,
+      "dense_relative_factorization_error": 6.606301228954943e-10,
+      "dense_hermiticity_residual": 5.406715630794387e-17,
+      "exchange_symmetry_residual": 3.9555158819194954e-16
+    },
+    {
+      "basis_order": 8,
+      "quadrature_order": 128,
+      "coupling": 1.0,
+      "softening": 1.0,
+      "retained_rank": 50,
+      "discarded_rank": 78,
+      "relative_threshold": 1e-14,
+      "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+      "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+      "dense_relative_factorization_error": 6.542905166393247e-13,
+      "dense_hermiticity_residual": 5.406715630794387e-17,
+      "exchange_symmetry_residual": 3.9555158819194954e-16
+    },
+    {
+      "basis_order": 8,
+      "quadrature_order": 128,
+      "coupling": 1.0,
+      "softening": 1.0,
+      "retained_rank": 128,
+      "discarded_rank": 0,
+      "relative_threshold": 0.0,
+      "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+      "discarded_kernel_eigenvalue_magnitude": 0.0,
+      "dense_relative_factorization_error": 5.349777710807603e-13,
+      "dense_hermiticity_residual": 5.406715630794387e-17,
+      "exchange_symmetry_residual": 3.9555158819194954e-16
+    }
+  ],
+  "basis_scan": [
+    {
+      "basis_order": 4,
+      "finite_basis_ground_energy": 2.5542887341013563,
+      "diagnostics": {
+        "basis_order": 4,
+        "quadrature_order": 128,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 50,
+        "discarded_rank": 78,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+        "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+        "dense_relative_factorization_error": 5.104856200336489e-15,
+        "dense_hermiticity_residual": 7.69089658569505e-17,
+        "exchange_symmetry_residual": 3.8694521788449734e-16
+      },
+      "energy_difference_vs_d16": 0.00045691523384272514
+    },
+    {
+      "basis_order": 6,
+      "finite_basis_ground_energy": 2.553885908133898,
+      "diagnostics": {
+        "basis_order": 6,
+        "quadrature_order": 128,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 50,
+        "discarded_rank": 78,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+        "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+        "dense_relative_factorization_error": 3.207980517333196e-14,
+        "dense_hermiticity_residual": 0.0,
+        "exchange_symmetry_residual": 4.2186159219556554e-16
+      },
+      "energy_difference_vs_d16": 5.408926638450495e-05
+    },
+    {
+      "basis_order": 8,
+      "finite_basis_ground_energy": 2.5538420791436924,
+      "diagnostics": {
+        "basis_order": 8,
+        "quadrature_order": 128,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 50,
+        "discarded_rank": 78,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+        "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+        "dense_relative_factorization_error": 6.542905166393247e-13,
+        "dense_hermiticity_residual": 5.406715630794387e-17,
+        "exchange_symmetry_residual": 3.9555158819194954e-16
+      },
+      "energy_difference_vs_d16": 1.0260276178897243e-05
+    },
+    {
+      "basis_order": 10,
+      "finite_basis_ground_energy": 2.5538343362609504,
+      "diagnostics": {
+        "basis_order": 10,
+        "quadrature_order": 128,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 50,
+        "discarded_rank": 78,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+        "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+        "dense_relative_factorization_error": 3.184600539257702e-10,
+        "dense_hermiticity_residual": 4.3137249153140166e-17,
+        "exchange_symmetry_residual": 4.005432848085936e-16
+      },
+      "energy_difference_vs_d16": 2.517393436818338e-06
+    },
+    {
+      "basis_order": 12,
+      "finite_basis_ground_energy": 2.553832510344216,
+      "diagnostics": {
+        "basis_order": 12,
+        "quadrature_order": 128,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 50,
+        "discarded_rank": 78,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+        "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+        "dense_relative_factorization_error": 5.082311084688698e-08,
+        "dense_hermiticity_residual": 0.0,
+        "exchange_symmetry_residual": 4.0959191253400983e-16
+      },
+      "energy_difference_vs_d16": 6.914767025634205e-07
+    },
+    {
+      "basis_order": 14,
+      "finite_basis_ground_energy": 2.5538319892210275,
+      "diagnostics": {
+        "basis_order": 14,
+        "quadrature_order": 128,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 50,
+        "discarded_rank": 78,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+        "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+        "dense_relative_factorization_error": 3.935156478753756e-06,
+        "dense_hermiticity_residual": 4.775502918732262e-17,
+        "exchange_symmetry_residual": 4.0846831823667215e-16
+      },
+      "energy_difference_vs_d16": 1.7035351396188503e-07
+    },
+    {
+      "basis_order": 16,
+      "finite_basis_ground_energy": 2.5538318188675135,
+      "diagnostics": {
+        "basis_order": 16,
+        "quadrature_order": 128,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "retained_rank": 50,
+        "discarded_rank": 78,
+        "relative_threshold": 1e-14,
+        "largest_kernel_eigenvalue_magnitude": 1.4152720351177555,
+        "discarded_kernel_eigenvalue_magnitude": 2.4848609196598165e-15,
+        "dense_relative_factorization_error": 0.0001225636762080393,
+        "dense_hermiticity_residual": 4.273539088850423e-17,
+        "exchange_symmetry_residual": 4.22986053421635e-16
+      },
+      "energy_difference_vs_d16": 0.0
+    }
+  ],
+  "independent_relative_coordinate_grid_scan": [
+    {
+      "intervals": 80,
+      "half_width": 8.0,
+      "spacing": 0.1,
+      "ground_energy": 2.552605551401369
+    },
+    {
+      "intervals": 120,
+      "half_width": 8.0,
+      "spacing": 0.06666666666666667,
+      "ground_energy": 2.553286975097753
+    },
+    {
+      "intervals": 180,
+      "half_width": 8.0,
+      "spacing": 0.044444444444444446,
+      "ground_energy": 2.553589651768993
+    },
+    {
+      "intervals": 240,
+      "half_width": 8.0,
+      "spacing": 0.03333333333333333,
+      "ground_energy": 2.5536955627357676
+    }
+  ],
+  "independent_relative_coordinate_box_scan": [
+    {
+      "intervals": 180,
+      "half_width": 6.0,
+      "spacing": 0.03333333333333333,
+      "ground_energy": 2.5536955627362774
+    },
+    {
+      "intervals": 240,
+      "half_width": 8.0,
+      "spacing": 0.03333333333333333,
+      "ground_energy": 2.5536955627357676
+    },
+    {
+      "intervals": 300,
+      "half_width": 10.0,
+      "spacing": 0.03333333333333333,
+      "ground_energy": 2.5536955627359563
+    }
+  ],
+  "second_order_grid_extrapolated_energy": 2.553831733978763,
+  "d16_minus_grid_extrapolated_energy": 8.488875069545543e-08,
+  "largest_basis_energy_is_not_a_proven_continuum_reference": true
+}

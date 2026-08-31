@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "experiment": "soft_coulomb_factor_axis_batching_timing",
+  "hardware": "NVIDIA RTX PRO 4000 Blackwell",
+  "configuration": {
+    "N": 2,
+    "D": 12,
+    "quadrature_order": 128,
+    "retained_factor_rank": 50
+  },
+  "sequential": {
+    "steps": 600,
+    "elapsed_seconds": 490.8939270999981,
+    "seconds_per_step": 0.8181565451666635,
+    "source": "soft_coulomb_n2.json resumed production segment"
+  },
+  "batched": {
+    "steps": 100,
+    "elapsed_seconds": 4.105299500050023,
+    "seconds_per_step": 0.04105299500050023,
+    "peak_cuda_memory_bytes": 18938880
+  },
+  "measured_speedup": 19.929279111278674,
+  "caveat": "Different optimization trajectory lengths; this is per-step wall time at the same N,D,Q and factor rank."
+}

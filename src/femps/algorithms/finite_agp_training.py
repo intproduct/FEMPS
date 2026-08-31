@@ -21,6 +21,7 @@ from femps.hamiltonians import (
     antisymmetric_many_body_hamiltonian,
     exact_interacting_harmonic_fermion_energy,
     harmonic_pair_hamiltonian,
+    soft_coulomb_operator,
 )
 
 from .agp_subspace import GeneralizedEigenResult, solve_generalized_hermitian
@@ -28,7 +29,7 @@ from .agp_subspace import GeneralizedEigenResult, solve_generalized_hermitian
 
 @dataclass(frozen=True, slots=True)
 class FiniteAgpConfig:
-    """Configuration for harmonic finite-AGP variable-projection training."""
+    """Configuration for finite-AGP variable-projection training."""
 
     basis_order: int = 8
     particles: int = 4
@@ -44,6 +45,11 @@ class FiniteAgpConfig:
     checkpoint_every: int = 100
     overlap_relative_threshold: float = 1e-10
     frozen_prefix_terms: int = 0
+    interaction_model: str = "harmonic"
+    soft_coulomb_coupling: float = 1.0
+    soft_coulomb_softening: float = 1.0
+    soft_coulomb_quadrature_order: int = 128
+    soft_coulomb_relative_threshold: float = 1e-14
 
     def validate(self) -> None:
         if self.particles < 2 or self.particles % 2:
@@ -63,9 +69,48 @@ class FiniteAgpConfig:
             raise ValueError("overlap_relative_threshold must be nonnegative")
         if not 0 <= self.frozen_prefix_terms < self.agp_terms:
             raise ValueError("frozen_prefix_terms must satisfy 0 <= frozen < K")
-        exact_interacting_harmonic_fermion_energy(
-            self.particles, kappa=self.kappa, omega=self.omega
+        if self.interaction_model == "harmonic":
+            exact_interacting_harmonic_fermion_energy(
+                self.particles, kappa=self.kappa, omega=self.omega
+            )
+        elif self.interaction_model == "soft_coulomb":
+            if self.soft_coulomb_quadrature_order < 1:
+                raise ValueError("soft-Coulomb quadrature order must be positive")
+            if self.soft_coulomb_coupling < 0 or self.soft_coulomb_softening <= 0:
+                raise ValueError("invalid soft-Coulomb coupling or softening")
+        else:
+            raise ValueError("interaction_model must be harmonic or soft_coulomb")
+
+
+def _build_hamiltonian(
+    config: FiniteAgpConfig, device: torch.device | str
+):
+    one_body = harmonic_pair_hamiltonian(
+        config.basis_order,
+        kappa=0.0,
+        omega=config.omega,
+        dtype=torch.complex128,
+        device=device,
+    )[0]
+    if config.interaction_model == "harmonic":
+        _, interaction = harmonic_pair_hamiltonian(
+            config.basis_order,
+            kappa=config.kappa,
+            omega=config.omega,
+            dtype=torch.complex128,
+            device=device,
         )
+        return one_body, None if config.kappa == 0 else interaction
+    interaction, _ = soft_coulomb_operator(
+        config.basis_order,
+        quadrature_order=config.soft_coulomb_quadrature_order,
+        coupling=config.soft_coulomb_coupling,
+        softening=config.soft_coulomb_softening,
+        relative_threshold=config.soft_coulomb_relative_threshold,
+        dtype=torch.complex128,
+        device=device,
+    )
+    return one_body, interaction
 
 
 def _random_complex_raw(
@@ -211,15 +256,7 @@ def run_finite_agp_variable_projection(
         raise ValueError("resume cannot be combined with initial_pair_matrices")
     device = resolve_device(config.device)
     pairs = config.particles // 2
-    one_body, interaction = harmonic_pair_hamiltonian(
-        config.basis_order,
-        kappa=config.kappa,
-        omega=config.omega,
-        dtype=torch.complex128,
-        device=device,
-    )
-    if config.kappa == 0:
-        interaction = None
+    one_body, interaction = _build_hamiltonian(config, device)
     resumed = False
     if resume:
         if checkpoint_path is None or not checkpoint_path.exists():
@@ -365,15 +402,7 @@ def run_finite_agp_variable_projection(
     final_pairs = final_pairs[order]
     final_amplitudes = final_result.amplitudes[order]
 
-    one_body_cpu, interaction_cpu = harmonic_pair_hamiltonian(
-        config.basis_order,
-        kappa=config.kappa,
-        omega=config.omega,
-        dtype=torch.complex128,
-        device="cpu",
-    )
-    if config.kappa == 0:
-        interaction_cpu = None
+    one_body_cpu, interaction_cpu = _build_hamiltonian(config, "cpu")
     truth_hamiltonian = antisymmetric_many_body_hamiltonian(
         one_body_cpu, config.particles, interaction_cpu
     )
@@ -397,8 +426,12 @@ def run_finite_agp_variable_projection(
             / coefficient_norm
         ).real
     )
-    continuum_reference = exact_interacting_harmonic_fermion_energy(
-        config.particles, kappa=config.kappa, omega=config.omega
+    continuum_reference = (
+        exact_interacting_harmonic_fermion_energy(
+            config.particles, kappa=config.kappa, omega=config.omega
+        )
+        if config.interaction_model == "harmonic"
+        else None
     )
     final_energy = float(final_result.energy.detach().cpu())
     completed = stop_step == config.steps
@@ -442,9 +475,17 @@ def run_finite_agp_variable_projection(
         ),
         "finite_basis_reference_energy": finite_reference,
         "continuum_reference_energy": continuum_reference,
-        "basis_error_vs_continuum": finite_reference - continuum_reference,
+        "basis_error_vs_continuum": (
+            finite_reference - continuum_reference
+            if continuum_reference is not None
+            else None
+        ),
         "error_vs_finite_basis": final_energy - finite_reference,
-        "error_vs_continuum": final_energy - continuum_reference,
+        "error_vs_continuum": (
+            final_energy - continuum_reference
+            if continuum_reference is not None
+            else None
+        ),
         "finite_basis_ground_fidelity": fidelity,
         "final_overlap_eigenvalues": [
             float(value)

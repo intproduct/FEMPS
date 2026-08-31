@@ -701,6 +701,121 @@ def _complex_derivative(
     return torch.complex(real_derivative, imaginary_derivative)
 
 
+def _overlap_mixed_recurrence_batched(
+    bra_pair_matrix: torch.Tensor,
+    ket_pair_matrix: torch.Tensor,
+    pairs: int,
+    first_directions: torch.Tensor,
+    second_directions: torch.Tensor,
+    mixed_directions: torch.Tensor,
+) -> torch.Tensor:
+    """Return batched mixed overlap derivatives by a second-order recurrence."""
+
+    dimension = bra_pair_matrix.shape[0]
+    terms = first_directions.shape[0]
+    bra_scale = _detached_max_abs_scale(bra_pair_matrix)
+    ket_scale = _detached_max_abs_scale(ket_pair_matrix)
+    normalized_bra_adjoint = (
+        bra_pair_matrix / bra_scale
+    ).conj().transpose(0, 1)
+    overlap_matrix = normalized_bra_adjoint @ (ket_pair_matrix / ket_scale)
+    first_matrices = torch.matmul(
+        normalized_bra_adjoint, first_directions / ket_scale
+    )
+    second_matrices = torch.matmul(
+        normalized_bra_adjoint, second_directions / ket_scale
+    )
+    mixed_matrices = torch.matmul(
+        normalized_bra_adjoint, mixed_directions / ket_scale
+    )
+
+    power_matrix = torch.eye(
+        dimension, dtype=overlap_matrix.dtype, device=overlap_matrix.device
+    )
+    zero_batch = torch.zeros(
+        (terms, dimension, dimension),
+        dtype=overlap_matrix.dtype,
+        device=overlap_matrix.device,
+    )
+    first_power = zero_batch
+    second_power = zero_batch
+    mixed_power = zero_batch
+    zero_scalar = torch.zeros(
+        (), dtype=overlap_matrix.dtype, device=overlap_matrix.device
+    )
+    zero_terms = torch.zeros(
+        terms, dtype=overlap_matrix.dtype, device=overlap_matrix.device
+    )
+    traces = [zero_scalar]
+    first_traces = [zero_terms]
+    second_traces = [zero_terms]
+    mixed_traces = [zero_terms]
+    for _ in range(1, pairs + 1):
+        next_mixed = (
+            torch.matmul(mixed_power, overlap_matrix)
+            + torch.matmul(first_power, second_matrices)
+            + torch.matmul(second_power, first_matrices)
+            + torch.matmul(power_matrix, mixed_matrices)
+        )
+        next_first = torch.matmul(first_power, overlap_matrix) + torch.matmul(
+            power_matrix, first_matrices
+        )
+        next_second = torch.matmul(second_power, overlap_matrix) + torch.matmul(
+            power_matrix, second_matrices
+        )
+        power_matrix = power_matrix @ overlap_matrix
+        first_power = next_first
+        second_power = next_second
+        mixed_power = next_mixed
+        traces.append(torch.trace(power_matrix))
+        first_traces.append(torch.diagonal(first_power, dim1=-2, dim2=-1).sum(-1))
+        second_traces.append(torch.diagonal(second_power, dim1=-2, dim2=-1).sum(-1))
+        mixed_traces.append(torch.diagonal(mixed_power, dim1=-2, dim2=-1).sum(-1))
+
+    coefficients = [torch.ones_like(zero_scalar)]
+    first_coefficients = [zero_terms]
+    second_coefficients = [zero_terms]
+    mixed_coefficients = [zero_terms]
+    for degree in range(1, pairs + 1):
+        values = []
+        first_values = []
+        second_values = []
+        mixed_values = []
+        for power in range(1, degree + 1):
+            sign = -1 if (power + 1) % 2 else 1
+            factor = 0.5 * sign
+            remainder = degree - power
+            values.append(factor * traces[power] * coefficients[remainder])
+            first_values.append(
+                factor
+                * (
+                    first_traces[power] * coefficients[remainder]
+                    + traces[power] * first_coefficients[remainder]
+                )
+            )
+            second_values.append(
+                factor
+                * (
+                    second_traces[power] * coefficients[remainder]
+                    + traces[power] * second_coefficients[remainder]
+                )
+            )
+            mixed_values.append(
+                factor
+                * (
+                    mixed_traces[power] * coefficients[remainder]
+                    + first_traces[power] * second_coefficients[remainder]
+                    + second_traces[power] * first_coefficients[remainder]
+                    + traces[power] * mixed_coefficients[remainder]
+                )
+            )
+        coefficients.append(torch.stack(values).sum() / degree)
+        first_coefficients.append(torch.stack(first_values).sum(0) / degree)
+        second_coefficients.append(torch.stack(second_values).sum(0) / degree)
+        mixed_coefficients.append(torch.stack(mixed_values).sum(0) / degree)
+    return (bra_scale * ket_scale).pow(pairs) * mixed_coefficients[pairs]
+
+
 def agp_two_body_transition_factorized(
     bra_pair_matrix: torch.Tensor,
     ket_pair_matrix: torch.Tensor,
@@ -740,29 +855,27 @@ def agp_two_body_transition_factorized(
     ):
         raise ValueError("weights must have shape (terms,) and share dtype/device")
 
-    total = torch.zeros(
-        (), dtype=bra_pair_matrix.dtype, device=bra_pair_matrix.device
+    first_directions = (
+        torch.matmul(left_operators, ket_pair_matrix)
+        + torch.matmul(ket_pair_matrix, left_operators.transpose(1, 2))
     )
-    scalar_dtype = bra_pair_matrix.real.dtype
-    identity = torch.eye(
-        dimension, dtype=bra_pair_matrix.dtype, device=bra_pair_matrix.device
+    second_directions = (
+        torch.matmul(right_operators, ket_pair_matrix)
+        + torch.matmul(ket_pair_matrix, right_operators.transpose(1, 2))
     )
-    for term in range(terms):
-        first = torch.zeros(
-            (), dtype=scalar_dtype, device=bra_pair_matrix.device, requires_grad=True
-        )
-        second = torch.zeros(
-            (), dtype=scalar_dtype, device=bra_pair_matrix.device, requires_grad=True
-        )
-        transform = identity + first * left_operators[term] + second * right_operators[term]
-        transformed_pair = transform @ ket_pair_matrix @ transform.transpose(0, 1)
-        overlap = agp_overlap_generating(
-            bra_pair_matrix, transformed_pair, pairs
-        )
-        first_derivative = _complex_derivative(overlap, first, create_graph=True)
-        mixed_derivative = _complex_derivative(first_derivative, second, create_graph=True)
-        total = total + 0.5 * weights[term] * mixed_derivative
-    return total
+    mixed_directions = (
+        torch.matmul(torch.matmul(left_operators, ket_pair_matrix), right_operators.transpose(1, 2))
+        + torch.matmul(torch.matmul(right_operators, ket_pair_matrix), left_operators.transpose(1, 2))
+    )
+    mixed_derivatives = _overlap_mixed_recurrence_batched(
+        bra_pair_matrix,
+        ket_pair_matrix,
+        pairs,
+        first_directions,
+        second_directions,
+        mixed_directions,
+    )
+    return 0.5 * torch.sum(weights * mixed_derivatives)
 
 
 def agp_two_body_expectation_factorized(

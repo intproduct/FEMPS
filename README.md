@@ -33,8 +33,11 @@ is gated by an explicit contraction-complexity audit.
 - Phase 8 reaches `N=8` without materializing the `10^8`-entry particle tensor
   and adds an exact ordered-coordinate hard-wall oracle as an independent
   competing-representation control.
+- E6 introduces a converged factorized soft-Coulomb operator. Blind/restarted
+  N=2 reaches finite-basis truth, N=4 greedy K=2 reaches `7.445e-5` error, and
+  batched mixed-derivative contractions remove the initial factor-axis bottleneck.
 
-See [the active soft-Coulomb plan](docs/exec-plans/active/phase9.md),
+See [the active soft-Coulomb hierarchy plan](docs/exec-plans/active/phase10.md),
 [the Pfaffian theory](docs/theory/pfaffian_subclass.md), and
 [the 2201 reproduction report](docs/experiments/2201_baseline_report.md).
 

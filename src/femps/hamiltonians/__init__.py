@@ -12,6 +12,12 @@ from .harmonic_fermions import (
     exact_noninteracting_fermion_energy,
     harmonic_pair_hamiltonian,
 )
+from .soft_coulomb import (
+    SoftCoulombDiagnostics,
+    soft_coulomb_dense_quadrature,
+    soft_coulomb_operator,
+    soft_coulomb_two_fermion_relative_grid_energy,
+)
 
 __all__ = [
     "FactorizedTwoBodyOperator",
@@ -24,4 +30,8 @@ __all__ = [
     "exact_interacting_pair_energy",
     "exact_noninteracting_fermion_energy",
     "harmonic_pair_hamiltonian",
+    "SoftCoulombDiagnostics",
+    "soft_coulomb_dense_quadrature",
+    "soft_coulomb_operator",
+    "soft_coulomb_two_fermion_relative_grid_energy",
 ]

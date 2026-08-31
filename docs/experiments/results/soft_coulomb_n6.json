@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "experiment": "soft_coulomb_n6_blind_single_agp",
+  "config": {
+    "particles": 6,
+    "basis_order": 8,
+    "quadrature_order": 96,
+    "coupling": 1.0,
+    "softening": 1.0,
+    "relative_threshold": 1e-14,
+    "steps": 600,
+    "learning_rate": 0.02,
+    "seed": 171,
+    "device": "auto"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128",
+    "device": "cuda:2",
+    "gpu": "NVIDIA RTX PRO 4000 Blackwell"
+  },
+  "resumed_this_call": false,
+  "completed": true,
+  "completed_steps": 600,
+  "initial_energy": 29.765226745531432,
+  "terminal_energy_before_best_restore": 25.05295773893325,
+  "final_energy": 25.05295773893325,
+  "explicit_exterior_energy": 25.05295773893206,
+  "polynomial_exterior_absolute_difference": 1.1901590823981678e-12,
+  "finite_basis_reference_energy": 25.051232892744068,
+  "error_vs_finite_basis": 0.0017248461891838929,
+  "finite_basis_ground_fidelity": 0.9996265259235517,
+  "operator_diagnostics": {
+    "basis_order": 8,
+    "quadrature_order": 96,
+    "coupling": 1.0,
+    "softening": 1.0,
+    "retained_rank": 44,
+    "discarded_rank": 52,
+    "relative_threshold": 1e-14,
+    "largest_kernel_eigenvalue_magnitude": 1.4152720351189043,
+    "discarded_kernel_eigenvalue_magnitude": 2.208849815126888e-15,
+    "dense_relative_factorization_error": 1.4492333158728185e-11,
+    "dense_hermiticity_residual": 0.0,
+    "exchange_symmetry_residual": 3.515955072636412e-16
+  },
+  "history": [
+    {
+      "step": 0,
+      "energy": 29.765226745531432
+    },
+    {
+      "step": 30,
+      "energy": 25.05942256541328,
+      "learning_rate": 0.0198769449642484
+    },
+    {
+      "step": 60,
+      "energy": 25.053184533042764,
+      "learning_rate": 0.019510809880370072
+    },
+    {
+      "step": 90,
+      "energy": 25.05304788727109,
+      "learning_rate": 0.018910610209262747
+    },
+    {
+      "step": 120,
+      "energy": 25.05303269159501,
+      "learning_rate": 0.0180911248587776
+    },
+    {
+      "step": 150,
+      "energy": 25.053027111650277,
+      "learning_rate": 0.017072532277959546
+    },
+    {
+      "step": 180,
+      "energy": 25.05302122270683,
+      "learning_rate": 0.015879913596663266
+    },
+    {
+      "step": 210,
+      "energy": 25.05301476070822,
+      "learning_rate": 0.014542635044896765
+    },
+    {
+      "step": 240,
+      "energy": 25.05300784544525,
+      "learning_rate": 0.013093624858777598
+    },
+    {
+      "step": 270,
+      "energy": 25.053000648535637,
+      "learning_rate": 0.011568562478077105
+    },
+    {
+      "step": 300,
+      "energy": 25.052993381107086,
+      "learning_rate": 0.010005
+    },
+    {
+      "step": 330,
+      "energy": 25.05298628429782,
+      "learning_rate": 0.008441437521922895
+    },
+    {
+      "step": 360,
+      "energy": 25.05297961268652,
+      "learning_rate": 0.0069163751412224025
+    },
+    {
+      "step": 390,
+      "energy": 25.05297361093762,
+      "learning_rate": 0.005467364955103231
+    },
+    {
+      "step": 420,
+      "energy": 25.052968486360705,
+      "learning_rate": 0.004130086403336734
+    },
+    {
+      "step": 450,
+      "energy": 25.05296438173718,
+      "learning_rate": 0.0029374677220404596
+    },
+    {
+      "step": 480,
+      "energy": 25.052961353473925,
+      "learning_rate": 0.0019188751412224027
+    },
+    {
+      "step": 510,
+      "energy": 25.052959359366035,
+      "learning_rate": 0.001099389790737265
+    },
+    {
+      "step": 540,
+      "energy": 25.052958257997506,
+      "learning_rate": 0.0004991901196299412
+    },
+    {
+      "step": 570,
+      "energy": 25.052957818793285,
+      "learning_rate": 0.00013305503575159936
+    },
+    {
+      "step": 600,
+      "energy": 25.05295773893325,
+      "learning_rate": 1e-05
+    }
+  ],
+  "elapsed_seconds_this_call": 33.67602889996488,
+  "peak_cuda_memory_bytes": 18348032
+}

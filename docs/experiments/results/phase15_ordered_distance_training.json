@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "experiment": "phase15_ordered_distance_blind_training",
+  "evidence_level": "native_blind_training_then_small_exact_truth_audit",
+  "grid_points": 8,
+  "particles": 4,
+  "spacing": 0.7,
+  "gap_cutoff": 4,
+  "local_dimension": 5,
+  "multiplicity_per_charge": 4,
+  "steps": 2500,
+  "learning_rate": 0.02,
+  "energy_tolerance": 5e-05,
+  "device": "cuda:2",
+  "dtype": "float64",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "training_materializes_D_power_N": false,
+  "post_training_truth_audit_materializes_small_local_gap_tensor": true,
+  "truth_sector_dimension": 70,
+  "truth_ground_energy": 10.550426086401501,
+  "runs": [
+    {
+      "seed": 701,
+      "initial_energy": 15.220534292858206,
+      "best_energy": 10.550434416701705,
+      "final_energy": 10.550434416701705,
+      "history": [
+        {
+          "step": 0,
+          "energy": 15.220534292858206
+        },
+        {
+          "step": 125,
+          "energy": 10.55151466324074
+        },
+        {
+          "step": 250,
+          "energy": 10.551180185392974
+        },
+        {
+          "step": 375,
+          "energy": 10.551089451785277
+        },
+        {
+          "step": 500,
+          "energy": 10.550960831693555
+        },
+        {
+          "step": 625,
+          "energy": 10.550634685950289
+        },
+        {
+          "step": 750,
+          "energy": 10.550497205543754
+        },
+        {
+          "step": 875,
+          "energy": 10.550478007146902
+        },
+        {
+          "step": 1000,
+          "energy": 10.550471173087482
+        },
+        {
+          "step": 1125,
+          "energy": 10.55046661331645
+        },
+        {
+          "step": 1250,
+          "energy": 10.5504624039854
+        },
+        {
+          "step": 1375,
+          "energy": 10.550457488447664
+        },
+        {
+          "step": 1500,
+          "energy": 10.550451867476054
+        },
+        {
+          "step": 1625,
+          "energy": 10.550448212251716
+        },
+        {
+          "step": 1750,
+          "energy": 10.550446050111137
+        },
+        {
+          "step": 1875,
+          "energy": 10.550444104465125
+        },
+        {
+          "step": 2000,
+          "energy": 10.550442220721827
+        },
+        {
+          "step": 2125,
+          "energy": 10.550440347084926
+        },
+        {
+          "step": 2250,
+          "energy": 10.550438435991806
+        },
+        {
+          "step": 2375,
+          "energy": 10.55043645379086
+        },
+        {
+          "step": 2500,
+          "energy": 10.550434416701705
+        }
+      ],
+      "bond_dimensions": [
+        1,
+        5,
+        10,
+        10,
+        5,
+        1
+      ],
+      "charge_labels": [
+        [
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          4
+        ]
+      ],
+      "max_forbidden_parameter": 0.0,
+      "native_only": true,
+      "charge_weight": 1.0,
+      "seconds": 26.453815200016834,
+      "peak_cuda_memory_bytes": 19563520,
+      "energy_error_vs_post_training_truth": 8.330300204306695e-06,
+      "ground_state_fidelity": 0.9999985898220924,
+      "passes_energy_tolerance": true
+    },
+    {
+      "seed": 1701,
+      "initial_energy": 16.901670069164666,
+      "best_energy": 10.55044674948048,
+      "final_energy": 10.55044674948048,
+      "history": [
+        {
+          "step": 0,
+          "energy": 16.901670069164666
+        },
+        {
+          "step": 125,
+          "energy": 10.61425275261867
+        },
+        {
+          "step": 250,
+          "energy": 10.558687435476315
+        },
+        {
+          "step": 375,
+          "energy": 10.55123524441949
+        },
+        {
+          "step": 500,
+          "energy": 10.550786954999625
+        },
+        {
+          "step": 625,
+          "energy": 10.550639270096257
+        },
+        {
+          "step": 750,
+          "energy": 10.550590902644403
+        },
+        {
+          "step": 875,
+          "energy": 10.550559132084405
+        },
+        {
+          "step": 1000,
+          "energy": 10.550534558903124
+        },
+        {
+          "step": 1125,
+          "energy": 10.550514869377428
+        },
+        {
+          "step": 1250,
+          "energy": 10.550498663275565
+        },
+        {
+          "step": 1375,
+          "energy": 10.550485203715551
+        },
+        {
+          "step": 1500,
+          "energy": 10.550474500887779
+        },
+        {
+          "step": 1625,
+          "energy": 10.550466800485907
+        },
+        {
+          "step": 1750,
+          "energy": 10.55046163484643
+        },
+        {
+          "step": 1875,
+          "energy": 10.550457969679234
+        },
+        {
+          "step": 2000,
+          "energy": 10.550455055538936
+        },
+        {
+          "step": 2125,
+          "energy": 10.550452562177824
+        },
+        {
+          "step": 2250,
+          "energy": 10.55045036919821
+        },
+        {
+          "step": 2375,
+          "energy": 10.550448437514225
+        },
+        {
+          "step": 2500,
+          "energy": 10.55044674948048
+        }
+      ],
+      "bond_dimensions": [
+        1,
+        5,
+        10,
+        10,
+        5,
+        1
+      ],
+      "charge_labels": [
+        [
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          4
+        ]
+      ],
+      "max_forbidden_parameter": 0.0,
+      "native_only": true,
+      "charge_weight": 1.0,
+      "seconds": 25.167023100075312,
+      "peak_cuda_memory_bytes": 19690496,
+      "energy_error_vs_post_training_truth": 2.0663078979410443e-05,
+      "ground_state_fidelity": 0.9999956822813187,
+      "passes_energy_tolerance": true
+    },
+    {
+      "seed": 2701,
+      "initial_energy": 14.863656759985169,
+      "best_energy": 10.550427385059953,
+      "final_energy": 10.550427385059953,
+      "history": [
+        {
+          "step": 0,
+          "energy": 14.863656759985169
+        },
+        {
+          "step": 125,
+          "energy": 10.556577741822158
+        },
+        {
+          "step": 250,
+          "energy": 10.550977664105256
+        },
+        {
+          "step": 375,
+          "energy": 10.550599770843037
+        },
+        {
+          "step": 500,
+          "energy": 10.550513348335219
+        },
+        {
+          "step": 625,
+          "energy": 10.550482297840105
+        },
+        {
+          "step": 750,
+          "energy": 10.550468501762895
+        },
+        {
+          "step": 875,
+          "energy": 10.550460738712585
+        },
+        {
+          "step": 1000,
+          "energy": 10.550454922369227
+        },
+        {
+          "step": 1125,
+          "energy": 10.550450086478392
+        },
+        {
+          "step": 1250,
+          "energy": 10.550445916972398
+        },
+        {
+          "step": 1375,
+          "energy": 10.550442255933511
+        },
+        {
+          "step": 1500,
+          "energy": 10.550439024618669
+        },
+        {
+          "step": 1625,
+          "energy": 10.550436196383869
+        },
+        {
+          "step": 1750,
+          "energy": 10.55043377725491
+        },
+        {
+          "step": 1875,
+          "energy": 10.550431784511778
+        },
+        {
+          "step": 2000,
+          "energy": 10.550430223434686
+        },
+        {
+          "step": 2125,
+          "energy": 10.550429073889266
+        },
+        {
+          "step": 2250,
+          "energy": 10.550428267042793
+        },
+        {
+          "step": 2375,
+          "energy": 10.550440028062859
+        },
+        {
+          "step": 2500,
+          "energy": 10.550427385059953
+        }
+      ],
+      "bond_dimensions": [
+        1,
+        5,
+        10,
+        10,
+        5,
+        1
+      ],
+      "charge_labels": [
+        [
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          3,
+          3,
+          4
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          4
+        ]
+      ],
+      "max_forbidden_parameter": 0.0,
+      "native_only": true,
+      "charge_weight": 1.0,
+      "seconds": 25.004219599999487,
+      "peak_cuda_memory_bytes": 19690496,
+      "energy_error_vs_post_training_truth": 1.2986584518870359e-06,
+      "ground_state_fidelity": 0.9999998114215845,
+      "passes_energy_tolerance": true
+    }
+  ],
+  "all_seed_gate_pass": true
+}

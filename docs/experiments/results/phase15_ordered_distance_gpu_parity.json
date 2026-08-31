@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "experiment": "phase15_ordered_distance_cpu_gpu_parity",
+  "grid_points": 8,
+  "particles": 4,
+  "spacing": 0.7,
+  "dtype": "float64",
+  "device": "cuda:2",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "exact_mps_ranks": [
+    5,
+    10,
+    10,
+    5
+  ],
+  "tt_svd_discarded_norm": 3.57421770222891e-17,
+  "truth_energy": 10.550426086401501,
+  "cpu_energy": 10.550426086401506,
+  "gpu_energy": 10.550426086401501,
+  "energy_absolute_difference": 5.329070518200751e-15,
+  "gradient_max_absolute_difference": 5.329070518200751e-15,
+  "cpu_seconds": 0.013322699931450188,
+  "gpu_seconds": 0.05646600003819913,
+  "gpu_peak_memory_bytes": 18564608
+}

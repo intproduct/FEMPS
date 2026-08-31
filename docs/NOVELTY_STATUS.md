@@ -32,3 +32,11 @@ must be stated narrowly as the 2201 continuous orthonormal functional-basis
 operator/AD integration, its controlled continuum benchmarks, and the new
 matrix-wedge/ordinary-particle-TT no-go theory. No priority claim is attached
 to ordered coordinates or distance-variable MPS.
+
+Phase 15 closes only the finite-grid contraction gate: the exact hard-charge
+gap MPS, `O(N^2(L-N))` raw operator bond, and native AD optimizer are an
+implementation/evidence result, not a new ansatz claim. The next novelty gate
+is whether full-line center-of-mass and Dirichlet half-line distance bases can
+retain the distinctive 2201 orthonormal functional-operator calculus with
+controlled continuum convergence. Until that comparison is complete, the
+ordered-distance branch has no affirmative method-priority claim.

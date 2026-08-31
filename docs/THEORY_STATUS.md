@@ -9,7 +9,7 @@
 | Fixed-number Pfaffian/AGP FEMPS contracts polynomially | theorem/algorithm draft; value, gradient, scaling and GPU verified; the LC-AGP family and K-squared organization have direct prior art | Use as fallback/control, not central novelty |
 | Finite-AGP overlap compression can be made term-gauge invariant | proved by unit-diagonal balancing; explicit exterior and three-seed D10 tests pass | Relation of the contribution Gram spectrum to physical correlation remains open |
 | 2201 functional MPS baseline transfers to the current backend | validated by controlled `D`/`chi`/seed scan | Larger paper-figure digitization is optional |
-| Ordered-sector particle MPS removes exchange multiplicity on the controlled N4,D8 grid | exact fixed-grid comparison: ordered ranks `(5,9,5)` versus antisymmetric `(8,28,8)`, with signed reconstruction and latticeTN AD | Distance-coordinate native MPO and scaling gate remain open |
+| Ordered-distance MPS/MPO has polynomial native contraction on the finite grid | Gate C pass: exact gap bijection, hard charge, kinetic/trap/soft-Coulomb MPO with raw bond `O(N^2(L-N))`; three blind N4,L8 runs reach `1.30e-6`--`2.07e-5` energy error | Continuous half-line functional basis, continuum convergence, and large-N accuracy remain open |
 
 Scalable contraction is asserted only for the fixed-number Pfaffian/AGP
 subclass and finite sums, not for generic matrix-wedge FEMPS. No novelty claim
@@ -24,6 +24,9 @@ matrix-wedge ansatz cannot be the promised exact polynomial solver unless the
 permanent admits a polynomial algorithm. This does not apply automatically to
 additional structured core algebras or approximate contraction.
 
-ADR 0004 therefore makes ordered-sector/interparticle-distance functional TN
-the primary numerical research route. The current latticeTN comparator is an
-exact dense truth interface, not yet a production contraction.
+ADR 0004 makes ordered-sector/interparticle-distance functional TN the primary
+numerical research route. Phase 15 and ADR 0005 replace its dense comparator by
+a production native MPS/MPO contraction on the finite grid. The training path
+does not materialize a local-dimension-to-the-number-of-sites tensor; dense
+objects survive only as explicitly small post-training truth audits. This is
+not yet the 2201 orthonormal continuous functional-basis completion.

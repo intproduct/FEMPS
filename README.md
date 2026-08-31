@@ -39,9 +39,18 @@ is gated by an explicit contraction-complexity audit.
 - The N=4 soft-Coulomb hierarchy now reaches K=4 with three-seed reproduction;
   independent exterior truth extends through D=14, while D=10 conditioning
   identifies canonical finite-AGP compression as the next solver task.
+- Generic matrix-wedge FEMPS exact contraction is now conditionally obstructed
+  by a polynomial tagged reduction from the permanent-hard `Mat_2` Cayley
+  determinant; tractable restricted cases found so far collapse to established
+  AGP/Gaussian structure.
+- Gate C passes for the finite-grid ordered-distance route. Exact hard-charge
+  gap MPS/MPO contraction has raw operator bond `O(N^2(L-N))`; three blind
+  `N=4,L=8` Blackwell runs reproduce the truth within `2.07e-5` without a
+  `d**(N+1)` training gather. A continuous half-line functional-basis bridge is
+  the next gate.
 
-See [the active finite-AGP conditioning plan](docs/exec-plans/active/phase11.md),
-[the Pfaffian theory](docs/theory/pfaffian_subclass.md), and
+See [the active execution plan](docs/exec-plans/active/phase16.md),
+[the ordered-distance formulation](docs/theory/ordered_distance_mpo.md), and
 [the 2201 reproduction report](docs/experiments/2201_baseline_report.md).
 
 ## Development setup
@@ -88,6 +97,8 @@ compute capability rather than assuming that `cuda:0` is the Blackwell card.
 
 - `src/femps/basis`: continuous functional bases and operator matrices;
 - `src/femps/baselines`: the differentiable 2201 MPS baseline;
+- `src/femps/ordered_distance.py`: exact finite-box ordered gap coordinates;
+- `src/femps/baselines/ordered_distance_mpo.py`: native gap MPS/MPO operators;
 - `src/femps/exterior`: exact antisymmetric, matrix-wedge, and Gate A oracles;
 - `docs/theory`: theorem and contraction-status drafts;
 - `docs/experiments/results`: machine-readable reproduction records;

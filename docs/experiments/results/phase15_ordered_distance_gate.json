@@ -1,0 +1,444 @@
+{
+  "schema_version": 1,
+  "experiment": "phase15_ordered_distance_gate",
+  "evidence_level": "exact_fixed_grid_plus_controlled_mps_mpo_truncations",
+  "particles": 4,
+  "grid_points": 8,
+  "spacing": 0.7,
+  "full_gap_cutoff": 4,
+  "full_ground_energy": 10.550426086401501,
+  "full_sector_dimension": 70,
+  "full_exact_mps_ranks": [
+    5,
+    10,
+    10,
+    5
+  ],
+  "full_exact_mps_discarded_norm": 3.57421770222891e-17,
+  "full_raw_mpo_max_bond": 33,
+  "gap_cutoff_sweep": [
+    {
+      "gap_cutoff": 1,
+      "local_dimension": 2,
+      "sector_dimension": 5,
+      "ground_energy": 13.040974082531356,
+      "error_vs_full_gap_basis": 2.4905479961298553,
+      "native_energy_absolute_error": 5.329070518200751e-15,
+      "exact_mps_ranks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "exact_mps_parameters": 32,
+      "tt_svd_discarded_norm": 5.239436432335806e-17,
+      "raw_mpo_max_bond": 33,
+      "seconds": 0.06469419994391501
+    },
+    {
+      "gap_cutoff": 2,
+      "local_dimension": 3,
+      "sector_dimension": 45,
+      "ground_energy": 10.600110126916354,
+      "error_vs_full_gap_basis": 0.04968404051485287,
+      "native_energy_absolute_error": 3.552713678800501e-15,
+      "exact_mps_ranks": [
+        3,
+        9,
+        9,
+        3
+      ],
+      "exact_mps_parameters": 423,
+      "tt_svd_discarded_norm": 0.0,
+      "raw_mpo_max_bond": 33,
+      "seconds": 0.014567899983376265
+    },
+    {
+      "gap_cutoff": 3,
+      "local_dimension": 4,
+      "sector_dimension": 65,
+      "ground_energy": 10.55053387482413,
+      "error_vs_full_gap_basis": 0.00010778842262837429,
+      "native_energy_absolute_error": 3.552713678800501e-15,
+      "exact_mps_ranks": [
+        4,
+        10,
+        10,
+        4
+      ],
+      "exact_mps_parameters": 752,
+      "tt_svd_discarded_norm": 3.939989506448679e-17,
+      "raw_mpo_max_bond": 33,
+      "seconds": 0.01794659998267889
+    },
+    {
+      "gap_cutoff": 4,
+      "local_dimension": 5,
+      "sector_dimension": 70,
+      "ground_energy": 10.550426086401501,
+      "error_vs_full_gap_basis": 0.0,
+      "native_energy_absolute_error": 5.329070518200751e-15,
+      "exact_mps_ranks": [
+        5,
+        10,
+        10,
+        5
+      ],
+      "exact_mps_parameters": 1050,
+      "tt_svd_discarded_norm": 3.57421770222891e-17,
+      "raw_mpo_max_bond": 33,
+      "seconds": 0.020412500016391277
+    }
+  ],
+  "mps_bond_sweep": [
+    {
+      "max_bond": 1,
+      "retained_ranks": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "parameters": 25,
+      "discarded_norm": 0.9217961428892177,
+      "charge_weight": 1.0,
+      "energy": 14.464561902761757,
+      "energy_error_vs_full": 3.9141358163602558
+    },
+    {
+      "max_bond": 2,
+      "retained_ranks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "parameters": 80,
+      "discarded_norm": 0.6028966807404811,
+      "charge_weight": 1.0,
+      "energy": 11.487099756271329,
+      "energy_error_vs_full": 0.9366736698698279
+    },
+    {
+      "max_bond": 4,
+      "retained_ranks": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "parameters": 280,
+      "discarded_norm": 0.037777783789728715,
+      "charge_weight": 1.0,
+      "energy": 10.556038969026977,
+      "energy_error_vs_full": 0.00561288262547599
+    },
+    {
+      "max_bond": 8,
+      "retained_ranks": [
+        5,
+        8,
+        8,
+        5
+      ],
+      "parameters": 770,
+      "discarded_norm": 0.0004865023848219473,
+      "charge_weight": 1.0,
+      "energy": 10.550427621806904,
+      "energy_error_vs_full": 1.5354054028193787e-06
+    },
+    {
+      "max_bond": 16,
+      "retained_ranks": [
+        5,
+        10,
+        10,
+        5
+      ],
+      "parameters": 1050,
+      "discarded_norm": 3.57421770222891e-17,
+      "charge_weight": 1.0,
+      "energy": 10.550426086401506,
+      "energy_error_vs_full": 5.329070518200751e-15
+    }
+  ],
+  "mpo_bond_energy_sweep": [
+    {
+      "max_bond": 4,
+      "retained_ranks": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "local_discarded_singular_norm": 86.14186934163942,
+      "energy": 18.221650919521025,
+      "energy_error_on_exact_ground_state": 7.671224833119524
+    },
+    {
+      "max_bond": 8,
+      "retained_ranks": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "local_discarded_singular_norm": 54.27360776834224,
+      "energy": 15.196951860300912,
+      "energy_error_on_exact_ground_state": 4.646525773899411
+    },
+    {
+      "max_bond": 16,
+      "retained_ranks": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "local_discarded_singular_norm": 32.40172480405755,
+      "energy": 11.43785927902068,
+      "energy_error_on_exact_ground_state": 0.887433192619179
+    },
+    {
+      "max_bond": 24,
+      "retained_ranks": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "local_discarded_singular_norm": 0.6612510551529885,
+      "energy": 10.53855555360684,
+      "energy_error_on_exact_ground_state": -0.01187053279466177
+    },
+    {
+      "max_bond": 32,
+      "retained_ranks": [
+        25,
+        32,
+        32,
+        25
+      ],
+      "local_discarded_singular_norm": 1.2661757463697721e-14,
+      "energy": 10.550426086401375,
+      "energy_error_on_exact_ground_state": -1.2612133559741778e-13
+    },
+    {
+      "max_bond": 64,
+      "retained_ranks": [
+        25,
+        33,
+        33,
+        25
+      ],
+      "local_discarded_singular_norm": 0.0,
+      "energy": 10.550426086401393,
+      "energy_error_on_exact_ground_state": -1.0835776720341528e-13
+    }
+  ],
+  "mpo_operator_error_audit": {
+    "gap_cutoff": 2,
+    "sector_dimension": 45,
+    "points": [
+      {
+        "max_bond": 4,
+        "retained_ranks": [
+          4,
+          4,
+          4,
+          4
+        ],
+        "local_discarded_singular_norm": 16.731145330091373,
+        "frobenius_operator_error": 15.813094348917504,
+        "relative_frobenius_operator_error": 0.14711235451160226
+      },
+      {
+        "max_bond": 8,
+        "retained_ranks": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "local_discarded_singular_norm": 14.054188768599431,
+        "frobenius_operator_error": 12.685135341105768,
+        "relative_frobenius_operator_error": 0.1180123311827425
+      },
+      {
+        "max_bond": 16,
+        "retained_ranks": [
+          9,
+          16,
+          16,
+          16
+        ],
+        "local_discarded_singular_norm": 3.90856575195582,
+        "frobenius_operator_error": 2.6770463777238005,
+        "relative_frobenius_operator_error": 0.024905093656806272
+      },
+      {
+        "max_bond": 24,
+        "retained_ranks": [
+          9,
+          24,
+          24,
+          24
+        ],
+        "local_discarded_singular_norm": 0.032923124389308986,
+        "frobenius_operator_error": 0.005209505665163873,
+        "relative_frobenius_operator_error": 4.8465064922366146e-05
+      },
+      {
+        "max_bond": 32,
+        "retained_ranks": [
+          9,
+          32,
+          32,
+          25
+        ],
+        "local_discarded_singular_norm": 3.2436783506485925e-15,
+        "frobenius_operator_error": 6.870318468435692e-13,
+        "relative_frobenius_operator_error": 6.391593598537585e-15
+      },
+      {
+        "max_bond": 64,
+        "retained_ranks": [
+          9,
+          33,
+          33,
+          25
+        ],
+        "local_discarded_singular_norm": 0.0,
+        "frobenius_operator_error": 6.734449631474196e-13,
+        "relative_frobenius_operator_error": 6.265192123474439e-15
+      }
+    ]
+  },
+  "grid_sweep": [
+    {
+      "grid_points": 6,
+      "box_min": -1.75,
+      "box_max": 1.75,
+      "sector_dimension": 15,
+      "local_gap_dimension": 3,
+      "ground_energy": 11.243933018968514,
+      "native_energy_absolute_error": 5.329070518200751e-15,
+      "exact_mps_ranks": [
+        3,
+        4,
+        4,
+        3
+      ],
+      "raw_mpo_max_bond": 29,
+      "seconds": 0.007652800064533949
+    },
+    {
+      "grid_points": 8,
+      "box_min": -2.4499999999999997,
+      "box_max": 2.4499999999999997,
+      "sector_dimension": 70,
+      "local_gap_dimension": 5,
+      "ground_energy": 10.550426086401501,
+      "native_energy_absolute_error": 5.329070518200751e-15,
+      "exact_mps_ranks": [
+        5,
+        10,
+        10,
+        5
+      ],
+      "raw_mpo_max_bond": 33,
+      "seconds": 0.01714489993173629
+    },
+    {
+      "grid_points": 10,
+      "box_min": -3.15,
+      "box_max": 3.15,
+      "sector_dimension": 210,
+      "local_gap_dimension": 7,
+      "ground_energy": 10.446393698768414,
+      "native_energy_absolute_error": 1.7763568394002505e-15,
+      "exact_mps_ranks": [
+        7,
+        19,
+        19,
+        7
+      ],
+      "raw_mpo_max_bond": 37,
+      "seconds": 0.04978750005830079
+    },
+    {
+      "grid_points": 12,
+      "box_min": -3.8499999999999996,
+      "box_max": 3.8499999999999996,
+      "sector_dimension": 495,
+      "local_gap_dimension": 9,
+      "ground_energy": 10.440412047621043,
+      "native_energy_absolute_error": 1.7763568394002505e-15,
+      "exact_mps_ranks": [
+        9,
+        31,
+        31,
+        9
+      ],
+      "raw_mpo_max_bond": 41,
+      "seconds": 0.12761640001554042
+    }
+  ],
+  "fixed_box_spacing_sweep": [
+    {
+      "grid_points": 8,
+      "spacing": 0.9,
+      "box_min": -3.15,
+      "box_max": 3.15,
+      "sector_dimension": 70,
+      "ground_energy": 9.852736406643077,
+      "seconds": 0.0086182999657467
+    },
+    {
+      "grid_points": 10,
+      "spacing": 0.7,
+      "box_min": -3.15,
+      "box_max": 3.15,
+      "sector_dimension": 210,
+      "ground_energy": 10.446393698768414,
+      "seconds": 0.030839300015941262
+    },
+    {
+      "grid_points": 13,
+      "spacing": 0.525,
+      "box_min": -3.1500000000000004,
+      "box_max": 3.1500000000000004,
+      "sector_dimension": 715,
+      "ground_energy": 10.727927391159778,
+      "seconds": 0.1565624000504613
+    },
+    {
+      "grid_points": 15,
+      "spacing": 0.45,
+      "box_min": -3.15,
+      "box_max": 3.15,
+      "sector_dimension": 1365,
+      "ground_energy": 10.823057390075917,
+      "seconds": 0.47343520005233586
+    }
+  ],
+  "native_ad": {
+    "energy_absolute_error": 5.329070518200751e-15,
+    "all_gradients_finite": true,
+    "gradient_norms_at_exact_ground_state": [
+      8.945022835455479e-15,
+      1.585036721413681e-14,
+      1.3812778032504941e-14,
+      1.1931885275113258e-14,
+      8.82153268093702e-15
+    ]
+  },
+  "production_path_materializes_D_power_N": false,
+  "truth_operator_audit_materializes_small_local_gap_tensor": true,
+  "complexity_controls": [
+    "grid_points/box size",
+    "gap_cutoff/local distance dimension",
+    "MPS bond",
+    "MPO compression bond"
+  ]
+}

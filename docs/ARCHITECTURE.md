@@ -8,6 +8,9 @@ flowchart LR
     Exterior --> State[FEMPS state]
     Grid[Coordinate grid] --> Ordered[Ordered Weyl chamber]
     Ordered --> OrderedOracle[Ordered-sector oracle]
+    Ordered --> Gaps[Fixed-charge gap coordinates]
+    Gaps --> GapMPO[Native distance MPS/MPO]
+    GapMPO --> Optimizer
     Lattice[latticeTN AD/MPS backend] --> Baseline[2201 baseline]
     Hamiltonian --> Baseline
     Hamiltonian --> Contract[Exterior contraction engine]
@@ -29,6 +32,10 @@ flowchart LR
   admitted fixed-number Pfaffian contraction engine.
 - `femps.ordered_sector`: exact normalized chamber maps and local coordinate-grid
   hard-wall oracles for small-system representation comparisons.
+- `femps.ordered_distance`: the exact ordered-grid/gap bijection and independent
+  small fixed-charge Hamiltonian truth matrices.
+- `femps.baselines.ordered_distance_mpo`: polynomial-bond kinetic, trap,
+  finite-box, and interval-interaction MPOs plus the native latticeTN MPS bridge.
 - `femps.hamiltonians.soft_coulomb`: Gauss--Hermite two-body integrals,
   symmetric kernel factorization, and an independent `N=2` relative-grid oracle.
 - `femps.states`: Slater, explicit antisymmetric, and FEMPS states.
@@ -40,6 +47,12 @@ flowchart LR
 `latticeTN` stays an upstream sibling dependency. FEMPS reuses its PyTorch MPS,
 native contractions, device/dtype conventions, and AD infrastructure instead
 of copying them.
+
+The ordered-distance production path carries the finite box as an exact MPS
+charge: the sum of `N+1` nonnegative gaps is `L-N`. Dense gap tensors and exact
+diagonalization are confined to small truth audits. The finite-grid module is a
+precursor to, not a substitute for, the planned continuous half-line
+functional-basis layer.
 
 The finite-AGP optimizer accepts either the configured harmonic/soft-Coulomb
 operators or an explicitly identified external one-/two-body functional

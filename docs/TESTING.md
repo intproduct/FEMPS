@@ -33,3 +33,15 @@ python scripts/benchmark_ordered_continuous_training.py --device auto
 The first command uses dense vectors only in bounded truth audits and never
 forms the squared product-basis Hamiltonian. The second command is the formal
 blind native MPS/MPO path and requires the Blackwell GPU selected by `auto`.
+
+The completed unbounded-interaction Gate E records are reproduced by:
+
+```powershell
+python scripts/benchmark_ordered_continuous_fourier.py
+python scripts/benchmark_ordered_continuous_fourier_n6.py --device auto
+```
+
+The first command includes direct half-line quadrature, compact/direct MPO
+equivalence, matched-basis comparisons, and global compression audits. The
+second performs every N=6 blind training run before constructing the bounded
+product-vector Lanczos and TT-SVD truth audits.

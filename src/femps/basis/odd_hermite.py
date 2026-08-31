@@ -161,6 +161,70 @@ def odd_hermite_derivative_matrix(
     return torch.einsum("mx,x,nx->mn", odd, factor, derivative_polynomial)
 
 
+def odd_hermite_characteristic_matrices(
+    order: int,
+    frequencies: torch.Tensor,
+    length_scale: float = 1.0,
+    *,
+    quadrature_order: int | None = None,
+    dtype: torch.dtype = torch.float64,
+    device: torch.device | str | None = None,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Return half-line projections of ``cos(k r)`` and ``sin(k r)``.
+
+    A finite Gauss--Legendre rule is used out to the same adaptive Gaussian
+    tail cutoff as :func:`odd_hermite_power_matrices`. Unlike very high-order
+    Golub--Welsch Laguerre rules, this remains stable for the most oscillatory
+    Fourier nodes. The quadrature order is an explicit independent control.
+    """
+
+    _validate(order, length_scale)
+    if frequencies.ndim != 1:
+        raise ValueError("frequencies must be a one-dimensional tensor")
+    resolved_device = frequencies.device if device is None else torch.device(device)
+    count = (
+        max(256, 4 * order + 64)
+        if quadrature_order is None
+        else quadrature_order
+    )
+    if count < 1:
+        raise ValueError("quadrature_order must be positive")
+    raw_nodes, raw_weights = np.polynomial.legendre.leggauss(count)
+    dimensionless_cutoff = math.sqrt(4 * order + 2) + 8
+    physical_cutoff = length_scale * dimensionless_cutoff
+    real_dtype = torch.empty((), dtype=dtype).real.dtype
+    nodes = torch.as_tensor(
+        (raw_nodes + 1) * physical_cutoff / 2,
+        dtype=real_dtype,
+        device=resolved_device,
+    )
+    weights = torch.as_tensor(
+        raw_weights * physical_cutoff / 2,
+        dtype=real_dtype,
+        device=resolved_device,
+    )
+    basis = odd_hermite_basis_values(order, nodes, length_scale).to(dtype)
+    phases = (
+        frequencies.to(dtype=dtype, device=resolved_device)[:, None]
+        * nodes.to(dtype)[None, :]
+    )
+    cosine = torch.einsum(
+        "xm,x,kx,xn->kmn",
+        basis.conj(),
+        weights.to(dtype),
+        torch.cos(phases),
+        basis,
+    )
+    sine = torch.einsum(
+        "xm,x,kx,xn->kmn",
+        basis.conj(),
+        weights.to(dtype),
+        torch.sin(phases),
+        basis,
+    )
+    return cosine, sine
+
+
 def odd_hermite_position_matrix(
     order: int,
     length_scale: float = 1.0,

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import string
+import time
 
 import torch
 
@@ -37,3 +38,77 @@ def mpo_product_basis_matvec(mpo, vector: torch.Tensor) -> torch.Tensor:
     equation = ",".join(operands) + "->" + "".join(outputs)
     state = vector.reshape((mpo.dim,) * sites)
     return torch.einsum(equation, state, *mpo.tensors).reshape(-1)
+
+
+def lowest_mpo_eigenpair(
+    mpo,
+    *,
+    tolerance: float = 2e-10,
+    maximum_iterations: int = 1200,
+    seed: int = 1610,
+    initial_vector: torch.Tensor | None = None,
+) -> tuple[float, torch.Tensor, dict[str, float | int | bool | str]]:
+    """Return the lowest eigenpair through a CPU product-basis Lanczos audit.
+
+    The dense state vector is bounded by ``dim**length`` but the Hamiltonian
+    matrix is never materialized. SciPy remains an optional benchmark-only
+    dependency and is imported lazily.
+    """
+
+    import numpy as np
+    from scipy.sparse.linalg import LinearOperator, eigsh
+
+    if any(tensor.device.type != "cpu" for tensor in mpo.tensors):
+        raise ValueError("the independent Lanczos audit is CPU-only")
+    if mpo.dtype != torch.float64:
+        raise ValueError("the independent Lanczos audit currently requires float64")
+    dimension = mpo.dim**mpo.length
+    calls = 0
+
+    def matvec(vector: np.ndarray) -> np.ndarray:
+        nonlocal calls
+        calls += 1
+        tensor = torch.from_numpy(np.asarray(vector, dtype=np.float64))
+        return mpo_product_basis_matvec(mpo, tensor).detach().numpy()
+
+    operator = LinearOperator(
+        (dimension, dimension), matvec=matvec, rmatvec=matvec, dtype=np.float64
+    )
+    if initial_vector is None:
+        initial = np.random.default_rng(seed).normal(size=dimension)
+        initialization = "seeded_random"
+    else:
+        if (
+            initial_vector.ndim != 1
+            or initial_vector.numel() != dimension
+            or initial_vector.dtype != torch.float64
+            or initial_vector.device.type != "cpu"
+        ):
+            raise ValueError(
+                "initial_vector must be a CPU float64 vector of dim**length entries"
+            )
+        initial = initial_vector.detach().numpy()
+        initialization = "provided_post_training_vector"
+    started = time.perf_counter()
+    values, vectors = eigsh(
+        operator,
+        k=1,
+        which="SA",
+        v0=initial,
+        tol=tolerance,
+        maxiter=maximum_iterations,
+    )
+    elapsed = time.perf_counter() - started
+    eigenvector = torch.from_numpy(vectors[:, 0].copy())
+    residual = torch.linalg.vector_norm(
+        mpo_product_basis_matvec(mpo, eigenvector) - values[0] * eigenvector
+    )
+    diagnostics: dict[str, float | int | bool | str] = {
+        "product_basis_dimension": dimension,
+        "matvec_calls": calls,
+        "residual_norm": float(residual),
+        "elapsed_seconds": elapsed,
+        "dense_hamiltonian_materialized": False,
+        "initialization": initialization,
+    }
+    return float(values[0]), eigenvector, diagnostics

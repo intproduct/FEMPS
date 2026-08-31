@@ -2,12 +2,12 @@
 
 ## Evidence level and purpose
 
-This is the Phase 16 bridge from the finite gap grid to the 2201 architecture.
-The coordinate and operator identities are exact.  The current Dirichlet sine
-basis is a Galerkin approximation on a finite positive interval, the soft
-Coulomb polynomial is approximate, and the reported energies are numerical
-evidence. Gate D passes at controlled `N<=4` scope; unbounded interacting bases
-and larger-particle accuracy remain open.
+This is the Phase 16--17 bridge from the finite gap grid to the 2201
+architecture. The coordinate and operator identities are exact. Dirichlet
+sine and odd-Hermite bases are Galerkin approximations; the interval polynomial
+and Fourier--Bessel soft-Coulomb representations are controlled numerical
+approximations. Gate E passes at controlled `N<=6` scope. Basis efficiency,
+temporary dense raw-MPO storage, and N=8 accuracy remain open.
 
 ## Center of mass and positive distances
 
@@ -79,9 +79,9 @@ second candidate is the normalized restriction of odd harmonic-oscillator
 functions to `r>0`, scaled by a positive length `ell`. It is orthonormal on the
 half-line, vanishes at collision, and has no outer box. Its overlap, `r^2`, and
 `-d^2/dr^2` matrices are analytic; `r` and the first derivative are checked by
-independent quadrature. The present soft-Coulomb interval automaton does not
-yet support this unbounded basis, so its evidence is deliberately limited to
-the noninteracting Hamiltonian.
+independent quadrature. Phase 17 supports this unbounded basis with projected
+characteristic operators and a Fourier--Bessel interaction. The finite sine
+construction remains an independent matched-order control.
 
 ## Native noninteracting MPO
 
@@ -142,6 +142,34 @@ Degrees `8,16,24` on `s in [0,12]` have sampled scalar errors decreasing to
 below `2e-5`.  One- and two-distance projected MPOs independently match direct
 one- and two-dimensional quadrature, with error decreasing in `K`.
 
+## Soft-Coulomb Fourier--Bessel recurrence
+
+On the unbounded half-line, use the exact cosine transform
+
+```text
+1/sqrt(s^2+a^2) = (2/pi) integral_0^inf K0(a k) cos(k s) dk.
+```
+
+The numerical rule has independent Fourier order, dimensionless frequency
+cutoff, and odd-Hermite projection quadrature. The map `k=kmax*u^2` regularizes
+the logarithmic endpoint of `K0` before Gauss--Legendre quadrature. Projected
+`C=cos(k r)` and `S=sin(k r)` matrices pass independent one- and two-gap
+half-line checks.
+
+For one Fourier node, a row state `[1,c,s,T]` crossing a gap updates
+
+```text
+c' = C(c+1)-S s,
+s' = S(c+1)+C s,
+T' = T+c'.
+```
+
+Selecting `T` after the final gap yields every pair cosine. The all-pair
+interaction therefore has raw bond `4M`, independent of N. Direct-pair and
+compact operators agree globally to float64 precision. Compression is admitted
+only after a bounded dense-operator or global-action audit; local discarded
+singular values are not certificates.
+
 ## Controlled physics evidence
 
 For N=2 soft Coulomb, `(D,Rmax,K)=(12,9,20)` gives
@@ -171,15 +199,24 @@ Galerkin truth. CPU and GPU energy agree exactly for the parity state and the
 largest gradient difference is `8.88e-15`. Training uses only native MPS/MPO
 contractions and never materializes a product-basis state.
 
-## Gate D decision
+With the unbounded interaction, matched N=4,D=8 odd Hermite and sine errors
+against the same exterior numerical reference are `3.023e-3` and `8.661e-3`.
+At N=6,D=8, the scale-0.60 Galerkin energy is `25.0626429274`; three blind
+bond-32 runs lie `1.29e-4--2.48e-4` above it. TT-SVD of that Galerkin ground
+state has only `4.50e-6` energy error at bond eight, while the difference from
+an exterior D=12 numerical reference is `1.328e-2`. The observed larger-system
+error is therefore basis dominated.
 
-Gate D is **PASS (controlled continuous-basis prototype)**. The coordinate
-map, signed permutation recovery, collision boundary, and chamber
-normalization are exact; every basis/operator identity has an analytic or
-independent quadrature check; the Hamiltonian and norm use native polynomial
-MPS/MPO contraction; and basis/scale, interaction degree, projection
-quadrature, MPS bond, and optimization errors are separately measured.
+## Gate E decision
 
-The scope is deliberately narrow. The N=4 exterior reference is numerical, not
-a continuum bound; the interacting unbounded half-line basis is unimplemented;
-and no `N>4` accuracy or favorable asymptotic rank requirement is inferred.
+Gate E is **PASS (controlled unbounded N=6 prototype)**. The coordinate map,
+signed recovery, collision boundary, and chamber normalization remain exact.
+The interacting odd-Hermite basis improves the finite sine box at matched N=2
+and N=4 orders. Every adopted MPO compression has a global audit, and three
+blind N=6 runs finish within `2.49e-4` of post-run same-basis Galerkin truth
+without a product-state gather.
+
+The scope remains narrow. The N=6,D=8 Galerkin energy differs from an exterior
+D=12 numerical reference by `1.328e-2`; TT-SVD shows this is basis dominated,
+not an MPS-capacity limitation. N=8, continuum convergence rates, and favorable
+end-to-end asymptotic resource requirements are not inferred.

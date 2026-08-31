@@ -48,6 +48,9 @@ flowchart LR
   `femps.baselines.ordered_continuous_interaction`: native functional MPOs for
   the mixed continuum Hamiltonian and controlled interval-polynomial
   soft-Coulomb interaction.
+- `femps.baselines.ordered_continuous_fourier`: unbounded Fourier--Bessel
+  soft-Coulomb quadrature, projected cosine/sine operators, and a compact
+  four-state all-pair recurrence with interaction bond `4M`.
 - `femps.hamiltonians.soft_coulomb`: Gauss--Hermite two-body integrals,
   symmetric kernel factorization, and an independent `N=2` relative-grid oracle.
 - `femps.states`: Slater, explicit antisymmetric, and FEMPS states.
@@ -64,9 +67,11 @@ The ordered-distance production path carries the finite box as an exact MPS
 charge: the sum of `N+1` nonnegative gaps is `L-N`. Dense gap tensors and exact
 diagonalization are confined to small truth audits. The finite-grid module
 remains a structural oracle. Gate D admits the continuous COM/half-line
-functional-basis layer for controlled small systems; the present soft-Coulomb
-interaction still uses the finite sine interval, while the unbounded
-odd-Hermite basis is validated only for the noninteracting Hamiltonian.
+functional-basis layer for controlled small systems. Gate E adds the
+interacting unbounded odd-Hermite path through controlled N=6 and globally
+audited Fourier-MPO compression. The current builder still materializes dense
+raw `W^2 D^2` MPO blocks before compression; removing that temporary cost and
+improving basis efficiency are active work.
 
 The finite-AGP optimizer accepts either the configured harmonic/soft-Coulomb
 operators or an explicitly identified external one-/two-body functional

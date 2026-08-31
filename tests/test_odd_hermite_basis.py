@@ -4,6 +4,7 @@ import torch
 
 from femps.basis.odd_hermite import (
     odd_hermite_basis_values,
+    odd_hermite_characteristic_matrices,
     odd_hermite_derivative_matrix,
     odd_hermite_negative_second_derivative_matrix,
     odd_hermite_position_matrix,
@@ -72,6 +73,46 @@ def test_odd_hermite_derivative_is_nonzero_skew_and_matches_finite_difference() 
     assert float(torch.linalg.matrix_norm(observed)) > 0
     torch.testing.assert_close(observed.mT, -observed, atol=2e-11, rtol=2e-11)
     torch.testing.assert_close(observed, expected, atol=3e-9, rtol=3e-9)
+
+
+def test_odd_hermite_characteristic_matrices_match_independent_quadrature() -> None:
+    order = 5
+    scale = 0.9
+    frequencies = torch.tensor([0.0, 0.7, 2.3, 5.0], dtype=torch.float64)
+    cosine, sine = odd_hermite_characteristic_matrices(
+        order, frequencies, scale, quadrature_order=160
+    )
+    nodes, weights = _finite_quadrature(scale, 500)
+    basis = odd_hermite_basis_values(order, nodes, scale)
+    phases = frequencies[:, None] * nodes[None, :]
+    expected_cosine = torch.einsum(
+        "xm,x,kx,xn->kmn", basis, weights, torch.cos(phases), basis
+    )
+    expected_sine = torch.einsum(
+        "xm,x,kx,xn->kmn", basis, weights, torch.sin(phases), basis
+    )
+    torch.testing.assert_close(cosine, expected_cosine, atol=3e-13, rtol=3e-13)
+    torch.testing.assert_close(sine, expected_sine, atol=3e-13, rtol=3e-13)
+    torch.testing.assert_close(
+        cosine[0], torch.eye(order, dtype=torch.float64), atol=2e-13, rtol=2e-13
+    )
+    torch.testing.assert_close(sine[0], torch.zeros_like(sine[0]), atol=0, rtol=0)
+
+
+def test_odd_hermite_characteristic_matrices_support_complex_dtype() -> None:
+    frequencies = torch.tensor([0.3, 1.7], dtype=torch.float64)
+    real_cosine, real_sine = odd_hermite_characteristic_matrices(
+        3, frequencies, 0.8, quadrature_order=96
+    )
+    complex_cosine, complex_sine = odd_hermite_characteristic_matrices(
+        3,
+        frequencies,
+        0.8,
+        quadrature_order=96,
+        dtype=torch.complex128,
+    )
+    torch.testing.assert_close(complex_cosine, real_cosine.to(torch.complex128))
+    torch.testing.assert_close(complex_sine, real_sine.to(torch.complex128))
 
 
 def test_odd_hermite_kinetic_and_position_squared_rebuild_oscillator() -> None:

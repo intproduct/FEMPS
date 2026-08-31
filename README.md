@@ -52,12 +52,18 @@ is gated by an explicit contraction-complexity audit.
   continuum mixed-derivative/soft-Coulomb MPOs, and native latticeTN AD now
   have independently controlled `D`, scale/box, interaction-degree, MPS-bond,
   and optimization errors. Three blind N=4 runs are within `4.39e-3` of an
-  independent numerical reference; unbounded interactions and N>4 scaling are
-  the next gate.
+  independent numerical reference.
+- Gate E passes at controlled `N<=6` scope. A Fourier--Bessel soft-Coulomb
+  separation supports the unbounded odd-Hermite basis, and a four-state real
+  recurrence per Fourier node gives all-pair interaction bond `4M`, independent
+  of particle count. Three blind N=6 Blackwell runs are within `2.49e-4` of
+  their post-run Galerkin truth; the production MPO compression has `1.63e-9`
+  global action error. The remaining `1.33e-2` total discrepancy is basis
+  dominated, so basis efficiency and N=8 define the next gate.
 
-See [the active execution plan](docs/exec-plans/active/phase17.md),
+See [the active execution plan](docs/exec-plans/active/phase18.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md), and
-[the 2201 reproduction report](docs/experiments/2201_baseline_report.md).
+[the Gate E report](docs/experiments/phase17_unbounded_fourier_gate_report.md).
 
 ## Development setup
 
@@ -107,6 +113,8 @@ compute capability rather than assuming that `cuda:0` is the Blackwell card.
 - `src/femps/baselines/ordered_distance_mpo.py`: native gap MPS/MPO operators;
 - `src/femps/ordered_continuous.py`: exact COM/positive-gap continuum map;
 - `src/femps/baselines/ordered_continuous_mpo.py`: continuous functional MPOs;
+- `src/femps/baselines/ordered_continuous_fourier.py`: unbounded
+  Fourier--Bessel interaction and compact all-pair recurrence MPO;
 - `src/femps/exterior`: exact antisymmetric, matrix-wedge, and Gate A oracles;
 - `docs/theory`: theorem and contraction-status drafts;
 - `docs/experiments/results`: machine-readable reproduction records;

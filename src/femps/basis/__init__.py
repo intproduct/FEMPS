@@ -17,6 +17,7 @@ from .dirichlet_sine import (
 )
 from .odd_hermite import (
     odd_hermite_basis_values,
+    odd_hermite_characteristic_matrices,
     odd_hermite_derivative_matrix,
     odd_hermite_negative_second_derivative_matrix,
     odd_hermite_position_matrix,
@@ -37,6 +38,7 @@ __all__ = [
     "position_matrix",
     "position_squared_matrix",
     "odd_hermite_basis_values",
+    "odd_hermite_characteristic_matrices",
     "odd_hermite_derivative_matrix",
     "odd_hermite_negative_second_derivative_matrix",
     "odd_hermite_position_matrix",

@@ -51,3 +51,12 @@ soft-Coulomb MPOs, native global AD, and an independently separated
 `D/scale/K/chi/optimization` error budget. This is a reproducible integration
 and evidence contribution. It is not an affirmative ansatz-priority claim,
 and it is not called FEMPS.
+
+Phase 17 closes Gate E at controlled N=6 scope without broadening that claim.
+The implemented Fourier--Bessel/odd-Hermite interaction, compact four-real-state
+all-pair recurrence, and global compression audits are an integration and
+evidence result. The recurrence removes direct-pair growth at fixed Fourier
+order, but no priority claim is made for ordered coordinates, first-quantized
+distance MPS, or scalable fermionic tensor networks. Hong et al. and
+Li--Waintal remain the direct method parents. The N=6 basis-dominated error and
+temporary dense raw-MPO storage preclude an asymptotic accuracy/resource claim.

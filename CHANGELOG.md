@@ -1,5 +1,19 @@
 # Research changelog
 
+## 2026-09-01 - Phase 11 gauge-balanced finite-AGP conditioning
+
+- Reinterpreted the Phase 10 D10 raw overlap condition `143.5` as a scale-gauge
+  artifact: the unit-diagonal overlap condition is only `1.464`.
+- Added gauge-balanced whitening/compression, raw and balanced diagnostics, an
+  invariant contribution Gram spectrum, and auditable leave-one-out pruning.
+- Verified whitening and exact duplicate pruning against explicit exterior
+  states; production runs discarded or restarted no directions.
+- Refined three independent D10,K4 chains to errors `1.334e-5`, `1.900e-5`,
+  and `2.031e-5`, all matching or improving the Phase 10 result.
+- Reproduced K5 improvement on all three chains, reaching `6.000e-6`,
+  `8.820e-6`, and `8.026e-6` with balanced conditions below `3.11`.
+- Advanced the active work to a controlled N/D/K soft-Coulomb benchmark matrix.
+
 ## 2026-08-31 - Phase 0 bootstrap
 
 - Established the Python package, CI, documentation, reference-management, and

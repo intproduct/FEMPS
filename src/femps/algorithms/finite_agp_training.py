@@ -203,9 +203,14 @@ def _history_entry(step: int, result: GeneralizedEigenResult, learning_rate: flo
         "overlap_eigenvalues": [
             float(value) for value in result.overlap_eigenvalues.detach().cpu()
         ],
+        "raw_overlap_eigenvalues": [
+            float(value)
+            for value in result.raw_overlap_eigenvalues.detach().cpu()
+        ],
         "retained_rank": result.retained_rank,
         "discarded_rank": result.discarded_rank,
         "retained_condition_number": result.retained_condition_number,
+        "raw_overlap_condition_number": result.raw_overlap_condition_number,
         "generalized_residual_norm": float(result.residual_norm.detach().cpu()),
     }
 
@@ -491,9 +496,16 @@ def run_finite_agp_variable_projection(
             float(value)
             for value in final_result.overlap_eigenvalues.detach().cpu()
         ],
+        "final_raw_overlap_eigenvalues": [
+            float(value)
+            for value in final_result.raw_overlap_eigenvalues.detach().cpu()
+        ],
         "final_retained_rank": final_result.retained_rank,
         "final_discarded_rank": final_result.discarded_rank,
         "final_retained_condition_number": final_result.retained_condition_number,
+        "final_raw_overlap_condition_number": (
+            final_result.raw_overlap_condition_number
+        ),
         "final_generalized_residual_norm": float(
             final_result.residual_norm.detach().cpu()
         ),

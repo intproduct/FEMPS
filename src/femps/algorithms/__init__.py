@@ -1,6 +1,15 @@
 """Optimization algorithms admitted after the contraction gate."""
 
-from .agp_subspace import GeneralizedEigenResult, solve_generalized_hermitian
+from .agp_subspace import (
+    GeneralizedEigenResult,
+    OverlapWhitening,
+    TermPruningAssessment,
+    assess_term_pruning,
+    contribution_gram_spectrum,
+    leave_one_out_energies,
+    overlap_whitening,
+    solve_generalized_hermitian,
+)
 from .finite_agp_training import (
     FiniteAgpConfig,
     canonical_pair_matrices,
@@ -15,6 +24,12 @@ from .pfaffian_training import (
 
 __all__ = [
     "GeneralizedEigenResult",
+    "OverlapWhitening",
+    "TermPruningAssessment",
+    "assess_term_pruning",
+    "contribution_gram_spectrum",
+    "leave_one_out_energies",
+    "overlap_whitening",
     "solve_generalized_hermitian",
     "FiniteAgpConfig",
     "canonical_pair_matrices",

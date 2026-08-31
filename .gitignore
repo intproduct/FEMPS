@@ -15,6 +15,7 @@ outputs/
 tmp/
 *.log
 *_checkpoint.pt
+*.pt
 
 # Papers are local research inputs, not repository source.
 refs/*.pdf

@@ -2,12 +2,15 @@ import pytest
 import torch
 
 from femps.exterior import (
+    agp_tensor,
     antisymmetry_residual,
     bivector_decomposition_length,
     materialize_femps_matrix,
+    materialize_femps_as_agp_path_sum,
     materialize_femps_paths,
     normalized_slater_from_minors,
     slater_sum_cores,
+    slater_as_agp_pair_matrix,
     wedge_tensors,
 )
 
@@ -35,6 +38,17 @@ def test_chi_one_femps_is_exactly_one_decomposable_wedge() -> None:
     torch.testing.assert_close(observed, expected, atol=3e-13, rtol=3e-13)
 
 
+def test_every_even_slater_is_one_fixed_number_agp() -> None:
+    orbitals = _random_complex((6, 4), 7)
+    pair_matrix = slater_as_agp_pair_matrix(orbitals)
+    torch.testing.assert_close(
+        agp_tensor(pair_matrix, 2),
+        normalized_slater_from_minors(orbitals),
+        atol=3e-12,
+        rtol=3e-12,
+    )
+
+
 @pytest.mark.parametrize(
     "bonds",
     [
@@ -53,6 +67,20 @@ def test_matrix_wedge_and_path_enumeration_agree(bonds: tuple[int, ...]) -> None
     by_paths = materialize_femps_paths(cores)
     torch.testing.assert_close(by_matrix, by_paths, atol=2e-12, rtol=2e-12)
     assert antisymmetry_residual(by_matrix).item() < 1e-14
+
+
+def test_even_femps_equals_its_pathwise_lc_agp_expansion() -> None:
+    bonds = (1, 2, 3, 2, 1)
+    cores = [
+        _random_complex((bonds[site], 5, bonds[site + 1]), 71 + site)
+        for site in range(4)
+    ]
+    torch.testing.assert_close(
+        materialize_femps_as_agp_path_sum(cores),
+        materialize_femps_matrix(cores),
+        atol=4e-11,
+        rtol=4e-11,
+    )
 
 
 def test_finite_slater_sum_has_diagonal_path_embedding() -> None:

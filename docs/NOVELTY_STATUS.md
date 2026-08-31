@@ -14,3 +14,13 @@ and AGP-CI constructions. The present finite-AGP implementation is therefore a
 validated fallback and benchmark baseline, not a new ansatz class. The active
 novelty question is now explicitly beyond LC-AGP: generic matrix-wedge
 contraction or a proved statistics-carrier/correlation-multiplicity structure.
+
+Phase 13 rules out the first branch as a generic exact solver, conditionally on
+standard permanent hardness, by an explicit tagged Cayley-determinant
+reduction. Thus “generic matrix-wedge FEMPS with polynomial exact contraction”
+is no longer an admissible novelty claim. A future method claim must instead
+identify a systematically improvable restricted algebra with a surviving
+novelty boundary, prove a stronger statistics-carrier factorization, or use
+the ordered-sector first-quantized route. The one-body quantity
+`N/Tr(gamma^2)` is retained only as a correlation diagnostic, not a novel
+entanglement measure or a canonical FEMPS bond spectrum.

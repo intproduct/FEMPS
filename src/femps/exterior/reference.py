@@ -84,6 +84,131 @@ def normalized_slater_from_minors(orbitals: torch.Tensor) -> torch.Tensor:
     return result
 
 
+def exterior_coefficients_to_tensor(
+    coefficients: torch.Tensor, dimension: int, particles: int
+) -> torch.Tensor:
+    """Materialize increasing-basis exterior coefficients as a particle tensor.
+
+    The increasing Slater basis is orthonormal in the normalized tensor
+    convention.  This routine is an exponential small-system oracle.
+    """
+
+    if coefficients.ndim != 1:
+        raise ValueError("coefficients must be a vector")
+    if particles < 1 or dimension < particles:
+        raise ValueError("require dimension >= particles >= 1")
+    supports = list(itertools.combinations(range(dimension), particles))
+    if coefficients.numel() != len(supports):
+        raise ValueError("coefficient count must equal binom(dimension, particles)")
+    result = torch.zeros(
+        (dimension,) * particles,
+        dtype=coefficients.dtype,
+        device=coefficients.device,
+    )
+    scale = math.sqrt(math.factorial(particles))
+    permutations = list(itertools.permutations(range(particles)))
+    for support, coefficient in zip(supports, coefficients, strict=True):
+        for permutation in permutations:
+            index = tuple(support[position] for position in permutation)
+            result[index] = _permutation_sign(permutation) * coefficient / scale
+    return result
+
+
+def one_body_expectation_exterior_coefficients(
+    coefficients: torch.Tensor,
+    operator: torch.Tensor,
+    particles: int,
+) -> torch.Tensor:
+    """Evaluate ``<c|dGamma(operator)|c>`` in the increasing exterior basis."""
+
+    if coefficients.ndim != 1 or operator.ndim != 2 or operator.shape[0] != operator.shape[1]:
+        raise ValueError("require a coefficient vector and a square one-body operator")
+    dimension = operator.shape[0]
+    supports = list(itertools.combinations(range(dimension), particles))
+    if coefficients.numel() != len(supports):
+        raise ValueError("coefficient count must equal binom(dimension, particles)")
+    lookup = {support: position for position, support in enumerate(supports)}
+    acted = torch.zeros_like(coefficients)
+    for ket_position, support in enumerate(supports):
+        ket_coefficient = coefficients[ket_position]
+        for annihilation_position, removed in enumerate(support):
+            remaining = support[:annihilation_position] + support[annihilation_position + 1 :]
+            annihilation_sign = -1 if annihilation_position % 2 else 1
+            for created in range(dimension):
+                if created in remaining:
+                    continue
+                creation_position = sum(index < created for index in remaining)
+                creation_sign = -1 if creation_position % 2 else 1
+                target = tuple(sorted(remaining + (created,)))
+                acted[lookup[target]] = acted[lookup[target]] + (
+                    annihilation_sign
+                    * creation_sign
+                    * operator[created, removed]
+                    * ket_coefficient
+                )
+    return torch.vdot(coefficients, acted)
+
+
+def one_body_density_exterior_coefficients(
+    coefficients: torch.Tensor,
+    dimension: int,
+    particles: int,
+    *,
+    normalize: bool = True,
+) -> torch.Tensor:
+    """Return ``gamma[p,q] = <a_q^dagger a_p>`` in the exterior basis."""
+
+    if coefficients.ndim != 1 or particles < 1 or dimension < particles:
+        raise ValueError("require a vector and dimension >= particles >= 1")
+    supports = list(itertools.combinations(range(dimension), particles))
+    if coefficients.numel() != len(supports):
+        raise ValueError("coefficient count must equal binom(dimension, particles)")
+    lookup = {support: position for position, support in enumerate(supports)}
+    density = torch.zeros(
+        dimension, dimension, dtype=coefficients.dtype, device=coefficients.device
+    )
+    for ket_position, support in enumerate(supports):
+        for annihilation_position, removed in enumerate(support):
+            remaining = support[:annihilation_position] + support[annihilation_position + 1 :]
+            annihilation_sign = -1 if annihilation_position % 2 else 1
+            for created in range(dimension):
+                if created in remaining:
+                    continue
+                creation_position = sum(index < created for index in remaining)
+                creation_sign = -1 if creation_position % 2 else 1
+                target = tuple(sorted(remaining + (created,)))
+                density[removed, created] = density[removed, created] + (
+                    annihilation_sign
+                    * creation_sign
+                    * coefficients[lookup[target]].conj()
+                    * coefficients[ket_position]
+                )
+    if normalize:
+        norm = torch.vdot(coefficients, coefficients).real
+        if norm <= 0:
+            raise ValueError("cannot normalize a zero exterior state")
+        density = density / norm
+    return density
+
+
+def fermionic_correlation_multiplicity(
+    coefficients: torch.Tensor,
+    dimension: int,
+    particles: int,
+) -> torch.Tensor:
+    """Return ``N / Tr(gamma^2)``, equal to one for a single Slater.
+
+    This gauge-invariant one-body purity diagnostic is called a correlation
+    multiplicity here.  It is not labeled particle entanglement.
+    """
+
+    density = one_body_density_exterior_coefficients(
+        coefficients, dimension, particles, normalize=True
+    )
+    purity = torch.trace(density @ density).real
+    return particles / purity
+
+
 def antisymmetry_residual(tensor: torch.Tensor, *, relative: bool = True) -> torch.Tensor:
     """Return the largest adjacent-transposition residual in Frobenius norm."""
 

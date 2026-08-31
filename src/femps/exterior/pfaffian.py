@@ -60,6 +60,20 @@ def pair_matrix_from_channels(
     ) @ weighted_left
 
 
+def slater_as_agp_pair_matrix(orbitals: torch.Tensor) -> torch.Tensor:
+    """Return a pair matrix whose fixed-number AGP equals an even Slater.
+
+    ``orbitals`` has shape ``(D, 2M)``. Consecutive columns are paired; the
+    resulting ``Omega^M/M!`` is exactly their ordered exterior product.
+    """
+
+    if orbitals.ndim != 2 or orbitals.shape[1] < 2 or orbitals.shape[1] % 2:
+        raise ValueError("orbitals must have shape (D, 2M) with M >= 1")
+    left = orbitals[:, 0::2].transpose(0, 1)
+    right = orbitals[:, 1::2].transpose(0, 1)
+    return pair_matrix_from_channels(left, right)
+
+
 def real_skew_pair_decomposition(
     pair_matrix: torch.Tensor,
     channels: int | None = None,

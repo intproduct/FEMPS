@@ -267,3 +267,8 @@ sums formed from them, remain intrinsically relative-condition limited.
   correlation entropy or canonical FEMPS spectrum.
 - Representation advantage must be established on E1--E4 physics benchmarks,
   not inferred from the exponential formal Slater expansion alone.
+- Every even matrix-wedge FEMPS also has an exact pathwise LC-AGP expansion,
+  and every finite-basis even state is LC-AGP at sufficiently large K. See
+  `lc_agp_relation.md`. The relevant open distinction is succinct polynomial
+  contraction without enumerating that expansion, not membership in a
+  “non-LC-AGP” state set.

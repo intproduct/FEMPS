@@ -13,6 +13,7 @@ from collections.abc import Iterator, Sequence
 import torch
 
 from .matrix_wedge import _validate_cores, materialize_femps_matrix
+from .pfaffian import agp_tensor, slater_as_agp_pair_matrix
 from .reference import normalized_slater_from_minors
 
 
@@ -84,6 +85,25 @@ def femps_norm_paths(cores: Sequence[torch.Tensor]) -> torch.Tensor:
         for ket in paths:
             total = total + torch.linalg.det(bra.conj().transpose(0, 1) @ ket)
     return total
+
+
+def materialize_femps_as_agp_path_sum(
+    cores: Sequence[torch.Tensor],
+) -> torch.Tensor:
+    """Materialize the exact even-N pathwise LC-AGP expansion.
+
+    This is an exponential equivalence oracle, not a contraction algorithm.
+    It makes explicit that every virtual-path Slater is one AGP.
+    """
+
+    _, particles = _validate_cores(cores)
+    if particles % 2:
+        raise ValueError("pathwise AGP conversion requires even particle number")
+    terms = [
+        agp_tensor(slater_as_agp_pair_matrix(orbitals), particles // 2)
+        for orbitals in _path_orbitals(cores)
+    ]
+    return torch.stack(terms).sum(dim=0)
 
 
 def apply_one_body_sum(state: torch.Tensor, operator: torch.Tensor) -> torch.Tensor:

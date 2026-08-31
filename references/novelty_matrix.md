@@ -12,11 +12,17 @@
 | FermiNet (Pfau et al. 2020) | first / real-space QMC | electron coordinates | sums of neural-coordinate-dependent determinants | basis-free continuous coordinates | neural backflow determinant sum | stochastic local-energy/VMC estimates | direct first-quantized continuous fermion solver | FEMPS is functional-basis Galerkin with exact polynomial contractions; it must not claim general accuracy or first-quantized priority |
 | PauliNet (Hermann et al. 2020) | first / real-space QMC | electron coordinates | multireference determinants plus Jastrow/backflow | continuous coordinates with physical baseline | neural Jastrow/backflow multireference state | stochastic VMC | direct electronic Schrödinger optimization with built-in antisymmetry | deterministic functional-basis/Pfaffian contraction and separate `D,K` controls |
 | Hidden-fermion Pfaffian (Chen et al. 2025 preprint) | primarily lattice/Fock configurations | visible plus neural hidden fermions | projected Pfaffian carrier | no 2201 continuous functional basis | neural-augmented Pfaffian | VMC-style amplitude evaluation | modern scalable correlated Pfaffian competitor | different state domain, hidden-neural correlation mechanism, and stochastic objective |
+| Uemura--Kasamatsu--Sugino 2015 AGP-CI | finite orbital Hilbert space | molecular/spin orbitals | linear combination of AGPs/HFB states | orbital basis, not a 2201 continuum functional-TN layer | independently optimized nonorthogonal AGP sum | deterministic AGP overlaps/Hamiltonian; reported cost quadratic in term count | essentially the same finite-AGP state family and `K^2` contraction pattern | only the 2201 functional-operator integration, exterior no-go framing, implementation details, and continuum `D/K` audit remain different |
+| Dutta et al. 2021 nonorthogonal AGP | finite orbital Hilbert space | orbitals | linearly independent nonorthogonal AGP basis | no direct coordinate functional solver | selective CI rewritten as linear combinations of AGPs | standard nonorthogonal AGP matrix elements | directly overlaps finite-AGP conditioning and span management | current diagonal balancing is an implementation diagnostic, not a new state class |
+| Kawasaki--Gao--Scuseria 2026 AGP-CI | finite orbital/lattice Hilbert space | orbitals/sites | AGP-CI evaluated as compact LC-AGP | no 2201 particle-coordinate functional layer | inter-geminal CI reorganized by border-rank ideas | standard AGP overlap/Hamiltonian machinery | newer and more expressive direct competitor to the present LC-AGP subclass | generic matrix-wedge FEMPS or a proved statistics/multiplicity carrier would still be distinct; LC-AGP alone is insufficient |
 
 All entries are preliminary reading notes, not novelty conclusions. The Phase 10
 audit rules out any claim that FEMPS first introduced continuous first-quantized
-determinant/Pfaffian solvers or scalable Pfaffian trial states. The remaining
-candidate contribution is narrower: a 2201-style orthonormal functional-basis
-Galerkin solver with an exterior/Pfaffian structural carrier, exact polynomial
-one-/two-body contractions, and independently controlled basis size `D` and
-finite-AGP length `K`.
+determinant/Pfaffian solvers or scalable Pfaffian trial states. Linear
+combinations of nonorthogonal AGPs, their deterministic matrix elements, and
+quadratic dependence on the number of terms were also established before this
+project. The current finite-AGP implementation is therefore a validated
+fallback/baseline, not by itself a new FEMPS ansatz. A defensible method
+contribution must come from the 2201 particle-coordinate functional integration
+plus new contraction or canonical structure beyond standard LC-AGP, or from
+the generic matrix-wedge statistics/multiplicity program.

@@ -1,0 +1,547 @@
+{
+  "schema_version": 1,
+  "experiment": "soft_coulomb_finite_agp_checkpoint_continuation",
+  "source_checkpoint": "docs\\experiments\\results\\soft_coulomb_n8_d10_k3_checkpoints\\joint_checkpoint.pt",
+  "stages": {
+    "joint": {
+      "schema_version": 1,
+      "experiment": "finite_agp_harmonic_variable_projection",
+      "config": {
+        "basis_order": 12,
+        "particles": 8,
+        "agp_terms": 3,
+        "kappa": 0.35,
+        "omega": 1.0,
+        "steps": 220,
+        "learning_rate": 0.0008,
+        "final_learning_rate": 1e-05,
+        "seed": 501,
+        "device": "auto",
+        "record_points": 20,
+        "checkpoint_every": 100,
+        "overlap_relative_threshold": 1e-10,
+        "frozen_prefix_terms": 0,
+        "interaction_model": "soft_coulomb",
+        "soft_coulomb_coupling": 1.0,
+        "soft_coulomb_softening": 1.0,
+        "soft_coulomb_quadrature_order": 128,
+        "soft_coulomb_relative_threshold": 1e-14
+      },
+      "environment": {
+        "python": "3.12.13",
+        "torch": "2.11.0+cu128",
+        "device": "cuda:2",
+        "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+        "compute_capability": [
+          12,
+          0
+        ]
+      },
+      "initialization": "provided_pair_matrices",
+      "resumed": false,
+      "completed": true,
+      "completed_steps": 220,
+      "initial_energy": 44.45170083682334,
+      "terminal_energy_before_best_restore": 44.44662532930227,
+      "final_energy": 44.44662532930227,
+      "explicit_exterior_energy": 44.44662532931057,
+      "polynomial_explicit_absolute_difference": 8.29913915367797e-12,
+      "finite_basis_reference_energy": 44.44600952839967,
+      "continuum_reference_energy": null,
+      "basis_error_vs_continuum": null,
+      "error_vs_finite_basis": 0.0006158009026009381,
+      "error_vs_continuum": null,
+      "finite_basis_ground_fidelity": 0.9999189575872459,
+      "final_overlap_eigenvalues": [
+        0.883138938685036,
+        1.007568963366179,
+        1.109292097948785
+      ],
+      "final_raw_overlap_eigenvalues": [
+        1.2830621053075758e-05,
+        1.3495869409138773e-05,
+        0.0001674038863266426
+      ],
+      "final_retained_rank": 3,
+      "final_discarded_rank": 0,
+      "final_retained_condition_number": 1.256078799560671,
+      "final_raw_overlap_condition_number": 13.047216158450297,
+      "final_generalized_residual_norm": 2.244885041863895e-16,
+      "ordinary_particle_tt_ranks": null,
+      "antisymmetry_residual": null,
+      "history": [
+        {
+          "step": 0,
+          "energy": 44.45170083682334,
+          "learning_rate": 0.0008,
+          "overlap_eigenvalues": [
+            0.9650353143165208,
+            0.9994391661999174,
+            1.0355255194835613
+          ],
+          "raw_overlap_eigenvalues": [
+            2.071520894015707e-06,
+            2.7778376796119534e-05,
+            0.00013577797660033
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.07304417167051,
+          "raw_overlap_condition_number": 65.5450673910994,
+          "generalized_residual_norm": 1.123932313448126e-16
+        },
+        {
+          "step": 11,
+          "energy": 44.45050796003884,
+          "learning_rate": 0.0007951368945350796,
+          "overlap_eigenvalues": [
+            0.9493775786253763,
+            1.0036820463354263,
+            1.0469403750391986
+          ],
+          "raw_overlap_eigenvalues": [
+            4.049067023569983e-06,
+            3.717859610805138e-05,
+            0.00015463663527169873
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.102765010055415,
+          "raw_overlap_condition_number": 38.19068303180584,
+          "generalized_residual_norm": 6.182700319840424e-17
+        },
+        {
+          "step": 22,
+          "energy": 44.447809695107075,
+          "learning_rate": 0.0007806673239365859,
+          "overlap_eigenvalues": [
+            0.9189650499802179,
+            0.9881390194986236,
+            1.0928959305211576
+          ],
+          "raw_overlap_eigenvalues": [
+            7.204268094073374e-06,
+            4.605625910447152e-05,
+            0.0001641600292605614
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.1892682214026353,
+          "raw_overlap_condition_number": 22.7864964375227,
+          "generalized_residual_norm": 2.3430745927308585e-16
+        },
+        {
+          "step": 33,
+          "energy": 44.447033479637554,
+          "learning_rate": 0.0007569475770544055,
+          "overlap_eigenvalues": [
+            0.9117048051810481,
+            0.9930767352543217,
+            1.0952184595646304
+          ],
+          "raw_overlap_eigenvalues": [
+            9.505749182082e-06,
+            4.6230354184133475e-05,
+            0.00016773184148619633
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.201286264304749,
+          "raw_overlap_condition_number": 17.64530478064421,
+          "generalized_residual_norm": 2.1056102228525486e-16
+        },
+        {
+          "step": 44,
+          "energy": 44.44686221240212,
+          "learning_rate": 0.0007245617127781044,
+          "overlap_eigenvalues": [
+            0.9163949218060524,
+            0.9930954064065625,
+            1.0905096717873863
+          ],
+          "raw_overlap_eigenvalues": [
+            1.107162478887638e-05,
+            4.323642221245138e-05,
+            0.0001693932028974781
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.1899996888221342,
+          "raw_overlap_condition_number": 15.299760073848134,
+          "generalized_residual_norm": 2.4545858292514915e-16
+        },
+        {
+          "step": 55,
+          "energy": 44.44678936030173,
+          "learning_rate": 0.0006843071785686863,
+          "overlap_eigenvalues": [
+            0.9229932121175197,
+            0.9950911397442209,
+            1.0819156481382588
+          ],
+          "raw_overlap_eigenvalues": [
+            1.2508991258760912e-05,
+            3.943595782102609e-05,
+            0.00016977681708128136
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.1721815869654568,
+          "raw_overlap_condition_number": 13.572382742083612,
+          "generalized_residual_norm": 5.574685443496522e-16
+        },
+        {
+          "step": 66,
+          "energy": 44.44676446508817,
+          "learning_rate": 0.0006371751746555268,
+          "overlap_eigenvalues": [
+            0.9267115529435196,
+            0.9933394299743853,
+            1.0799490170820947
+          ],
+          "raw_overlap_eigenvalues": [
+            1.3516402204074977e-05,
+            3.604946167945658e-05,
+            0.0001697912891507909
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.1653561603412044,
+          "raw_overlap_condition_number": 12.561870132837685,
+          "generalized_residual_norm": 2.27753589424122e-16
+        },
+        {
+          "step": 77,
+          "energy": 44.44674801455392,
+          "learning_rate": 0.0005843262473971208,
+          "overlap_eigenvalues": [
+            0.9271033270193173,
+            0.9915837245540363,
+            1.0813129484266468
+          ],
+          "raw_overlap_eigenvalues": [
+            1.4025163037675542e-05,
+            3.290089441166356e-05,
+            0.00016962710010944037
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.1663348808197258,
+          "raw_overlap_condition_number": 12.094483297896371,
+          "generalized_residual_norm": 3.3376779555641934e-16
+        },
+        {
+          "step": 88,
+          "energy": 44.4467361958386,
+          "learning_rate": 0.000527061712778104,
+          "overlap_eigenvalues": [
+            0.926808000171143,
+            0.988221854198388,
+            1.0849701456304681
+          ],
+          "raw_overlap_eigenvalues": [
+            1.4233556634172887e-05,
+            3.0162823059665e-05,
+            0.00016938715200417095
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.1706525466225142,
+          "raw_overlap_condition_number": 11.900549971993282,
+          "generalized_residual_norm": 3.5541357742559463e-16
+        },
+        {
+          "step": 99,
+          "energy": 44.44672495641053,
+          "learning_rate": 0.00046679161369089073,
+          "overlap_eigenvalues": [
+            0.9251962261544802,
+            0.9852482322964471,
+            1.0895555415490732
+          ],
+          "raw_overlap_eigenvalues": [
+            1.4314932063170933e-05,
+            2.7526163329744403e-05,
+            0.00016910248111802278
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.177648060755438,
+          "raw_overlap_condition_number": 11.813013178950742,
+          "generalized_residual_norm": 2.606418414658737e-17
+        },
+        {
+          "step": 110,
+          "energy": 44.44671291094395,
+          "learning_rate": 0.00040499999999999965,
+          "overlap_eigenvalues": [
+            0.9222925628358565,
+            0.9840806554312653,
+            1.0936267817328778
+          ],
+          "raw_overlap_eigenvalues": [
+            1.435571595675339e-05,
+            2.5003168059005203e-05,
+            0.00016880719001738836
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.1857699235589674,
+          "raw_overlap_condition_number": 11.758883397102604,
+          "generalized_residual_norm": 2.3770024296616133e-16
+        },
+        {
+          "step": 121,
+          "energy": 44.44669992634207,
+          "learning_rate": 0.0003432083863091084,
+          "overlap_eigenvalues": [
+            0.9178369477695377,
+            0.9847871562983959,
+            1.097375895932066
+          ],
+          "raw_overlap_eigenvalues": [
+            1.4340318169664597e-05,
+            2.254423788803293e-05,
+            0.00016852860535896346
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.1956109400464114,
+          "raw_overlap_condition_number": 11.752082719856777,
+          "generalized_residual_norm": 2.2423104362920805e-16
+        },
+        {
+          "step": 132,
+          "energy": 44.44668631577546,
+          "learning_rate": 0.0002829382872218955,
+          "overlap_eigenvalues": [
+            0.9123373116278324,
+            0.9871812398604349,
+            1.1004814485117327
+          ],
+          "raw_overlap_eigenvalues": [
+            1.4258146257028156e-05,
+            2.0277189355436563e-05,
+            0.00016826647577704708
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.2062221225482987,
+          "raw_overlap_condition_number": 11.801427250341524,
+          "generalized_residual_norm": 1.2180566283362438e-16
+        },
+        {
+          "step": 143,
+          "energy": 44.446672666632615,
+          "learning_rate": 0.00022567375260287888,
+          "overlap_eigenvalues": [
+            0.9064382499656105,
+            0.9906917335477039,
+            1.1028700164866854
+          ],
+          "raw_overlap_eigenvalues": [
+            1.4128191065574026e-05,
+            1.826087176172719e-05,
+            0.00016803267874852178
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.2167072787677786,
+          "raw_overlap_condition_number": 11.893431931138357,
+          "generalized_residual_norm": 2.257549496944408e-16
+        },
+        {
+          "step": 154,
+          "energy": 44.44665978894164,
+          "learning_rate": 0.00017282482534447307,
+          "overlap_eigenvalues": [
+            0.9005712292118108,
+            0.9947054178441445,
+            1.1047233529440446
+          ],
+          "raw_overlap_eigenvalues": [
+            1.3971183897739578e-05,
+            1.6569330668842927e-05,
+            0.0001678377896493214
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.226691811941305,
+          "raw_overlap_condition_number": 12.01314010879752,
+          "generalized_residual_norm": 3.8714368354300314e-17
+        },
+        {
+          "step": 165,
+          "energy": 44.44664851746358,
+          "learning_rate": 0.0001256928214313138,
+          "overlap_eigenvalues": [
+            0.8951776328750549,
+            0.998646251399151,
+            1.1061761157257946
+          ],
+          "raw_overlap_eigenvalues": [
+            1.3808071659778974e-05,
+            1.5247906097902533e-05,
+            0.00016768333334106183
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.2357057137063097,
+          "raw_overlap_condition_number": 12.143863203542061,
+          "generalized_residual_norm": 3.346220995189157e-16
+        },
+        {
+          "step": 176,
+          "energy": 44.4466394955262,
+          "learning_rate": 8.543828722189585e-05,
+          "overlap_eigenvalues": [
+            0.8906575815231134,
+            1.0020207028214516,
+            1.1073217156554356
+          ],
+          "raw_overlap_eigenvalues": [
+            1.364814347557608e-05,
+            1.4296946934461516e-05,
+            0.00016756893458474254
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.2432631110171486,
+          "raw_overlap_condition_number": 12.277782314101117,
+          "generalized_residual_norm": 1.1459519470771102e-16
+        },
+        {
+          "step": 187,
+          "energy": 44.44663300186737,
+          "learning_rate": 5.305242294559463e-05,
+          "overlap_eigenvalues": [
+            0.8872807002735659,
+            1.0045323424609502,
+            1.1081869572654832
+          ],
+          "raw_overlap_eigenvalues": [
+            1.3433348467102477e-05,
+            1.3753221994569491e-05,
+            0.0001674913002434777
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.248969978636758,
+          "raw_overlap_condition_number": 12.468320959115635,
+          "generalized_residual_norm": 1.3124794609961721e-16
+        },
+        {
+          "step": 198,
+          "energy": 44.446628884248724,
+          "learning_rate": 2.9332676063414313e-05,
+          "overlap_eigenvalues": [
+            0.885077569264046,
+            1.0061563989332314,
+            1.1087660318027222
+          ],
+          "raw_overlap_eigenvalues": [
+            1.3136415498247932e-05,
+            1.3584299539636736e-05,
+            0.0001674438850110501
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.2527331731213978,
+          "raw_overlap_condition_number": 12.746542999753846,
+          "generalized_residual_norm": 1.2337134567452489e-16
+        },
+        {
+          "step": 209,
+          "energy": 44.44662660156175,
+          "learning_rate": 1.4863105464920627e-05,
+          "overlap_eigenvalues": [
+            0.8838359943200216,
+            1.0070630845918138,
+            1.109100921088164
+          ],
+          "raw_overlap_eigenvalues": [
+            1.2941595680731089e-05,
+            1.352530802774667e-05,
+            0.00016741813599154738
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.2548718633499982,
+          "raw_overlap_condition_number": 12.93643690637148,
+          "generalized_residual_norm": 8.282424701125051e-17
+        },
+        {
+          "step": 220,
+          "energy": 44.44662532930227,
+          "learning_rate": 1e-05,
+          "overlap_eigenvalues": [
+            0.883138938685036,
+            1.007568963366179,
+            1.109292097948785
+          ],
+          "raw_overlap_eigenvalues": [
+            1.2830621053075758e-05,
+            1.3495869409138773e-05,
+            0.0001674038863266426
+          ],
+          "retained_rank": 3,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.256078799560671,
+          "raw_overlap_condition_number": 13.047216158450297,
+          "generalized_residual_norm": 2.244885041863895e-16
+        }
+      ],
+      "elapsed_seconds_this_call": 122.70652779994998,
+      "peak_cuda_memory_bytes": 121455104
+    }
+  },
+  "conditioning": {
+    "balanced_overlap_condition_number": 1.2560787995606721,
+    "raw_overlap_condition_number": 13.047216158450398,
+    "retained_rank": 3,
+    "discarded_rank": 0,
+    "contribution_gram_spectrum": [
+      0.9994862835044762,
+      0.00048646104105419036,
+      2.725545446972268e-05
+    ],
+    "pruning_assessment": {
+      "should_prune": false,
+      "candidate": null,
+      "energy_penalty": null,
+      "balanced_condition_number": 1.2560787995606721,
+      "discarded_rank": 0,
+      "reason": "balanced overlap is well conditioned"
+    },
+    "pruning_or_restart_events": []
+  },
+  "normalized_point": {
+    "point_id": "n8-d12-k3-s501",
+    "method": "finite_agp",
+    "evidence_level": "numerical",
+    "particles": 8,
+    "basis_order": 12,
+    "correlation_terms": 3,
+    "quadrature_order": 128,
+    "seed": 501,
+    "initialization": "provided_pair_matrices",
+    "energy": 44.44662532930227,
+    "finite_basis_reference_energy": 44.44600952839967,
+    "correlation_optimizer_error": 0.0006158009026009381,
+    "largest_basis_reference_energy": 44.4460095284341,
+    "basis_error_estimate": -3.4425795547576854e-11,
+    "total_error_estimate": 0.0006158008681751426,
+    "operator_error_estimate": 1e-12,
+    "finite_basis_ground_fidelity": 0.9999189575872459,
+    "polynomial_exterior_absolute_difference": 8.29913915367797e-12,
+    "antisymmetry_residual": null,
+    "retained_rank": 3,
+    "discarded_rank": 0,
+    "balanced_overlap_condition_number": 1.2560787995606721,
+    "raw_overlap_condition_number": 13.047216158450398,
+    "pruning_or_restart_events": [],
+    "elapsed_seconds": 122.70652779994998,
+    "peak_cuda_memory_bytes": 121455104,
+    "device": "cuda:2"
+  }
+}

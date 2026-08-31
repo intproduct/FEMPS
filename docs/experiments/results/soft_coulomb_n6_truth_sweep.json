@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment": "soft_coulomb_many_body_direct_exterior_truth",
+  "hamiltonian": "spin-polarized N=6, g=a=omega=1 on R",
+  "truth_path": "direct four-index Slater-Condon exterior Hamiltonian",
+  "largest_D_and_Q_are_numerical_references_not_continuum_truth": true,
+  "basis_scan": [
+    {
+      "N": 6,
+      "D": 8,
+      "Q": 128,
+      "exterior_dimension": 28,
+      "ground_energy": 25.05123289276764,
+      "hermiticity_residual": 2.8224759571631572e-18,
+      "elapsed_seconds": 0.39711300004273653,
+      "energy_difference_vs_largest_D": 0.0018664766711147251
+    },
+    {
+      "N": 6,
+      "D": 10,
+      "Q": 128,
+      "exterior_dimension": 210,
+      "ground_energy": 25.04963983983226,
+      "hermiticity_residual": 2.432704323103354e-18,
+      "elapsed_seconds": 5.464017900056206,
+      "energy_difference_vs_largest_D": 0.0002734237357344682
+    },
+    {
+      "N": 6,
+      "D": 12,
+      "Q": 128,
+      "exterior_dimension": 924,
+      "ground_energy": 25.049366416096525,
+      "hermiticity_residual": 1.9139897392725444e-18,
+      "elapsed_seconds": 44.36437160009518,
+      "energy_difference_vs_largest_Q": -2.913225216616411e-13,
+      "energy_difference_vs_largest_D": 0.0
+    }
+  ],
+  "quadrature_scan_at_largest_D": [
+    {
+      "N": 6,
+      "D": 12,
+      "Q": 96,
+      "exterior_dimension": 924,
+      "ground_energy": 25.049366416074168,
+      "hermiticity_residual": 1.8437215636888342e-18,
+      "elapsed_seconds": 45.07385939999949,
+      "energy_difference_vs_largest_Q": -2.2648549702353193e-11
+    },
+    {
+      "N": 6,
+      "D": 12,
+      "Q": 128,
+      "exterior_dimension": 924,
+      "ground_energy": 25.049366416096525,
+      "hermiticity_residual": 1.9139897392725444e-18,
+      "elapsed_seconds": 44.36437160009518,
+      "energy_difference_vs_largest_Q": -2.913225216616411e-13,
+      "energy_difference_vs_largest_D": 0.0
+    },
+    {
+      "N": 6,
+      "D": 12,
+      "Q": 160,
+      "exterior_dimension": 924,
+      "ground_energy": 25.049366416096817,
+      "hermiticity_residual": 1.928187830682551e-18,
+      "elapsed_seconds": 48.3142653000541,
+      "energy_difference_vs_largest_Q": 0.0
+    }
+  ]
+}

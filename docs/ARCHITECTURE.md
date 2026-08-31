@@ -33,8 +33,16 @@ flowchart LR
   symmetric kernel factorization, and an independent `N=2` relative-grid oracle.
 - `femps.states`: Slater, explicit antisymmetric, and FEMPS states.
 - `femps.algorithms`: contractions and optimization admitted after exact tests.
+- `femps.benchmarks`: normalized records, direct-truth feasibility budgets, and
+  error-axis closure for controlled comparisons.
 - `math/`: proof and certificate pipelines, isolated from production solvers.
 
 `latticeTN` stays an upstream sibling dependency. FEMPS reuses its PyTorch MPS,
 native contractions, device/dtype conventions, and AD infrastructure instead
 of copying them.
+
+The finite-AGP optimizer accepts either the configured harmonic/soft-Coulomb
+operators or an explicitly identified external one-/two-body functional
+operator pair. Checkpoints store the operator identifier and reject a mismatched
+resume. This keeps the AD/exterior solver independent of the chosen functional
+basis while preserving reproducibility.

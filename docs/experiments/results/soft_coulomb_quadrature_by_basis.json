@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "experiment": "soft_coulomb_quadrature_convergence_by_basis",
+  "hamiltonian": "spin-polarized N=4, g=a=omega=1 on R",
+  "truth_path": "direct four-index Slater-Condon exterior Hamiltonian",
+  "largest_Q_is_a_numerical_reference_not_an_exact_operator": true,
+  "scans": [
+    {
+      "D": 8,
+      "points": [
+        {
+          "D": 8,
+          "Q": 96,
+          "exterior_dimension": 70,
+          "ground_energy": 11.023278984744955,
+          "hermiticity_residual": 3.826983333517681e-18,
+          "elapsed_seconds": 0.7942189000314102,
+          "energy_difference_vs_largest_Q": -4.851230528402084e-12
+        },
+        {
+          "D": 8,
+          "Q": 128,
+          "exterior_dimension": 70,
+          "ground_energy": 11.02327898474975,
+          "hermiticity_residual": 2.5879537609796136e-18,
+          "elapsed_seconds": 0.7666648000013083,
+          "energy_difference_vs_largest_Q": -5.684341886080802e-14
+        },
+        {
+          "D": 8,
+          "Q": 160,
+          "exterior_dimension": 70,
+          "ground_energy": 11.023278984749806,
+          "hermiticity_residual": 2.713241219100306e-18,
+          "elapsed_seconds": 0.7736720000393689,
+          "energy_difference_vs_largest_Q": 0.0
+        }
+      ]
+    },
+    {
+      "D": 10,
+      "points": [
+        {
+          "D": 10,
+          "Q": 96,
+          "exterior_dimension": 210,
+          "ground_energy": 11.023133765387325,
+          "hermiticity_residual": 2.7637400161250645e-18,
+          "elapsed_seconds": 4.080412199953571,
+          "energy_difference_vs_largest_Q": -4.744649118038069e-12
+        },
+        {
+          "D": 10,
+          "Q": 128,
+          "exterior_dimension": 210,
+          "ground_energy": 11.023133765392014,
+          "hermiticity_residual": 2.6168727007311935e-18,
+          "elapsed_seconds": 4.138844899949618,
+          "energy_difference_vs_largest_Q": -5.5067062021407764e-14
+        },
+        {
+          "D": 10,
+          "Q": 160,
+          "exterior_dimension": 210,
+          "ground_energy": 11.02313376539207,
+          "hermiticity_residual": 2.6900028970759595e-18,
+          "elapsed_seconds": 4.136112399981357,
+          "energy_difference_vs_largest_Q": 0.0
+        }
+      ]
+    },
+    {
+      "D": 12,
+      "points": [
+        {
+          "D": 12,
+          "Q": 96,
+          "exterior_dimension": 495,
+          "ground_energy": 11.02309465640656,
+          "hermiticity_residual": 1.7941149866378506e-18,
+          "elapsed_seconds": 15.24812090001069,
+          "energy_difference_vs_largest_Q": -4.675371201301459e-12
+        },
+        {
+          "D": 12,
+          "Q": 128,
+          "exterior_dimension": 495,
+          "ground_energy": 11.02309465641118,
+          "hermiticity_residual": 1.703126853968509e-18,
+          "elapsed_seconds": 15.384888299973682,
+          "energy_difference_vs_largest_Q": -5.5067062021407764e-14
+        },
+        {
+          "D": 12,
+          "Q": 160,
+          "exterior_dimension": 495,
+          "ground_energy": 11.023094656411235,
+          "hermiticity_residual": 1.7540937752049458e-18,
+          "elapsed_seconds": 15.256566499941982,
+          "energy_difference_vs_largest_Q": 0.0
+        }
+      ]
+    }
+  ]
+}

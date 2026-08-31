@@ -24,6 +24,7 @@ references/local_pdfs/
 # A local checkout may be present here for development; the canonical upstream
 # is the separate latticeTN repository and must not be vendored into FEMPS.
 latticeTN/
+.worktrees/
 
 # Editors and operating systems
 .idea/

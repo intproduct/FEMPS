@@ -17,6 +17,7 @@ from femps.exterior import (
     particle_tt_ranks,
 )
 from femps.hamiltonians import (
+    FactorizedTwoBodyOperator,
     agp_hamiltonian_transition_matrices,
     antisymmetric_many_body_hamiltonian,
     exact_interacting_harmonic_fermion_energy,
@@ -111,6 +112,31 @@ def _build_hamiltonian(
         device=device,
     )
     return one_body, interaction
+
+
+def _provided_hamiltonian(
+    config: FiniteAgpConfig,
+    operators: tuple[torch.Tensor, FactorizedTwoBodyOperator | None],
+    device: torch.device | str,
+) -> tuple[torch.Tensor, FactorizedTwoBodyOperator | None]:
+    """Validate and move externally supplied functional-basis operators."""
+
+    one_body, interaction = operators
+    if one_body.shape != (config.basis_order, config.basis_order):
+        raise ValueError("provided one-body operator has the wrong shape")
+    if interaction is not None and interaction.dimension != config.basis_order:
+        raise ValueError("provided two-body operator has the wrong dimension")
+    target_one_body = one_body.to(dtype=torch.complex128, device=device)
+    target_interaction = (
+        FactorizedTwoBodyOperator(
+            interaction.left.to(dtype=torch.complex128, device=device),
+            interaction.right.to(dtype=torch.complex128, device=device),
+            interaction.weights.to(dtype=torch.complex128, device=device),
+        )
+        if interaction is not None
+        else None
+    )
+    return target_one_body, target_interaction
 
 
 def _random_complex_raw(
@@ -226,6 +252,7 @@ def _save_checkpoint(
     optimizer: torch.optim.Optimizer,
     scheduler: torch.optim.lr_scheduler.LRScheduler,
     history: list[dict],
+    operator_id: str | None,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(
@@ -239,6 +266,7 @@ def _save_checkpoint(
             "optimizer": optimizer.state_dict(),
             "scheduler": scheduler.state_dict(),
             "history": history,
+            "operator_id": operator_id,
         },
         path,
     )
@@ -251,6 +279,8 @@ def run_finite_agp_variable_projection(
     resume: bool = False,
     max_steps_this_call: int | None = None,
     initial_pair_matrices: torch.Tensor | None = None,
+    operators: tuple[torch.Tensor, FactorizedTwoBodyOperator | None] | None = None,
+    operator_id: str | None = None,
 ) -> dict:
     """Optimize nonlinear pair matrices while solving amplitudes exactly."""
 
@@ -259,9 +289,17 @@ def run_finite_agp_variable_projection(
         raise ValueError("max_steps_this_call must be positive")
     if resume and initial_pair_matrices is not None:
         raise ValueError("resume cannot be combined with initial_pair_matrices")
+    if (operators is None and operator_id is not None) or (
+        operators is not None and not operator_id
+    ):
+        raise ValueError("provided operators require a nonempty operator_id")
     device = resolve_device(config.device)
     pairs = config.particles // 2
-    one_body, interaction = _build_hamiltonian(config, device)
+    one_body, interaction = (
+        _build_hamiltonian(config, device)
+        if operators is None
+        else _provided_hamiltonian(config, operators, device)
+    )
     resumed = False
     if resume:
         if checkpoint_path is None or not checkpoint_path.exists():
@@ -269,6 +307,8 @@ def run_finite_agp_variable_projection(
         payload = torch.load(checkpoint_path, map_location=device, weights_only=False)
         if payload["config"] != asdict(config):
             raise ValueError("checkpoint configuration does not match requested run")
+        if payload.get("operator_id") != operator_id:
+            raise ValueError("checkpoint operator_id does not match requested run")
         raw = torch.nn.Parameter(payload["raw"].to(device))
         best_raw = payload["best_raw"].to(device)
         best_energy = float(payload["best_energy"])
@@ -383,6 +423,7 @@ def run_finite_agp_variable_projection(
                 optimizer=optimizer,
                 scheduler=scheduler,
                 history=history,
+                operator_id=operator_id,
             )
     if device.type == "cuda":
         torch.cuda.synchronize(device)
@@ -407,7 +448,11 @@ def run_finite_agp_variable_projection(
     final_pairs = final_pairs[order]
     final_amplitudes = final_result.amplitudes[order]
 
-    one_body_cpu, interaction_cpu = _build_hamiltonian(config, "cpu")
+    one_body_cpu, interaction_cpu = (
+        _build_hamiltonian(config, "cpu")
+        if operators is None
+        else _provided_hamiltonian(config, operators, "cpu")
+    )
     truth_hamiltonian = antisymmetric_many_body_hamiltonian(
         one_body_cpu, config.particles, interaction_cpu
     )
@@ -466,6 +511,7 @@ def run_finite_agp_variable_projection(
             ),
         },
         "initialization": initialization,
+        "operator_id": operator_id or "config_default",
         "resumed": resumed,
         "completed": completed,
         "completed_steps": stop_step,

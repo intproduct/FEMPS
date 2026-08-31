@@ -23,10 +23,25 @@ reports scalable interacting-fermion simulations, primarily for lattice
 Hubbard settings. Its domain and correlation mechanism differ, but it narrows
 any broad claim about scalable correlated Pfaffian wavefunctions.
 
+## Deterministic linear combinations of AGPs
+
+Uemura, Kasamatsu, and Sugino (2015) already formulate configuration
+interaction as a linear combination of independently optimized AGPs/HFB states
+and report polynomial cost with quadratic dependence on the number of terms.
+Dutta et al. (2021) construct linearly independent nonorthogonal AGP sets and
+use them for selective CI. Kawasaki, Gao, and Scuseria (2026) further rewrite
+inter-geminal AGP-CI as compact LC-AGP expansions using border-rank ideas.
+
+These works overlap the present finite-AGP state family, generalized amplitude
+solve, and `K^2` transition-matrix organization much more directly than the QMC
+comparators. Gauge-balanced conditioning and the soft-Coulomb `D/K` scans are
+useful numerical engineering, but they do not establish a new ansatz class.
+
 ## Surviving narrow question
 
-The potentially distinct package is the combination of a 2201 orthonormal
-functional basis, an exterior/Pfaffian statistics carrier, exact deterministic
-polynomial operator contraction, AD optimization, and separate `D`/`K`
-convergence. This remains a candidate positioning statement, not a priority
-claim, until a broader literature audit and paper-scale comparisons are done.
+The potentially distinct package must now be stated more strictly: a 2201
+particle-coordinate functional solver with new exterior-transfer/canonical
+structure beyond standard LC-AGP, or a successful generic matrix-wedge
+statistics/multiplicity factorization. The current finite-AGP solver remains a
+valuable polynomial fallback and benchmark control, but it is not sufficient
+as the central novelty claim.

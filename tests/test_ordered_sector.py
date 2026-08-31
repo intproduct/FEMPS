@@ -1,7 +1,10 @@
 import torch
 
 from femps.exterior import normalized_slater_from_minors
-from femps.hamiltonians import antisymmetric_many_body_hamiltonian
+from femps.hamiltonians import (
+    antisymmetric_many_body_hamiltonian,
+    antisymmetric_many_body_hamiltonian_dense_two_body,
+)
 from femps.ordered_sector import (
     extend_from_ordered_sector,
     finite_difference_harmonic_hamiltonian,
@@ -38,3 +41,19 @@ def test_ordered_pair_potential_is_diagonal() -> None:
     diagonal_shift = torch.diagonal(interacting - noninteracting)
     assert torch.all(diagonal_shift >= 0)
     assert torch.count_nonzero((interacting - noninteracting) - torch.diag(diagonal_shift)) == 0
+
+
+def test_ordered_soft_coulomb_equals_dense_exterior_truth() -> None:
+    grid, one_body = finite_difference_harmonic_hamiltonian(7, 0.8)
+    potential = 1 / torch.sqrt((grid[:, None] - grid[None, :]) ** 2 + 1)
+    identity = torch.eye(7, dtype=one_body.dtype)
+    dense_two_body = torch.einsum(
+        "pq,pr,qs->pqrs", potential, identity, identity
+    )
+    ordered = ordered_sector_hamiltonian(
+        one_body, 3, pair_potential=potential
+    )
+    exterior = antisymmetric_many_body_hamiltonian_dense_two_body(
+        one_body, 3, dense_two_body
+    )
+    torch.testing.assert_close(ordered, exterior, atol=2e-13, rtol=2e-13)

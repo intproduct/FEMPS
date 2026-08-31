@@ -1,5 +1,20 @@
 # Research changelog
 
+## 2026-09-01 - Phase 12 controlled soft-Coulomb benchmark matrix
+
+- Added a normalized benchmark schema with exact closure of correlation,
+  operator-representation, basis, and total error axes.
+- Extended direct soft-Coulomb truth and finite-AGP evidence through N=8,
+  D=12, and K=6, with reproducible K-growth probes and Blackwell resource data.
+- Added a generic checkpoint-continuation runner and arbitrary supplied
+  functional-operator support in the finite-AGP optimizer.
+- Matched finite AGP, ordered-sector, exterior-CI, and ordinary particle-TT
+  diagnostics on one identical finite-difference soft-Coulomb Hamiltonian.
+- Found prior deterministic LC-AGP/AGP-CI work that overlaps the finite-AGP
+  state family and K-squared contraction organization; reclassified finite AGP
+  as a fallback/control rather than sufficient FEMPS novelty.
+- Advanced the active work to a beyond-LC-AGP matrix-wedge structure gate.
+
 ## 2026-09-01 - Phase 11 gauge-balanced finite-AGP conditioning
 
 - Reinterpreted the Phase 10 D10 raw overlap condition `143.5` as a scale-gauge

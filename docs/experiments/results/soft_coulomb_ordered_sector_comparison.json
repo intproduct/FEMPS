@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "experiment": "soft_coulomb_ordered_sector_exterior_tt_comparison",
+  "evidence_level": "numerical_exact_at_fixed_grid",
+  "ordered_sector_is_an_exponential_truth_oracle_not_a_production_TN": true,
+  "points": [
+    {
+      "N": 4,
+      "grid_points": 8,
+      "spacing": 0.7,
+      "grid_min": -2.4499999999999997,
+      "grid_max": 2.4499999999999997,
+      "ordered_dimension": 70,
+      "ordered_build_seconds": 0.013998799957334995,
+      "exterior_build_seconds": 0.6262067999923602,
+      "matrix_max_absolute_difference": 7.105427357601002e-15,
+      "ground_energy": 10.550426086401494,
+      "ordinary_particle_tt_ranks": [
+        8,
+        28,
+        8
+      ],
+      "antisymmetry_residual": 0.0,
+      "explicit_particle_tensor_elements": 4096,
+      "ordered_vector_elements": 70
+    },
+    {
+      "N": 4,
+      "grid_points": 10,
+      "spacing": 0.7,
+      "grid_min": -3.15,
+      "grid_max": 3.15,
+      "ordered_dimension": 210,
+      "ordered_build_seconds": 0.06520680000539869,
+      "exterior_build_seconds": 3.6453837000299245,
+      "matrix_max_absolute_difference": 1.7763568394002505e-14,
+      "ground_energy": 10.44639369876841,
+      "ordinary_particle_tt_ranks": [
+        10,
+        45,
+        10
+      ],
+      "antisymmetry_residual": 0.0,
+      "explicit_particle_tensor_elements": 10000,
+      "ordered_vector_elements": 210
+    },
+    {
+      "N": 4,
+      "grid_points": 12,
+      "spacing": 0.7,
+      "grid_min": -3.8499999999999996,
+      "grid_max": 3.8499999999999996,
+      "ordered_dimension": 495,
+      "ordered_build_seconds": 0.15976819989737123,
+      "exterior_build_seconds": 13.704474599915557,
+      "matrix_max_absolute_difference": 1.7763568394002505e-14,
+      "ground_energy": 10.44041204762105,
+      "ordinary_particle_tt_ranks": [
+        12,
+        63,
+        12
+      ],
+      "antisymmetry_residual": 0.0,
+      "explicit_particle_tensor_elements": 20736,
+      "ordered_vector_elements": 495
+    }
+  ]
+}

@@ -100,3 +100,41 @@ def test_finite_agp_soft_coulomb_uses_explicit_truth() -> None:
     assert result["basis_error_vs_continuum"] is None
     assert result["error_vs_continuum"] is None
     assert result["polynomial_explicit_absolute_difference"] < 2e-11
+
+
+def test_finite_agp_accepts_external_functional_operators() -> None:
+    one_body = torch.diag(
+        torch.tensor([0.3, 1.1, 2.0, 3.2], dtype=torch.float64)
+    )
+    config = FiniteAgpConfig(
+        basis_order=4,
+        particles=2,
+        agp_terms=1,
+        steps=2,
+        learning_rate=2e-3,
+        final_learning_rate=1e-4,
+        record_points=2,
+        checkpoint_every=1,
+    )
+    result = run_finite_agp_variable_projection(
+        config,
+        operators=(one_body, None),
+        operator_id="test-diagonal-one-body-v1",
+    )
+    assert result["operator_id"] == "test-diagonal-one-body-v1"
+    assert result["finite_basis_reference_energy"] == pytest.approx(1.4)
+    assert result["polynomial_explicit_absolute_difference"] < 2e-11
+
+
+def test_external_operators_require_an_id() -> None:
+    config = FiniteAgpConfig(
+        basis_order=4,
+        particles=2,
+        agp_terms=1,
+        steps=1,
+    )
+    one_body = torch.eye(4)
+    with pytest.raises(ValueError, match="operator_id"):
+        run_finite_agp_variable_projection(
+            config, operators=(one_body, None)
+        )

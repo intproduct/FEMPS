@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "experiment": "soft_coulomb_finite_agp_checkpoint_continuation",
+  "source_checkpoint": "docs\\experiments\\results\\soft_coulomb_n6_greedy_checkpoints\\joint_checkpoint.pt",
+  "stages": {
+    "joint": {
+      "schema_version": 1,
+      "experiment": "finite_agp_harmonic_variable_projection",
+      "config": {
+        "basis_order": 8,
+        "particles": 6,
+        "agp_terms": 2,
+        "kappa": 0.35,
+        "omega": 1.0,
+        "steps": 1,
+        "learning_rate": 1e-05,
+        "final_learning_rate": 1e-05,
+        "seed": 241,
+        "device": "auto",
+        "record_points": 20,
+        "checkpoint_every": 100,
+        "overlap_relative_threshold": 1e-10,
+        "frozen_prefix_terms": 0,
+        "interaction_model": "soft_coulomb",
+        "soft_coulomb_coupling": 1.0,
+        "soft_coulomb_softening": 1.0,
+        "soft_coulomb_quadrature_order": 96,
+        "soft_coulomb_relative_threshold": 1e-14
+      },
+      "environment": {
+        "python": "3.12.13",
+        "torch": "2.11.0+cu128",
+        "device": "cuda:2",
+        "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+        "compute_capability": [
+          12,
+          0
+        ]
+      },
+      "initialization": "provided_pair_matrices",
+      "resumed": false,
+      "completed": true,
+      "completed_steps": 1,
+      "initial_energy": 25.051234376416637,
+      "terminal_energy_before_best_restore": 25.051234191713437,
+      "final_energy": 25.051234191713437,
+      "explicit_exterior_energy": 25.051234191712247,
+      "polynomial_explicit_absolute_difference": 1.1901590823981678e-12,
+      "finite_basis_reference_energy": 25.051232892744068,
+      "continuum_reference_energy": null,
+      "basis_error_vs_continuum": null,
+      "error_vs_finite_basis": 1.298969369400993e-06,
+      "error_vs_continuum": null,
+      "finite_basis_ground_fidelity": 0.9999997062640609,
+      "final_overlap_eigenvalues": [
+        0.9852472840953849,
+        1.014752715904615
+      ],
+      "final_raw_overlap_eigenvalues": [
+        8.134585469614357e-05,
+        0.0021302968413630086
+      ],
+      "final_retained_rank": 2,
+      "final_discarded_rank": 0,
+      "final_retained_condition_number": 1.0299472348572074,
+      "final_raw_overlap_condition_number": 26.188142583545826,
+      "final_generalized_residual_norm": 2.2932257431208383e-16,
+      "ordinary_particle_tt_ranks": [
+        8,
+        28,
+        56,
+        28,
+        8
+      ],
+      "antisymmetry_residual": 0.0,
+      "history": [
+        {
+          "step": 0,
+          "energy": 25.051234376416637,
+          "learning_rate": 1e-05,
+          "overlap_eigenvalues": [
+            0.9851785962716023,
+            1.0148214037283976
+          ],
+          "raw_overlap_eigenvalues": [
+            8.166303222100761e-05,
+            0.002129972837919895
+          ],
+          "retained_rank": 2,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.0300887651934159,
+          "raw_overlap_condition_number": 26.08246081477201,
+          "generalized_residual_norm": 2.240062444470942e-16
+        },
+        {
+          "step": 1,
+          "energy": 25.051234191713437,
+          "learning_rate": 1e-05,
+          "overlap_eigenvalues": [
+            0.9852472840953849,
+            1.014752715904615
+          ],
+          "raw_overlap_eigenvalues": [
+            8.134585469614357e-05,
+            0.0021302968413630086
+          ],
+          "retained_rank": 2,
+          "discarded_rank": 0,
+          "retained_condition_number": 1.0299472348572074,
+          "raw_overlap_condition_number": 26.188142583545826,
+          "generalized_residual_norm": 2.2932257431208383e-16
+        }
+      ],
+      "elapsed_seconds_this_call": 0.5515273999189958,
+      "peak_cuda_memory_bytes": 32003584
+    }
+  },
+  "conditioning": {
+    "balanced_overlap_condition_number": 1.0299472348572076,
+    "raw_overlap_condition_number": 26.188142583545964,
+    "retained_rank": 2,
+    "discarded_rank": 0,
+    "contribution_gram_spectrum": [
+      0.999626760161757,
+      0.0003732398382430273
+    ],
+    "pruning_assessment": {
+      "should_prune": false,
+      "candidate": null,
+      "energy_penalty": null,
+      "balanced_condition_number": 1.0299472348572076,
+      "discarded_rank": 0,
+      "reason": "balanced overlap is well conditioned"
+    },
+    "pruning_or_restart_events": []
+  },
+  "normalized_point": {
+    "point_id": "n6-d8-k2-s241",
+    "method": "finite_agp",
+    "evidence_level": "numerical",
+    "particles": 6,
+    "basis_order": 8,
+    "correlation_terms": 2,
+    "quadrature_order": 96,
+    "seed": 241,
+    "initialization": "provided_pair_matrices",
+    "energy": 25.051234191713437,
+    "finite_basis_reference_energy": 25.051232892744068,
+    "correlation_optimizer_error": 1.298969369400993e-06,
+    "largest_basis_reference_energy": 25.0493664160965,
+    "basis_error_estimate": 0.0018664766475673389,
+    "total_error_estimate": 0.0018677756169367399,
+    "operator_error_estimate": 2.4e-11,
+    "finite_basis_ground_fidelity": 0.9999997062640609,
+    "polynomial_exterior_absolute_difference": 1.1901590823981678e-12,
+    "antisymmetry_residual": 0.0,
+    "retained_rank": 2,
+    "discarded_rank": 0,
+    "balanced_overlap_condition_number": 1.0299472348572076,
+    "raw_overlap_condition_number": 26.188142583545964,
+    "pruning_or_restart_events": [],
+    "elapsed_seconds": 0.5515273999189958,
+    "peak_cuda_memory_bytes": 32003584,
+    "device": "cuda:2"
+  }
+}

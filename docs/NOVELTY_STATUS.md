@@ -24,3 +24,11 @@ novelty boundary, prove a stronger statistics-carrier factorization, or use
 the ordered-sector first-quantized route. The one-body quantity
 `N/Tr(gamma^2)` is retained only as a correlation diagnostic, not a novel
 entanglement measure or a canonical FEMPS bond spectrum.
+
+Post-gate numerical work now targets ordered-sector/interparticle-distance
+functional TN and is not called FEMPS. Li--Waintal 2026 already establishes
+the first-quantized ordered-distance MPS direction; any surviving contribution
+must be stated narrowly as the 2201 continuous orthonormal functional-basis
+operator/AD integration, its controlled continuum benchmarks, and the new
+matrix-wedge/ordinary-particle-TT no-go theory. No priority claim is attached
+to ordered coordinates or distance-variable MPS.

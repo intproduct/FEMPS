@@ -1,0 +1,143 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\CayleyDet}{\operatorname{CDet}}
+
+\title{A Conditional Exact-Contraction Obstruction for Generic Matrix-Wedge FEMPS}
+\author{Working theorem draft}
+\date{2026-09-01}
+
+\begin{document}
+\maketitle
+
+\paragraph{Evidence status.}
+The algebraic reduction below is a proof draft. An independent exact-integer
+enumerator verifies its core identity through order four. The complexity input
+is Theorem~3.5 of Chien--Harsha--Sinclair--Srinivasan: the row-ordered
+determinant over $\Mat_2(\mathbb F)$ is \#P-hard when $\mathbb F$ has
+characteristic zero. External proof review is still required.
+
+\section{Matrix-valued pair powers}
+
+Let $V=\mathbb F^D$, let $\mathcal A=\Mat_\chi(\mathbb F)$, and let
+$B_{pq}\in\mathcal A$ satisfy $B_{qp}=-B_{pq}$ and $B_{pp}=0$. Define
+\[
+  \Omega_B=\sum_{p<q}B_{pq}\,e_p\wedge e_q
+  \in \mathcal A\otimes\Lambda^2V.
+\]
+For $N=2M$ and boundary vectors $l,r\in\mathbb F^\chi$, set
+\[
+  \Psi_M(B;l,r)=l^{\mathsf T}\frac{\Omega_B^M}{M!}r.
+\]
+Products in $\mathcal A$ retain their order. Since two-forms have even degree,
+the coefficient on a support $S$ of size $2M$ is
+\begin{equation}
+  C_S=\frac1{M!}\sum_{\mathfrak m\in\operatorname{PM}(S)}
+  \operatorname{sgn}(\mathfrak m)
+  \sum_{\tau\in S_M}
+  B_{a_{\tau(1)}b_{\tau(1)}}\cdots
+  B_{a_{\tau(M)}b_{\tau(M)}}.
+  \label{eq:sym-pf}
+\end{equation}
+Here $\mathfrak m=\{(a_k,b_k):a_k<b_k\}$ is a perfect matching and its sign
+is the exterior reordering sign. Formula~\eqref{eq:sym-pf} is independent of
+the initially chosen enumeration of matching edges because of the inner
+symmetrization.
+
+\section{Shift-tag identity}
+
+For an $n\times n$ matrix $A=(A_{ij})$ over $\Mat_d(\mathbb F)$, define its
+row-ordered Cayley determinant by
+\[
+  \CayleyDet(A)=\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)
+  A_{1,\sigma(1)}\cdots A_{n,\sigma(n)}.
+\]
+
+\begin{lemma}[Shift-tag reduction]
+Assume $n!$ is invertible in $\mathbb F$. Take $D=2n$ with physical indices
+$x_1,\ldots,x_n,y_1,\ldots,y_n$, take $\chi=(n+1)d$, and identify the
+virtual space with $\mathbb F^{n+1}\otimes\mathbb F^d$. Set
+\[
+ B_{x_i y_j}=E_{i,i+1}\otimes A_{ij},
+ \qquad B_{x_ix_j}=B_{y_i y_j}=0,
+\]
+and extend by skew symmetry. If $l=e_1\otimes u$ and
+$r=e_{n+1}\otimes v$, then the unique top-degree coefficient is
+\[
+  [e_{x_1}\wedge\cdots\wedge e_{x_n}\wedge
+    e_{y_1}\wedge\cdots\wedge e_{y_n}]\,\Psi_n
+  =\frac{(-1)^{n(n-1)/2}}{n!}
+    u^{\mathsf T}\CayleyDet(A)v.
+\]
+\end{lemma}
+
+\begin{proof}
+Only matchings joining every $x_i$ to a distinct $y_{\sigma(i)}$ can
+contribute. Relative to the displayed physical order, the sign of this
+matching is $(-1)^{n(n-1)/2}\operatorname{sgn}(\sigma)$. For any fixed
+matching, Equation~\eqref{eq:sym-pf} symmetrizes all $n!$ factor orders.
+The matrix-unit product is zero for every order except increasing row order,
+where
+\[
+ E_{12}E_{23}\cdots E_{n,n+1}=E_{1,n+1}.
+\]
+Contracting the tag endpoints and summing over $\sigma$ gives the formula.
+\end{proof}
+
+\section{Embedding into one-form matrix-wedge FEMPS}
+
+\begin{lemma}[Polynomial-bond embedding]
+Every state $\Psi_M(B;l,r)$ has an exact open-chain one-form matrix-wedge
+FEMPS representation with $2M$ particle sites and bonds alternating between
+$\chi D$ and $\chi$, apart from the unit boundary bonds.
+\end{lemma}
+
+\begin{proof}
+For each pair factor introduce an intermediate index $(a,i)$ of size
+$\chi D$. The odd core maps $a$ to $(a,i)$ while emitting $e_i$. The even
+core maps $(a,i)$ to $b$ while emitting
+$\sum_{j>i}(B_{ij})_{ab}e_j$. Their matrix-wedge product is exactly the
+matrix-valued two-form $\Omega_B$. Repeat the two cores $M$ times, insert
+$l^{\mathsf T}/M!$ in the first core, and contract $r$ in the last core.
+\end{proof}
+
+\begin{theorem}[Conditional generic exact-norm obstruction]
+Over $\mathbb Q$, exact norm evaluation for unrestricted rational
+matrix-wedge FEMPS is \#P-hard under polynomial-time Turing reductions, even
+when $D=N$ and the maximum one-form FEMPS bond is $O(N^2)$. Consequently, a
+generic exact contraction algorithm polynomial jointly in $(N,D,\chi)$ would
+imply $\mathrm{FP}=\#\mathrm P$.
+\end{theorem}
+
+\begin{proof}
+By Chien--Harsha--Sinclair--Srinivasan, computing
+$\CayleyDet(A)$ for $A\in\Mat_n(\Mat_2(\mathbb Q))$ is \#P-hard. Apply the
+shift-tag lemma with $d=2$. Four choices of $u,v$ recover the four entries of
+the Cayley determinant up to a known nonzero rational scale. The resulting
+pair state has $D=N=2n$ and pair bond $2(n+1)$; the embedding lemma gives
+maximum one-form FEMPS bond $4n(n+1)=O(N^2)$. Its explicit description and
+all rational bit lengths are polynomial in the input size.
+
+It remains to reduce a signed amplitude $x$ to norms. The top exterior space
+$\Lambda^{2n}\mathbb Q^{2n}$ is one-dimensional. A scalar block with only
+$B_{x_i y_i}=1$ supplies a known top coefficient
+$q=(-1)^{n(n-1)/2}$. A virtual direct sum adds this scalar block to the hard
+block, producing amplitude $x+q$ with only constant additive bond overhead.
+Exact norm queries give $x^2$ and $(x+q)^2$, hence
+\[
+ x=\frac{(x+q)^2-x^2-q^2}{2q}.
+\]
+Thus an exact polynomial-time norm oracle computes every required Cayley
+determinant entry and therefore solves a \#P-hard problem.
+\end{proof}
+
+\paragraph{Scope.}
+The theorem concerns the unrestricted dense family and exact arithmetic. It
+does not rule out structured coefficient algebras, approximate contractions,
+or ordered-sector first-quantized representations. It also does not assert an
+unconditional separation of complexity classes.
+
+\end{document}

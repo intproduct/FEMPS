@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment": "phase14_ordered_sector_latticetn_comparator",
+  "evidence_level": "numerical_exact_at_fixed_grid",
+  "production_solver": false,
+  "particles": 4,
+  "dimension": 8,
+  "spacing": 0.7,
+  "ground_energy": 10.550426086401494,
+  "mps_energy": 10.550426086401497,
+  "energy_absolute_error": 3.552713678800501e-15,
+  "ordered_dimension": 70,
+  "ordered_particle_tensor_elements": 4096,
+  "ordered_mps_ranks": [
+    5,
+    9,
+    5
+  ],
+  "ordered_mps_parameters": 800,
+  "antisymmetric_particle_tt_ranks": [
+    8,
+    28,
+    8
+  ],
+  "ordered_particle_tt_ranks": [
+    5,
+    9,
+    5
+  ],
+  "native_norm_absolute_error": 6.661338147750939e-16,
+  "ordered_reconstruction_max_absolute_error": 2.92300905702092e-16,
+  "tt_svd_discarded_norm": 4.757883350646222e-16,
+  "antisymmetry_residual_after_signed_extension": 0.0,
+  "all_ad_gradients_finite": true,
+  "ad_gradient_norms_at_ground_state": [
+    5.050118186998867e-15,
+    7.359187731844735e-15,
+    9.274892038262382e-15,
+    5.752645881047895e-15
+  ],
+  "limitations": [
+    "ordered energy currently gathers a dense D**N tensor",
+    "hard ordering constraint is not yet a scalable MPO",
+    "this comparator is not named FEMPS"
+  ]
+}

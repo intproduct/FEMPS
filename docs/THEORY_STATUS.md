@@ -9,6 +9,7 @@
 | Fixed-number Pfaffian/AGP FEMPS contracts polynomially | theorem/algorithm draft; value, gradient, scaling and GPU verified; the LC-AGP family and K-squared organization have direct prior art | Use as fallback/control, not central novelty |
 | Finite-AGP overlap compression can be made term-gauge invariant | proved by unit-diagonal balancing; explicit exterior and three-seed D10 tests pass | Relation of the contribution Gram spectrum to physical correlation remains open |
 | 2201 functional MPS baseline transfers to the current backend | validated by controlled `D`/`chi`/seed scan | Larger paper-figure digitization is optional |
+| Ordered-sector particle MPS removes exchange multiplicity on the controlled N4,D8 grid | exact fixed-grid comparison: ordered ranks `(5,9,5)` versus antisymmetric `(8,28,8)`, with signed reconstruction and latticeTN AD | Distance-coordinate native MPO and scaling gate remain open |
 
 Scalable contraction is asserted only for the fixed-number Pfaffian/AGP
 subclass and finite sums, not for generic matrix-wedge FEMPS. No novelty claim
@@ -22,3 +23,7 @@ conditional algebraic-complexity obstruction. The unrestricted dense
 matrix-wedge ansatz cannot be the promised exact polynomial solver unless the
 permanent admits a polynomial algorithm. This does not apply automatically to
 additional structured core algebras or approximate contraction.
+
+ADR 0004 therefore makes ordered-sector/interparticle-distance functional TN
+the primary numerical research route. The current latticeTN comparator is an
+exact dense truth interface, not yet a production contraction.

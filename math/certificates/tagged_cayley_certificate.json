@@ -1,0 +1,58 @@
+{
+  "arithmetic": "exact integers",
+  "cases": [
+    {
+      "block_dimension": 2,
+      "input_sha256": "591fa7a1536f092d9cbd7d56a7cb2e61668ebcd2116346bf076870aafb59ce0a",
+      "matching_count": 1,
+      "nonzero_scaled_entries": 3,
+      "order": 1,
+      "physical_dimension": 2,
+      "product_order_count": 1,
+      "scaled_coefficient_sha256": "d3bfd888290a88233af2244f270f3df6b125b14b0e010221e896e1ad4443f1bd",
+      "virtual_dimension": 4
+    },
+    {
+      "block_dimension": 2,
+      "input_sha256": "e9d1e7b7a781d788397e257434133e14b91b5794a67c1bbb43fc2b20e493cd9b",
+      "matching_count": 3,
+      "nonzero_scaled_entries": 3,
+      "order": 2,
+      "physical_dimension": 4,
+      "product_order_count": 2,
+      "scaled_coefficient_sha256": "1a31fb627ab2a6649f4b81a50e2093d28d298e4cd8318fe359de88213356f8ad",
+      "virtual_dimension": 6
+    },
+    {
+      "block_dimension": 2,
+      "input_sha256": "e87d2c93dae07b8c9b63a731559a7b837aeef9c0f02ce7eeba67b34e1e3f8b26",
+      "matching_count": 15,
+      "nonzero_scaled_entries": 4,
+      "order": 3,
+      "physical_dimension": 6,
+      "product_order_count": 6,
+      "scaled_coefficient_sha256": "f3560e098b50952141a5d737bb83d18c6dba11ea8b48ee810f2ed55749311d89",
+      "virtual_dimension": 8
+    },
+    {
+      "block_dimension": 2,
+      "input_sha256": "b557bcea598b9e8d5711a28382662b8539653c9e2073eb56f6a163979353a4e9",
+      "matching_count": 105,
+      "nonzero_scaled_entries": 4,
+      "order": 4,
+      "physical_dimension": 8,
+      "product_order_count": 24,
+      "scaled_coefficient_sha256": "a121ee34cb7d7c879bcb62085cb7e0743ad6cf4b731c45bde512fd925608f429",
+      "virtual_dimension": 10
+    }
+  ],
+  "certificate_sha256": "893077be401414cd810fa1154e618d37d83b58e077732801f2482b3716b2c0c0",
+  "enumerator": "perfect matchings times all factor permutations",
+  "orders": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "schema": "femps.tagged-cayley-certificate.v1"
+}

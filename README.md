@@ -46,11 +46,17 @@ is gated by an explicit contraction-complexity audit.
 - Gate C passes for the finite-grid ordered-distance route. Exact hard-charge
   gap MPS/MPO contraction has raw operator bond `O(N^2(L-N))`; three blind
   `N=4,L=8` Blackwell runs reproduce the truth within `2.07e-5` without a
-  `d**(N+1)` training gather. A continuous half-line functional-basis bridge is
+  `d**(N+1)` training gather.
+- Gate D passes at controlled `N<=4` scope for the continuous bridge. Exact
+  COM/positive-gap coordinates, Dirichlet and odd-Hermite half-line bases,
+  continuum mixed-derivative/soft-Coulomb MPOs, and native latticeTN AD now
+  have independently controlled `D`, scale/box, interaction-degree, MPS-bond,
+  and optimization errors. Three blind N=4 runs are within `4.39e-3` of an
+  independent numerical reference; unbounded interactions and N>4 scaling are
   the next gate.
 
-See [the active execution plan](docs/exec-plans/active/phase16.md),
-[the ordered-distance formulation](docs/theory/ordered_distance_mpo.md), and
+See [the active execution plan](docs/exec-plans/active/phase17.md),
+[the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md), and
 [the 2201 reproduction report](docs/experiments/2201_baseline_report.md).
 
 ## Development setup
@@ -95,10 +101,12 @@ compute capability rather than assuming that `cuda:0` is the Blackwell card.
 
 ## Repository map
 
-- `src/femps/basis`: continuous functional bases and operator matrices;
+- `src/femps/basis`: full-line and half-line functional bases and operators;
 - `src/femps/baselines`: the differentiable 2201 MPS baseline;
 - `src/femps/ordered_distance.py`: exact finite-box ordered gap coordinates;
 - `src/femps/baselines/ordered_distance_mpo.py`: native gap MPS/MPO operators;
+- `src/femps/ordered_continuous.py`: exact COM/positive-gap continuum map;
+- `src/femps/baselines/ordered_continuous_mpo.py`: continuous functional MPOs;
 - `src/femps/exterior`: exact antisymmetric, matrix-wedge, and Gate A oracles;
 - `docs/theory`: theorem and contraction-status drafts;
 - `docs/experiments/results`: machine-readable reproduction records;

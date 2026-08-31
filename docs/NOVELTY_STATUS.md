@@ -40,3 +40,14 @@ is whether full-line center-of-mass and Dirichlet half-line distance bases can
 retain the distinctive 2201 orthonormal functional-operator calculus with
 controlled continuum convergence. Until that comparison is complete, the
 ordered-distance branch has no affirmative method-priority claim.
+
+Phase 16 closes Gate D at controlled small-system scope. Implementation-level
+review confirms that the result is a bridge between, rather than a replacement
+for, its two direct parents: Hong et al.'s orthonormal continuous
+functional-operator/AD construction and Li--Waintal's ordered-distance
+first-quantized MPS. The surviving package is the exact COM/gap calculus,
+Dirichlet and unbounded half-line bases, continuum mixed-derivative and
+soft-Coulomb MPOs, native global AD, and an independently separated
+`D/scale/K/chi/optimization` error budget. This is a reproducible integration
+and evidence contribution. It is not an affirmative ansatz-priority claim,
+and it is not called FEMPS.

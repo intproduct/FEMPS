@@ -1,6 +1,6 @@
 import torch
 
-from femps.exterior import normalized_slater_from_minors
+from femps.exterior import antisymmetry_residual, normalized_slater_from_minors
 from femps.hamiltonians import (
     antisymmetric_many_body_hamiltonian,
     antisymmetric_many_body_hamiltonian_dense_two_body,
@@ -22,6 +22,7 @@ def test_ordered_sector_restriction_is_an_isometry() -> None:
     reconstructed = extend_from_ordered_sector(ordered, 5, 3)
     assert torch.allclose(torch.vdot(ordered, ordered), torch.vdot(state.ravel(), state.ravel()))
     assert torch.allclose(reconstructed, state)
+    assert antisymmetry_residual(reconstructed) == 0
 
 
 def test_local_ordered_hamiltonian_equals_exterior_truth() -> None:

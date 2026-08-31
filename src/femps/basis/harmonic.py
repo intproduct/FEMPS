@@ -81,6 +81,27 @@ def position_squared_matrix(
     return result
 
 
+def negative_second_derivative_matrix(
+    order: int,
+    *,
+    dtype: torch.dtype = torch.float64,
+    device: torch.device | str = "cpu",
+) -> torch.Tensor:
+    """Return the Galerkin projection ``<s'|-d^2/dx^2|s>``.
+
+    The operator is formed before truncation from ``2 H_0 - x^2``.  Squaring
+    :func:`derivative_matrix` would lose the excursion through the first
+    omitted oscillator state at the upper basis boundary.
+    """
+
+    _validate_order(order)
+    number = torch.arange(order, dtype=torch.float64, device=device).to(dtype)
+    twice_harmonic = torch.diag(2 * number + 1)
+    return twice_harmonic - position_squared_matrix(
+        order, dtype=dtype, device=device
+    )
+
+
 def harmonic_hamiltonian(
     order: int,
     *,

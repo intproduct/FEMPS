@@ -11,6 +11,10 @@ flowchart LR
     Ordered --> Gaps[Fixed-charge gap coordinates]
     Gaps --> GapMPO[Native distance MPS/MPO]
     GapMPO --> Optimizer
+    Ordered --> ContinuousQ[COM plus positive continuous gaps]
+    Basis --> ContinuousQ
+    ContinuousQ --> ContinuousMPO[Functional mixed-derivative and interaction MPO]
+    ContinuousMPO --> Optimizer
     Lattice[latticeTN AD/MPS backend] --> Baseline[2201 baseline]
     Hamiltonian --> Baseline
     Hamiltonian --> Contract[Exterior contraction engine]
@@ -36,6 +40,14 @@ flowchart LR
   small fixed-charge Hamiltonian truth matrices.
 - `femps.baselines.ordered_distance_mpo`: polynomial-bond kinetic, trap,
   finite-box, and interval-interaction MPOs plus the native latticeTN MPS bridge.
+- `femps.ordered_continuous`: the exact unit-Jacobian center-of-mass/positive-gap
+  transform, kinetic and harmonic metrics, and ordered-chamber normalization.
+- `femps.basis.dirichlet_sine` and `femps.basis.odd_hermite`: finite-interval and
+  unbounded collision-Dirichlet distance bases with projected local operators.
+- `femps.baselines.ordered_continuous_mpo` and
+  `femps.baselines.ordered_continuous_interaction`: native functional MPOs for
+  the mixed continuum Hamiltonian and controlled interval-polynomial
+  soft-Coulomb interaction.
 - `femps.hamiltonians.soft_coulomb`: Gauss--Hermite two-body integrals,
   symmetric kernel factorization, and an independent `N=2` relative-grid oracle.
 - `femps.states`: Slater, explicit antisymmetric, and FEMPS states.
@@ -50,9 +62,11 @@ of copying them.
 
 The ordered-distance production path carries the finite box as an exact MPS
 charge: the sum of `N+1` nonnegative gaps is `L-N`. Dense gap tensors and exact
-diagonalization are confined to small truth audits. The finite-grid module is a
-precursor to, not a substitute for, the planned continuous half-line
-functional-basis layer.
+diagonalization are confined to small truth audits. The finite-grid module
+remains a structural oracle. Gate D admits the continuous COM/half-line
+functional-basis layer for controlled small systems; the present soft-Coulomb
+interaction still uses the finite sine interval, while the unbounded
+odd-Hermite basis is validated only for the noninteracting Hamiltonian.
 
 The finite-AGP optimizer accepts either the configured harmonic/soft-Coulomb
 operators or an explicitly identified external one-/two-body functional

@@ -3,6 +3,7 @@ import torch
 from femps.basis.harmonic import (
     derivative_matrix,
     harmonic_hamiltonian,
+    negative_second_derivative_matrix,
     position_matrix,
     position_squared_matrix,
 )
@@ -41,3 +42,13 @@ def test_position_squared_uses_infinite_basis_projection_at_top_boundary():
     expected_diagonal = torch.arange(order, dtype=torch.float64) + 0.5
     torch.testing.assert_close(squared.diagonal(), expected_diagonal)
     assert squared[-1, -1] != (position_matrix(order) @ position_matrix(order))[-1, -1]
+
+
+def test_negative_second_derivative_is_projected_before_truncation():
+    order = 7
+    kinetic = negative_second_derivative_matrix(order)
+    squared = position_squared_matrix(order)
+    expected = torch.diag(2 * torch.arange(order, dtype=torch.float64) + 1)
+    torch.testing.assert_close(kinetic + squared, expected)
+    torch.testing.assert_close(kinetic.mT, kinetic)
+    assert kinetic[-1, -1] != -(derivative_matrix(order) @ derivative_matrix(order))[-1, -1]

@@ -22,3 +22,14 @@ The current CPU/Blackwell forward-and-gradient parity smoke is:
 ```powershell
 python scripts/gpu_smoke.py
 ```
+
+The completed continuous ordered-distance Gate D records are reproduced by:
+
+```powershell
+python scripts/benchmark_ordered_continuous_controls.py
+python scripts/benchmark_ordered_continuous_training.py --device auto
+```
+
+The first command uses dense vectors only in bounded truth audits and never
+forms the squared product-basis Hamiltonian. The second command is the formal
+blind native MPS/MPO path and requires the Blackwell GPU selected by `auto`.

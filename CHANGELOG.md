@@ -1,5 +1,29 @@
 # Research changelog
 
+## 2026-09-01 - Phase 16 continuous ordered-distance Gate D
+
+- Derived the exact unit-Jacobian center-of-mass/positive-gap map, its Cartan
+  kinetic metric, harmonic metric, `sqrt(N!)` chamber normalization, and exact
+  signed fermion recovery.
+- Added finite sine-box and unbounded odd-Hermite collision-Dirichlet bases with
+  analytic/projected derivative, kinetic, position, and position-square
+  operators plus independent quadrature tests.
+- Built native continuum noninteracting and soft-Coulomb MPS/MPO operators. The
+  direct interaction automaton has conservative raw bond `O(N^2 K)` and never
+  powers a truncated position matrix.
+- Added arbitrary-local-dimension latticeTN MPS initialization and blind global
+  AD training without a product-basis gather.
+- Closed basis/box, interaction-degree, quadrature, MPS-bond, optimization, and
+  CPU/GPU parity axes with independent dense or matrix-free truth audits.
+- Three blind N=2 runs reach their Galerkin truth within `3.01e-6`; three blind
+  N=4 Blackwell runs lie `4.37e-3--4.39e-3` above an exterior `D=14` numerical
+  reference and only `2.84e-5--4.63e-5` above same-basis Galerkin truth.
+- Re-read Hong et al. and Li--Waintal at implementation level. The result is
+  classified as a controlled continuous functional/operator/AD integration,
+  not a priority claim for ordered coordinates or distance MPS and not FEMPS.
+- Issued ADR 0006: Gate D passes at controlled `N<=4` scope. Phase 17 targets an
+  unbounded interaction basis, global MPO compression audits, and N=6 scaling.
+
 ## 2026-09-01 - Phase 12 controlled soft-Coulomb benchmark matrix
 
 - Added a normalized benchmark schema with exact closure of correlation,

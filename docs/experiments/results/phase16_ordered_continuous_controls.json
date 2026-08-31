@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "experiment": "phase16_ordered_continuous_independent_error_controls",
+  "dtype": "float64",
+  "antisymmetry_audit": {
+    "mechanism": "exact signed extension of one ordered chamber",
+    "particles": 4,
+    "local_grid_dimension": 6,
+    "relative_antisymmetry_residual": 0.0,
+    "collision_amplitude_maximum": 0.0
+  },
+  "mpo_matvec_audit": {
+    "particles": 3,
+    "basis_order": 3,
+    "maximum_absolute_error": 7.105427357601002e-15
+  },
+  "n2": {
+    "independent_continuum_reference": 2.553831733978763,
+    "reference_provenance": "second-order Richardson extrapolation of an independent relative-coordinate half-line finite-difference solve",
+    "basis_order_at_fixed_box": [
+      {
+        "basis_order": 6,
+        "distance_length": 9.0,
+        "ground_energy": 2.5540625226936893,
+        "error_vs_independent_continuum_reference": 0.00023078871492643316
+      },
+      {
+        "basis_order": 8,
+        "distance_length": 9.0,
+        "ground_energy": 2.553908215723987,
+        "error_vs_independent_continuum_reference": 7.648174522412177e-05
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 9.0,
+        "ground_energy": 2.553839478230846,
+        "error_vs_independent_continuum_reference": 7.744252083163872e-06
+      },
+      {
+        "basis_order": 12,
+        "distance_length": 9.0,
+        "ground_energy": 2.553832673068384,
+        "error_vs_independent_continuum_reference": 9.390896211769473e-07
+      },
+      {
+        "basis_order": 16,
+        "distance_length": 9.0,
+        "ground_energy": 2.5538317364998546,
+        "error_vs_independent_continuum_reference": 2.5210917797835464e-09
+      },
+      {
+        "basis_order": 20,
+        "distance_length": 9.0,
+        "ground_energy": 2.5538317149630068,
+        "error_vs_independent_continuum_reference": -1.901575608087569e-08
+      }
+    ],
+    "outer_box_at_fixed_basis_order": [
+      {
+        "basis_order": 20,
+        "distance_length": 5.0,
+        "ground_energy": 2.554420155177384,
+        "error_vs_independent_continuum_reference": 0.0005884211986213472
+      },
+      {
+        "basis_order": 20,
+        "distance_length": 6.0,
+        "ground_energy": 2.5538368336787465,
+        "error_vs_independent_continuum_reference": 5.09969998363502e-06
+      },
+      {
+        "basis_order": 20,
+        "distance_length": 7.0,
+        "ground_energy": 2.553831728688571,
+        "error_vs_independent_continuum_reference": -5.290191840146008e-09
+      },
+      {
+        "basis_order": 20,
+        "distance_length": 8.0,
+        "ground_energy": 2.5538317143810794,
+        "error_vs_independent_continuum_reference": -1.9597683476035854e-08
+      },
+      {
+        "basis_order": 20,
+        "distance_length": 9.0,
+        "ground_energy": 2.5538317149630068,
+        "error_vs_independent_continuum_reference": -1.901575608087569e-08
+      },
+      {
+        "basis_order": 20,
+        "distance_length": 10.0,
+        "ground_energy": 2.553831718278875,
+        "error_vs_independent_continuum_reference": -1.5699888056275313e-08
+      }
+    ],
+    "interaction_degree_at_fixed_basis_and_quadrature": [
+      {
+        "interaction_degree": 8,
+        "ground_energy": 2.5541200996250013,
+        "difference_vs_degree_32": 0.0002874265566301659,
+        "sampled_scalar_error": 0.006548122663490141
+      },
+      {
+        "interaction_degree": 12,
+        "ground_energy": 2.5538444264323106,
+        "difference_vs_degree_32": 1.1753363939437378e-05,
+        "sampled_scalar_error": 0.0014012848213037499
+      },
+      {
+        "interaction_degree": 16,
+        "ground_energy": 2.5538326971720062,
+        "difference_vs_degree_32": 2.4103635087868724e-08,
+        "sampled_scalar_error": 5.812669408533644e-05
+      },
+      {
+        "interaction_degree": 20,
+        "ground_energy": 2.5538326754313596,
+        "difference_vs_degree_32": 2.3629884715603566e-09,
+        "sampled_scalar_error": 2.1721607424085576e-05
+      },
+      {
+        "interaction_degree": 24,
+        "ground_energy": 2.5538326730752257,
+        "difference_vs_degree_32": 6.8545169540357165e-12,
+        "sampled_scalar_error": 2.5751487169323184e-06
+      },
+      {
+        "interaction_degree": 32,
+        "ground_energy": 2.553832673068371,
+        "difference_vs_degree_32": 0.0,
+        "sampled_scalar_error": 6.214418357686213e-08
+      }
+    ],
+    "projection_quadrature_at_fixed_basis_and_degree": [
+      {
+        "quadrature_order": 48,
+        "ground_energy": 2.5538326754313423,
+        "difference_vs_q220": -1.7319479184152442e-14
+      },
+      {
+        "quadrature_order": 64,
+        "ground_energy": 2.553832675431347,
+        "difference_vs_q220": -1.2434497875801753e-14
+      },
+      {
+        "quadrature_order": 80,
+        "ground_energy": 2.5538326754313503,
+        "difference_vs_q220": -9.325873406851315e-15
+      },
+      {
+        "quadrature_order": 120,
+        "ground_energy": 2.5538326754313467,
+        "difference_vs_q220": -1.2878587085651816e-14
+      },
+      {
+        "quadrature_order": 160,
+        "ground_energy": 2.553832675431347,
+        "difference_vs_q220": -1.2434497875801753e-14
+      },
+      {
+        "quadrature_order": 220,
+        "ground_energy": 2.5538326754313596,
+        "difference_vs_q220": 0.0
+      }
+    ]
+  },
+  "noninteracting_basis": {
+    "particles": 3,
+    "exact_continuum_energy": 4.5,
+    "basis_comparison": [
+      {
+        "basis": "dirichlet_sine",
+        "basis_order": 2,
+        "box_or_length_scale": 6.0,
+        "ground_energy": 5.8708918432825845,
+        "error_vs_exact": 1.3708918432825845
+      },
+      {
+        "basis": "odd_hermite",
+        "basis_order": 2,
+        "box_or_length_scale": 0.7,
+        "ground_energy": 5.290547392068792,
+        "error_vs_exact": 0.7905473920687918
+      },
+      {
+        "basis": "dirichlet_sine",
+        "basis_order": 4,
+        "box_or_length_scale": 6.0,
+        "ground_energy": 4.585307535871454,
+        "error_vs_exact": 0.08530753587145412
+      },
+      {
+        "basis": "odd_hermite",
+        "basis_order": 4,
+        "box_or_length_scale": 0.7,
+        "ground_energy": 4.600896152583017,
+        "error_vs_exact": 0.10089615258301698
+      },
+      {
+        "basis": "dirichlet_sine",
+        "basis_order": 6,
+        "box_or_length_scale": 6.0,
+        "ground_energy": 4.51790644952195,
+        "error_vs_exact": 0.017906449521950307
+      },
+      {
+        "basis": "odd_hermite",
+        "basis_order": 6,
+        "box_or_length_scale": 0.7,
+        "ground_energy": 4.511684411155219,
+        "error_vs_exact": 0.01168441115521901
+      },
+      {
+        "basis": "dirichlet_sine",
+        "basis_order": 8,
+        "box_or_length_scale": 6.0,
+        "ground_energy": 4.50640312991096,
+        "error_vs_exact": 0.006403129910959926
+      },
+      {
+        "basis": "odd_hermite",
+        "basis_order": 8,
+        "box_or_length_scale": 0.7,
+        "ground_energy": 4.50164704509042,
+        "error_vs_exact": 0.0016470450904195744
+      },
+      {
+        "basis": "dirichlet_sine",
+        "basis_order": 10,
+        "box_or_length_scale": 6.0,
+        "ground_energy": 4.503089396577398,
+        "error_vs_exact": 0.0030893965773977072
+      },
+      {
+        "basis": "odd_hermite",
+        "basis_order": 10,
+        "box_or_length_scale": 0.7,
+        "ground_energy": 4.500609339654088,
+        "error_vs_exact": 0.000609339654087826
+      }
+    ],
+    "odd_hermite_length_scale_scan": [
+      {
+        "basis_order": 8,
+        "length_scale": 0.5,
+        "ground_energy": 4.648408005619397,
+        "error_vs_exact": 0.14840800561939727
+      },
+      {
+        "basis_order": 8,
+        "length_scale": 0.6,
+        "ground_energy": 4.517966738801329,
+        "error_vs_exact": 0.01796673880132893
+      },
+      {
+        "basis_order": 8,
+        "length_scale": 0.7,
+        "ground_energy": 4.50164704509042,
+        "error_vs_exact": 0.0016470450904195744
+      },
+      {
+        "basis_order": 8,
+        "length_scale": 0.8,
+        "ground_energy": 4.501177615036794,
+        "error_vs_exact": 0.001177615036794144
+      },
+      {
+        "basis_order": 8,
+        "length_scale": 1.0,
+        "ground_energy": 4.502521583409047,
+        "error_vs_exact": 0.002521583409047068
+      },
+      {
+        "basis_order": 8,
+        "length_scale": 1.2,
+        "ground_energy": 4.504744555037427,
+        "error_vs_exact": 0.004744555037427212
+      }
+    ]
+  },
+  "n4_galerkin": {
+    "post_run_exterior_reference": 11.023082853674637,
+    "reference_is_numerical_not_continuum_bound": true,
+    "basis_order_at_fixed_box": [
+      {
+        "basis_order": 6,
+        "distance_length": 4.5,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.045778789354586,
+        "error_vs_exterior_D14_reference": 0.02269593567994832,
+        "product_basis_dimension": 1296,
+        "matvec_calls": 91,
+        "residual_norm": 4.6000289933241743e-10,
+        "elapsed_seconds": 0.15459549997467548,
+        "dense_hamiltonian_materialized": false
+      },
+      {
+        "basis_order": 8,
+        "distance_length": 4.5,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.031743851019934,
+        "error_vs_exterior_D14_reference": 0.008660997345296906,
+        "product_basis_dimension": 4096,
+        "matvec_calls": 111,
+        "residual_norm": 1.666774550506303e-09,
+        "elapsed_seconds": 0.3150862999027595,
+        "dense_hamiltonian_materialized": false
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 4.5,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.027429139958112,
+        "error_vs_exterior_D14_reference": 0.004346286283475109,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 151,
+        "residual_norm": 2.7572922084590615e-10,
+        "elapsed_seconds": 0.7836860000388697,
+        "dense_hamiltonian_materialized": false
+      },
+      {
+        "basis_order": 12,
+        "distance_length": 4.5,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.025607622376532,
+        "error_vs_exterior_D14_reference": 0.002524768701894331,
+        "product_basis_dimension": 20736,
+        "matvec_calls": 191,
+        "residual_norm": 1.180884454111063e-09,
+        "elapsed_seconds": 1.756579800043255,
+        "dense_hamiltonian_materialized": false
+      }
+    ],
+    "outer_box_at_fixed_basis_order": [
+      {
+        "basis_order": 10,
+        "distance_length": 3.5,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.041328548204541,
+        "error_vs_exterior_D14_reference": 0.0182456945299041,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 181,
+        "residual_norm": 2.2718420586213246e-10,
+        "elapsed_seconds": 0.9221554000396281,
+        "dense_hamiltonian_materialized": false
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 4.0,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.027442219108721,
+        "error_vs_exterior_D14_reference": 0.004359365434083884,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 161,
+        "residual_norm": 7.15371057858206e-10,
+        "elapsed_seconds": 0.8177747000008821,
+        "dense_hamiltonian_materialized": false
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 4.5,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.027429139958112,
+        "error_vs_exterior_D14_reference": 0.004346286283475109,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 151,
+        "residual_norm": 2.7572922084590615e-10,
+        "elapsed_seconds": 0.7961730000097305,
+        "dense_hamiltonian_materialized": false
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 5.0,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.029116661125254,
+        "error_vs_exterior_D14_reference": 0.00603380745061699,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 151,
+        "residual_norm": 5.34301056321475e-10,
+        "elapsed_seconds": 0.7930800999747589,
+        "dense_hamiltonian_materialized": false
+      }
+    ],
+    "interaction_degree_at_fixed_basis": [
+      {
+        "basis_order": 10,
+        "distance_length": 4.5,
+        "interaction_degree": 8,
+        "quadrature_order": 160,
+        "ground_energy": 11.020926394707868,
+        "error_vs_exterior_D14_reference": -0.0021564589667697476,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 151,
+        "residual_norm": 2.7320768999723906e-10,
+        "elapsed_seconds": 0.5102964999387041,
+        "dense_hamiltonian_materialized": false,
+        "difference_vs_degree_24": -0.00650194398517101
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 4.5,
+        "interaction_degree": 12,
+        "quadrature_order": 160,
+        "ground_energy": 11.02732979149859,
+        "error_vs_exterior_D14_reference": 0.004246937823952024,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 151,
+        "residual_norm": 2.700815613042447e-10,
+        "elapsed_seconds": 0.5718796000583097,
+        "dense_hamiltonian_materialized": false,
+        "difference_vs_degree_24": -9.854719444923887e-05
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 4.5,
+        "interaction_degree": 16,
+        "quadrature_order": 160,
+        "ground_energy": 11.02739947771667,
+        "error_vs_exterior_D14_reference": 0.004316624042033368,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 151,
+        "residual_norm": 2.7003850976567603e-10,
+        "elapsed_seconds": 0.6548099999781698,
+        "dense_hamiltonian_materialized": false,
+        "difference_vs_degree_24": -2.8860976367894864e-05
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 4.5,
+        "interaction_degree": 20,
+        "quadrature_order": 160,
+        "ground_energy": 11.027429139958112,
+        "error_vs_exterior_D14_reference": 0.004346286283475109,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 151,
+        "residual_norm": 2.7572922084590615e-10,
+        "elapsed_seconds": 0.7608750999206677,
+        "dense_hamiltonian_materialized": false,
+        "difference_vs_degree_24": 8.012650738464799e-07
+      },
+      {
+        "basis_order": 10,
+        "distance_length": 4.5,
+        "interaction_degree": 24,
+        "quadrature_order": 160,
+        "ground_energy": 11.027428338693039,
+        "error_vs_exterior_D14_reference": 0.004345485018401263,
+        "product_basis_dimension": 10000,
+        "matvec_calls": 151,
+        "residual_norm": 1.5855367409221761e-09,
+        "elapsed_seconds": 0.8739399000769481,
+        "dense_hamiltonian_materialized": false,
+        "difference_vs_degree_24": 0.0
+      }
+    ]
+  },
+  "n4_mps_bond": {
+    "method": "TT-SVD compression of the independent Galerkin ground state",
+    "truth_state_materialization_is_audit_only": true,
+    "training_materializes_product_basis_state": false,
+    "exact_galerkin_ground_energy": 11.027429139958235,
+    "lanczos": {
+      "product_basis_dimension": 10000,
+      "matvec_calls": 161,
+      "residual_norm": 3.3764914539187163e-10,
+      "elapsed_seconds": 0.7890772999962792,
+      "dense_hamiltonian_materialized": false
+    },
+    "points": [
+      {
+        "requested_maximum_bond": 1,
+        "retained_ranks": [
+          1,
+          1,
+          1
+        ],
+        "energy": 11.429034126513058,
+        "energy_error_vs_exact_galerkin_ground": 0.4016049865548226,
+        "fidelity_vs_exact_galerkin_ground": 0.9409182336192545,
+        "sequential_discarded_singular_value_norm": 0.24306741118616837
+      },
+      {
+        "requested_maximum_bond": 2,
+        "retained_ranks": [
+          2,
+          2,
+          2
+        ],
+        "energy": 11.048444177684742,
+        "energy_error_vs_exact_galerkin_ground": 0.02101503772650659,
+        "fidelity_vs_exact_galerkin_ground": 0.9985692939405997,
+        "sequential_discarded_singular_value_norm": 0.03782467527157672
+      },
+      {
+        "requested_maximum_bond": 4,
+        "retained_ranks": [
+          4,
+          4,
+          4
+        ],
+        "energy": 11.027443861029859,
+        "energy_error_vs_exact_galerkin_ground": 1.4721071623924331e-05,
+        "fidelity_vs_exact_galerkin_ground": 0.9999995745481048,
+        "sequential_discarded_singular_value_norm": 0.0006522667366055147
+      },
+      {
+        "requested_maximum_bond": 8,
+        "retained_ranks": [
+          8,
+          8,
+          8
+        ],
+        "energy": 11.027429143402736,
+        "energy_error_vs_exact_galerkin_ground": 3.4445015728579165e-09,
+        "fidelity_vs_exact_galerkin_ground": 0.9999999999221895,
+        "sequential_discarded_singular_value_norm": 8.821058237416379e-06
+      },
+      {
+        "requested_maximum_bond": 16,
+        "retained_ranks": [
+          10,
+          16,
+          10
+        ],
+        "energy": 11.027429139958015,
+        "energy_error_vs_exact_galerkin_ground": -2.2026824808563106e-13,
+        "fidelity_vs_exact_galerkin_ground": 0.9999999999999999,
+        "sequential_discarded_singular_value_norm": 3.649634799744091e-12
+      },
+      {
+        "requested_maximum_bond": 32,
+        "retained_ranks": [
+          10,
+          32,
+          10
+        ],
+        "energy": 11.027429139958015,
+        "energy_error_vs_exact_galerkin_ground": -2.2026824808563106e-13,
+        "fidelity_vs_exact_galerkin_ground": 0.9999999999999999,
+        "sequential_discarded_singular_value_norm": 2.2786630979836916e-12
+      },
+      {
+        "requested_maximum_bond": 64,
+        "retained_ranks": [
+          10,
+          64,
+          10
+        ],
+        "energy": 11.027429139958022,
+        "energy_error_vs_exact_galerkin_ground": -2.1316282072803006e-13,
+        "fidelity_vs_exact_galerkin_ground": 0.9999999999999999,
+        "sequential_discarded_singular_value_norm": 8.021849443534687e-13
+      },
+      {
+        "requested_maximum_bond": 100,
+        "retained_ranks": [
+          10,
+          96,
+          10
+        ],
+        "energy": 11.027429139958022,
+        "energy_error_vs_exact_galerkin_ground": -2.1316282072803006e-13,
+        "fidelity_vs_exact_galerkin_ground": 0.9999999999999999,
+        "sequential_discarded_singular_value_norm": 2.8082374999708816e-14
+      }
+    ]
+  },
+  "elapsed_seconds": 15.16706439992413
+}

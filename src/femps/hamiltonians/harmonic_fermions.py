@@ -316,3 +316,66 @@ def antisymmetric_many_body_hamiltonian(
             lifted_left @ lifted_right - lifted_product
         )
     return hamiltonian
+
+
+def antisymmetric_many_body_hamiltonian_dense_two_body(
+    one_body: torch.Tensor,
+    particles: int,
+    two_body_tensor: torch.Tensor,
+) -> torch.Tensor:
+    """Build exact exterior truth directly from ``<pq|v|rs>`` integrals.
+
+    This independent Slater--Condon path applies
+    ``1/2 sum_pqrs V[p,q,r,s] a_p^dag a_q^dag a_s a_r``. It avoids a matrix
+    product per operator-Schmidt factor and is intended only for safe sectors.
+    """
+
+    if one_body.ndim != 2 or one_body.shape[0] != one_body.shape[1]:
+        raise ValueError("one_body must be square")
+    dimension = one_body.shape[0]
+    if two_body_tensor.shape != (dimension,) * 4:
+        raise ValueError("two_body_tensor must have shape (D,D,D,D)")
+    if (
+        two_body_tensor.dtype != one_body.dtype
+        or two_body_tensor.device != one_body.device
+    ):
+        raise ValueError("one- and two-body tensors must share dtype/device")
+    if particles < 1 or particles > dimension:
+        raise ValueError("require 1 <= particles <= D")
+    supports = list(itertools.combinations(range(dimension), particles))
+    support_index = {support: index for index, support in enumerate(supports)}
+    hamiltonian = _lift_one_body_to_exterior(one_body, supports, support_index)
+    for column, support in enumerate(supports):
+        for annihilated_r in support:
+            first = _annihilate(support, annihilated_r)
+            assert first is not None
+            after_r, sign_r = first
+            for annihilated_s in after_r:
+                second = _annihilate(after_r, annihilated_s)
+                assert second is not None
+                after_s, sign_s = second
+                for created_q in range(dimension):
+                    third = _create(after_s, created_q)
+                    if third is None:
+                        continue
+                    after_q, sign_q = third
+                    for created_p in range(dimension):
+                        fourth = _create(after_q, created_p)
+                        if fourth is None:
+                            continue
+                        final_support, sign_p = fourth
+                        row = support_index[final_support]
+                        hamiltonian[row, column] += (
+                            0.5
+                            * sign_r
+                            * sign_s
+                            * sign_q
+                            * sign_p
+                            * two_body_tensor[
+                                created_p,
+                                created_q,
+                                annihilated_r,
+                                annihilated_s,
+                            ]
+                        )
+    return hamiltonian

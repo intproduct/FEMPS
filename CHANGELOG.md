@@ -131,3 +131,14 @@
 - Soft-Coulomb N=4 greedy K=2 reaches `7.445e-5` finite-basis error with stable
   overlap conditioning; a safe `N=6,D=8,K=1` attempt reaches `1.725e-3` error
   and polynomial/exterior agreement at `1.19e-12` in 33.7 seconds.
+- Completed the N=4 soft-Coulomb D/K hierarchy. D=8 errors fall through
+  `1.446e-3, 7.445e-5, 1.956e-5, 5.407e-6` for K=1--4; three independent
+  shorter K=4 chains reproduce `9.19e-6`--`1.27e-5` without overlap-rank loss.
+- Direct exterior truth reaches D=14. Best total differences from that numerical
+  reference fall from `2.015e-4` at D=8,K=4 to `7.131e-5` at D=10,K=4.
+- N=6 greedy K=2 reaches `1.484e-6` finite-basis error. Matched current-kernel
+  timing shows only 2--4% soft-Coulomb time overhead over the two-factor harmonic
+  interaction, though peak memory grows by 44%.
+- Expanded the novelty audit to electronic Pfaffian QMC, FermiNet, PauliNet, and
+  hidden-fermion Pfaffian states; broad first-quantized/Pfaffian priority claims
+  are explicitly rejected.

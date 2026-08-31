@@ -8,5 +8,15 @@
 | Kong-Zhu-Xie 2026 Grassmann TN | Fock/coherent-state | occupation sites and graded virtual bonds | Grassmann parity/order, equivalent to Z2 grading/swap gates | no | Grassmann MPS/PEPS/MPO | Grassmann integration with ordinary coefficient numerics | possible sign/contraction backend | not a first-quantized particle-coordinate ansatz |
 | Beylkin et al. 2008 | first | continuous particle coordinates | Slater determinant sum | continuous functions | unconstrained Slater sum | determinant identities | determinant statistics carrier | matrix-wedge chain and AD functional operators |
 | Begovic Kovac--Kressner 2017 | coefficient tensor | shared one-particle Tucker modes | alternating core retained | finite basis | structure-preserving Tucker approximation | HOOI/Jacobi-style optimization | rigorous symmetry-preserving compression comparator | one-particle support rank, not particle-cut TT rank |
+| Bajdich et al. 2008 | first / real-space QMC | electron coordinates | Pfaffian of singlet/triplet pair orbitals | continuous orbitals, sampled rather than Galerkin functional basis | Pfaffian, multi-Pfaffian, and backflow trial states | Pfaffian evaluation plus VMC | closest established electronic Pfaffian carrier and finite Pfaffian sums | FEMPS uses deterministic HO-basis operator contraction and AD Rayleigh minimization, not nodal/VMC sampling |
+| FermiNet (Pfau et al. 2020) | first / real-space QMC | electron coordinates | sums of neural-coordinate-dependent determinants | basis-free continuous coordinates | neural backflow determinant sum | stochastic local-energy/VMC estimates | direct first-quantized continuous fermion solver | FEMPS is functional-basis Galerkin with exact polynomial contractions; it must not claim general accuracy or first-quantized priority |
+| PauliNet (Hermann et al. 2020) | first / real-space QMC | electron coordinates | multireference determinants plus Jastrow/backflow | continuous coordinates with physical baseline | neural Jastrow/backflow multireference state | stochastic VMC | direct electronic Schrödinger optimization with built-in antisymmetry | deterministic functional-basis/Pfaffian contraction and separate `D,K` controls |
+| Hidden-fermion Pfaffian (Chen et al. 2025 preprint) | primarily lattice/Fock configurations | visible plus neural hidden fermions | projected Pfaffian carrier | no 2201 continuous functional basis | neural-augmented Pfaffian | VMC-style amplitude evaluation | modern scalable correlated Pfaffian competitor | different state domain, hidden-neural correlation mechanism, and stochastic objective |
 
-All entries are preliminary reading notes, not novelty conclusions.
+All entries are preliminary reading notes, not novelty conclusions. The Phase 10
+audit rules out any claim that FEMPS first introduced continuous first-quantized
+determinant/Pfaffian solvers or scalable Pfaffian trial states. The remaining
+candidate contribution is narrower: a 2201-style orthonormal functional-basis
+Galerkin solver with an exterior/Pfaffian structural carrier, exact polynomial
+one-/two-body contractions, and independently controlled basis size `D` and
+finite-AGP length `K`.

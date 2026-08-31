@@ -36,8 +36,11 @@ is gated by an explicit contraction-complexity audit.
 - E6 introduces a converged factorized soft-Coulomb operator. Blind/restarted
   N=2 reaches finite-basis truth, N=4 greedy K=2 reaches `7.445e-5` error, and
   batched mixed-derivative contractions remove the initial factor-axis bottleneck.
+- The N=4 soft-Coulomb hierarchy now reaches K=4 with three-seed reproduction;
+  independent exterior truth extends through D=14, while D=10 conditioning
+  identifies canonical finite-AGP compression as the next solver task.
 
-See [the active soft-Coulomb hierarchy plan](docs/exec-plans/active/phase10.md),
+See [the active finite-AGP conditioning plan](docs/exec-plans/active/phase11.md),
 [the Pfaffian theory](docs/theory/pfaffian_subclass.md), and
 [the 2201 reproduction report](docs/experiments/2201_baseline_report.md).
 

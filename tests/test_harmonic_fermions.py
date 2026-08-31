@@ -5,6 +5,7 @@ from femps.exterior import agp_tensor, apply_two_body_sum
 from femps.hamiltonians import (
     agp_energy,
     antisymmetric_many_body_hamiltonian,
+    antisymmetric_many_body_hamiltonian_dense_two_body,
     antisymmetric_two_particle_hamiltonian,
     exact_interacting_harmonic_fermion_energy,
     exact_interacting_pair_energy,
@@ -64,6 +65,17 @@ def test_many_body_exterior_truth_reduces_to_two_particle_projection() -> None:
     )
     projected = antisymmetric_two_particle_hamiltonian(one_body, interaction)
     torch.testing.assert_close(many_body, projected, atol=3e-14, rtol=3e-14)
+
+
+def test_dense_two_body_slater_condon_matches_factorized_truth() -> None:
+    one_body, interaction = harmonic_pair_hamiltonian(7, kappa=0.2)
+    factorized = antisymmetric_many_body_hamiltonian(
+        one_body, particles=4, two_body=interaction
+    )
+    dense = antisymmetric_many_body_hamiltonian_dense_two_body(
+        one_body, particles=4, two_body_tensor=interaction.dense()
+    )
+    torch.testing.assert_close(dense, factorized, atol=2e-13, rtol=2e-13)
 
 
 def test_e3_four_fermion_slater_is_exact_agp_ground_state() -> None:

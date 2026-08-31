@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "experiment": "matched_harmonic_soft_coulomb_k2_timing",
+  "hardware": "NVIDIA RTX PRO 4000 Blackwell",
+  "configuration": {"N": 4, "D": 8, "K": 2, "steps_per_stage": 300},
+  "harmonic": {
+    "operator_factor_rank": 2,
+    "growth_seconds": 32.7263541999273,
+    "joint_seconds": 32.45085999998264,
+    "peak_cuda_memory_bytes": 19093504
+  },
+  "soft_coulomb": {
+    "quadrature_order": 96,
+    "operator_factor_rank": 44,
+    "growth_seconds": 34.157955699949525,
+    "joint_seconds": 33.09556989988778,
+    "peak_cuda_memory_bytes": 27449856
+  },
+  "growth_time_ratio_soft_over_harmonic": 1.043747543441786,
+  "joint_time_ratio_soft_over_harmonic": 1.019867210151169,
+  "memory_ratio_soft_over_harmonic": 1.437644038430544
+}

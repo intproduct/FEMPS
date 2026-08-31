@@ -21,10 +21,10 @@ def _checkpoint_pairs(path: Path) -> torch.Tensor:
     return canonical_pair_matrices(raw.unsqueeze(0) if raw.ndim == 2 else raw)
 
 
-def _config(*, steps: int, frozen: int, seed: int, device: str) -> FiniteAgpConfig:
+def _config(*, dimension: int, particles: int, quadrature: int, steps: int, frozen: int, seed: int, device: str) -> FiniteAgpConfig:
     return FiniteAgpConfig(
-        basis_order=8,
-        particles=4,
+        basis_order=dimension,
+        particles=particles,
         agp_terms=2,
         steps=steps,
         learning_rate=5e-3,
@@ -35,13 +35,16 @@ def _config(*, steps: int, frozen: int, seed: int, device: str) -> FiniteAgpConf
         checkpoint_every=100,
         frozen_prefix_terms=frozen,
         interaction_model="soft_coulomb",
-        soft_coulomb_quadrature_order=96,
+        soft_coulomb_quadrature_order=quadrature,
         soft_coulomb_relative_threshold=1e-14,
     )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--basis-order", type=int, default=8)
+    parser.add_argument("--particles", type=int, default=4)
+    parser.add_argument("--quadrature-order", type=int, default=96)
     parser.add_argument("--steps", type=int, default=300)
     parser.add_argument("--seed", type=int, default=151)
     parser.add_argument("--device", default="auto")
@@ -64,21 +67,21 @@ def main() -> None:
     first = _checkpoint_pairs(args.k1_checkpoint)[0]
     generator = torch.Generator().manual_seed(args.seed)
     random_raw = torch.complex(
-        torch.randn(8, 8, generator=generator, dtype=torch.float64),
-        torch.randn(8, 8, generator=generator, dtype=torch.float64),
+        torch.randn(args.basis_order, args.basis_order, generator=generator, dtype=torch.float64),
+        torch.randn(args.basis_order, args.basis_order, generator=generator, dtype=torch.float64),
     ).unsqueeze(0)
     second = canonical_pair_matrices(random_raw)[0]
     initial = torch.stack((first, second))
     growth_checkpoint = args.checkpoint_directory / "growth_checkpoint.pt"
     growth = run_finite_agp_variable_projection(
-        _config(steps=args.steps, frozen=1, seed=args.seed, device=args.device),
+        _config(dimension=args.basis_order, particles=args.particles, quadrature=args.quadrature_order, steps=args.steps, frozen=1, seed=args.seed, device=args.device),
         checkpoint_path=growth_checkpoint,
         initial_pair_matrices=initial,
     )
     grown = _checkpoint_pairs(growth_checkpoint)
     joint_checkpoint = args.checkpoint_directory / "joint_checkpoint.pt"
     joint = run_finite_agp_variable_projection(
-        _config(steps=args.steps, frozen=0, seed=args.seed, device=args.device),
+        _config(dimension=args.basis_order, particles=args.particles, quadrature=args.quadrature_order, steps=args.steps, frozen=0, seed=args.seed, device=args.device),
         checkpoint_path=joint_checkpoint,
         initial_pair_matrices=grown,
     )

@@ -33,8 +33,8 @@ We therefore study a restricted functional exterior matrix product state
 exactly a sum of $K$ nonorthogonal Slater determinants in a continuous
 functional basis, embedded in the matrix-wedge definition.  Norms, one-body
 and factorized two-body energies, and reverse-mode gradients are evaluated
-through $K^2$ determinant transitions, with inverse-based fast formulas and a
-singular-safe minor fallback.  A conditioned generalized eigenproblem removes
+through batched $K^2$ determinant transitions, with inverse-based fast formulas
+and a singular-safe minor fallback.  A conditioned generalized eigenproblem removes
 the linear determinant amplitudes during orbital optimization.
 
 Numerical evidence is reported for harmonic and soft-Coulomb fermions.  At
@@ -43,8 +43,10 @@ $D=8\to12$ continuation pass direct finite-basis configuration-interaction
 (CI), variance, norm, antisymmetry, time, and memory checks.  At
 $N=6,D=10,K=4$, three blind runs have CI errors
 $2.49\times10^{-4}$--$4.03\times10^{-4}$, maximum variance
-$3.09\times10^{-3}$, and zero structural antisymmetry residual.  At fixed
-$D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
+$3.09\times10^{-3}$, and zero structural antisymmetry residual.  Independent
+$N=6$ axes further give monotone energies for $K=1,2,4$ at $D=10$ and
+$D=8,10,12$ at $K=4$; the final $D=12$ CI error is
+$1.05\times10^{-4}$.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
 $N=6$, while the \FEMPS{} correlation control remains $K=4$; matched kernel
 measurements expose the corresponding polynomial cost.  The method is a
 restricted nonorthogonal multideterminant algorithm, not an efficient generic
@@ -188,7 +190,10 @@ $B_{ab}^{\ell}=U_a^\dagger R_\ell U_b$, the well-conditioned mixed transition is
 \end{equation}
 The singular-safe route replaces two distinct columns and evaluates
 $K^2LN(N-1)$ determinants.  The auto path selects inverse formulas only after a
-conditioning gate; both branches remain differentiable under PyTorch AD.
+conditioning gate.  Well-conditioned $K^2$ pairs and all $L$ factors are
+evaluated as batched solves; only singular pairs enter the column-replacement
+loop.  Both branches remain differentiable under PyTorch AD, while the former
+pairwise implementation is retained as an independent reference.
 
 \subsection{Energy and complexity}
 
@@ -249,15 +254,15 @@ errors $1.34\times10^{-15}$ and $3.85\times10^{-15}$.
 
 Direct references use the unfactorized four-index quadrature tensor and the
 Slater--Condon Hamiltonian in $\Lambda^N V_D$.  CI is validation-only and never
-initializes a \FEMPS{} run.  At $N=6,D=10$ the exterior dimension is
-$\binom{10}{6}=210$, so exact diagonalization remains stronger than an
+initializes a \FEMPS{} run.  At $N=6,D=10$ and 12 the exterior dimensions are
+$\binom{10}{6}=210$ and $\binom{12}{6}=924$, so exact diagonalization remains stronger than an
 approximate second-quantized DMRG control.  DMRG is therefore deferred rather
 than relabeled as \FEMPS{}.
 
 \section{Numerical evidence}
 
 All floating-point results in this section are numerical evidence.  The full
-manifest contains eight independently verified artifacts.
+manifest contains ten independently verified artifacts.
 
 \subsection{\texorpdfstring{$N=2$}{N=2}: analytic and finite-basis checks}
 
@@ -368,6 +373,38 @@ retained, norm and structural antisymmetry residuals are zero, and every point
 stays below 883 MB sampled peak RSS.  Seed 31 additionally materializes the
 one-million-coefficient tensor and gives zero antisymmetry residual.
 
+Independent functional-basis and correlation axes are reported in
+Table~\ref{tab:n6-dk}.  Every point uses 160 Adam and 80 L-BFGS steps.  The
+$D=12,K=4$ point takes 107.66 seconds and 974,974,976 sampled RSS bytes.  Its
+structural antisymmetry residual is zero; no $12^6$ particle tensor is built.
+
+\begin{table}[t]
+\centering
+\caption{Independent \texorpdfstring{$N=6$}{N=6} soft-Coulomb convergence axes.}
+\label{tab:n6-dk}
+\begin{tabular}{llrrr}
+\toprule
+Axis & Point & Energy & Error versus CI & Variance \\
+\midrule
+$K$ at $D=10$ & $K=1$ & 25.052242782725 & $2.603\times10^{-3}$ & $1.478\times10^{-2}$ \\
+ & $K=2$ & 25.050276338618 & $6.365\times10^{-4}$ & $4.695\times10^{-3}$ \\
+ & $K=4$ & 25.049825287522 & $1.854\times10^{-4}$ & $1.749\times10^{-3}$ \\
+$D$ at $K=4$ & $D=8$ & 25.051264850894 & $3.196\times10^{-5}$ & $3.016\times10^{-4}$ \\
+ & $D=10$ & 25.049825287522 & $1.854\times10^{-4}$ & $1.749\times10^{-3}$ \\
+ & $D=12$ & 25.049471144618 & $1.047\times10^{-4}$ & $1.122\times10^{-3}$ \\
+\bottomrule
+\end{tabular}
+\par\smallskip{\scriptsize Evidence: \claimid{n6_independent_dk_convergence}.}
+\end{table}
+
+Both the \FEMPS{} and direct-CI absolute energies decrease over $D=8,10,12$.
+The error relative to each same-basis CI result is not monotone because fixed
+$K=4$ must approximate new correlation directions as the basis grows.  This
+is an interpretable $D/K$ tradeoff, not a continuum bound.  At $D=12,K=4$ the
+state stores 292 complex \FEMPS{} scalars; its ordinary particle-TT ranks are
+$(12,60,80,60,12)$ and require 132,768 scalars (claim
+\claimid{n6_independent_dk_convergence}).
+
 \section{Exchange carrier, correlation multiplicity, and cost}
 
 At fixed $D=10,K=4,L=19$, the exact structural counts grow as shown in
@@ -398,9 +435,41 @@ grows by 1.239/1.024 over these two small points and accelerates the N6 minor
 path by 7.27/8.93.  These are two-point CPU measurements, not asymptotic fits.
 Auto and minor transition matrices agree within $1.07\times10^{-14}$.
 
+Phase 33 batches transition pairs and factor axes while retaining that
+pairwise implementation as a reference.  Table~\ref{tab:vectorized-backend}
+uses one fixed $N=6,D=10,K=4,L=19$ state and one matched blind optimization.
+
+\begin{table}[t]
+\centering
+\caption{Vectorized transition and matched backend audit.}
+\label{tab:vectorized-backend}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Path & FB kernel (s) & Reference speedup & 160/80 solve (s) \\
+\midrule
+CPU pairwise reference & 0.28038 & 1.0 & -- \\
+CPU batched & 0.00803 & 34.9 & 5.08 \\
+Blackwell batched & 0.01814 & 15.5 & 11.96 \\
+\bottomrule
+\end{tabular}
+\par\smallskip{\scriptsize Evidence:
+\claimid{n6_vectorized_transition_backend}.}
+\end{table}
+
+CPU batched/reference Hamiltonians differ by $8.90\times10^{-16}$ and orbital
+gradients by $4.69\times10^{-13}$.  CPU/Blackwell Hamiltonians differ by
+$1.43\times10^{-14}$ and gradients by $3.68\times10^{-12}$.  The matched
+optimizations give identical energy $25.050223374042$; Blackwell finishes well
+inside 600 seconds with 20.7 MB peak device allocation.  CPU remains faster by
+a factor 2.35 for the full registered solve, so Blackwell is an admitted backend
+but not an acceleration claim.  Seed 3304 misses the separate Phase 29 CI-error
+quality control and is used only for backend parity; it does not replace the
+Phase 32 physics evidence.
+
 \begin{figure}[htbp]
  \centering
- \includegraphics[width=0.90\textwidth]{femps-structure-cost-summary.pdf}
+ \includegraphics[width=0.72\textwidth]{femps-structure-cost-summary.pdf}
  \caption{Matched N4/N6 kernel timings and ordinary particle-TT center ranks
  at fixed \FEMPS{} $K=4$.  The exterior representation keeps the correlation
  multiplicity fixed while the labelled-particle exchange carrier grows.  The
@@ -410,7 +479,8 @@ Auto and minor transition matrices agree within $1.07\times10^{-14}$.
  \claimid{matched_n4_n6_transition_cost}.}
 \end{figure}
 
-\enlargethispage{\baselineskip}
+\FloatBarrier
+
 For $N=4$ the ordinary particle-TT ranks are $(10,24,10)$ for the K4 state and
 $(10,45,10)$ for dense CI.  At $N=6$ they are
 $(10,45,80,45,10)$ and $(10,45,120,45,10)$.  The \FEMPS{} nonlinear
@@ -418,8 +488,6 @@ correlation multiplicity remains $K=4$ even though the ordinary center rank
 increases from 24 to 80.  Exterior algebra does not remove exchange support;
 it prevents that support from being conflated with the adjustable correlation
 count.
-
-\FloatBarrier
 
 \section{Relation to other representations}
 
@@ -452,11 +520,12 @@ states may require rapidly growing $K$.  The measured cost is explicitly
 quadratic in $K$ and linear in the two-body factor rank $L$ before orbital and
 determinant costs.
 
-Direct CI is faster at the current $\binom{10}{4}=\binom{10}{6}=210$ truth
-dimensions.  The evidence demonstrates correctness, optimization stability,
-and a structural tradeoff, not a speed or memory advantage.  N6 basis
-convergence has not been independently scanned, N8 is not admitted, and two
-particle counts cannot establish asymptotic scaling.  DMRG has been deferred
+Direct CI is faster in the current truth spaces, which extend to
+$\binom{12}{6}=924$.  The evidence demonstrates correctness, optimization
+stability, three-point N6 basis/correlation convergence, and a structural
+tradeoff, not an end-to-end speed or memory advantage.  Three basis points and
+two particle counts cannot establish asymptotic scaling; no $N=8$ diagonal-path
+calculation is admitted.  DMRG has been deferred
 because it would be weaker than exact CI in the present finite spaces; no
 FEMPS--DMRG performance inference follows.
 
@@ -518,12 +587,14 @@ Identifier & Scope \\
 \claimid{n6_soft_coulomb_pilot} & N6 K1-to-K4 resource-capped pilot \\
 \claimid{n6_soft_coulomb_multiseed} & N6 three-blind-seed stability \\
 \claimid{matched_n4_n6_transition_cost} & Fixed-D/K/L N4-to-N6 cost audit \\
+\claimid{n6_independent_dk_convergence} & N6 independent D8/D10/D12 and K1/K2/K4 axes \\
+\claimid{n6_vectorized_transition_backend} & Batched CPU/Blackwell parity and matched solve \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \begingroup
-\small
+\footnotesize
 \bibliographystyle{unsrt}
 \bibliography{references/references}
 \endgroup

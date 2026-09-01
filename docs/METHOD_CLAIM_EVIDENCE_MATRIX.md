@@ -11,11 +11,12 @@ are in `docs/experiments/results/phase30_reproduction_manifest.json`.
 | Nonbranching diagonal-path FEMPS contracts through K-squared determinant transitions | implemented restricted algorithm; value/gradient verified | solver contract, transition tests, E4 and matched-cost artifacts | polynomial exact contraction for this restricted subclass |
 | Single Slater has FEMPS correlation multiplicity one while ordinary particle TT carries exchange ranks | proved/numerically verified | Slater spectrum theorem/tests and comparator artifacts | exchange carrier is structurally separate from K in this representation |
 | Increasing K recovers non-Slater correlation | numerical evidence at N2/N4/N6 | E4, high-basis K4-to-K5, and N6 K1-to-K4 artifacts | systematic improvement at the tested points |
-| Increasing D gives controlled functional-basis convergence | numerical evidence at N2/N4 | E4 and D8-to-D12 basis-extension artifacts | monotone basis convergence on registered axes |
+| Increasing D gives controlled functional-basis convergence | numerical evidence at N2/N4/N6 | E4, N4 D8-to-D12, and N6 D8/D10/D12 artifacts | monotone absolute energy on registered axes; no asymptotic or continuum bound |
 | Restricted FEMPS solves a nontrivial continuous interacting model reproducibly | numerical evidence | N4 soft-Coulomb multiseed and N6 three-seed artifacts | stable optimization for the verified N4/N6 benchmarks |
 | Antisymmetry survives every approximation/validation step | exact structural residual plus bounded materialized audits | all registered artifacts and manifest verifier | residual is always reported; materialized residual is zero where enabled |
 | FEMPS is faster than CI/DMRG | not established | CI is faster in current truth spaces; DMRG not yet admitted | no runtime-superiority claim |
 | FEMPS scales to N8 or asymptotically | not established | no admitted N8 diagonal-path artifact | no N8 or asymptotic claim |
+| Batched transition contractions accelerate the reference implementation | numerical backend evidence at N6,D10,K4 | Phase 33 value/gradient parity and matched CPU/Blackwell artifact | CPU batched kernel is faster than the pairwise reference; Blackwell is admitted but CPU remains faster on the registered workload |
 | Diagonal-path FEMPS is novel beyond nonorthogonal selected CI | not established | novelty comparison remains qualified | describe the exterior/functional integration and measured tradeoff, not categorical novelty |
 
 ## Required paper language

@@ -39,6 +39,8 @@ def verify_manuscript(path: Path) -> dict:
         "numerical evidence",
         "antisymmetry residual",
         "Direct CI remains faster",
+        "CPU remains faster",
+        "batched $K^2$ determinant transitions",
         "no $N=8$",
     )
     for phrase in required_scope:
@@ -66,7 +68,9 @@ def verify_manuscript(path: Path) -> dict:
     mapped_floats = {
         "tab:n4-k": {"n4_soft_coulomb_transferability"},
         "tab:n6-seeds": {"n6_soft_coulomb_multiseed"},
+        "tab:n6-dk": {"n6_independent_dk_convergence"},
         "tab:cost-counts": {"matched_n4_n6_transition_cost"},
+        "tab:vectorized-backend": {"n6_vectorized_transition_backend"},
         "fig:convergence": {
             "n4_soft_coulomb_transferability",
             "n4_soft_coulomb_basis_extension",

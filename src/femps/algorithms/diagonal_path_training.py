@@ -369,7 +369,7 @@ def _run_diagonal_path_variable_projection_impl(
             expected_operator_id=operator_id,
             verify_operator_id=True,
         )
-        raw = torch.nn.Parameter(payload["raw"].to(device))
+        raw = torch.nn.Parameter(payload["raw"].to(device).contiguous())
         best_raw = payload["best_raw"].to(device)
         best_energy = float(payload["best_energy"])
         start_step = int(payload["step"])
@@ -385,7 +385,7 @@ def _run_diagonal_path_variable_projection_impl(
                 raise ValueError("initial_orbitals shape does not match config")
             initial_raw = initial_orbitals.to(dtype=torch.complex128, device=device)
             initialization = "provided_orbitals"
-        raw = torch.nn.Parameter(initial_raw)
+        raw = torch.nn.Parameter(initial_raw.contiguous())
         _project_raw_orbitals(raw)
         start_step = 0
         history = []
@@ -397,6 +397,11 @@ def _run_diagonal_path_variable_projection_impl(
         )
         best_energy = float(initial_result.energy.detach().cpu())
         best_raw = raw.detach().clone()
+
+    # Batched determinant/solve adjoints may return a non-contiguous view.
+    # Adam accepts it, while torch.optim.LBFGS still flattens with ``view``.
+    # Normalize the layout at the parameter boundary without changing values.
+    raw.register_hook(lambda gradient: gradient.contiguous())
 
     optimizer = torch.optim.Adam([raw], lr=config.learning_rate)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(

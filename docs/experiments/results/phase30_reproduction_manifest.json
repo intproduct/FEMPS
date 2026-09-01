@@ -204,6 +204,69 @@
       "artifact_schema_version": 1,
       "evidence_level": "numerical",
       "scientific_boundary": "matched kernel timing at fixed D,K,L; not asymptotic scaling"
+    },
+    {
+      "id": "n6_independent_dk_convergence",
+      "claim": "N6 soft-Coulomb FEMPS passes independent K1/K2/K4 and D8/D10/D12 convergence, operator, symmetry, and resource gates.",
+      "artifact": "docs/experiments/results/phase32_n6_convergence.json",
+      "verifier_module": "scripts.verify_phase32_n6_convergence",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase32_n6_convergence.py",
+      "verify_command": "python scripts/verify_phase32_n6_convergence.py",
+      "seeds": [
+        3201,
+        3202,
+        3204,
+        3284,
+        3212
+      ],
+      "artifact_sha256": "a9d2d6618443746e84591c637084c17a582b42e9cc7ce1bca415a14505c46b82",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "three D values and three K values for one soft-Coulomb model; convergence evidence, not an asymptotic scaling fit",
+      "registered_tolerances": {
+        "energy_monotonicity_tolerance": 1e-09,
+        "norm_error": 1e-10,
+        "antisymmetry_residual": 1e-12,
+        "operator_factorization_error": 1e-11,
+        "quadrature_relative_change": 2e-12,
+        "peak_cpu_rss_bytes": 2147483648,
+        "peak_cuda_memory_bytes": 4294967296,
+        "wall_time_seconds_per_point": 600.0
+      }
+    },
+    {
+      "id": "n6_vectorized_transition_backend",
+      "claim": "Batched N6,D10,K4 transitions pass reference and CPU/Blackwell value-gradient parity plus a matched 160/80 optimization gate.",
+      "artifact": "docs/experiments/results/phase33_vectorized_transitions.json",
+      "verifier_module": "scripts.verify_phase33_vectorized_transitions",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase33_vectorized_transitions.py",
+      "verify_command": "python scripts/verify_phase33_vectorized_transitions.py",
+      "seeds": [
+        3301,
+        3304
+      ],
+      "artifact_sha256": "5ec5f054b86d59ac10ce3918b89419074436e518833f383a3a2767000f1ed047",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "one matched N6,D10,K4 workload; backend evidence, not asymptotic scaling",
+      "registered_tolerances": {
+        "cpu_reference_value_max_abs": 1e-11,
+        "cpu_reference_gradient_max_abs": 1e-09,
+        "cpu_gpu_value_max_abs": 1e-10,
+        "cpu_gpu_gradient_max_abs": 1e-09,
+        "production_energy_difference": 1e-10,
+        "production_condition_relative_difference": 1e-08,
+        "diagnostic_phase29_direct_ci_error": 0.0005,
+        "diagnostic_phase29_variance": 0.005,
+        "norm_error": 1e-10,
+        "antisymmetry_residual": 1e-12,
+        "retained_condition_number": 100000000.0,
+        "wall_time_seconds": 600.0,
+        "peak_cpu_rss_bytes": 2147483648,
+        "peak_cuda_memory_bytes": 4294967296
+      }
     }
   ]
 }

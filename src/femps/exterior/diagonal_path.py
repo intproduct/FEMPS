@@ -9,10 +9,11 @@ below contract the resulting ``K`` nonorthogonal Slater determinants through
 ``K**2`` transition pairs.  They never enumerate the nominal ``K**(N-1)``
 paths of dense cores and never materialize the full particle tensor.
 
-Column-replacement determinant formulas are used instead of overlap inverses,
-so the reference production path remains valid when a bra/ket overlap matrix
-is singular.  This costs extra powers of ``N`` but stays polynomial and is
-fully differentiable in PyTorch.
+The default path batches all well-conditioned transition pairs and two-body
+factors. Singular pairs retain column-replacement determinant formulas, so the
+production path remains valid without overlap inverses. The historical
+pairwise implementation remains available as ``transition_algorithm=reference``
+for value/gradient parity and performance audits.
 """
 
 from __future__ import annotations
@@ -73,8 +74,12 @@ def _replace_column(
     matrix: torch.Tensor, replacement: torch.Tensor, column: int
 ) -> torch.Tensor:
     return torch.cat(
-        (matrix[:, :column], replacement[:, None], matrix[:, column + 1 :]),
-        dim=1,
+        (
+            matrix[..., :column],
+            replacement.unsqueeze(-1),
+            matrix[..., column + 1 :],
+        ),
+        dim=-1,
     )
 
 
@@ -88,6 +93,25 @@ def _use_well_conditioned_path(overlap: torch.Tensor) -> bool:
         return bool(
             singular_values[-1] > 0
             and singular_values[0] / singular_values[-1] <= condition_limit
+        )
+
+
+def _well_conditioned_mask(overlaps: torch.Tensor) -> torch.Tensor:
+    """Return the detached inverse-safety decision for a batch of overlaps."""
+
+    with torch.no_grad():
+        singular_values = torch.linalg.svdvals(overlaps)
+        condition_limit = torch.finfo(singular_values.dtype).eps ** -0.5
+        return (singular_values[..., -1] > 0) & (
+            singular_values[..., 0] / singular_values[..., -1]
+            <= condition_limit
+        )
+
+
+def _validate_transition_algorithm(transition_algorithm: str) -> None:
+    if transition_algorithm not in {"auto", "minor", "reference"}:
+        raise ValueError(
+            "transition_algorithm must be auto, minor, or reference"
         )
 
 
@@ -145,18 +169,140 @@ def _mixed_transition_from_projected(
     return total
 
 
+def _mixed_minor_transitions_batched_factors(
+    overlap: torch.Tensor,
+    left_insertions: torch.Tensor,
+    right_insertions: torch.Tensor,
+) -> torch.Tensor:
+    """Return singular-safe mixed transitions for every factor in one batch."""
+
+    factors, particles, _ = left_insertions.shape
+    expanded_overlap = overlap.unsqueeze(0).expand(factors, -1, -1)
+    total = torch.zeros(
+        factors, dtype=overlap.dtype, device=overlap.device
+    )
+    for left_column in range(particles):
+        with_left = _replace_column(
+            expanded_overlap,
+            left_insertions[..., left_column],
+            left_column,
+        )
+        for right_column in range(particles):
+            if right_column != left_column:
+                total = total + torch.linalg.det(
+                    _replace_column(
+                        with_left,
+                        right_insertions[..., right_column],
+                        right_column,
+                    )
+                )
+    return total
+
+
+def _projected_overlap_batch(orbitals: torch.Tensor) -> torch.Tensor:
+    bra_orbitals = orbitals.conj().permute(0, 2, 1)
+    return torch.einsum("and,bdm->abnm", bra_orbitals, orbitals)
+
+
+def _hybrid_one_body_transitions(
+    overlaps: torch.Tensor, insertions: torch.Tensor
+) -> torch.Tensor:
+    terms, _, particles, _ = overlaps.shape
+    flat_overlaps = overlaps.reshape(terms * terms, particles, particles)
+    flat_insertions = insertions.reshape(
+        terms * terms, particles, particles
+    )
+    well_mask = _well_conditioned_mask(flat_overlaps)
+    well_indices = torch.nonzero(well_mask, as_tuple=False).flatten()
+    fallback_indices = torch.nonzero(~well_mask, as_tuple=False).flatten()
+    result = torch.zeros(
+        terms * terms, dtype=overlaps.dtype, device=overlaps.device
+    )
+    if well_indices.numel():
+        selected_overlaps = flat_overlaps[well_indices]
+        logarithmic_derivatives = torch.linalg.solve(
+            selected_overlaps, flat_insertions[well_indices]
+        )
+        values = torch.linalg.det(selected_overlaps) * torch.diagonal(
+            logarithmic_derivatives, dim1=-2, dim2=-1
+        ).sum(-1)
+        result = result.index_copy(0, well_indices, values)
+    if fallback_indices.numel():
+        values = torch.stack(
+            [
+                _one_body_transition_from_projected(
+                    flat_overlaps[index],
+                    flat_insertions[index],
+                    allow_inverse=False,
+                )
+                for index in fallback_indices.tolist()
+            ]
+        )
+        result = result.index_copy(0, fallback_indices, values)
+    return result.reshape(terms, terms)
+
+
+def _hybrid_two_body_transitions(
+    overlaps: torch.Tensor,
+    left_insertions: torch.Tensor,
+    right_insertions: torch.Tensor,
+    weights: torch.Tensor,
+) -> torch.Tensor:
+    terms, _, factors, particles, _ = left_insertions.shape
+    pairs = terms * terms
+    flat_overlaps = overlaps.reshape(pairs, particles, particles)
+    flat_left = left_insertions.reshape(pairs, factors, particles, particles)
+    flat_right = right_insertions.reshape(pairs, factors, particles, particles)
+    well_mask = _well_conditioned_mask(flat_overlaps)
+    well_indices = torch.nonzero(well_mask, as_tuple=False).flatten()
+    fallback_indices = torch.nonzero(~well_mask, as_tuple=False).flatten()
+    result = torch.zeros(pairs, dtype=overlaps.dtype, device=overlaps.device)
+    if well_indices.numel():
+        selected_overlaps = flat_overlaps[well_indices]
+        left_logarithmic = torch.linalg.solve(
+            selected_overlaps[:, None], flat_left[well_indices]
+        )
+        right_logarithmic = torch.linalg.solve(
+            selected_overlaps[:, None], flat_right[well_indices]
+        )
+        left_trace = torch.diagonal(
+            left_logarithmic, dim1=-2, dim2=-1
+        ).sum(-1)
+        right_trace = torch.diagonal(
+            right_logarithmic, dim1=-2, dim2=-1
+        ).sum(-1)
+        mixed_trace = torch.einsum(
+            "plij,plji->pl", left_logarithmic, right_logarithmic
+        )
+        per_factor = torch.linalg.det(selected_overlaps)[:, None] * (
+            left_trace * right_trace - mixed_trace
+        )
+        values = 0.5 * torch.sum(per_factor * weights[None], dim=-1)
+        result = result.index_copy(0, well_indices, values)
+    if fallback_indices.numel():
+        values = torch.stack(
+            [
+                0.5
+                * torch.sum(
+                    weights
+                    * _mixed_minor_transitions_batched_factors(
+                        flat_overlaps[index],
+                        flat_left[index],
+                        flat_right[index],
+                    )
+                )
+                for index in fallback_indices.tolist()
+            ]
+        )
+        result = result.index_copy(0, fallback_indices, values)
+    return result.reshape(terms, terms)
+
+
 def diagonal_path_overlap_matrix(orbitals: torch.Tensor) -> torch.Tensor:
     """Return ``S[a,b] = <Phi_a|Phi_b>`` for all Slater paths."""
 
-    terms, _, _ = _validate_orbitals(orbitals)
-    result = torch.empty(
-        (terms, terms), dtype=orbitals.dtype, device=orbitals.device
-    )
-    for bra in range(terms):
-        bra_orbitals = orbitals[bra].conj().transpose(0, 1)
-        for ket in range(terms):
-            result[bra, ket] = torch.linalg.det(bra_orbitals @ orbitals[ket])
-    return result
+    _validate_orbitals(orbitals)
+    return torch.linalg.det(_projected_overlap_batch(orbitals))
 
 
 def diagonal_path_one_body_transition_matrix(
@@ -168,22 +314,23 @@ def diagonal_path_one_body_transition_matrix(
     """Return all ``<Phi_a|sum_i h(i)|Phi_b>`` transitions."""
 
     _validate_one_body(orbitals, operator)
-    if transition_algorithm not in {"auto", "minor"}:
-        raise ValueError("transition_algorithm must be auto or minor")
+    _validate_transition_algorithm(transition_algorithm)
     terms, _, _ = orbitals.shape
+    acted = torch.einsum("de,ken->kdn", operator, orbitals)
+    bra_orbitals = orbitals.conj().permute(0, 2, 1)
+    overlaps = torch.einsum("and,bdm->abnm", bra_orbitals, orbitals)
+    insertions = torch.einsum("and,bdm->abnm", bra_orbitals, acted)
+    if transition_algorithm == "auto":
+        return _hybrid_one_body_transitions(overlaps, insertions)
     result = torch.empty(
         (terms, terms), dtype=orbitals.dtype, device=orbitals.device
     )
-    acted = torch.einsum("de,ken->kdn", operator, orbitals)
     for bra in range(terms):
-        bra_orbitals = orbitals[bra].conj().transpose(0, 1)
         for ket in range(terms):
-            overlap = bra_orbitals @ orbitals[ket]
-            insertion = bra_orbitals @ acted[ket]
             result[bra, ket] = _one_body_transition_from_projected(
-                overlap,
-                insertion,
-                allow_inverse=transition_algorithm == "auto",
+                overlaps[bra, ket],
+                insertions[bra, ket],
+                allow_inverse=transition_algorithm == "reference",
             )
     return result
 
@@ -204,8 +351,7 @@ def diagonal_path_two_body_transition_matrix_factorized(
     """
 
     _validate_two_body_factors(orbitals, left, right, weights)
-    if transition_algorithm not in {"auto", "minor"}:
-        raise ValueError("transition_algorithm must be auto or minor")
+    _validate_transition_algorithm(transition_algorithm)
     terms, _, particles = orbitals.shape
     result = torch.zeros(
         (terms, terms), dtype=orbitals.dtype, device=orbitals.device
@@ -215,20 +361,28 @@ def diagonal_path_two_body_transition_matrix_factorized(
 
     left_acted = torch.einsum("lde,ken->lkdn", left, orbitals)
     right_acted = torch.einsum("lde,ken->lkdn", right, orbitals)
+    bra_orbitals = orbitals.conj().permute(0, 2, 1)
+    overlaps = torch.einsum("and,bdm->abnm", bra_orbitals, orbitals)
+    left_insertions = torch.einsum(
+        "and,lbdm->ablnm", bra_orbitals, left_acted
+    )
+    right_insertions = torch.einsum(
+        "and,lbdm->ablnm", bra_orbitals, right_acted
+    )
+    if transition_algorithm == "auto":
+        return _hybrid_two_body_transitions(
+            overlaps, left_insertions, right_insertions, weights
+        )
     for bra in range(terms):
-        bra_orbitals = orbitals[bra].conj().transpose(0, 1)
         for ket in range(terms):
-            overlap = bra_orbitals @ orbitals[ket]
             value = torch.zeros((), dtype=orbitals.dtype, device=orbitals.device)
             for factor in range(left.shape[0]):
-                left_insertion = bra_orbitals @ left_acted[factor, ket]
-                right_insertion = bra_orbitals @ right_acted[factor, ket]
                 value = value + 0.5 * weights[factor] * (
                     _mixed_transition_from_projected(
-                        overlap,
-                        left_insertion,
-                        right_insertion,
-                        allow_inverse=transition_algorithm == "auto",
+                        overlaps[bra, ket],
+                        left_insertions[bra, ket, factor],
+                        right_insertions[bra, ket, factor],
+                        allow_inverse=transition_algorithm == "reference",
                     )
                 )
             result[bra, ket] = value

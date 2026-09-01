@@ -130,15 +130,22 @@ is gated by an explicit contraction-complexity audit.
   energies decrease to `25.049471144618`, whose same-basis CI error is
   `1.04729e-4`. All structural and admitted materialized antisymmetry residuals
   are zero. Compact exterior-sector matrices report ordinary particle-TT ranks
-  without a `D^N` tensor. The current Python-loop GPU backend exceeds its 600 s
-  gate, so CPU remains production until matched vectorization tests pass.
+  without a `D^N` tensor.
+- Phase 33 batches transition-pair and physical-factor axes. At the registered
+  N6,D10,K4 point, the CPU forward/backward kernel is `34.926x` faster than the
+  pairwise reference. CPU and Blackwell matched solves agree exactly in energy
+  and pass gradient/resource gates. Blackwell is admitted, while CPU remains
+  default because the complete solve is `2.352x` faster on CPU for this small
+  workload. This is portability and bounded implementation evidence, not a GPU
+  acceleration or generic scalability claim.
 
-See [the active execution plan](docs/exec-plans/active/phase33.md),
+See [the active execution plan](docs/exec-plans/active/phase34.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
 [the diagonal-path solver contract](docs/DIAGONAL_PATH_SOLVER_CONTRACT.md),
 [the N6 soft-Coulomb pilot](docs/experiments/phase29_n6_soft_coulomb_pilot_report.md),
 [the N6 independent convergence report](docs/experiments/phase32_n6_convergence_report.md),
+[the vectorized transition report](docs/experiments/phase33_vectorized_transitions_report.md),
 [the method claim/evidence matrix](docs/METHOD_CLAIM_EVIDENCE_MATRIX.md),
 [the Phase 30 reproduction manifest](docs/experiments/results/phase30_reproduction_manifest.json),
 [the exact four-form workspace](math/four_forms/README.md),

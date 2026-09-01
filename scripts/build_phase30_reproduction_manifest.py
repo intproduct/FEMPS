@@ -107,6 +107,26 @@ ENTRIES = (
             "operator_factorization_error": 1e-11,
         },
     },
+    {
+        "id": "n6_independent_dk_convergence",
+        "claim": "N6 soft-Coulomb FEMPS passes independent K1/K2/K4 and D8/D10/D12 convergence, operator, symmetry, and resource gates.",
+        "artifact": "docs/experiments/results/phase32_n6_convergence.json",
+        "verifier_module": "scripts.verify_phase32_n6_convergence",
+        "verifier_argument": "path",
+        "benchmark_command": "python scripts/benchmark_phase32_n6_convergence.py",
+        "verify_command": "python scripts/verify_phase32_n6_convergence.py",
+        "seeds": [3201, 3202, 3204, 3284, 3212],
+    },
+    {
+        "id": "n6_vectorized_transition_backend",
+        "claim": "Batched N6,D10,K4 transitions pass reference and CPU/Blackwell value-gradient parity plus a matched 160/80 optimization gate.",
+        "artifact": "docs/experiments/results/phase33_vectorized_transitions.json",
+        "verifier_module": "scripts.verify_phase33_vectorized_transitions",
+        "verifier_argument": "path",
+        "benchmark_command": "python scripts/benchmark_phase33_vectorized_transitions.py",
+        "verify_command": "python scripts/verify_phase33_vectorized_transitions.py",
+        "seeds": [3301, 3304],
+    },
 )
 
 

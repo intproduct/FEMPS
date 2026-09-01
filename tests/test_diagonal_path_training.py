@@ -121,6 +121,59 @@ def test_optional_lbfgs_refinement_is_audited_and_nonworsening() -> None:
     assert result["structural_antisymmetry_residual"] == 0.0
 
 
+def test_vectorized_soft_coulomb_lbfgs_accepts_contiguous_parameter_gradient() -> None:
+    from femps.hamiltonians import harmonic_pair_hamiltonian, soft_coulomb_operator
+
+    dimension = 6
+    one_body = harmonic_pair_hamiltonian(
+        dimension, kappa=0.0, dtype=torch.complex128, device="cpu"
+    )[0]
+    interaction = soft_coulomb_operator(
+        dimension,
+        quadrature_order=32,
+        relative_threshold=1e-13,
+        factorization_backend="physical",
+        dtype=torch.complex128,
+        device="cpu",
+    )[0]
+    config = DiagonalPathConfig(
+        basis_order=dimension,
+        particles=4,
+        terms=4,
+        interaction_model="soft_coulomb",
+        soft_coulomb_quadrature_order=32,
+        steps=2,
+        learning_rate=1e-3,
+        final_learning_rate=1e-4,
+        seed=3304,
+        record_points=2,
+        checkpoint_every=2,
+        lbfgs_refinement_steps=2,
+        truth_maximum_dimension=20,
+    )
+    generator = torch.Generator().manual_seed(3304)
+    initial_orbitals = canonical_slater_orbitals(
+        torch.complex(
+            torch.randn(
+                (4, dimension, 4), generator=generator, dtype=torch.float64
+            ),
+            torch.randn(
+                (4, dimension, 4), generator=generator, dtype=torch.float64
+            ),
+        )
+    )
+    assert not initial_orbitals.is_contiguous()
+    result = run_diagonal_path_variable_projection(
+        config,
+        initial_orbitals=initial_orbitals,
+        operators=(one_body, interaction),
+        operator_id="test_vectorized_soft_coulomb_lbfgs",
+    )
+
+    assert result["completed"]
+    assert result["refinement"]["closure_calls"] >= 1
+
+
 def test_checkpoint_resume_matches_uninterrupted_run(tmp_path: Path) -> None:
     config = DiagonalPathConfig(
         basis_order=4,

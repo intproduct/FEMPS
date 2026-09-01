@@ -150,6 +150,82 @@ def test_diagonal_path_gradients_match_exterior_truth() -> None:
         )
 
 
+def test_vectorized_transitions_match_reference_values_and_gradients() -> None:
+    orbitals, _, one_body, two_body = _problem()
+
+    def evaluate(raw: torch.Tensor, algorithm: str) -> torch.Tensor:
+        overlap, hamiltonian = diagonal_path_hamiltonian_matrices(
+            raw,
+            one_body,
+            two_body_left=two_body.left,
+            two_body_right=two_body.right,
+            two_body_weights=two_body.weights,
+            transition_algorithm=algorithm,
+        )
+        return overlap.real.square().sum() + hamiltonian.real.square().sum()
+
+    vectorized_orbitals = orbitals.detach().clone().requires_grad_(True)
+    vectorized = evaluate(vectorized_orbitals, "auto")
+    vectorized_gradient = torch.autograd.grad(vectorized, vectorized_orbitals)[0]
+    reference_orbitals = orbitals.detach().clone().requires_grad_(True)
+    reference = evaluate(reference_orbitals, "reference")
+    reference_gradient = torch.autograd.grad(reference, reference_orbitals)[0]
+
+    torch.testing.assert_close(vectorized, reference, atol=1e-11, rtol=1e-11)
+    torch.testing.assert_close(
+        vectorized_gradient, reference_gradient, atol=1e-9, rtol=1e-9
+    )
+
+
+def test_vectorized_singular_fallback_matches_reference_gradient() -> None:
+    orbitals = torch.zeros((2, 4, 2), dtype=torch.float64)
+    orbitals[0, 0, 0] = 1.0
+    orbitals[0, 1, 1] = 1.0
+    orbitals[1, 2, 0] = 1.0
+    orbitals[1, 3, 1] = 1.0
+    one_body = torch.tensor(
+        [
+            [0.5, 0.1, 0.2, -0.1],
+            [0.1, 1.5, -0.3, 0.4],
+            [0.2, -0.3, 2.5, 0.2],
+            [-0.1, 0.4, 0.2, 3.5],
+        ],
+        dtype=torch.float64,
+    )
+    left = torch.stack((one_body, torch.eye(4, dtype=torch.float64)))
+    right = torch.stack((torch.flip(one_body, (0, 1)), one_body))
+    weights = torch.tensor([0.2, -0.07], dtype=torch.float64)
+
+    def evaluate(raw: torch.Tensor, algorithm: str) -> torch.Tensor:
+        overlap, hamiltonian = diagonal_path_hamiltonian_matrices(
+            raw,
+            one_body,
+            two_body_left=left,
+            two_body_right=right,
+            two_body_weights=weights,
+            transition_algorithm=algorithm,
+        )
+        return overlap.square().sum() + hamiltonian.square().sum()
+
+    vectorized_orbitals = orbitals.clone().requires_grad_(True)
+    vectorized = evaluate(vectorized_orbitals, "auto")
+    vectorized_gradient = torch.autograd.grad(vectorized, vectorized_orbitals)[0]
+    reference_orbitals = orbitals.clone().requires_grad_(True)
+    reference = evaluate(reference_orbitals, "reference")
+    reference_gradient = torch.autograd.grad(reference, reference_orbitals)[0]
+
+    torch.testing.assert_close(vectorized, reference, atol=1e-11, rtol=1e-11)
+    torch.testing.assert_close(
+        vectorized_gradient, reference_gradient, atol=1e-9, rtol=1e-9
+    )
+    diagnostics = diagonal_path_transition_diagnostics(orbitals)
+    assert diagnostics == {
+        "transition_pairs": 4,
+        "well_conditioned_inverse_pairs": 2,
+        "singular_safe_minor_pairs": 2,
+    }
+
+
 def test_diagonal_path_orbital_gradient_matches_central_difference() -> None:
     orbitals, amplitudes, one_body, two_body = _problem()
     orbitals = orbitals.detach().requires_grad_(True)

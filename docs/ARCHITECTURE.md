@@ -42,15 +42,19 @@ flowchart LR
   finite-box, and interval-interaction MPOs plus the native latticeTN MPS bridge.
 - `femps.ordered_continuous`: the exact unit-Jacobian center-of-mass/positive-gap
   transform, kinetic and harmonic metrics, and ordered-chamber normalization.
-- `femps.basis.dirichlet_sine` and `femps.basis.odd_hermite`: finite-interval and
-  unbounded collision-Dirichlet distance bases with projected local operators.
+- `femps.basis.dirichlet_sine`, `femps.basis.odd_hermite`, and
+  `femps.basis.multiscale_odd_hermite`: finite-interval, single-scale
+  unbounded, and Lowdin-orthonormalized two-scale collision-Dirichlet distance
+  bases with projected local operators.
 - `femps.baselines.ordered_continuous_mpo` and
   `femps.baselines.ordered_continuous_interaction`: native functional MPOs for
   the mixed continuum Hamiltonian and controlled interval-polynomial
   soft-Coulomb interaction.
 - `femps.baselines.ordered_continuous_fourier`: unbounded Fourier--Bessel
   soft-Coulomb quadrature, projected cosine/sine operators, and a compact
-  four-state all-pair recurrence with interaction bond `4M`.
+  four-state all-pair recurrence with interaction bond `4M`; its production
+  builder applies the sparse recurrence to a retained transfer and compresses
+  incrementally without materializing raw dense bulk tensors.
 - `femps.hamiltonians.soft_coulomb`: Gauss--Hermite two-body integrals,
   symmetric kernel factorization, and an independent `N=2` relative-grid oracle.
 - `femps.states`: Slater, explicit antisymmetric, and FEMPS states.
@@ -69,9 +73,10 @@ diagonalization are confined to small truth audits. The finite-grid module
 remains a structural oracle. Gate D admits the continuous COM/half-line
 functional-basis layer for controlled small systems. Gate E adds the
 interacting unbounded odd-Hermite path through controlled N=6 and globally
-audited Fourier-MPO compression. The current builder still materializes dense
-raw `W^2 D^2` MPO blocks before compression; removing that temporary cost and
-improving basis efficiency are active work.
+audited Fourier-MPO compression. Gate F adds the multiscale basis, removes raw
+`W^2 D^2` bulk materialization, and admits one qualified controlled N=8 point.
+The remaining resource boundary is the latticeTN chi-32 two-site effective-
+Hamiltonian contraction, not the production global-AD MPO builder.
 
 The finite-AGP optimizer accepts either the configured harmonic/soft-Coulomb
 operators or an explicitly identified external one-/two-body functional

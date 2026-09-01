@@ -60,3 +60,13 @@ order, but no priority claim is made for ordered coordinates, first-quantized
 distance MPS, or scalable fermionic tensor networks. Hong et al. and
 Li--Waintal remain the direct method parents. The N=6 basis-dominated error and
 temporary dense raw-MPO storage preclude an asymptotic accuracy/resource claim.
+
+Phase 18 closes the core Gate F criteria at one controlled N=8 point, again
+without broadening the novelty claim. The Lowdin-orthonormalized two-scale
+half-line basis and incremental sparse-recurrence MPO builder are basis/
+implementation choices inside the established ordered first-quantized and
+functional-basis parent methods. They reduce measured error and construction
+memory but do not establish a new ansatz class. The retained raw-gradient
+auxiliary miss, numerical rather than continuum N=8 reference, and chi-32
+local-solver resource rejection explicitly preclude an asymptotic or method-
+priority claim.

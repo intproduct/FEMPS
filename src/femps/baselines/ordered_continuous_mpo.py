@@ -31,6 +31,7 @@ def ordered_continuous_local_operators(
     distance_length: float,
     *,
     distance_basis: str = "dirichlet_sine",
+    distance_scale_ratio: float = 2.0,
     center_of_mass_length: float | None = None,
     dtype: torch.dtype = torch.float64,
     device: torch.device | str | None = None,
@@ -105,9 +106,53 @@ def ordered_continuous_local_operators(
                 basis_order, distance_length, dtype=dtype, device=device
             ),
         }
+    elif distance_basis == "multiscale_odd_hermite":
+        from femps.basis.multiscale_odd_hermite import (
+            multiscale_odd_hermite_derivative_matrix,
+            multiscale_odd_hermite_negative_second_derivative_matrix,
+            multiscale_odd_hermite_position_matrix,
+            multiscale_odd_hermite_position_squared_matrix,
+        )
+
+        distance = {
+            "identity": identity,
+            "derivative": multiscale_odd_hermite_derivative_matrix(
+                basis_order,
+                distance_length,
+                distance_scale_ratio,
+                dtype=dtype,
+                device=device,
+            ),
+            "negative_second_derivative": (
+                multiscale_odd_hermite_negative_second_derivative_matrix(
+                    basis_order,
+                    distance_length,
+                    distance_scale_ratio,
+                    dtype=dtype,
+                    device=device,
+                )
+            ),
+            "position": multiscale_odd_hermite_position_matrix(
+                basis_order,
+                distance_length,
+                distance_scale_ratio,
+                dtype=dtype,
+                device=device,
+            ),
+            "position_squared": (
+                multiscale_odd_hermite_position_squared_matrix(
+                    basis_order,
+                    distance_length,
+                    distance_scale_ratio,
+                    dtype=dtype,
+                    device=device,
+                )
+            ),
+        }
     else:
         raise ValueError(
-            "distance_basis must be 'dirichlet_sine' or 'odd_hermite'"
+            "distance_basis must be 'dirichlet_sine', 'odd_hermite', or "
+            "'multiscale_odd_hermite'"
         )
     return [com] + [distance for _ in range(particles - 1)]
 
@@ -118,6 +163,7 @@ def ordered_continuous_noninteracting_terms(
     distance_length: float,
     *,
     distance_basis: str = "dirichlet_sine",
+    distance_scale_ratio: float = 2.0,
     center_of_mass_length: float | None = None,
     omega: float = 1.0,
     dtype: torch.dtype = torch.float64,
@@ -132,6 +178,7 @@ def ordered_continuous_noninteracting_terms(
         basis_order,
         distance_length,
         distance_basis=distance_basis,
+        distance_scale_ratio=distance_scale_ratio,
         center_of_mass_length=center_of_mass_length,
         dtype=dtype,
         device=device,
@@ -188,6 +235,7 @@ def ordered_continuous_noninteracting_mpo(
     distance_length: float,
     *,
     distance_basis: str = "dirichlet_sine",
+    distance_scale_ratio: float = 2.0,
     center_of_mass_length: float | None = None,
     omega: float = 1.0,
     dtype: torch.dtype = torch.float64,
@@ -201,6 +249,7 @@ def ordered_continuous_noninteracting_mpo(
             basis_order,
             distance_length,
             distance_basis=distance_basis,
+            distance_scale_ratio=distance_scale_ratio,
             center_of_mass_length=center_of_mass_length,
             omega=omega,
             dtype=dtype,
@@ -216,6 +265,7 @@ def ordered_continuous_soft_coulomb_hamiltonian_mpo(
     interaction_degree: int,
     *,
     distance_basis: str = "dirichlet_sine",
+    distance_scale_ratio: float = 2.0,
     center_of_mass_length: float | None = None,
     omega: float = 1.0,
     coupling: float = 1.0,
@@ -233,6 +283,7 @@ def ordered_continuous_soft_coulomb_hamiltonian_mpo(
         basis_order,
         distance_length,
         distance_basis=distance_basis,
+        distance_scale_ratio=distance_scale_ratio,
         center_of_mass_length=center_of_mass_length,
         omega=omega,
         dtype=dtype,

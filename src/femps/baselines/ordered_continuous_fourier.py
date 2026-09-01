@@ -11,6 +11,46 @@ from femps.basis.odd_hermite import odd_hermite_characteristic_matrices
 from femps.baselines.ordered_distance_mpo import sum_mpos
 
 
+def _distance_characteristic_matrices(
+    distance_basis: str,
+    basis_order: int,
+    frequencies: torch.Tensor,
+    distance_scale: float,
+    distance_scale_ratio: float,
+    *,
+    quadrature_order: int | None,
+    dtype: torch.dtype,
+    device: torch.device | str | None,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    if distance_basis == "odd_hermite":
+        return odd_hermite_characteristic_matrices(
+            basis_order,
+            frequencies,
+            distance_scale,
+            quadrature_order=quadrature_order,
+            dtype=dtype,
+            device=device,
+        )
+    if distance_basis == "multiscale_odd_hermite":
+        from femps.basis.multiscale_odd_hermite import (
+            multiscale_odd_hermite_characteristic_matrices,
+        )
+
+        return multiscale_odd_hermite_characteristic_matrices(
+            basis_order,
+            frequencies,
+            distance_scale,
+            distance_scale_ratio,
+            quadrature_order=quadrature_order,
+            dtype=dtype,
+            device=device,
+        )
+    raise ValueError(
+        "Fourier interaction requires odd_hermite or "
+        "multiscale_odd_hermite"
+    )
+
+
 def soft_coulomb_fourier_rule(
     order: int,
     *,
@@ -93,6 +133,8 @@ def ordered_continuous_fourier_soft_coulomb_pair_mpo(
     right_particle: int,
     fourier_order: int,
     *,
+    distance_basis: str = "odd_hermite",
+    distance_scale_ratio: float = 2.0,
     softening: float = 1.0,
     dimensionless_cutoff: float = 30.0,
     local_quadrature_order: int | None = None,
@@ -127,10 +169,12 @@ def ordered_continuous_fourier_soft_coulomb_pair_mpo(
         dtype=dtype,
         device=device,
     )
-    cosine, sine = odd_hermite_characteristic_matrices(
+    cosine, sine = _distance_characteristic_matrices(
+        distance_basis,
         basis_order,
         frequencies,
         distance_scale,
+        distance_scale_ratio,
         quadrature_order=local_quadrature_order,
         dtype=dtype,
         device=device,
@@ -251,6 +295,8 @@ def ordered_continuous_fourier_soft_coulomb_compact_mpo(
     distance_scale: float,
     fourier_order: int,
     *,
+    distance_basis: str = "odd_hermite",
+    distance_scale_ratio: float = 2.0,
     softening: float = 1.0,
     dimensionless_cutoff: float = 30.0,
     local_quadrature_order: int | None = None,
@@ -275,6 +321,8 @@ def ordered_continuous_fourier_soft_coulomb_compact_mpo(
             0,
             1,
             fourier_order,
+            distance_basis=distance_basis,
+            distance_scale_ratio=distance_scale_ratio,
             softening=softening,
             dimensionless_cutoff=dimensionless_cutoff,
             local_quadrature_order=local_quadrature_order,
@@ -293,10 +341,12 @@ def ordered_continuous_fourier_soft_coulomb_compact_mpo(
         dtype=dtype,
         device=device,
     )
-    cosine, sine = odd_hermite_characteristic_matrices(
+    cosine, sine = _distance_characteristic_matrices(
+        distance_basis,
         basis_order,
         frequencies,
         distance_scale,
+        distance_scale_ratio,
         quadrature_order=local_quadrature_order,
         dtype=dtype,
         device=device,
@@ -359,6 +409,8 @@ def ordered_continuous_fourier_hamiltonian_mpo(
     distance_scale: float,
     fourier_order: int,
     *,
+    distance_basis: str = "odd_hermite",
+    distance_scale_ratio: float = 2.0,
     center_of_mass_length: float | None = None,
     omega: float = 1.0,
     coupling: float = 1.0,
@@ -380,7 +432,8 @@ def ordered_continuous_fourier_hamiltonian_mpo(
         particles,
         basis_order,
         distance_scale,
-        distance_basis="odd_hermite",
+        distance_basis=distance_basis,
+        distance_scale_ratio=distance_scale_ratio,
         center_of_mass_length=center_of_mass_length,
         omega=omega,
         dtype=dtype,
@@ -393,6 +446,8 @@ def ordered_continuous_fourier_hamiltonian_mpo(
         basis_order,
         distance_scale,
         fourier_order,
+        distance_basis=distance_basis,
+        distance_scale_ratio=distance_scale_ratio,
         softening=softening,
         dimensionless_cutoff=dimensionless_cutoff,
         local_quadrature_order=local_quadrature_order,
@@ -402,3 +457,285 @@ def ordered_continuous_fourier_hamiltonian_mpo(
     with torch.no_grad():
         interaction.tensors[0].mul_(coupling)
     return sum_mpos([noninteracting, interaction])
+
+
+def _contract_fourier_bulk_from_left(
+    transfer: torch.Tensor,
+    cosine: torch.Tensor,
+    sine: torch.Tensor,
+    identity: torch.Tensor,
+) -> torch.Tensor:
+    """Apply all sparse four-state recurrence blocks to a left transfer."""
+
+    retained = transfer.shape[0]
+    fourier_order = cosine.shape[0]
+    states = transfer.reshape(retained, fourier_order, 4)
+    constant, cosine_sum, sine_sum, total = states.unbind(dim=2)
+    common = constant + cosine_sum
+    cosine_update = (
+        common[..., None, None] * cosine[None]
+        - sine_sum[..., None, None] * sine[None]
+    )
+    sine_update = (
+        common[..., None, None] * sine[None]
+        + sine_sum[..., None, None] * cosine[None]
+    )
+    output = torch.empty(
+        retained,
+        fourier_order,
+        4,
+        identity.shape[0],
+        identity.shape[1],
+        dtype=transfer.dtype,
+        device=transfer.device,
+    )
+    output[:, :, 0] = constant[..., None, None] * identity
+    output[:, :, 1] = cosine_update
+    output[:, :, 2] = sine_update
+    output[:, :, 3] = cosine_update + total[..., None, None] * identity
+    return output.reshape(retained, 4 * fourier_order, *identity.shape)
+
+
+def _contract_fourier_last_from_left(
+    transfer: torch.Tensor,
+    cosine: torch.Tensor,
+    sine: torch.Tensor,
+    identity: torch.Tensor,
+) -> torch.Tensor:
+    """Apply the final recurrence step and sum all Fourier-node totals."""
+
+    retained = transfer.shape[0]
+    states = transfer.reshape(retained, cosine.shape[0], 4)
+    constant, cosine_sum, sine_sum, total = states.unbind(dim=2)
+    value = (
+        (constant + cosine_sum)[..., None, None] * cosine[None]
+        - sine_sum[..., None, None] * sine[None]
+        + total[..., None, None] * identity
+    )
+    return value.sum(dim=1)
+
+
+def ordered_continuous_fourier_hamiltonian_compressed_mpo(
+    particles: int,
+    basis_order: int,
+    distance_scale: float,
+    fourier_order: int,
+    maximum_bond: int,
+    *,
+    distance_basis: str = "odd_hermite",
+    distance_scale_ratio: float = 2.0,
+    relative_tolerance: float = 0.0,
+    center_of_mass_length: float | None = None,
+    omega: float = 1.0,
+    coupling: float = 1.0,
+    softening: float = 1.0,
+    dimensionless_cutoff: float = 30.0,
+    local_quadrature_order: int | None = None,
+    dtype: torch.dtype = torch.float64,
+    device: torch.device | str | None = None,
+):
+    """Build the compressed Hamiltonian without dense raw Fourier bulk blocks.
+
+    This performs the same left-to-right Hilbert--Schmidt SVD as
+    :func:`compress_mpo`. At each bulk site, the incoming transfer is applied
+    directly to the sparse four-state Fourier recurrence. The theoretical raw
+    direct-sum shape is recorded, but no ``(4M)^2 D^2`` tensor is materialized.
+    """
+
+    if maximum_bond < 1 or relative_tolerance < 0:
+        raise ValueError("maximum_bond must be positive and tolerance nonnegative")
+    if coupling < 0:
+        raise ValueError("coupling must be nonnegative")
+    from femps.baselines.ordered_continuous_mpo import (
+        ordered_continuous_noninteracting_mpo,
+    )
+    from femps.baselines.ordered_distance_mpo import (
+        _compress_left_mpo_tensor,
+        compress_mpo,
+    )
+
+    noninteracting = ordered_continuous_noninteracting_mpo(
+        particles,
+        basis_order,
+        distance_scale,
+        distance_basis=distance_basis,
+        distance_scale_ratio=distance_scale_ratio,
+        center_of_mass_length=center_of_mass_length,
+        omega=omega,
+        dtype=dtype,
+        device=device,
+    )
+    if coupling == 0 or particles == 2:
+        raw = (
+            noninteracting
+            if coupling == 0
+            else ordered_continuous_fourier_hamiltonian_mpo(
+                particles,
+                basis_order,
+                distance_scale,
+                fourier_order,
+                distance_basis=distance_basis,
+                distance_scale_ratio=distance_scale_ratio,
+                center_of_mass_length=center_of_mass_length,
+                omega=omega,
+                coupling=coupling,
+                softening=softening,
+                dimensionless_cutoff=dimensionless_cutoff,
+                local_quadrature_order=local_quadrature_order,
+                dtype=dtype,
+                device=device,
+            )
+        )
+        compressed, ranks, discarded = compress_mpo(
+            raw,
+            maximum_bond,
+            relative_tolerance=relative_tolerance,
+        )
+        diagnostics = {
+            "construction": "small_system_dense_free_fallback",
+            "dense_raw_fourier_bulk_materialized": False,
+            "theoretical_raw_maximum_bond": max(
+                max(tensor.shape[:2]) for tensor in raw.tensors
+            ),
+            "theoretical_raw_tensor_elements": sum(
+                tensor.numel() for tensor in raw.tensors
+            ),
+            "maximum_intermediate_tensor_elements": max(
+                tensor.numel() for tensor in raw.tensors
+            ),
+            "retained_ranks": tuple(ranks),
+            "local_discarded_norm_not_global_certificate": discarded,
+        }
+        return compressed, diagnostics
+
+    try:
+        from latticetn.mpo import MPO
+    except ImportError as exc:
+        raise ImportError("latticeTN is required for Fourier interaction MPOs") from exc
+
+    frequencies, coefficients = soft_coulomb_fourier_rule(
+        fourier_order,
+        softening=softening,
+        dimensionless_cutoff=dimensionless_cutoff,
+        dtype=dtype,
+        device=device,
+    )
+    cosine, sine = _distance_characteristic_matrices(
+        distance_basis,
+        basis_order,
+        frequencies,
+        distance_scale,
+        distance_scale_ratio,
+        quadrature_order=local_quadrature_order,
+        dtype=dtype,
+        device=device,
+    )
+    cosine = cosine.transpose(-2, -1)
+    sine = sine.transpose(-2, -1)
+    identity = torch.eye(
+        basis_order, dtype=dtype, device=device
+    ).transpose(0, 1)
+    fourier_bond = 4 * fourier_order
+
+    first_fourier = torch.zeros(
+        1,
+        fourier_bond,
+        basis_order,
+        basis_order,
+        dtype=dtype,
+        device=device,
+    )
+    first_fourier[0, 0::4] = (
+        coupling * coefficients[:, None, None] * identity
+    )
+    first = torch.cat([noninteracting.tensors[0], first_fourier], dim=1)
+    compressed_first, transfer, retained, discarded_squared = (
+        _compress_left_mpo_tensor(
+            first, maximum_bond, relative_tolerance
+        )
+    )
+    tensors = [compressed_first]
+    ranks = [retained]
+    maximum_intermediate = first.numel()
+
+    theoretical_raw_elements = first.numel()
+    theoretical_raw_maximum_bond = first.shape[1]
+    for site in range(1, particles - 1):
+        noninteracting_site = noninteracting.tensors[site]
+        noninteracting_left = noninteracting_site.shape[0]
+        if transfer.shape[1] != noninteracting_left + fourier_bond:
+            raise RuntimeError("structured Fourier and noninteracting bonds disagree")
+        noninteracting_contracted = torch.einsum(
+            "ar,rsij->asij",
+            transfer[:, :noninteracting_left],
+            noninteracting_site,
+        )
+        fourier_contracted = _contract_fourier_bulk_from_left(
+            transfer[:, noninteracting_left:], cosine, sine, identity
+        )
+        contracted = torch.cat(
+            [noninteracting_contracted, fourier_contracted], dim=1
+        )
+        maximum_intermediate = max(maximum_intermediate, contracted.numel())
+        theoretical_left = noninteracting_site.shape[0] + fourier_bond
+        theoretical_right = noninteracting_site.shape[1] + fourier_bond
+        theoretical_raw_elements += (
+            theoretical_left
+            * theoretical_right
+            * basis_order
+            * basis_order
+        )
+        theoretical_raw_maximum_bond = max(
+            theoretical_raw_maximum_bond,
+            theoretical_left,
+            theoretical_right,
+        )
+        compressed_site, transfer, retained, site_discarded_squared = (
+            _compress_left_mpo_tensor(
+                contracted, maximum_bond, relative_tolerance
+            )
+        )
+        tensors.append(compressed_site)
+        ranks.append(retained)
+        discarded_squared = discarded_squared + site_discarded_squared
+
+    noninteracting_last = noninteracting.tensors[-1]
+    noninteracting_left = noninteracting_last.shape[0]
+    if transfer.shape[1] != noninteracting_left + fourier_bond:
+        raise RuntimeError("structured Fourier final bond disagrees")
+    last = torch.einsum(
+        "ar,rsij->asij",
+        transfer[:, :noninteracting_left],
+        noninteracting_last,
+    )
+    last = last + _contract_fourier_last_from_left(
+        transfer[:, noninteracting_left:], cosine, sine, identity
+    )[:, None]
+    tensors.append(last)
+    maximum_intermediate = max(maximum_intermediate, last.numel())
+    theoretical_last_left = noninteracting_last.shape[0] + fourier_bond
+    theoretical_raw_elements += (
+        theoretical_last_left * basis_order * basis_order
+    )
+    theoretical_raw_maximum_bond = max(
+        theoretical_raw_maximum_bond, theoretical_last_left
+    )
+    compressed = MPO(
+        tensors,
+        length=particles,
+        dim=basis_order,
+        dtype=dtype,
+        device=device,
+    )
+    diagnostics = {
+        "construction": "incremental_structured_left_svd",
+        "dense_raw_fourier_bulk_materialized": False,
+        "theoretical_raw_maximum_bond": theoretical_raw_maximum_bond,
+        "theoretical_raw_tensor_elements": theoretical_raw_elements,
+        "maximum_intermediate_tensor_elements": maximum_intermediate,
+        "retained_ranks": tuple(ranks),
+        "local_discarded_norm_not_global_certificate": torch.sqrt(
+            discarded_squared
+        ),
+    }
+    return compressed, diagnostics

@@ -2,12 +2,14 @@
 
 ## Evidence level and purpose
 
-This is the Phase 16--17 bridge from the finite gap grid to the 2201
+This is the Phase 16--18 bridge from the finite gap grid to the 2201
 architecture. The coordinate and operator identities are exact. Dirichlet
 sine and odd-Hermite bases are Galerkin approximations; the interval polynomial
 and Fourier--Bessel soft-Coulomb representations are controlled numerical
-approximations. Gate E passes at controlled `N<=6` scope. Basis efficiency,
-temporary dense raw-MPO storage, and N=8 accuracy remain open.
+approximations. Gate F passes at one qualified controlled `N=8,D=10` point.
+The dense raw-MPO construction and dominant Gate E N=6 basis error are reduced;
+chi-32 local-solver resources, the auxiliary raw-gradient audit, and stronger
+N=8 reference convergence remain open.
 
 ## Center of mass and positive distances
 
@@ -82,6 +84,15 @@ half-line, vanishes at collision, and has no outer box. Its overlap, `r^2`, and
 independent quadrature. Phase 17 supports this unbounded basis with projected
 characteristic operators and a Fourier--Bessel interaction. The finite sine
 construction remains an independent matched-order control.
+
+Phase 18 adds a two-scale primitive union. Odd-Hermite modes at
+`ell/sqrt(rho)` and `ell*sqrt(rho)` all obey the same collision boundary.
+Analytic Gaussian-polynomial moments form the primitive overlap and local
+operator matrices; symmetric Lowdin orthonormalization gives the final basis.
+The scale ratio `rho` is an explicit numerical control. Independent half-line
+quadrature checks overlap, derivative, kinetic, position, position-squared,
+and characteristic matrices. This construction is a numerical spectral-basis
+choice, not a convergence-rate theorem.
 
 ## Native noninteracting MPO
 
@@ -170,6 +181,14 @@ compact operators agree globally to float64 precision. Compression is admitted
 only after a bounded dense-operator or global-action audit; local discarded
 singular values are not certificates.
 
+The Phase 18 builder does not first form the dense raw direct sum. At each
+site, it contracts the retained left transfer into the sparse `[1,c,s,T]`
+recurrence, performs the same local Hilbert--Schmidt SVD as raw left
+compression, and propagates only the retained transfer. Small global operators
+match raw-then-compress to float64 precision. At N=8,D=10,M=96,W=128, the
+largest build intermediate has 5,465,600 entries versus 109,482,800
+theoretical raw entries.
+
 ## Controlled physics evidence
 
 For N=2 soft Coulomb, `(D,Rmax,K)=(12,9,20)` gives
@@ -207,6 +226,19 @@ state has only `4.50e-6` energy error at bond eight, while the difference from
 an exterior D=12 numerical reference is `1.328e-2`. The observed larger-system
 error is therefore basis dominated.
 
+With the Phase 18 multiscale choice `(ell,rho)=(0.50,2.5)`, N=6 Galerkin
+orders D=8 and D=10 give `25.0534947768` and `25.0518179918`. Their differences
+from the exterior D=12 numerical reference are `4.128e-3` and `2.452e-3`,
+reductions of `68.9%` and `81.5%` from Gate E's single-scale D=8 error. Three
+D=10 production AD seeds lie `1.88e-5--3.25e-5` above same-basis truth.
+
+At N=8,D=10, three blind AD seeds give
+`44.4543733--44.4544088`, or `8.36e-3--8.40e-3` above an exterior D=12
+numerical reference. A right-canonical chi-16 local DMRG audit reaches
+`44.4543222`, within `5.11e-5` of the source chi-32 AD energy. The current
+chi-32 local contraction itself is resource rejected at a 78.12 GiB requested
+intermediate on a 23.89 GiB GPU.
+
 ## Gate E decision
 
 Gate E is **PASS (controlled unbounded N=6 prototype)**. The coordinate map,
@@ -220,3 +252,17 @@ The scope remains narrow. The N=6,D=8 Galerkin energy differs from an exterior
 D=12 numerical reference by `1.328e-2`; TT-SVD shows this is basis dominated,
 not an MPS-capacity limitation. N=8, continuum convergence rates, and favorable
 end-to-end asymptotic resource requirements are not inferred.
+
+## Gate F decision
+
+Gate F is **PASS (controlled N=8 point, qualified auxiliary audit)**. The
+multiscale basis measurably reduces the N=6 error, production no longer builds
+dense raw Fourier bulk tensors, and the blind N=8 point meets declared
+reference-agreement and independent-optimizer budgets without a product-state
+gather.
+
+The additional bond-128/192 raw parameter-gradient relative threshold misses
+(`2.90e-5` versus `2e-6`), although energy differs by only `3.60e-7` and the
+gradient cosine similarity is `0.999999999584`. This auxiliary miss and the
+chi-32 local-solver resource rejection remain explicit. N=10, continuum
+convergence rates, and favorable asymptotic scaling are not inferred.

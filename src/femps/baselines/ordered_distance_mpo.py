@@ -172,6 +172,42 @@ def sum_mpos(mpos: Sequence):
     )
 
 
+def _compress_left_mpo_tensor(
+    tensor: torch.Tensor,
+    max_bond: int,
+    relative_tolerance: float,
+) -> tuple[torch.Tensor, torch.Tensor, int, torch.Tensor]:
+    """Factor one MPO site and return its right-going transfer matrix."""
+
+    left, right, physical_in, physical_out = tensor.shape
+    matrix = tensor.permute(0, 2, 3, 1).reshape(
+        left * physical_in * physical_out, right
+    )
+    singular_vectors, singular_values, right_vectors = torch.linalg.svd(
+        matrix, full_matrices=False
+    )
+    retained = min(max_bond, singular_values.numel())
+    if relative_tolerance > 0 and singular_values.numel() and singular_values[0] > 0:
+        retained = min(
+            retained,
+            max(
+                1,
+                int(
+                    torch.count_nonzero(
+                        singular_values
+                        > relative_tolerance * singular_values[0]
+                    )
+                ),
+            ),
+        )
+    compressed = singular_vectors[:, :retained].reshape(
+        left, physical_in, physical_out, retained
+    ).permute(0, 3, 1, 2)
+    transfer = singular_values[:retained, None] * right_vectors[:retained]
+    discarded_squared = torch.sum(singular_values[retained:] ** 2)
+    return compressed, transfer, retained, discarded_squared
+
+
 def compress_mpo(
     mpo,
     max_bond: int,
@@ -194,35 +230,13 @@ def compress_mpo(
         (), dtype=tensors[0].real.dtype, device=tensors[0].device
     )
     for site in range(mpo.length - 1):
-        tensor = tensors[site]
-        left, right, physical_in, physical_out = tensor.shape
-        matrix = tensor.permute(0, 2, 3, 1).reshape(
-            left * physical_in * physical_out, right
-        )
-        singular_vectors, singular_values, right_vectors = torch.linalg.svd(
-            matrix, full_matrices=False
-        )
-        retained = min(max_bond, singular_values.numel())
-        if relative_tolerance > 0 and singular_values.numel() and singular_values[0] > 0:
-            retained = min(
-                retained,
-                max(
-                    1,
-                    int(
-                        torch.count_nonzero(
-                            singular_values
-                            > relative_tolerance * singular_values[0]
-                        )
-                    ),
-                ),
+        compressed_site, transfer, retained, site_discarded_squared = (
+            _compress_left_mpo_tensor(
+                tensors[site], max_bond, relative_tolerance
             )
-        discarded_squared = discarded_squared + torch.sum(
-            singular_values[retained:] ** 2
         )
-        tensors[site] = singular_vectors[:, :retained].reshape(
-            left, physical_in, physical_out, retained
-        ).permute(0, 3, 1, 2)
-        transfer = singular_values[:retained, None] * right_vectors[:retained]
+        discarded_squared = discarded_squared + site_discarded_squared
+        tensors[site] = compressed_site
         tensors[site + 1] = torch.einsum(
             "ar,rsij->asij", transfer, tensors[site + 1]
         )

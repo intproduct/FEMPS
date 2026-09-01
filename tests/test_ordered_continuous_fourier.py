@@ -9,6 +9,7 @@ pytest.importorskip("latticetn")
 
 from femps.basis.odd_hermite import odd_hermite_basis_values
 from femps.baselines.ordered_continuous_fourier import (
+    ordered_continuous_fourier_hamiltonian_compressed_mpo,
     ordered_continuous_fourier_hamiltonian_mpo,
     ordered_continuous_fourier_soft_coulomb_mpo,
     ordered_continuous_fourier_soft_coulomb_pair_mpo,
@@ -17,6 +18,7 @@ from femps.baselines.ordered_continuous_fourier import (
 from femps.baselines.ordered_continuous_mpo import (
     ordered_continuous_noninteracting_mpo,
 )
+from femps.baselines.ordered_distance_mpo import compress_mpo
 
 
 def _quadrature(order: int, scale: float, count: int = 500):
@@ -152,3 +154,75 @@ def test_compact_all_pair_mpo_matches_direct_pair_audit(particles: int) -> None:
     )
     if particles > 2:
         assert max(max(tensor.shape[:2]) for tensor in compact.tensors) == 32
+
+
+@pytest.mark.parametrize(
+    "particles,basis_order,fourier_order,maximum_bond",
+    [(3, 3, 12, 8), (4, 3, 12, 12), (5, 2, 8, 12)],
+)
+def test_incremental_structured_compression_matches_raw_mpo_compression(
+    particles: int,
+    basis_order: int,
+    fourier_order: int,
+    maximum_bond: int,
+) -> None:
+    kwargs = dict(
+        particles=particles,
+        basis_order=basis_order,
+        distance_scale=0.85,
+        fourier_order=fourier_order,
+        coupling=1.2,
+        local_quadrature_order=96,
+    )
+    raw = ordered_continuous_fourier_hamiltonian_mpo(**kwargs)
+    expected, expected_ranks, expected_discarded = compress_mpo(
+        raw, maximum_bond
+    )
+    observed, diagnostics = (
+        ordered_continuous_fourier_hamiltonian_compressed_mpo(
+            **kwargs, maximum_bond=maximum_bond
+        )
+    )
+    torch.testing.assert_close(
+        observed.to_dense(), expected.to_dense(), atol=3e-12, rtol=3e-12
+    )
+    assert diagnostics["retained_ranks"] == expected_ranks
+    torch.testing.assert_close(
+        diagnostics["local_discarded_norm_not_global_certificate"],
+        expected_discarded,
+        atol=3e-11,
+        rtol=3e-11,
+    )
+    assert diagnostics["dense_raw_fourier_bulk_materialized"] is False
+    assert diagnostics["theoretical_raw_maximum_bond"] == max(
+        max(tensor.shape[:2]) for tensor in raw.tensors
+    )
+    assert diagnostics["theoretical_raw_tensor_elements"] == sum(
+        tensor.numel() for tensor in raw.tensors
+    )
+    assert diagnostics["maximum_intermediate_tensor_elements"] < sum(
+        tensor.numel() for tensor in raw.tensors
+    )
+
+
+def test_multiscale_structured_hamiltonian_matches_materialized_compression() -> None:
+    kwargs = dict(
+        particles=4,
+        basis_order=3,
+        distance_scale=0.8,
+        fourier_order=12,
+        distance_basis="multiscale_odd_hermite",
+        distance_scale_ratio=2.0,
+        local_quadrature_order=96,
+    )
+    raw = ordered_continuous_fourier_hamiltonian_mpo(**kwargs)
+    expected, _, _ = compress_mpo(raw, 12)
+    observed, diagnostics = (
+        ordered_continuous_fourier_hamiltonian_compressed_mpo(
+            **kwargs, maximum_bond=12
+        )
+    )
+    torch.testing.assert_close(
+        observed.to_dense(), expected.to_dense(), atol=4e-12, rtol=4e-12
+    )
+    assert diagnostics["dense_raw_fourier_bulk_materialized"] is False

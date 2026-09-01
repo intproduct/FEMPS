@@ -95,3 +95,58 @@ def test_fourier_training_records_mpo_compression() -> None:
     assert diagnostics["mpo_max_bond"] == 6
     assert diagnostics["mpo_compression_ranks"] == [6, 6]
     assert diagnostics["mpo_compression_local_discarded_norm"] > 0
+    assert (
+        diagnostics["mpo_compression_strategy"]
+        == "incremental_structured_left_svd"
+    )
+    assert diagnostics["dense_raw_fourier_bulk_materialized"] is False
+    assert (
+        diagnostics["maximum_mpo_build_intermediate_tensor_elements"]
+        < diagnostics["uncompressed_mpo_tensor_elements"]
+    )
+
+
+def test_multiscale_fourier_training_decreases_energy() -> None:
+    config = OrderedContinuousTrainingConfig(
+        particles=3,
+        basis_order=4,
+        distance_length=0.9,
+        distance_basis="multiscale_odd_hermite",
+        distance_basis_scale_ratio=2.0,
+        interaction_method="fourier_bessel",
+        fourier_order=12,
+        interaction_quadrature_order=96,
+        mpo_max_bond=12,
+        bond_dimension=4,
+        steps=30,
+        learning_rate=0.03,
+        seed=26,
+        projection="tensor_norm",
+    )
+    _, diagnostics = train_ordered_continuous_mps(config)
+    assert diagnostics["final_energy"] < diagnostics["initial_energy"] - 0.5
+    assert diagnostics["dense_raw_fourier_bulk_materialized"] is False
+
+
+def test_predeclared_staged_optimization_records_each_stage() -> None:
+    config = OrderedContinuousTrainingConfig(
+        particles=2,
+        basis_order=4,
+        distance_length=1.0,
+        distance_basis="odd_hermite",
+        interaction_method="fourier_bessel",
+        fourier_order=24,
+        interaction_quadrature_order=96,
+        bond_dimension=4,
+        optimization_stages=((20, 0.03, "adam"), (20, 0.01, "adam")),
+        seed=27,
+        projection="tensor_norm",
+    )
+    _, diagnostics = train_ordered_continuous_mps(config)
+    assert diagnostics["optimizer"] == "staged"
+    assert diagnostics["num_steps"] == 40
+    assert len(diagnostics["optimization_stages"]) == 2
+    assert diagnostics["optimization_stages"][1]["initial_energy"] < (
+        diagnostics["optimization_stages"][0]["initial_energy"]
+    )
+    assert diagnostics["final_energy"] < diagnostics["initial_energy"] - 0.2

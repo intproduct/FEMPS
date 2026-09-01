@@ -45,3 +45,18 @@ The first command includes direct half-line quadrature, compact/direct MPO
 equivalence, matched-basis comparisons, and global compression audits. The
 second performs every N=6 blind training run before constructing the bounded
 product-vector Lanczos and TT-SVD truth audits.
+
+The completed basis-efficiency and N=8 Gate F records are reproduced by:
+
+```powershell
+python scripts/benchmark_phase18_basis_and_mpo.py
+python scripts/benchmark_phase18_n6_n8.py --device auto
+```
+
+The first command checks analytic multiscale-basis operators, matched N=2/N=4
+orders, raw-versus-incremental global MPO equality, construction resources, and
+a one-million-dimensional N=6 action. The second freezes all blind N=6/N=8
+training choices before same-basis truth/reference audits. It writes an ignored
+recoverable checkpoint before local DMRG, records the chi-32 resource rejection,
+and distinguishes the Gate F core pass from the failed auxiliary raw-gradient
+threshold.

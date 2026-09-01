@@ -24,6 +24,15 @@ from .odd_hermite import (
     odd_hermite_position_squared_matrix,
     odd_hermite_power_matrices,
 )
+from .multiscale_odd_hermite import (
+    multiscale_odd_hermite_basis_values,
+    multiscale_odd_hermite_characteristic_matrices,
+    multiscale_odd_hermite_condition_number,
+    multiscale_odd_hermite_derivative_matrix,
+    multiscale_odd_hermite_negative_second_derivative_matrix,
+    multiscale_odd_hermite_position_matrix,
+    multiscale_odd_hermite_position_squared_matrix,
+)
 
 __all__ = [
     "derivative_matrix",
@@ -44,4 +53,11 @@ __all__ = [
     "odd_hermite_position_matrix",
     "odd_hermite_position_squared_matrix",
     "odd_hermite_power_matrices",
+    "multiscale_odd_hermite_basis_values",
+    "multiscale_odd_hermite_characteristic_matrices",
+    "multiscale_odd_hermite_condition_number",
+    "multiscale_odd_hermite_derivative_matrix",
+    "multiscale_odd_hermite_negative_second_derivative_matrix",
+    "multiscale_odd_hermite_position_matrix",
+    "multiscale_odd_hermite_position_squared_matrix",
 ]

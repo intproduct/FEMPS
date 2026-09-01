@@ -60,10 +60,19 @@ is gated by an explicit contraction-complexity audit.
   their post-run Galerkin truth; the production MPO compression has `1.63e-9`
   global action error. The remaining `1.33e-2` total discrepancy is basis
   dominated, so basis efficiency and N=8 define the next gate.
+- Gate F passes at a controlled `N=8,D=10` point, with an explicitly retained
+  auxiliary qualification. A Lowdin-orthonormalized two-scale odd-Hermite
+  basis reduces the N=6 reference discrepancy by `81.5%`, and incremental
+  sparse-recurrence compression removes dense raw Fourier-MPO bulk storage.
+  Three blind N=8 runs lie `8.36e-3--8.40e-3` above an exterior D=12 numerical
+  reference; a chi-16 local audit agrees with the best chi-32 AD state within
+  `5.11e-5`. The extra bond-128/192 raw-gradient threshold misses, and the
+  current chi-32 DMRG contraction requests a 78.12 GiB intermediate, so both
+  remain Phase 19 constraints.
 
-See [the active execution plan](docs/exec-plans/active/phase18.md),
+See [the active execution plan](docs/exec-plans/active/phase19.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md), and
-[the Gate E report](docs/experiments/phase17_unbounded_fourier_gate_report.md).
+[the Gate F report](docs/experiments/phase18_basis_n8_gate_report.md).
 
 ## Development setup
 
@@ -114,7 +123,10 @@ compute capability rather than assuming that `cuda:0` is the Blackwell card.
 - `src/femps/ordered_continuous.py`: exact COM/positive-gap continuum map;
 - `src/femps/baselines/ordered_continuous_mpo.py`: continuous functional MPOs;
 - `src/femps/baselines/ordered_continuous_fourier.py`: unbounded
-  Fourier--Bessel interaction and compact all-pair recurrence MPO;
+  Fourier--Bessel interaction, compact all-pair recurrence, and incremental
+  structured compression;
+- `src/femps/basis/multiscale_odd_hermite.py`: collision-compatible two-scale
+  half-line basis and analytic projected local operators;
 - `src/femps/exterior`: exact antisymmetric, matrix-wedge, and Gate A oracles;
 - `docs/theory`: theorem and contraction-status drafts;
 - `docs/experiments/results`: machine-readable reproduction records;

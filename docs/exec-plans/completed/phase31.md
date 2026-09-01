@@ -55,4 +55,4 @@ separate evidence labels.
   script that does not depend on latexmk/Perl.
 - [x] Full repository test suite: 252 passed; the sole warning is the known
   latticeTN report-path tensor-to-scalar warning.
-- [x] Release-candidate commit prepared for push to `main`.
+- [x] Release commit `aff0ddf` pushed to remote `main`.

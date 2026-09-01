@@ -183,11 +183,15 @@ expansion and is not an independent method-paper contribution.
 The original structural Theorems 1--3 remain explicit. The hard pointwise
 amplitude is already represented at `chi=2`, whereas the proved signed exact
 squared-norm reduction has maximum bond three; exact norm hardness restricted
-to `chi=2` remains a conjecture. A future separate method paper is gated on a
-non-NOCI explicit-correlation `D`-convergence advantage or a matched
-Li--Waintal/same-basis-DMRG comparison with a genuine measured tradeoff.
+to `chi=2` remains a conjecture. No second manuscript is currently in
+development. Algorithm experiments may continue, but a new paper may be
+considered only after an independently reproduced non-NOCI explicit-
+correlation `D`-convergence advantage or a matched Li--Waintal/same-basis-DMRG
+comparison with a genuine measured tradeoff.
 
-See [the active execution plan](docs/exec-plans/active/phase39.md),
+See [the active execution plan](docs/exec-plans/active/phase40.md),
+[the completed single-manuscript audit](docs/exec-plans/completed/phase39.md),
+[the explicit-correlation audit](docs/experiments/phase39_distinctiveness_audit.md),
 [the single-manuscript scope](docs/paper/SINGLE_MANUSCRIPT_SCOPE.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),

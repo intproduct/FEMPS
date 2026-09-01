@@ -29,6 +29,12 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _text_sha256(path: Path) -> str:
+    """Hash UTF-8 source with platform line endings normalized to LF."""
+
+    return hashlib.sha256(path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+
+
 def _complex_vector(values: list[list[float]]) -> torch.Tensor:
     return torch.tensor(
         [complex(real, imaginary) for real, imaginary in values],
@@ -145,7 +151,7 @@ def verify_artifact(path: Path) -> dict:
         "benchmark": Path("scripts/benchmark_phase34_adaptive_k_growth.py"),
     }
     for name, source_path in source_paths.items():
-        if _sha256(source_path) != sources["source_hashes"][name]:
+        if _text_sha256(source_path) != sources["source_hashes"][name]:
             raise AssertionError(f"Phase 34 {name} source hash mismatch")
 
     one_body = harmonic_pair_hamiltonian(

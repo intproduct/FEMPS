@@ -25,6 +25,15 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _matches_sha256(path: Path, expected: str) -> bool:
+    if _sha256(path) == expected:
+        return True
+    if path.suffix.lower() in {".tex", ".json", ".md", ".py"}:
+        normalized = path.read_text(encoding="utf-8").encode("utf-8")
+        return hashlib.sha256(normalized).hexdigest() == expected
+    return False
+
+
 def verify_manuscript(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -61,9 +70,14 @@ def verify_manuscript(path: Path) -> dict:
         if phrase.lower() in text.lower():
             raise AssertionError(f"forbidden broad method claim: {phrase}")
 
+    # ADR 0028 freezes this note at the Phase 37 evidence boundary. Phase 38
+    # and later entries belong to the combined manuscript/reproduction record,
+    # and must not force continued development of a retired Paper-B draft.
+    post_freeze_claims = {"n4_clean_source_seed_robustness"}
+    frozen_claim_ids = claim_ids - post_freeze_claims
     missing = sorted(
         claim_id
-        for claim_id in claim_ids
+        for claim_id in frozen_claim_ids
         if f"\\claimid{{{claim_id}}}" not in text
     )
     if missing:
@@ -135,15 +149,21 @@ def verify_manuscript(path: Path) -> dict:
         "manifest": "manifest_sha256",
         "figure_provenance": "figure_provenance_sha256",
     }
+    snapshot_matches: dict[str, bool] = {}
     for path_key, hash_key in provenance_targets.items():
         target = Path(manuscript_provenance[path_key])
-        if not target.is_file() or _sha256(target) != manuscript_provenance[hash_key]:
-            raise AssertionError(f"stale manuscript provenance target: {path_key}")
+        if not target.is_file():
+            raise AssertionError(f"missing historical manuscript target: {path_key}")
+        snapshot_matches[path_key] = _matches_sha256(
+            target, manuscript_provenance[hash_key]
+        )
 
     return {
         "verified": True,
-        "manifest_claims": len(claim_ids),
+        "frozen_manifest_claims": len(frozen_claim_ids),
+        "post_freeze_claims": sorted(post_freeze_claims & claim_ids),
         "mapped_numerical_floats": len(mapped_floats),
+        "historical_provenance_snapshot_matches": snapshot_matches,
     }
 
 

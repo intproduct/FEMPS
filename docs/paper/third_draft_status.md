@@ -44,9 +44,10 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
 - Higher-dimensional four-form classification is explicitly parked unless it
   controls an algorithmic or physical decision.
 - The diagonal-path solver is identified as NOCI-equivalent numerical evidence,
-  not an independent method contribution. A future method paper is gated on a
-  non-NOCI explicit-correlation `D`-convergence advantage or a matched
-  Li--Waintal/same-basis-DMRG comparison.
+  not an independent method contribution. No second manuscript is in
+  development; a new publication decision is permitted only after an
+  independently reproduced non-NOCI explicit-correlation `D`-convergence
+  advantage or a matched Li--Waintal/same-basis-DMRG comparison.
 
 ## Reviewer and submission hygiene
 
@@ -73,6 +74,7 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
 - Standard repository suite: `277 passed, 1 known latticeTN report-path
   warning` in 688.51 s, using a workspace-local pytest temporary directory.
 
-The next project milestone is the registered nonquadratic soft-Coulomb
-transferability benchmark. It must preserve the established truth, variance,
-symmetry, memory, and comparator requirements.
+The next project milestone is the preregistered Phase 40 `N=2` soft-Coulomb
+explicit-correlation differentiator experiment. It is algorithm research, not
+a second-paper project, and must preserve the established truth, variance,
+symmetry, memory, independent-axis, and comparator requirements.

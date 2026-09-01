@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "experiment": "phase39_correlated_exterior_n2_exploratory_prototype",
+  "evidence_level": "exploratory numerical evidence",
+  "scientific_boundary": "bounded Q^2 materialization and dense-CI truth audit; not a preregistered benchmark, production contraction, VMC result, generic FEMPS claim, or method-paper gate pass",
+  "model": {
+    "particles": 2,
+    "dimension": 1,
+    "trap_omega": 1.0,
+    "interaction": "soft_coulomb",
+    "coupling": 1.0,
+    "softening": 1.0,
+    "carrier_basis": "unit-frequency harmonic functions",
+    "carrier_basis_order": 4,
+    "carrier": "canonical orbitals 0 and 1",
+    "correlator": "exp(sum_m amplitude_m exp(-exponent_m (x1-x2)^2))",
+    "correlator_exponents": [
+      0.0625,
+      0.25,
+      1.0,
+      4.0,
+      16.0
+    ]
+  },
+  "optimization": {
+    "seed": 39001,
+    "initialization": "zero correlator amplitudes",
+    "adam_steps": 300,
+    "adam_learning_rate": 0.03,
+    "lbfgs_max_iterations": 100,
+    "lbfgs_learning_rate": 0.5,
+    "optimized_amplitudes": [
+      -0.4066069757410175,
+      -0.08395401295778399,
+      -0.030376735209646667,
+      0.0025820941141033414,
+      -0.0016350547652696176
+    ],
+    "trace": [
+      {
+        "step": 0,
+        "energy": 2.5648908472450866
+      },
+      {
+        "step": 50,
+        "energy": 2.553876621202059
+      },
+      {
+        "step": 100,
+        "energy": 2.5538406818362906
+      },
+      {
+        "step": 150,
+        "energy": 2.553834439304448
+      },
+      {
+        "step": 200,
+        "energy": 2.5538331670099996
+      },
+      {
+        "step": 250,
+        "energy": 2.5538330012368533
+      },
+      {
+        "step": 299,
+        "energy": 2.5538329876380352
+      }
+    ]
+  },
+  "final": {
+    "energy": 2.553833129441639,
+    "continuum_grid_reference_energy": 2.5538286511071613,
+    "absolute_reference_error": 4.4783344779197876e-06,
+    "uncorrelated_slater_energy": 2.564890847245658,
+    "energy_improvement_over_same_carrier": 0.011057717804018985,
+    "raw_norm": 0.46123899910025756,
+    "quadrature_norm_relative_change_q128_to_q160": 5.5028659170147444e-11,
+    "energy_variance": 2.136245609328397e-05,
+    "antisymmetry_residual": 0.0,
+    "correlator_symmetry_residual": 0.0
+  },
+  "quadrature_axis": [
+    {
+      "quadrature_order": 64,
+      "materialized_coordinate_values": 4096,
+      "energy": 2.553827305523026,
+      "norm": 0.46123906802506276,
+      "energy_variance": 1.61541246713961e-05,
+      "antisymmetry_residual": 0.0
+    },
+    {
+      "quadrature_order": 96,
+      "materialized_coordinate_values": 9216,
+      "energy": 2.5538329875901526,
+      "norm": 0.4612390010482198,
+      "energy_variance": 1.616247636482487e-05,
+      "antisymmetry_residual": 0.0
+    },
+    {
+      "quadrature_order": 128,
+      "materialized_coordinate_values": 16384,
+      "energy": 2.5538331342551825,
+      "norm": 0.4612389991256389,
+      "energy_variance": 1.970824929637431e-05,
+      "antisymmetry_residual": 0.0
+    },
+    {
+      "quadrature_order": 160,
+      "materialized_coordinate_values": 25600,
+      "energy": 2.553833129441639,
+      "norm": 0.46123899910025756,
+      "energy_variance": 2.136245609328397e-05,
+      "antisymmetry_residual": 0.0
+    }
+  ],
+  "projection_rank_axis": [
+    {
+      "projection_order": 4,
+      "antisymmetric_matrix_rank": 4,
+      "slater_rank": 2,
+      "relative_skew_residual": 1.5730478673599784e-16,
+      "relative_rank_threshold": 1e-10
+    },
+    {
+      "projection_order": 6,
+      "antisymmetric_matrix_rank": 6,
+      "slater_rank": 3,
+      "relative_skew_residual": 1.653466153214513e-16,
+      "relative_rank_threshold": 1e-10
+    },
+    {
+      "projection_order": 8,
+      "antisymmetric_matrix_rank": 8,
+      "slater_rank": 4,
+      "relative_skew_residual": 1.768796693884275e-16,
+      "relative_rank_threshold": 1e-10
+    },
+    {
+      "projection_order": 10,
+      "antisymmetric_matrix_rank": 10,
+      "slater_rank": 5,
+      "relative_skew_residual": 1.8066486692512158e-16,
+      "relative_rank_threshold": 1e-10
+    },
+    {
+      "projection_order": 12,
+      "antisymmetric_matrix_rank": 12,
+      "slater_rank": 6,
+      "relative_skew_residual": 6.176620062062843e-16,
+      "relative_rank_threshold": 1e-10
+    }
+  ],
+  "same_basis_ci_axis": [
+    {
+      "basis_order": 2,
+      "same_basis_ci_energy": 2.564890847245651
+    },
+    {
+      "basis_order": 4,
+      "same_basis_ci_energy": 2.5542887341013545
+    },
+    {
+      "basis_order": 6,
+      "same_basis_ci_energy": 2.553885908133897
+    },
+    {
+      "basis_order": 8,
+      "same_basis_ci_energy": 2.5538420791436915
+    },
+    {
+      "basis_order": 10,
+      "same_basis_ci_energy": 2.553834336260949
+    },
+    {
+      "basis_order": 12,
+      "same_basis_ci_energy": 2.553832510344218
+    }
+  ],
+  "gradient_check": {
+    "parameter": "amplitude[0]",
+    "autodiff": 1.1773399908460158e-06,
+    "central_finite_difference": 1.177324904233501e-06,
+    "absolute_difference": 1.5086612514814135e-11,
+    "step": 1e-05
+  },
+  "resources": {
+    "elapsed_seconds": 2.8938545000273734,
+    "process_rss": {
+      "method": "sampled_process_resident_set",
+      "sampling_interval_seconds": 0.005,
+      "samples": 186,
+      "baseline_rss_bytes": 570880000,
+      "peak_rss_bytes": 752877568,
+      "final_rss_bytes": 752046080,
+      "peak_delta_rss_bytes": 181997568
+    },
+    "production_virtual_path_enumeration": 0,
+    "bounded_coordinate_grid_materialized": true,
+    "largest_materialized_coordinate_values": 25600,
+    "dense_ci_used_only_as_bounded_truth": true
+  },
+  "interpretation": {
+    "fixed_single_slater_projection_rank": 2,
+    "correlated_projection_rank_grows_with_D": true,
+    "claim": "The symmetric correlator preserves exact antisymmetry and produces a projected Slater rank greater than one. This is only a candidate differentiator; a preregistered matched-D comparison against optimized fixed-K NOCI is still required."
+  }
+}

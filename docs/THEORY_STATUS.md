@@ -153,6 +153,23 @@ support that audit but cannot open a separate method paper; the next scientific
 gate is a non-NOCI explicit-correlation advantage or a matched Li--Waintal/
 same-basis-DMRG tradeoff.
 
+Phase 39 closes the associated publication-scope correction. The original
+Theorems 1--3 are again displayed separately in the sole combined manuscript.
+The Cayley construction proves hard pointwise evaluation at maximum
+`chi=2`; the signed exact squared-norm reduction uses a direct-sum reference
+and reaches maximum bond three. Exact squared-norm hardness promised at
+`chi=2` therefore remains a conjecture. The diagonal-path data are retained
+only as an NOCI-equivalent numerical exercise.
+
+The bounded Phase 39 explicit-correlation prototype supplies **numerical
+evidence** that a symmetric Gaussian correlator preserves antisymmetry and can
+produce finite-basis projections whose Slater rank grows with projection
+dimension. It is a `Q^2` materialization oracle at `N=2`, not a contraction
+theorem, production solver, or `D`-convergence advantage. ADR 0029 selects this
+as the sole candidate route, and ADR 0030 preregisters Phase 40 against
+optimized fixed-`K` NOCI. No second manuscript exists: algorithm experiments
+must first produce and independently reproduce a genuine differentiator.
+
 ADR 0004 historically made ordered-sector/interparticle-distance functional TN
 the primary numerical route; ADR 0017 supersedes that priority while retaining
 it as a first-quantized control. Phase 15 and ADR 0005 replace its dense comparator by

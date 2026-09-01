@@ -24,7 +24,8 @@ are in `docs/experiments/results/phase30_reproduction_manifest.json`.
 | A clean canonical Slater can drive the public solver without historical FEMPS state | implemented command plus numerical reproduction | Phase 37 command/checkpoint schemas, N2 materialization/AD/resume tests, N4,D6 artifact, and independent verifier | K1--K4 clean and resumed runs agree exactly and reach `4.883e-10` same-basis CI error; one bounded truth point, no scaling or automatic-stop claim |
 | Clean-source growth is stable under fresh candidate/optimizer schedules | preregistered numerical evidence at one N4,D6 point | Phase 38 two-schedule artifact, forced-resume control, explicit exterior reconstruction, and independent verifier | distinct candidate paths have `2.035e-9` combined final-energy spread and maximum CI error `2.523e-9`; this is not universal seed independence, N/D scaling, or automatic stopping |
 | Diagonal-path FEMPS is novel beyond nonorthogonal selected CI | not established; current class is NOCI-equivalent | exact finite nonorthogonal Slater embedding and determinant-transition implementation | retain only as a numerical exercise in the combined paper; no independent method-paper claim |
-| A separate FEMPS method paper is justified | gate closed | no non-NOCI explicit-correlation D-convergence advantage and no matched Li--Waintal/same-basis-DMRG tradeoff yet | do not open Paper B until one differentiator is reproduced |
+| A symmetric explicit correlator times an exterior carrier goes beyond a fixed single Slater in finite projections | exploratory numerical evidence only | Phase 39 bounded `N=2` prototype and independent artifact verifier | candidate route; no `D`-convergence, scalability, or novelty claim |
+| A separate FEMPS method paper is justified | gate closed | no independently reproduced non-NOCI `D`-convergence advantage and no matched Li--Waintal/same-basis-DMRG tradeoff yet | run algorithm experiments without manuscript drafting; make a new publication decision only after a gate pass |
 
 ## Required combined-paper language
 
@@ -38,3 +39,4 @@ are in `docs/experiments/results/phase30_reproduction_manifest.json`.
 - The nonbranching diagonal-path subclass is explicitly NOCI-equivalent.
 - `math/femps_no_go_manuscript.tex` is the sole submission source; the existing
   restricted-method draft is an internal working note.
+- Phase 40 is an algorithm experiment, not a second-paper project.

@@ -1,5 +1,25 @@
 # Research changelog
 
+## 2026-09-02 - Phase 39 closure and no-paper-before-result rule
+
+- Closed Phase 39 with one authoritative combined manuscript. The former
+  restricted-method draft remains only a frozen reproduction note; no second
+  manuscript is in development.
+- Confirmed that Structural results I--III and the exact `chi=2`/maximum-bond-
+  three distinction are directly visible in the combined source. The apparent
+  disappearance came from an earlier consolidation/relabeling, not from a
+  retraction of the results.
+- Added an independently reproducible exploratory `N=2` symmetric-correlator
+  exterior-carrier prototype. It has zero audited antisymmetry residual and
+  passes AD/materialization checks, but does not establish an advantage over
+  optimized NOCI and therefore makes no method-paper claim.
+- Opened Phase 40 solely as a preregistered algorithm experiment with separate
+  `D`, `P`, and fixed-`K` axes. ADR 0030 forbids second-manuscript drafting
+  until an independently reproduced non-NOCI differentiator passes.
+- Passed the standard suite with `283 passed, 1 known latticeTN report-path
+  warning` in 680.47 s. The CPU 2201 baseline reproduced
+  `E=1.8788029184435575`, with absolute reference error `1.08054e-4`.
+
 ## 2026-09-02 - Single-manuscript restoration and distinctiveness gate
 
 - Accepted ADR 0028 and withdrew the two-paper split. The structural/no-go

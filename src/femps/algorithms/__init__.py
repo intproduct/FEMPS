@@ -68,6 +68,14 @@ from .slater_source_training import (
     run_slater_source_adaptive_solver,
     slater_source_config_from_record,
 )
+from .correlated_exterior import (
+    CorrelatedTwoFermionResult,
+    correlated_two_fermion_observables,
+    gauss_hermite_rule,
+    harmonic_function_values,
+    harmonic_function_values_and_derivatives,
+    project_correlated_two_fermion_coefficients,
+)
 
 __all__ = [
     "GeneralizedEigenResult",
@@ -118,4 +126,10 @@ __all__ = [
     "slater_source_config_from_record",
     "validate_slater_source_checkpoint",
     "validate_slater_source_result",
+    "CorrelatedTwoFermionResult",
+    "correlated_two_fermion_observables",
+    "gauss_hermite_rule",
+    "harmonic_function_values",
+    "harmonic_function_values_and_derivatives",
+    "project_correlated_two_fermion_coefficients",
 ]

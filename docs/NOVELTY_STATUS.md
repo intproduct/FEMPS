@@ -40,6 +40,16 @@ operator/AD integration, its controlled continuum benchmarks, and the new
 matrix-wedge/ordinary-particle-TT no-go theory. No priority claim is attached
 to ordered coordinates or distance-variable MPS.
 
+ADR 0028 withdraws the later two-paper split. The diagonal-path solver is
+finite NOCI and now appears only as a numerical section of the single combined
+structural/no-go manuscript. Phase 39 selects a symmetric explicit correlator
+times an exterior carrier only as a candidate experiment: Jastrow factors,
+backflow, determinant carriers, tensorized backflow, and VMC are prior art, so
+the ansatz form alone is not a novelty claim. Phase 40 must demonstrate an
+independently reproduced `D`-convergence or matched-cost advantage beyond
+optimized fixed-`K` NOCI before any new publication decision. No second-paper
+drafting occurs while that gate is closed.
+
 Phase 15 closes only the finite-grid contraction gate: the exact hard-charge
 gap MPS, `O(N^2(L-N))` raw operator bond, and native AD optimizer are an
 implementation/evidence result, not a new ansatz claim. The subsequent Phase 16

@@ -703,9 +703,9 @@ references/
 
 本阶段取代高维四形式搜索成为唯一 active 主计划。目标是先完成算法可行性审计和路线 ADR，再交付一个不枚举全部 virtual paths/完整反对称系数张量的最小求解器。求解器必须支持连续 functional basis、Slater/多行列式初始化、一/二体算符、范数/能量/梯度、checkpoint 与确定性种子、antisymmetry residual，以及 (D\)–\(\chi\) 独立扫描。
 
-当前首选是可精确收缩的受限 matrix-wedge FEMPS：用一个全局守恒 virtual label 表示 (K=\chi\) 个非分支 Slater paths，按 (K^2\) 个 determinant/Slater–Condon transition 计算 observable。它严格包含单 Slater，并随 (K\) 系统扩展到非正交多行列式。备用路线仅为带非渐近误差/方差和反对称残差的 VMC；在主路线没有完成 E1--E4 之前，不启动通用 FEMPS VMC 的大规模开发。
+受限 diagonal-path 路线已经完成其算法审计，但被严格识别为有限 NOCI，因而不再是差异化主路线。当前只选择一个候选：以对称显式相关因子乘 exterior carrier，在保持一阶量子化、连续坐标和精确反对称性的前提下独立控制 functional-basis 维数 \(D\)、相关特征数 \(P\) 与 carrier multiplicity \(\chi\)。小系统用确定性积分作 materialization/AD 真值检查；更大系统只有通过误差、方差、自相关和反对称残差审计后才可进入 VMC。
 
-Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。最新 N4,D6 三组最终能量展宽为 2.035e-9，最大同基组 CI 误差为 2.523e-9，优化失败及反对称/枚举残差均为零；这些结果的精确数据和边界保存在各 completed plan、实验报告和 reproduction manifest 中。ADR 0028 明确该路线等价于有限 NOCI，不能独立成文。当前 Phase 39 先闭合结构/no-go 与受限数值演算的单一合并稿，再审计至多两条非 NOCI 差异化路线；D8 的同类 NOCI 数值只能作为支持材料，不能开启第二篇论文。
+Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。最新 N4,D6 三组最终能量展宽为 2.035e-9，最大同基组 CI 误差为 2.523e-9，优化失败及反对称/枚举残差均为零；这些结果的精确数据和边界保存在各 completed plan、实验报告和 reproduction manifest 中。ADR 0028 明确该路线等价于有限 NOCI，只作为单篇结构/no-go 论文的数值演算章节。Phase 39 已恢复原定理 1--3、澄清 \(\chi=2\) 点值困难性与最大键维 3 的平方范数定理边界，并完成差异化路线审计。当前 Phase 40 只执行预注册的 N=2 显式相关 \(D/P/K\) 实验；在独立复现真正的非 NOCI 优势前，不得创建第二篇论文的标题、摘要、提纲或投稿源。
 
 旧 Phase 0--7 条目保留为历史设计与已完成工作的索引；若与本 recovery stage 冲突，以当前阶段和最新 ADR 为准。
 

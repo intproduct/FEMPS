@@ -50,9 +50,10 @@ N2/N4/N6, clean-source, seed, and D/K evidence is retained only as a bounded
 numerical exercise and algorithm-design consequence in the combined paper. It
 does not establish a new state class or an independent method paper.
 
-## Gate for any future method paper
+## Gate before any new publication decision
 
-A separate method manuscript may start only after reproducible evidence closes
+A separate method manuscript is not currently planned or drafted. A new
+publication decision may be considered only after reproducible evidence closes
 at least one genuinely differentiating question:
 
 1. a first-quantized continuous FEMPS carrier beyond finite NOCI supplies
@@ -63,4 +64,6 @@ at least one genuinely differentiating question:
    explained by an ordinary NOCI expansion.
 
 Until then, additional NOCI-equivalent convergence or seed studies may support
-the combined paper's numerical audit, but cannot reopen a second paper.
+the combined paper's numerical audit, and non-NOCI algorithm experiments may
+test the gate, but neither may create a title, abstract, outline, or submission
+source for a second paper.

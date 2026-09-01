@@ -40,6 +40,12 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _text_sha256(path: Path) -> str:
+    """Hash UTF-8 source with platform line endings normalized to LF."""
+
+    return hashlib.sha256(path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+
+
 def _decode_complex(values: list) -> torch.Tensor:
     real_view = torch.tensor(values, dtype=torch.float64)
     if real_view.shape[-1] != 2:
@@ -105,8 +111,10 @@ def _source_hashes(artifact: dict) -> None:
             "docs/decisions/0025-preregister-public-adaptive-solver.md"
         ),
     }
+    artifact_keys = {"phase32_artifact_sha256", "phase35_artifact_sha256"}
     for key, path in paths.items():
-        if _sha256(path) != sources[key]:
+        observed = _sha256(path) if key in artifact_keys else _text_sha256(path)
+        if observed != sources[key]:
             raise AssertionError(f"Phase 36 source hash mismatch: {key}")
     phase32 = json.loads(paths["phase32_artifact_sha256"].read_text(encoding="utf-8"))
     source = next(

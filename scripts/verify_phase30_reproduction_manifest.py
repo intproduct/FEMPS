@@ -71,9 +71,9 @@ def verify_manifest(path: Path) -> dict:
         results.append({"id": entry["id"], "verified": True})
     if len(ids) != len(set(ids)):
         raise AssertionError("manifest claim identifiers must be unique")
-    if len(ids) != 10:
+    if len(ids) != 11:
         raise AssertionError(
-            "restricted-method manifest must contain the ten admitted artifacts"
+            "restricted-method manifest must contain the eleven admitted artifacts"
         )
     return {"verified": True, "entries": len(ids), "results": results}
 

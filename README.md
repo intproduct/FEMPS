@@ -138,14 +138,22 @@ is gated by an explicit contraction-complexity audit.
   default because the complete solve is `2.352x` faster on CPU for this small
   workload. This is portability and bounded implementation evidence, not a GPU
   acceleration or generic scalability claim.
+- Phase 34 adds truth-free adaptive correlation growth. At N6,D12, the
+  preregistered K4-to-K5-to-K6 lineage lowers the same-basis CI error from
+  `1.04729e-4` to `3.20214e-5` and the variance from `1.12233e-3` to
+  `3.72621e-4`; adaptive K6 is `2.44109e-4` below a same-budget cold K6.
+  Selection sees only factorized determinant transitions and conditioning;
+  dense CI is constructed after optimization. This is one seed-pool lineage,
+  not multiseed or asymptotic evidence.
 
-See [the active execution plan](docs/exec-plans/active/phase34.md),
+See [the active execution plan](docs/exec-plans/active/phase35.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
 [the diagonal-path solver contract](docs/DIAGONAL_PATH_SOLVER_CONTRACT.md),
 [the N6 soft-Coulomb pilot](docs/experiments/phase29_n6_soft_coulomb_pilot_report.md),
 [the N6 independent convergence report](docs/experiments/phase32_n6_convergence_report.md),
 [the vectorized transition report](docs/experiments/phase33_vectorized_transitions_report.md),
+[the adaptive K-growth report](docs/experiments/phase34_adaptive_k_growth_report.md),
 [the method claim/evidence matrix](docs/METHOD_CLAIM_EVIDENCE_MATRIX.md),
 [the Phase 30 reproduction manifest](docs/experiments/results/phase30_reproduction_manifest.json),
 [the exact four-form workspace](math/four_forms/README.md),

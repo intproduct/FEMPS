@@ -46,7 +46,9 @@ $2.49\times10^{-4}$--$4.03\times10^{-4}$, maximum variance
 $3.09\times10^{-3}$, and zero structural antisymmetry residual.  Independent
 $N=6$ axes further give monotone energies for $K=1,2,4$ at $D=10$ and
 $D=8,10,12$ at $K=4$; the final $D=12$ CI error is
-$1.05\times10^{-4}$.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
+$1.05\times10^{-4}$.  A preregistered truth-free $D=12$ adaptive continuation
+to $K=6$ further reduces that error to $3.20\times10^{-5}$ and the variance to
+$3.73\times10^{-4}$, while beating a same-budget cold $K=6$ control.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
 $N=6$, while the \FEMPS{} correlation control remains $K=4$; matched kernel
 measurements expose the corresponding polynomial cost.  The method is a
 restricted nonorthogonal multideterminant algorithm, not an efficient generic
@@ -262,7 +264,7 @@ than relabeled as \FEMPS{}.
 \section{Numerical evidence}
 
 All floating-point results in this section are numerical evidence.  The full
-manifest contains ten independently verified artifacts.
+manifest contains eleven independently verified artifacts.
 
 \subsection{\texorpdfstring{$N=2$}{N=2}: analytic and finite-basis checks}
 
@@ -405,6 +407,40 @@ state stores 292 complex \FEMPS{} scalars; its ordinary particle-TT ranks are
 $(12,60,80,60,12)$ and require 132,768 scalars (claim
 \claimid{n6_independent_dk_convergence}).
 
+ADR 0023 next freezes a truth-free adaptive $D=12$ continuation.  At each
+growth step, exactly 32 seeded Slater candidates are ranked only by the
+factorized determinant-transition generalized eigenvalue and balanced overlap
+conditioning.  Dense CI is constructed only after the adaptive K5, adaptive
+K6, and cold K6 optimizations are frozen.  Table~\ref{tab:n6-adaptive} reports
+the result.
+
+\begin{table}[t]
+\centering
+\caption{Truth-free adaptive \texorpdfstring{$N=6,D=12$}{N=6,D=12} growth.}
+\label{tab:n6-adaptive}
+\begin{tabular}{lrrrr}
+\toprule
+State & Energy & Error versus CI & Variance & Condition \\
+\midrule
+Source $K=4$ & 25.049471144618 & $1.047\times10^{-4}$ & $1.122\times10^{-3}$ & 2.111 \\
+Adaptive $K=5$ & 25.049434533568 & $6.812\times10^{-5}$ & $7.747\times10^{-4}$ & 2.440 \\
+Adaptive $K=6$ & 25.049398437461 & $3.202\times10^{-5}$ & $3.726\times10^{-4}$ & 2.760 \\
+Cold $K=6$ & 25.049642546632 & $2.761\times10^{-4}$ & $2.659\times10^{-3}$ & 8.039 \\
+\bottomrule
+\end{tabular}
+\par\smallskip{\scriptsize Evidence: \claimid{n6_adaptive_correlation_growth}.}
+\end{table}
+
+Adaptive K6 lowers the source energy by $7.271\times10^{-5}$ and lies
+$2.441\times10^{-4}$ below the same-budget cold K6.  Its ordinary particle-TT
+ranks are $(12,66,120,66,12)$, requiring 209,376 scalars, while the restricted
+\FEMPS{} state stores 438 orbital and amplitude scalars.  This is a structural
+representation comparison, not a runtime advantage.  K5, adaptive K6, and
+cold K6 take 6.72, 6.24, and 6.28 CPU seconds after vectorization; the 107.66 s
+source record predates Phase 33 and is not a matched timing comparator.  The
+K6 pruning gate does not trigger (claim
+\claimid{n6_adaptive_correlation_growth}).
+
 \section{Exchange carrier, correlation multiplicity, and cost}
 
 At fixed $D=10,K=4,L=19$, the exact structural counts grow as shown in
@@ -434,6 +470,8 @@ close to the structural count after fixed overhead.  The inverse-fast path
 grows by 1.239/1.024 over these two small points and accelerates the N6 minor
 path by 7.27/8.93.  These are two-point CPU measurements, not asymptotic fits.
 Auto and minor transition matrices agree within $1.07\times10^{-14}$.
+
+\FloatBarrier
 
 Phase 33 batches transition pairs and factor axes while retaining that
 pairwise implementation as a reference.  Table~\ref{tab:vectorized-backend}
@@ -523,7 +561,9 @@ determinant costs.
 Direct CI is faster in the current truth spaces, which extend to
 $\binom{12}{6}=924$.  The evidence demonstrates correctness, optimization
 stability, three-point N6 basis/correlation convergence, and a structural
-tradeoff, not an end-to-end speed or memory advantage.  Three basis points and
+tradeoff, not an end-to-end speed or memory advantage.  Adaptive K growth has
+one registered candidate-pool lineage and one cold control; it does not yet
+establish pool-seed stability or a universal stopping rule.  Three basis points and
 two particle counts cannot establish asymptotic scaling; no $N=8$ diagonal-path
 calculation is admitted.  DMRG has been deferred
 because it would be weaker than exact CI in the present finite spaces; no
@@ -547,7 +587,9 @@ or particle-tensor enumeration in production.
 Controlled N2/N4/N6 calculations establish a functioning restricted solver:
 energies improve systematically in $D$ and $K$ on registered axes, blind
 interacting runs are stable, and every accepted approximation/error/resource
-quantity is explicit.  The ordinary particle-TT comparison makes the intended
+quantity is explicit.  Truth-free fixed-pool growth at N6,D12 converts the
+correlation control into a measurable solver improvement, while its single-pool
+scope remains explicit.  The ordinary particle-TT comparison makes the intended
 separation visible: exchange support grows while $K$ remains the chosen
 correlation multiplicity.  At the same time, current CI references are faster
 and the method is close to established nonorthogonal determinant expansions.
@@ -589,6 +631,7 @@ Identifier & Scope \\
 \claimid{matched_n4_n6_transition_cost} & Fixed-D/K/L N4-to-N6 cost audit \\
 \claimid{n6_independent_dk_convergence} & N6 independent D8/D10/D12 and K1/K2/K4 axes \\
 \claimid{n6_vectorized_transition_backend} & Batched CPU/Blackwell parity and matched solve \\
+\claimid{n6_adaptive_correlation_growth} & Truth-free N6,D12 K4-to-K6 growth and cold K6 control \\
 \bottomrule
 \end{tabularx}
 \end{table}

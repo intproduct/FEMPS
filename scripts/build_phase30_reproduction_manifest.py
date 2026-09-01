@@ -127,6 +127,16 @@ ENTRIES = (
         "verify_command": "python scripts/verify_phase33_vectorized_transitions.py",
         "seeds": [3301, 3304],
     },
+    {
+        "id": "n6_adaptive_correlation_growth",
+        "claim": "Truth-free N6,D12 K4-to-K6 adaptive growth passes nesting, CI, variance, symmetry, resource, and cold-K6 control gates.",
+        "artifact": "docs/experiments/results/phase34_adaptive_k_growth.json",
+        "verifier_module": "scripts.verify_phase34_adaptive_k_growth",
+        "verifier_argument": "path",
+        "benchmark_command": "python scripts/benchmark_phase34_adaptive_k_growth.py",
+        "verify_command": "python scripts/verify_phase34_adaptive_k_growth.py",
+        "seeds": [3451, 3452, 3460],
+    },
 )
 
 

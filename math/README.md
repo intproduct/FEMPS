@@ -9,11 +9,13 @@ test. Every certificate pipeline must record the base field, exact arithmetic
 backend, parameters, seed where relevant, artifact hash, and independent
 verification command.
 
-`femps_no_go_manuscript.tex` is the Phase 26 unified internal manuscript. It
+`femps_no_go_manuscript.tex` is the third-draft structural/no-go manuscript. It
 assembles the ordinary particle-TT rank results, fixed-bond and sparse exterior
 contraction obstructions, restricted-algebra collapses, approximation boundary,
-statistics-carrier obstruction, and the numerical-control context in one
-proof-audited source.
+statistics-carrier obstruction, explicit AGP embedding, and the restricted
+interacting FEMPS control in one submission-oriented source. Visible internal
+claim/evidence labels are removed; floating calculations remain identified as
+numerical evidence.
 
 `generic_femps_contraction_obstruction.tex` now begins with the direct
 site-indexed one-form Cayley identity and the conditional #P-hardness theorem

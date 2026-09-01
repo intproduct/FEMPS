@@ -93,15 +93,20 @@ external comparator.
 
 ## D. Paper-third-draft track
 
-- [ ] Preserve exact-rank, Slater flat-spectrum, and fixed-small-bond
+- [x] Preserve exact-rank, Slater flat-spectrum, and fixed-small-bond
   complexity results as algorithm-design constraints rather than a denial of
   every approximate or structured FEMPS method.
-- [ ] Distinguish exact-contraction hardness from restricted and stochastic
+- [x] Distinguish exact-contraction hardness from restricted and stochastic
   possibilities.
-- [ ] Address both reviewer rounds on R1/R2 provenance, FCI/DMRG comparisons,
+- [x] Address both reviewer rounds on R1/R2 provenance, FCI/DMRG comparisons,
   AGP embedding, odd/even forms, numerical wording, and AI disclosure.
-- [ ] Remove Phase/Gate/internal evidence labels from the submission version.
-- [ ] Do not require new high-dimensional four-form results for draft three.
+- [x] Remove Phase/Gate/internal evidence labels from the submission version.
+- [x] Do not require new high-dimensional four-form results for draft three.
+
+Draft three is recorded in `docs/paper/third_draft_status.md`; the compiled
+13-page review PDF is `output/pdf/femps_no_go_manuscript_v3.pdf`. The LaTeX log
+has no undefined citations/references, overfull/underfull boxes, or font
+warnings, and all pages passed rendered visual inspection.
 
 ## Complexity contract for the primary route
 

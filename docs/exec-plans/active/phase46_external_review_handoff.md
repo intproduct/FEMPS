@@ -34,10 +34,17 @@ new theorem claims, FEMPS physics points, or manuscript splits:
 - `docs/reviews/external_human_signoff_template.md` separates named human
   theory sign-off from external numerical reproduction and explicitly rejects
   AI or internal self-attestation.
+- `scripts/compare_phase44_external_reproduction.py` now authenticates the
+  primary artifact, verifies a reproduction from its own checkpoints and raw
+  samples, and applies a frozen uncertainty-aware comparison. Its output
+  cannot self-attest external independence or authorize Paper B.
+- A repository self-check exercises that external-artifact path and passes all
+  numerical checks while deliberately retaining
+  `external_independent_replication_complete = false`.
 
-The repository side of the handoff is ready. Completion now requires actual
-external human input; until received, this phase remains active and no claim is
-promoted.
+The repository side of the handoff, including machine-readable result
+comparison, is ready. Completion now requires actual external human input;
+until received, this phase remains active and no claim is promoted.
 
 ## Stop rules
 

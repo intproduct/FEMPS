@@ -1,5 +1,26 @@
 # Research changelog
 
+## 2026-09-02 - Phase 46 external reproduction comparison closed locally
+
+- Added a clean-rerun comparison tool that authenticates the primary Phase 44
+  artifact, verifies an external result from its own six optimizer checkpoints,
+  D6 clean control, and raw coordinate samples, and reconstructs every frozen
+  gate decision.
+- Replaced any cross-hardware bitwise-result expectation by the frozen
+  uncertainty allowance `5 sqrt(SE_primary^2 + SE_reproduction^2) + 2e-4`,
+  while still requiring the same selected lineages, aggregate failure,
+  consecutive D4/D6 subgate, antisymmetry tolerance, and no forbidden
+  materialization.
+- A full self-comparison through the external-artifact path passes with zero
+  energy difference and maximum antisymmetry residual `1.0401e-15`. It remains
+  explicitly non-external: named-human identity, independence, conflicts, and
+  checkpoint non-reuse cannot be certified by code.
+- Phase 46 remains active awaiting actual human algebraic review and external
+  numerical reproduction. No theorem status, manuscript split, or Paper B
+  authorization changed.
+- The standard repository suite passes `308` tests in 666.88 s, with the one
+  known latticeTN report-path scalar-conversion warning.
+
 ## 2026-09-02 - Phase 45 declines an unmatched comparator table
 
 - Reapplied ADR 0020 to Phase 44: at D4/D6/D8 the same-basis exterior spaces

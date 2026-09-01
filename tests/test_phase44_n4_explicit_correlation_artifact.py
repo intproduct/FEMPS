@@ -29,5 +29,6 @@ def test_phase44_failed_gate_and_internal_advantage_verify() -> None:
     assert result["all_confirmation_gates_pass"] is True
     assert result["maximum_observable_difference"] <= 3e-14
     assert result["verified_checkpoint_count"] == 7
+    assert result["checkpoint_verification_mode"] == "committed_manifest"
     assert result["external_independent_replication_complete"] is False
     assert result["paper_b_authorized"] is False

@@ -74,6 +74,30 @@ environment report, host/CPU/thread information, and console log. Do not
 change a seed, budget, proposal scale, threshold, initialization, lineage, or
 axis after observing results.
 
+Then compare the clean result with the authenticated primary artifact:
+
+```powershell
+python scripts/compare_phase44_external_reproduction.py `
+  --reproduction external-reproduction/phase44_result.json `
+  --output external-reproduction/phase44_comparison.json
+```
+
+The comparator authenticates the primary JSON against its committed manifest,
+checks the frozen design and source hashes, loads the reproduction's own six
+optimizer checkpoints plus its D6 clean control, and recomputes all 12
+selection/confirmation observables from the reproduction's raw coordinate
+archives. It requires identical gate decisions and selected lineages. Combined
+energies are compared with the preregistered uncertainty allowance
+`5 sqrt(SE_primary^2 + SE_reproduction^2) + 2e-4`, rather than a cross-machine
+bitwise-equality demand. It also checks the `1e-12` antisymmetry tolerance and
+absence of forbidden tensor/path materialization.
+
+`numerical_reproduction_pass = true` means only that the supplied numerical
+artifacts pass these checks. The script deliberately leaves
+`external_independent_replication_complete = false`: software cannot establish
+the reproducer's identity, independence, conflicts, or non-reuse of the
+primary checkpoints. Those require the named-human report below.
+
 ## Primary hashes
 
 | object | SHA-256 |

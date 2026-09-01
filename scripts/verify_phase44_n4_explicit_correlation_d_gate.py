@@ -184,12 +184,86 @@ def _verify_optimizer_checkpoints(
     return {
         "verified_checkpoint_count": len(manifest["checkpoints"]),
         "forced_resume_clean_bitwise_equal": True,
+        "checkpoint_verification_mode": "committed_manifest",
+    }
+
+
+def _verify_external_optimizer_checkpoints(
+    artifact: dict[str, Any],
+) -> dict[str, Any]:
+    """Verify checkpoints named by a clean external production artifact.
+
+    External reproductions do not have the committed primary-result manifest.
+    Their six final optimizer checkpoints and the D6/lineage-1 clean control
+    are instead authenticated against the states and histories serialized in
+    their own result.  This verifies numerical self-consistency; it cannot
+    establish that the producer is independent of this repository's authors.
+    """
+
+    payloads: dict[tuple[int, int, str], dict[str, Any]] = {}
+    for record in artifact["optimizer_runs"]:
+        path = Path(record["checkpoint_path"])
+        payload = torch.load(path, map_location="cpu", weights_only=False)
+        key = (record["D"], record["lineage"], "production")
+        payloads[key] = payload
+        if payload["schema_version"] != 1:
+            raise AssertionError(f"checkpoint schema mismatch: {path}")
+        if payload["config"] != asdict(phase44._optimizer_config(record["seed"])):
+            raise AssertionError(f"checkpoint optimizer config mismatch: {path}")
+        if payload["completed_steps"] != 100:
+            raise AssertionError(f"incomplete optimizer checkpoint: {path}")
+        for field in ("raw_orbitals", "amplitudes"):
+            _assert_tensor_equal(
+                payload[field], record[field],
+                f"external checkpoint D{record['D']} lineage{record['lineage']} {field}",
+            )
+        for field in ("history", "accepted_proposals", "total_proposals"):
+            if payload[field] != record[field]:
+                raise AssertionError(f"external checkpoint {field} mismatch: {path}")
+
+    resumed_record = next(
+        record
+        for record in artifact["optimizer_runs"]
+        if record["D"] == 6 and record["lineage"] == 1
+    )
+    comparison = resumed_record.get("forced_resume_clean_comparison")
+    if not comparison:
+        raise AssertionError("external artifact lacks D6 forced-resume control")
+    clean_path = Path(comparison["clean_checkpoint_path"])
+    clean = torch.load(clean_path, map_location="cpu", weights_only=False)
+    resumed = payloads[(6, 1, "production")]
+    exact_fields = (
+        "completed_steps",
+        "history",
+        "accepted_proposals",
+        "total_proposals",
+    )
+    tensor_fields = (
+        "raw_orbitals",
+        "amplitudes",
+        "positions",
+        "generator_state",
+        "raw_first_moment",
+        "raw_second_moment",
+        "amplitude_first_moment",
+        "amplitude_second_moment",
+    )
+    bitwise_equal = all(resumed[field] == clean[field] for field in exact_fields)
+    bitwise_equal = bitwise_equal and all(
+        torch.equal(resumed[field], clean[field]) for field in tensor_fields
+    )
+    if not bitwise_equal or not comparison["bitwise_trajectory_pass"]:
+        raise AssertionError("external D6 resumed/clean trajectory mismatch")
+    return {
+        "verified_checkpoint_count": len(payloads) + 1,
+        "forced_resume_clean_bitwise_equal": True,
+        "checkpoint_verification_mode": "artifact_self_contained",
     }
 
 
 def verify(
     artifact_path: Path = DEFAULT_ARTIFACT,
-    checkpoint_manifest_path: Path = DEFAULT_CHECKPOINT_MANIFEST,
+    checkpoint_manifest_path: Path | None = DEFAULT_CHECKPOINT_MANIFEST,
 ) -> dict[str, Any]:
     artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
     if artifact.get("schema_version") != 1:
@@ -224,8 +298,12 @@ def verify(
     ]:
         raise AssertionError("Phase 44 reference firewall was not asserted")
 
-    checkpoint_result = _verify_optimizer_checkpoints(
-        artifact_path, artifact, checkpoint_manifest_path
+    checkpoint_result = (
+        _verify_optimizer_checkpoints(
+            artifact_path, artifact, checkpoint_manifest_path
+        )
+        if checkpoint_manifest_path is not None
+        else _verify_external_optimizer_checkpoints(artifact)
     )
     optimizer_records = {
         (record["D"], record["lineage"]): record
@@ -434,6 +512,9 @@ def verify(
         "maximum_observable_difference": maximum_observable_difference,
         "verified_checkpoint_count": checkpoint_result[
             "verified_checkpoint_count"
+        ],
+        "checkpoint_verification_mode": checkpoint_result[
+            "checkpoint_verification_mode"
         ],
         "external_independent_replication_complete": False,
         "paper_b_authorized": False,

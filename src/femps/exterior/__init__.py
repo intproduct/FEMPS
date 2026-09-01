@@ -24,6 +24,16 @@ from .matrix_wedge import (
     slater_sum_cores,
     wedge_tensors,
 )
+from .diagonal_path import (
+    diagonal_path_energy,
+    diagonal_path_exterior_coefficients,
+    diagonal_path_hamiltonian_matrices,
+    diagonal_path_norm,
+    diagonal_path_one_body_transition_matrix,
+    diagonal_path_overlap_matrix,
+    diagonal_path_structural_counts,
+    diagonal_path_two_body_transition_matrix_factorized,
+)
 from .matrix_pair import (
     cayley_determinant,
     matrix_pair_exterior_coefficients,
@@ -109,6 +119,14 @@ __all__ = [
     "matrix_wedge",
     "slater_sum_cores",
     "wedge_tensors",
+    "diagonal_path_energy",
+    "diagonal_path_exterior_coefficients",
+    "diagonal_path_hamiltonian_matrices",
+    "diagonal_path_norm",
+    "diagonal_path_one_body_transition_matrix",
+    "diagonal_path_overlap_matrix",
+    "diagonal_path_structural_counts",
+    "diagonal_path_two_body_transition_matrix_factorized",
     "matrix_pair_exterior_coefficients",
     "cayley_determinant",
     "matrix_pair_exterior_matrices",

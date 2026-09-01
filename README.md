@@ -105,8 +105,16 @@ is gated by an explicit contraction-complexity audit.
   `mu_4^C(8)=mu_4^Qbar(8)=mu_4^Q(8)=12`. The 16D rank-22/23 provenance is
   still missing; the only certified 16D statement remains the rational upper
   bound `mu_4^Q(16)<=24`.
+- Phase 27 is now parked. Phase 28 restores the solver/physics main line with a
+  restricted nonbranching diagonal-path FEMPS: `K` globally conserved Slater
+  paths contract through `K^2` determinant transitions. The first E1/E2
+  artifact verifies energies and gradients against full exterior truth and
+  shows numerical `K=1,2,4` convergence for an interacting two-fermion model.
+  This route is close to nonorthogonal selected CI and carries no novelty or
+  scalability claim before the full physics ladder and comparator audit pass.
 
-See [the active execution plan](docs/exec-plans/active/phase27.md),
+See [the active execution plan](docs/exec-plans/active/phase28.md),
+[the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the exact four-form workspace](math/four_forms/README.md),
 [the no-go hierarchy](docs/theory/exterior_no_go_hierarchy.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md),

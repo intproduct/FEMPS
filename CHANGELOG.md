@@ -1,5 +1,38 @@
 # Research changelog
 
+## 2026-09-01 - FEMPS algorithm and physics recovery pivot
+
+- Parked Phase 27 after the exact seven- and eight-dimensional four-form
+  checkpoints; retained the 16D rank-22/23 branch as an open problem rather
+  than an active algorithm milestone.
+- Revised the master plan so generic polynomial exact contraction is no longer
+  the default success condition and high-dimensional rank classification no
+  longer receives independent main-line priority.
+- Opened Phase 28 and accepted ADR 0017. The primary route is an exactly
+  contractible nonbranching diagonal-path FEMPS (`K` nonorthogonal Slater
+  paths); the only registered backup is a separately gated controlled
+  stochastic estimator for generic cores.
+- Added the algorithm-feasibility audit, explicit complexity contract, ordered
+  E1--E4 physics gates, mandatory antisymmetry/error/runtime reporting, and the
+  third-draft paper track.
+- Implemented singular-overlap-safe `K^2` determinant contractions for
+  diagonal-path FEMPS norms, one-body and factorized two-body transitions,
+  plus variable-projection orbital optimization and checkpoint/resume.
+- Added independent exterior value/gradient tests and the first reproducible
+  E1/E2 ladder. At `N=2,D=6,kappa=0.35`, increasing `K=1,2,4` reduces the
+  continuum-energy error from `2.824e-4` to `5.927e-5` and `1.306e-5`, with
+  zero measured antisymmetry residual; these are numerical evidence only.
+- Passed the E3 representation check at `N=4,D=6,K=1`: exact energy and zero
+  variance/residual coexist with ordinary particle-TT ranks `(4,6,4)`.
+- Added an E4 harmonic-interaction pilot with independent `D=5,6,7` and
+  `K=1,2,4` trends plus exact same-basis references. E4 remains open pending
+  stronger high-`D` optimization, CPU peak-memory instrumentation, and the
+  required comparator table.
+- Repeated the representative E4 `D=6,K=4` point on the RTX PRO 4000
+  Blackwell: CPU/GPU energies agree within `7.75e-13`, peak allocated GPU
+  memory is `30,736,384` bytes, and the small determinant loops show no GPU
+  speed advantage.
+
 ## 2026-09-01 - Phase 27 four-form reconstruction checkpoint
 
 - Reconstructed the working extremal question as the minimum middle

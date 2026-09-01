@@ -6,6 +6,17 @@
 **名称状态：** 暂定。正式论文投稿前必须再次做名称与方法查新，避免与既有术语冲突。
 **核心目标：** 在 first quantization 的连续坐标 / functional-basis 框架下，为费米多体 Schrödinger 方程建立一种严格保持全反对称性、避免 ordinary particle-TT 指数级统计复杂度、并可进行可微分变分优化的新型张量网络表示与算法。
 
+**当前最高优先级（2026-09-01 修订）：** 构建一个可运行、可验证、可复现的 FEMPS 求解器，使其能在实际计算资源内对非平凡相互作用连续费米体系完成范数、能量、梯度、变分优化和 (D\)–\(\chi\) 独立收敛分析。参数量少、形式优美或新增外代数分类均不能替代算法闭环和物理 benchmark。
+
+当前成功必须由以下事实共同支持：
+
+1. 单 Slater、有限多行列式和至少一类非平凡关联态能够嵌入；
+2. 范数、一体与二体期望及梯度能够精确计算或带受控误差估计；
+3. 至少一个相互作用 benchmark 能稳定优化并呈现可解释的系统收敛；
+4. 每次近似或截断显式报告 antisymmetry residual、误差或方差、时间和峰值内存；
+5. 算法不显式枚举全部 virtual paths 或完整反对称 coefficient tensor；
+6. ordinary particle TT、Slater/CI、exact diagonalization 以及条件允许时的 second-quantized DMRG 只作为清楚标名的比较对象。
+
 ---
 
 ## 0. 项目总纲
@@ -33,7 +44,7 @@ $$
 
 > **能否在保持 2201 first-quantized continuous functional solver 核心结构的同时，把 fermionic exchange statistics 作为固定的 exterior/structural carrier 解析处理，而让可变 TN bond 只承担真正的 many-body correlation complexity？**
 
-本项目把这一候选路线暂称为 **FEMPS / Functional Exterior Matrix Product State**，并同时继续推进“任意完全反对称张量 exact TT rank spectrum”的纯数学研究。纯数学结果既是 FEMPS 的理论动机和 no-go 基础，也可独立形成数学/数学物理论文；最终是否作为 FEMPS 主文/附录或独立投稿，由成果完整度决定。
+本项目把这一候选路线暂称为 **FEMPS / Functional Exterior Matrix Product State**。已经闭合的 no-go、7 维和 8 维四形式结果作为独立、可复核的数学成果保存；高维 rank spectrum 不再独立持续占用主线资源。只有某个维度或秩问题能够直接决定 FEMPS 的表达能力、收缩复杂度、规范结构、截断规则或物理 benchmark 设计时，才通过新的 ADR 重新激活。
 
 ---
 
@@ -176,9 +187,13 @@ FEMPS 的核心哲学不是“降低同一个 Schmidt rank”，而是**改变�
 
 ---
 
-## Q3. FEMPS 是否存在多项式复杂度的 exact contraction？
+## Q3. FEMPS 如何在已知 exact-contraction 障碍下成为可用算法？
 
-这是整个项目的第一生死门槛。
+固定小键维 generic FEMPS exact squared-norm contraction 已有条件困难性结果，因此“通用 FEMPS 的多项式时间精确收缩”不再是默认成功条件，也不得假设新恒等式必然绕过该障碍。项目必须在小系统物理实验和复杂度审计后选择一条主路线，并至多保留一条备用路线：
+
+1. 可精确多项式收缩、可系统增加表达能力的受限 FEMPS 子类；
+2. 报告误差、方差和稳定性的近似/随机收缩；
+3. 保持 first-quantized continuous functional state 定义的 carrier–correlation 重构。
 
 参数量
 
@@ -247,16 +262,9 @@ $$
 
 而不是只说“polynomial”。
 
-### Go / No-Go Gate A
+### Algorithm Recovery Gate
 
-如果 generic FEMPS exact norm contraction 被证明或强烈证据表明仍然指数复杂，则停止直接扩大数值开发，转向：
-
-1. 寻找可多项式收缩的受限 FEMPS 子类；
-2. statistics-carrier × correlation-multiplicity 的更强结构分解；
-3. determinant/Pfaffian structured cores；
-4. ordered-sector FTN 作为并行替代路线。
-
-禁止因为已经投入代码而绕过这一理论门槛。
+候选路线必须预先给出 (T(N,D,\chi)\)、峰值内存、适用结构、误差/方差控制、AD 方式和 antisymmetry residual 定义。先完成 (N=2\) materialization equivalence 与梯度检查，再进入 (N=4\)。若主路线不能通过非平凡相互作用 benchmark，则转向预先登记的备用路线或明确命名的替代一阶量子化方法；不得用更多纯数学结果替代失败判定。
 
 ---
 
@@ -312,7 +320,7 @@ Grassmann algebra、determinant identities、Pfaffian、JW/parity 或其他 ferm
 
 以下仅作为研究目标，不可现在写成最终论文事实：
 
-> **A first-quantized continuous functional tensor-network ansatz in which matrix-valued one-particle functions are contracted through an exterior structural layer, so that exact fermionic antisymmetry is enforced by construction while the optimizable virtual multiplicity represents correlations beyond exchange statistics; together with a polynomial contraction calculus for norm and one-/two-body operators, enabling direct AD variational solution of continuous fermionic Schrödinger equations without conversion to an occupation-number MPS.**
+> **A first-quantized continuous functional tensor-network ansatz in which matrix-valued one-particle functions are contracted through an exterior structural layer, so that exact fermionic antisymmetry is enforced by construction while the optimizable virtual multiplicity represents correlations beyond exchange statistics; together with either a polynomially contractible structured subclass or a controlled approximate contraction method for norm and one-/two-body operators, enabling direct AD variational solution of continuous fermionic Schrödinger equations without conversion to an occupation-number MPS.**
 
 只有在 Q3 和持续查新同时通过后，才能把它升级为正式 priority claim。
 
@@ -320,9 +328,9 @@ Grassmann algebra、determinant identities、Pfaffian、JW/parity 或其他 ferm
 
 # 2. 六条并行研究工作流
 
-## Workstream A — 任意完全反对称张量 TT/Schmidt 谱数学理论
+## Workstream A — 已封存的反对称张量 TT/Schmidt 谱数学理论
 
-此工作流独立持续，不因 FEMPS 工程推进而停止。
+此工作流保存既有 exact-rank、Slater 平坦谱、固定小键维复杂性以及 7/8 维四形式成果，但默认处于 **parked** 状态，不再独立持续。
 
 ### A1. 当前已有结构整理
 
@@ -335,9 +343,9 @@ Grassmann algebra、determinant identities、Pfaffian、JW/parity 或其他 ferm
 * \(p=2\)、\(p=3\)、余维二分类；
 * \(p=4\) extremal rank program。
 
-### A2. 当前四形式主线
+### A2. 四形式成果边界
 
-继续完成 \(\mu_4(m)\) 的高维 sharp bounds 和完整/局部 rank spectra，尤其当前 16D rank 22/23 分支。
+固定 \(\mu_4(7)=\mu_4(8)=12\) 的当前精确检查点。16D rank 22/23 分支保留为明确开放问题，不再开展无直接算法用途的有限域、浮点或 orbit/chart 搜索。
 
 所有计算机辅助证明必须：
 
@@ -347,7 +355,7 @@ Grassmann algebra、determinant identities、Pfaffian、JW/parity 或其他 ferm
 * 明确区分 exploratory numerics 与 proof certificates；
 * 严格记录 base field（\(\mathbb R\)、\(\mathbb C\)、\(\mathbb Q\)、有限域）及跨域推理。
 
-### A3. 新增 approximate no-go 章节
+### A3. 保留的 no-go 论文任务
 
 优先完成：
 
@@ -357,11 +365,12 @@ Grassmann algebra、determinant identities、Pfaffian、JW/parity 或其他 ferm
 4. structure-preserving approximation 与 TT truncation 的区别；
 5. 一般 antisymmetric tensors approximate rank 的开放问题。
 
-### A4. 论文归属决策
+### A4. 重新激活条件与论文归属
 
 * 若数学结果形成独立完整定理体系：单独发表；
 * 若成果主要作为 FEMPS motivation/no-go：主文理论节 + 长附录；
-* 若四形式极值结果足够强但与 FEMPS 数值主线过远：独立数学论文，FEMPS 文中引用核心 no-go theorem。
+* 已有四形式结果可作为独立数学成果投稿，FEMPS 文中只引用直接相关的 no-go theorem；
+* 新的高维问题必须在 ADR 中写明它阻塞的具体算法、复杂度或物理判据，才可重新进入 active plan。
 
 不得为了“合成一篇大论文”强行牺牲两个方向各自的逻辑完整性。
 
@@ -482,9 +491,9 @@ $$
 * AD friendliness；
 * GPU vectorization potential。
 
-### Gate A
+### Recovery route selection
 
-只有证明/强证据支持 polynomially contractible 的非平凡 FEMPS family 后，才能进入大规模数值阶段。
+只允许一条主路线和至多一条备用路线。当前主路线由新的 Algorithm and Physics Recovery ADR 决定；其他候选只做有界审计，不得平行无限扩张。精确、近似和随机算法使用各自的成功判据，不再把 generic polynomial exact contraction 设为唯一入口。
 
 ---
 
@@ -580,6 +589,8 @@ math/
 
 ## Workstream E — 物理 benchmark
 
+所有 benchmark 必须统一报告：变分能量与参考误差、能量方差或估计不确定度、范数误差、antisymmetry residual、(D\) 与 \(\chi\) 独立收敛、wall time、峰值内存和优化稳定性。exact diagonalization、Slater/CI、ordinary particle TT 是必需的小系统比较；second-quantized DMRG 在条件允许时作为外部基准，且不得改称 FEMPS。
+
 ### E0. 全量 exact reference（小 N）
 
 对极小 \(N,D\) 显式 materialize \(C\) 与 Hamiltonian，作为一切新算法的 truth oracle。
@@ -611,6 +622,8 @@ math/
 * FEMPS reduced bond \(\chi=1\)。
 
 该实验应成为论文最具说服力的 representation-complexity demonstration 之一。
+
+**顺序门：** E1、E2、E3 全部通过后，才能将 E4 或更大系统作为主结果。不得因已有历史实验而跳过用当前求解器和统一记录格式重新验证前三关。
 
 ### E4. \(N=4\) interacting harmonic fermions
 
@@ -674,6 +687,14 @@ references/
 ---
 
 # 3. 阶段计划与硬性里程碑
+
+## Current recovery stage — FEMPS Algorithm and Physics Recovery
+
+本阶段取代高维四形式搜索成为唯一 active 主计划。目标是先完成算法可行性审计和路线 ADR，再交付一个不枚举全部 virtual paths/完整反对称系数张量的最小求解器。求解器必须支持连续 functional basis、Slater/多行列式初始化、一/二体算符、范数/能量/梯度、checkpoint 与确定性种子、antisymmetry residual，以及 (D\)–\(\chi\) 独立扫描。
+
+当前首选是可精确收缩的受限 matrix-wedge FEMPS：用一个全局守恒 virtual label 表示 (K=\chi\) 个非分支 Slater paths，按 (K^2\) 个 determinant/Slater–Condon transition 计算 observable。它严格包含单 Slater，并随 (K\) 系统扩展到非正交多行列式。备用路线仅为带非渐近误差/方差和反对称残差的 VMC；在主路线没有完成 E1--E4 之前，不启动通用 FEMPS VMC 的大规模开发。
+
+旧 Phase 0--7 条目保留为历史设计与已完成工作的索引；若与本 recovery stage 冲突，以当前阶段和最新 ADR 为准。
 
 ## Phase 0 — 项目固化与基线复现
 
@@ -1052,12 +1073,13 @@ PDF 默认放 `references/local_pdfs/` 并 `.gitignore`，避免 repo 膨胀与�
 
 ## 最小成功
 
-即使 FEMPS contraction 最终失败，本项目仍应至少得到：
+即使通用 FEMPS solver 最终失败，本项目仍应如实保留：
 
 1. rigorous ordinary particle-TT fermionic no-go theorem；
 2. Slater approximate no-go；
-3. 任意反对称 tensor TT spectrum 的一批新数学结果；
-4. 明确说明为什么 2201 的 naive fermionic extension 不 scalable。
+3. 已经闭合的低维数学结果；
+4. 明确说明为什么 2201 的 naive fermionic extension 不 scalable；
+5. 受限子类、受控近似和替代一阶量子化路线的可复现实验性判定。
 
 这已经可以形成有价值的理论成果。
 
@@ -1068,11 +1090,13 @@ PDF 默认放 `references/local_pdfs/` 并 `.gitignore`，避免 repo 膨胀与�
 1. FEMPS 或其结构化子类严格保持 antisymmetry；
 2. single Slater reduced correlation bond = 1；
 3. 非平凡 correlated states systematically improvable；
-4. norm + one-/two-body expectation polynomial contractible；
+4. norm + one-/two-body expectation 可精确多项式收缩，或有可测误差/方差的受控估计；
 5. 与 2201 functional operator calculus 无缝衔接；
 6. AD variational solver 稳定；
-7. \(N=4\) interacting continuum benchmark 明显展示 representation advantage；
+7. 至少一个 interacting continuum benchmark 稳定优化，能量随 (D\) 或 \(\chi\) 呈系统收敛；
 8. novelty audit 未发现等价已有方法。
+9. 全过程报告 antisymmetry residual、时间和峰值内存，且不枚举全部 virtual paths 或完整反对称 coefficient tensor；
+10. 至少展示一项 FEMPS 结构带来的实际优势或清晰且诚实的取舍。
 
 ## 强成功
 
@@ -1100,6 +1124,8 @@ PDF 默认放 `references/local_pdfs/` 并 `.gitignore`，避免 repo 膨胀与�
 8. **Reproducibility**：每个重要结果对应 commit SHA、config、seed、environment、raw output。
 9. **Physics compliance over speed**：性能优化不得改变定义或绕过物理约束。
 10. **Master Plan governs**：若阶段任务与本文件冲突，先更新本文件/ADR，再修改实现。
+11. **Algorithm/physics priority**：除非直接阻塞当前求解器闭环，高维分类或开放式纯数学搜索不得取得主线资源。
+12. **One primary route**：候选路线先做有界复杂度与小系统审计，随后只推进 ADR 选定的主路线和至多一条备用路线。
 
 ---
 
@@ -1137,7 +1163,7 @@ PDF 默认放 `references/local_pdfs/` 并 `.gitignore`，避免 repo 膨胀与�
 
 输出正式报告：FEMPS contraction 是否可行；若不完全可行，给出可收缩子类或 pivot 方案。
 
-**只有 Gate A 之后，才开启 \(N=4\) interacting FEMPS 的正式大规模开发。**
+历史 Gate A 已经否定 generic polynomial exact contraction。后续按 Algorithm Recovery Gate：先通过当前受限/近似路线的 E1--E3，再开启 E4。
 
 ---
 
@@ -1150,14 +1176,14 @@ PDF 默认放 `references/local_pdfs/` 并 `.gitignore`，避免 repo 膨胀与�
 3. 这一问题不仅是 exact rank：single Slater determinant 的 particle Schmidt spectrum 已经完全平坦，因此 ordinary SVD truncation 无法提供高精度压缩；
 4. 因此 exchange statistics 不能作为 ordinary particle-TT correlation 来存储；
 5. FEMPS 把 antisymmetry 放进 exterior structural layer，把可变 virtual multiplicity 留给 correlations beyond exchange；
-6. 建立 polynomial exterior transfer/contraction calculus；
+6. 建立受限结构的 polynomial contraction calculus，或具有明确误差/方差控制的近似 contraction；
 7. 将其与 2201 functional-basis operator framework 和 AD 结合；
 8. 在连续 fermionic harmonic/interacting systems 中验证能量、收敛、复杂度与严格 antisymmetry；
 9. 与 direct TT、ordered-sector first quantization、HS-MPS 和 second-quantized approaches 明确比较。
 
-如果第 6 步无法成立，则不得强行保持该叙事；项目应转为：
+如果第 6 步无法在非平凡相互作用 benchmark 上成立，则不得强行保持该叙事；项目应转为：
 
-> **no-go + new exterior rank mathematics + alternative first-quantized representation analysis**
+> **no-go + 已封存的外代数数学成果 + 明确命名的受限子类或替代 first-quantized method**
 
 而不是通过工程绕过来制造一个“看起来能跑”的 FEMPS。
 

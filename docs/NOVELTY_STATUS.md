@@ -14,21 +14,26 @@ and AGP-CI constructions. The present finite-AGP implementation is therefore a
 validated fallback and benchmark baseline, not a new ansatz class. The two
 tested beyond-LC-AGP claims---generic matrix-wedge exact contraction and a
 universal statistics-carrier/correlation-multiplicity tensor product---are now
-closed negatively; the active question has moved to independent four-form and
-exterior-geometry structures with their own contraction theorem.
+closed negatively. The former independent four-form program is parked after
+its exact seven- and eight-dimensional checkpoints. The active question is now
+whether a strictly scoped FEMPS solver can pass controlled continuous-physics
+benchmarks under those no-go constraints.
 
 Phase 13 first ruled out the generic exact branch at growing bond by an
 explicit tagged Cayley-determinant reduction; Phase 26 strengthens this to
 fixed maximum bond three. Thus “generic matrix-wedge FEMPS with polynomial exact contraction”
 is no longer an admissible novelty claim. A future method claim must instead
 identify a systematically improvable restricted algebra with a surviving
-novelty boundary, prove a stronger statistics-carrier factorization, or use
-the ordered-sector first-quantized route. The one-body quantity
+novelty boundary, use a controlled approximate estimator, or adopt an
+explicitly named alternative first-quantized route. Phase 28 initially chooses
+the nonbranching diagonal-path FEMPS, exactly a sum of `K` nonorthogonal Slater
+determinants. That is a valid restricted FEMPS algorithm target but is close to
+nonorthogonal selected CI and is not claimed as a new ansatz. The one-body quantity
 `N/Tr(gamma^2)` is retained only as a correlation diagnostic, not a novel
 entanglement measure or a canonical FEMPS bond spectrum.
 
-Post-gate numerical work now targets ordered-sector/interparticle-distance
-functional TN and is not called FEMPS. Li--Waintal 2026 already establishes
+Ordered-sector/interparticle-distance functional TN remains a control and is
+not called FEMPS. Li--Waintal 2026 already establishes
 the first-quantized ordered-distance MPS direction; any surviving contribution
 must be stated narrowly as the 2201 continuous orthonormal functional-basis
 operator/AD integration, its controlled continuum benchmarks, and the new

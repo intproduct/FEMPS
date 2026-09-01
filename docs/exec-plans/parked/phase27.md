@@ -1,12 +1,17 @@
-# Active execution plan: Phase 27 four-form rank-spectrum reconstruction
+# Parked execution plan: Phase 27 four-form rank-spectrum reconstruction
+
+**Status:** parked on 2026-09-01 after the exact eight-dimensional checkpoint.
+The unresolved 16D rank-22/23 branch is retained as an open mathematics
+problem, not as an active FEMPS algorithm milestone. Phase 28 supersedes this
+plan for project priority.
 
 ## Objective
 
-Resume Workstream A's independent four-form program, with special attention to
-the master plan's 16-dimensional rank-22/23 branch. The repository currently
-contains no four-form proof artifacts, so this phase begins by reconstructing
-the exact definitions, field conventions, prior results, and certificate
-provenance before making any extremal claim.
+Preserve the reconstructed four-form definitions, exact seven- and
+eight-dimensional results, field conventions, source transcriptions, and
+independent certificates. Do not resume the 16-dimensional rank-22/23 search
+unless a later ADR identifies a direct dependency on FEMPS expressivity,
+contraction complexity, gauge structure, truncation, or a physics benchmark.
 
 ## Checkpoints
 
@@ -43,9 +48,10 @@ provenance before making any extremal claim.
 - [ ] Issue a Phase 27 theorem/status report and ADR deciding whether the result
   belongs in a separate mathematics manuscript or only as a FEMPS citation.
 
-## Exit criterion
+## Parking boundary
 
-Phase 27 passes only when the four-form problem and base fields are unambiguous,
-every claimed value/bound has a clean exact proof or independently verifiable
-certificate, chart/orbit coverage metadata are complete, and the 16D 22/23
-branch is either resolved or reduced to a precisely documented open case.
+The phase is parked with exact theorem/certificate checkpoints through
+dimension eight and the rational 16D upper bound 24. Rank 22/23 remains
+unresolved and is not an admitted theorem, certificate, or algorithm claim.
+Reactivation requires a new ADR with a concrete algorithmic or physical
+dependency; open-ended spectrum completion is insufficient.

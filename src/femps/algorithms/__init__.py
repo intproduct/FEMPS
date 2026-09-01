@@ -21,6 +21,11 @@ from .pfaffian_training import (
     run_factorized_pfaffian_pair,
     run_pfaffian_pair,
 )
+from .diagonal_path_training import (
+    DiagonalPathConfig,
+    canonical_slater_orbitals,
+    run_diagonal_path_variable_projection,
+)
 
 __all__ = [
     "GeneralizedEigenResult",
@@ -38,4 +43,7 @@ __all__ = [
     "PfaffianPairConfig",
     "run_factorized_pfaffian_pair",
     "run_pfaffian_pair",
+    "DiagonalPathConfig",
+    "canonical_slater_orbitals",
+    "run_diagonal_path_variable_projection",
 ]

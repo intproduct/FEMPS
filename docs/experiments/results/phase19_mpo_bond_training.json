@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "experiment": "phase19_matched_n8_mpo_bond_training",
+  "device": "cuda:2",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "dtype": "float64",
+  "predeclared_configuration": {
+    "mpo_bonds": [
+      128,
+      160,
+      192
+    ],
+    "reference_mpo_bond": 192,
+    "seed": 1862,
+    "optimization_stages": [
+      [
+        300,
+        0.01,
+        "adam"
+      ],
+      [
+        500,
+        0.003,
+        "adam"
+      ],
+      [
+        500,
+        0.001,
+        "adam"
+      ],
+      [
+        300,
+        0.0003,
+        "adam"
+      ]
+    ],
+    "reference_energy_spread_tolerance": 0.0002,
+    "own_vs_reference_energy_tolerance": 1e-06,
+    "peak_cuda_memory_budget_bytes": 2147483648
+  },
+  "reference_mpo": {
+    "maximum_bond": 192,
+    "retained_ranks": [
+      100,
+      192,
+      192,
+      192,
+      192,
+      192,
+      192
+    ],
+    "dense_raw_fourier_bulk_materialized": false
+  },
+  "points": [
+    {
+      "maximum_mpo_bond": 128,
+      "seed": 1862,
+      "optimization_stages": [
+        {
+          "steps": 300,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 392.34239893800344,
+          "final_energy": 45.00804429248471
+        },
+        {
+          "steps": 500,
+          "learning_rate": 0.003,
+          "optimizer": "adam",
+          "initial_energy": 45.00804429248471,
+          "final_energy": 44.45466949484011
+        },
+        {
+          "steps": 500,
+          "learning_rate": 0.001,
+          "optimizer": "adam",
+          "initial_energy": 44.45466949484011,
+          "final_energy": 44.45495845096901
+        },
+        {
+          "steps": 300,
+          "learning_rate": 0.0003,
+          "optimizer": "adam",
+          "initial_energy": 44.45495845096901,
+          "final_energy": 44.45437326357539
+        }
+      ],
+      "initial_energy": 392.34239893800344,
+      "own_mpo_final_energy": 44.45437326357539,
+      "actual_mps_maximum_bond": 32,
+      "mpo_compression_ranks": [
+        100,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "mpo_local_discarded_norm_not_global_certificate": 0.0038494973597441896,
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 5465600,
+      "elapsed_seconds": 127.11194880004041,
+      "peak_cuda_memory_bytes": 523293696,
+      "bond_192_reference_energy_on_same_trained_state": 44.45437290390032,
+      "own_vs_reference_energy_absolute_difference": 3.5967507017176104e-07,
+      "own_vs_reference_energy_pass": true,
+      "memory_budget_pass": true
+    },
+    {
+      "maximum_mpo_bond": 160,
+      "seed": 1862,
+      "optimization_stages": [
+        {
+          "steps": 300,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 392.34239886645827,
+          "final_energy": 44.725707368191145
+        },
+        {
+          "steps": 500,
+          "learning_rate": 0.003,
+          "optimizer": "adam",
+          "initial_energy": 44.725707368191145,
+          "final_energy": 44.45467252395005
+        },
+        {
+          "steps": 500,
+          "learning_rate": 0.001,
+          "optimizer": "adam",
+          "initial_energy": 44.45467252395005,
+          "final_energy": 44.45460366074316
+        },
+        {
+          "steps": 300,
+          "learning_rate": 0.0003,
+          "optimizer": "adam",
+          "initial_energy": 44.45460366074316,
+          "final_energy": 44.454381375956636
+        }
+      ],
+      "initial_energy": 392.34239886645827,
+      "own_mpo_final_energy": 44.454381375956636,
+      "actual_mps_maximum_bond": 32,
+      "mpo_compression_ranks": [
+        100,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "mpo_local_discarded_norm_not_global_certificate": 3.348616427950554e-06,
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 6832000,
+      "elapsed_seconds": 169.2385519000236,
+      "peak_cuda_memory_bytes": 648261632,
+      "bond_192_reference_energy_on_same_trained_state": 44.45438137563124,
+      "own_vs_reference_energy_absolute_difference": 3.253930458413379e-10,
+      "own_vs_reference_energy_pass": true,
+      "memory_budget_pass": true
+    },
+    {
+      "maximum_mpo_bond": 192,
+      "seed": 1862,
+      "optimization_stages": [
+        {
+          "steps": 300,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 392.342398866463,
+          "final_energy": 44.72572347366333
+        },
+        {
+          "steps": 500,
+          "learning_rate": 0.003,
+          "optimizer": "adam",
+          "initial_energy": 44.72572347366333,
+          "final_energy": 44.45467082693692
+        },
+        {
+          "steps": 500,
+          "learning_rate": 0.001,
+          "optimizer": "adam",
+          "initial_energy": 44.45467082693692,
+          "final_energy": 44.4544231171842
+        },
+        {
+          "steps": 300,
+          "learning_rate": 0.0003,
+          "optimizer": "adam",
+          "initial_energy": 44.4544231171842,
+          "final_energy": 44.454395009300754
+        }
+      ],
+      "initial_energy": 392.342398866463,
+      "own_mpo_final_energy": 44.454395009300754,
+      "actual_mps_maximum_bond": 32,
+      "mpo_compression_ranks": [
+        100,
+        192,
+        192,
+        192,
+        192,
+        192,
+        192
+      ],
+      "mpo_local_discarded_norm_not_global_certificate": 9.99886237575396e-10,
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 8198400,
+      "elapsed_seconds": 224.9677886000136,
+      "peak_cuda_memory_bytes": 765400064,
+      "bond_192_reference_energy_on_same_trained_state": 44.454395009300754,
+      "own_vs_reference_energy_absolute_difference": 0.0,
+      "own_vs_reference_energy_pass": true,
+      "memory_budget_pass": true
+    }
+  ],
+  "bond_192_reference_energy_spread_across_matched_runs": 2.210540043279252e-05,
+  "reference_energy_spread_pass": true,
+  "matched_training_pass": true,
+  "selected_smallest_passing_production_mpo_bond": 128
+}

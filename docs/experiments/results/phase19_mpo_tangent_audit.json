@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "experiment": "phase19_gauge_fixed_physical_tangent_mpo_audit",
+  "formal_record": true,
+  "device": "cuda:2",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "dtype": "float64",
+  "predeclared_configuration": {
+    "mpo_bonds": [
+      128,
+      160,
+      192
+    ],
+    "reference_mpo_bond": 192,
+    "directions_per_nonzero_site_block": 2,
+    "direction_seed": 1914,
+    "energy_tolerance": 1e-06,
+    "tangent_maximum_absolute_tolerance": 1e-06,
+    "tangent_relative_l2_tolerance": 5e-05,
+    "tangent_cosine_minimum": 0.99999999
+  },
+  "source_state": {
+    "source": "reproduced_phase18_best_blind_seed",
+    "seed": 1862,
+    "optimization_stages": [
+      {
+        "steps": 300,
+        "learning_rate": 0.01,
+        "optimizer": "adam",
+        "initial_energy": 392.34239893800344,
+        "final_energy": 45.00804429248471
+      },
+      {
+        "steps": 500,
+        "learning_rate": 0.003,
+        "optimizer": "adam",
+        "initial_energy": 45.00804429248471,
+        "final_energy": 44.45466949484011
+      },
+      {
+        "steps": 500,
+        "learning_rate": 0.001,
+        "optimizer": "adam",
+        "initial_energy": 44.45466949484011,
+        "final_energy": 44.45495845096901
+      },
+      {
+        "steps": 300,
+        "learning_rate": 0.0003,
+        "optimizer": "adam",
+        "initial_energy": 44.45495845096901,
+        "final_energy": 44.45437326357539
+      }
+    ],
+    "initial_energy": 392.34239893800344,
+    "final_energy": 44.45437326357539,
+    "elapsed_seconds": 128.7965066001052
+  },
+  "tangent_construction": {
+    "gauge": "left_canonical_A_transpose_B_equals_zero",
+    "normalization": "native_many_body_MPS_tangent_norm_equals_one",
+    "directions": [
+      {
+        "site": 1,
+        "direction_index": 0,
+        "pre_normalization_physical_norm": 7.149396126048346,
+        "gauge_residual_before_physical_normalization": 2.2539984238159872e-14,
+        "normalized_physical_norm": 0.9999999999999999,
+        "state_overlap_absolute_value": 1.2228734400625365e-16
+      },
+      {
+        "site": 1,
+        "direction_index": 1,
+        "pre_normalization_physical_norm": 9.484726966162164,
+        "gauge_residual_before_physical_normalization": 2.2844394130436066e-14,
+        "normalized_physical_norm": 1.0000000000000002,
+        "state_overlap_absolute_value": 2.5925362727692593e-17
+      },
+      {
+        "site": 2,
+        "direction_index": 0,
+        "pre_normalization_physical_norm": 17.18322499435012,
+        "gauge_residual_before_physical_normalization": 2.9869170770478655e-14,
+        "normalized_physical_norm": 0.9999999999999983,
+        "state_overlap_absolute_value": 3.8659323539801085e-17
+      },
+      {
+        "site": 2,
+        "direction_index": 1,
+        "pre_normalization_physical_norm": 16.304382766818726,
+        "gauge_residual_before_physical_normalization": 3.0562671314445135e-14,
+        "normalized_physical_norm": 1.000000000000001,
+        "state_overlap_absolute_value": 3.9661367476508203e-17
+      },
+      {
+        "site": 3,
+        "direction_index": 0,
+        "pre_normalization_physical_norm": 17.243576202801087,
+        "gauge_residual_before_physical_normalization": 3.115452713820719e-14,
+        "normalized_physical_norm": 0.9999999999999996,
+        "state_overlap_absolute_value": 5.2470855778514445e-17
+      },
+      {
+        "site": 3,
+        "direction_index": 1,
+        "pre_normalization_physical_norm": 19.531683384065865,
+        "gauge_residual_before_physical_normalization": 3.05778710912629e-14,
+        "normalized_physical_norm": 1.0000000000000018,
+        "state_overlap_absolute_value": 1.375386719076205e-17
+      },
+      {
+        "site": 4,
+        "direction_index": 0,
+        "pre_normalization_physical_norm": 17.905962915264855,
+        "gauge_residual_before_physical_normalization": 3.1281797082180076e-14,
+        "normalized_physical_norm": 0.9999999999999998,
+        "state_overlap_absolute_value": 4.342951524304147e-17
+      },
+      {
+        "site": 4,
+        "direction_index": 1,
+        "pre_normalization_physical_norm": 17.150620680743643,
+        "gauge_residual_before_physical_normalization": 3.1210455926333506e-14,
+        "normalized_physical_norm": 0.9999999999999993,
+        "state_overlap_absolute_value": 4.4544882996320295e-17
+      },
+      {
+        "site": 5,
+        "direction_index": 0,
+        "pre_normalization_physical_norm": 15.768669452930265,
+        "gauge_residual_before_physical_normalization": 3.360779108872872e-14,
+        "normalized_physical_norm": 1.0,
+        "state_overlap_absolute_value": 4.383826545455444e-17
+      },
+      {
+        "site": 5,
+        "direction_index": 1,
+        "pre_normalization_physical_norm": 16.023542984464463,
+        "gauge_residual_before_physical_normalization": 2.995399568699248e-14,
+        "normalized_physical_norm": 1.0,
+        "state_overlap_absolute_value": 1.1308423192506918e-16
+      },
+      {
+        "site": 6,
+        "direction_index": 0,
+        "pre_normalization_physical_norm": 17.137059367278795,
+        "gauge_residual_before_physical_normalization": 9.18168027963302e-15,
+        "normalized_physical_norm": 0.9999999999999998,
+        "state_overlap_absolute_value": 1.0315622719225125e-16
+      },
+      {
+        "site": 6,
+        "direction_index": 1,
+        "pre_normalization_physical_norm": 17.165007808749753,
+        "gauge_residual_before_physical_normalization": 8.759338678017349e-15,
+        "normalized_physical_norm": 1.0,
+        "state_overlap_absolute_value": 3.7362762043188765e-18
+      },
+      {
+        "site": 7,
+        "direction_index": 0,
+        "pre_normalization_physical_norm": 10.675091936170569,
+        "gauge_residual_before_physical_normalization": 2.220446049250313e-16,
+        "normalized_physical_norm": 0.9999999999999999,
+        "state_overlap_absolute_value": 1.6653345369377348e-16
+      },
+      {
+        "site": 7,
+        "direction_index": 1,
+        "pre_normalization_physical_norm": 9.67641437594062,
+        "gauge_residual_before_physical_normalization": 2.498001805406602e-16,
+        "normalized_physical_norm": 0.9999999999999999,
+        "state_overlap_absolute_value": 1.0061396160665481e-16
+      }
+    ],
+    "maximum_state_overlap_absolute_value": 1.6653345369377348e-16,
+    "maximum_normalized_physical_norm_error": 1.7763568394002505e-15
+  },
+  "points": [
+    {
+      "maximum_bond": 128,
+      "energy": 44.454373263575405,
+      "directional_derivatives": [
+        -7.1617528032669015e-06,
+        -1.604817924930115e-05,
+        0.00011375436097338044,
+        -2.0815015871340954e-05,
+        2.853168312571139e-05,
+        -1.4982239978697851e-05,
+        -8.107989751094327e-06,
+        1.3076940538956866e-05,
+        0.00016572965721027772,
+        -9.6728114277352e-05,
+        -0.0021049806205751557,
+        -0.0011782314774502827,
+        0.003096613806989294,
+        -5.8307326641044354e-05
+      ],
+      "directional_derivative_l2_norm": 0.003932349134221697,
+      "raw_parameter_gradient_norm_diagnostic": 0.042523796362708144,
+      "retained_ranks": [
+        100,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "local_discarded_norm_not_global_certificate": 0.0038494973597441896,
+      "dense_raw_fourier_bulk_materialized": false
+    },
+    {
+      "maximum_bond": 160,
+      "energy": 44.45437290422571,
+      "directional_derivatives": [
+        -7.175899237039446e-06,
+        -1.6044013254665433e-05,
+        0.00011375854741406845,
+        -2.0776700474213998e-05,
+        2.8549938870354556e-05,
+        -1.4978921749988048e-05,
+        -8.079586346847335e-06,
+        1.3079002348636969e-05,
+        0.00016569814538566877,
+        -9.67675194152229e-05,
+        -0.0021049910736666644,
+        -0.0011782427658035928,
+        0.0030966306420713062,
+        -5.828732967887824e-05
+      ],
+      "directional_derivative_l2_norm": 0.003932370709789032,
+      "raw_parameter_gradient_norm_diagnostic": 0.042523914071943815,
+      "retained_ranks": [
+        100,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "local_discarded_norm_not_global_certificate": 3.348616427950554e-06,
+      "dense_raw_fourier_bulk_materialized": false
+    },
+    {
+      "maximum_bond": 192,
+      "energy": 44.45437290390033,
+      "directional_derivatives": [
+        -7.1758990782339e-06,
+        -1.6044013440510638e-05,
+        0.00011375854985382373,
+        -2.077670174761215e-05,
+        2.8549939036146354e-05,
+        -1.4978927975473354e-05,
+        -8.079583976529343e-06,
+        1.3079003064808249e-05,
+        0.0001656981454686006,
+        -9.676752438538249e-05,
+        -0.002104991075945857,
+        -0.001178242762700632,
+        0.003096630640430249,
+        -5.828734012771502e-05
+      ],
+      "directional_derivative_l2_norm": 0.003932370709167947,
+      "raw_parameter_gradient_norm_diagnostic": 0.042523914079766356,
+      "retained_ranks": [
+        100,
+        192,
+        192,
+        192,
+        192,
+        192,
+        192
+      ],
+      "local_discarded_norm_not_global_certificate": 9.99886237575396e-10,
+      "dense_raw_fourier_bulk_materialized": false
+    }
+  ],
+  "comparisons_vs_bond_192": [
+    {
+      "observed_mpo_bond": 128,
+      "reference_mpo_bond": 192,
+      "energy_absolute_difference": 3.596750772771884e-07,
+      "tangent_derivative_maximum_absolute_difference": 3.9410108030493e-08,
+      "tangent_derivative_relative_l2_difference": 2.0222845854558976e-05,
+      "tangent_derivative_cosine_similarity": 0.9999999998105682,
+      "energy_pass": true,
+      "tangent_maximum_absolute_pass": true,
+      "tangent_relative_l2_pass": true,
+      "tangent_cosine_pass": true,
+      "all_pass": true
+    },
+    {
+      "observed_mpo_bond": 160,
+      "reference_mpo_bond": 192,
+      "energy_absolute_difference": 3.253788349866227e-10,
+      "tangent_derivative_maximum_absolute_difference": 1.0448836782785131e-11,
+      "tangent_derivative_relative_l2_difference": 3.631704165795104e-09,
+      "tangent_derivative_cosine_similarity": 1.0000000000000002,
+      "energy_pass": true,
+      "tangent_maximum_absolute_pass": true,
+      "tangent_relative_l2_pass": true,
+      "tangent_cosine_pass": true,
+      "all_pass": true
+    }
+  ],
+  "smallest_passing_mpo_bond": 128,
+  "tangent_audit_pass": true
+}

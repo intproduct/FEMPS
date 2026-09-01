@@ -60,19 +60,18 @@ is gated by an explicit contraction-complexity audit.
   their post-run Galerkin truth; the production MPO compression has `1.63e-9`
   global action error. The remaining `1.33e-2` total discrepancy is basis
   dominated, so basis efficiency and N=8 define the next gate.
-- Gate F passes at a controlled `N=8,D=10` point, with an explicitly retained
-  auxiliary qualification. A Lowdin-orthonormalized two-scale odd-Hermite
-  basis reduces the N=6 reference discrepancy by `81.5%`, and incremental
-  sparse-recurrence compression removes dense raw Fourier-MPO bulk storage.
-  Three blind N=8 runs lie `8.36e-3--8.40e-3` above an exterior D=12 numerical
-  reference; a chi-16 local audit agrees with the best chi-32 AD state within
-  `5.11e-5`. The extra bond-128/192 raw-gradient threshold misses, and the
-  current chi-32 DMRG contraction requests a 78.12 GiB intermediate, so both
-  remain Phase 19 constraints.
+- Gate G passes at a resource-closed controlled `N=8,D=12` point. A staged
+  chi-32 local effective-Hamiltonian action peaks below 1.1 GB, bond 128 passes
+  a left-gauge physical-tangent audit against bond 192, and matched bond
+  training retains 128 as the smallest passing production value. A blind D12
+  multiscale run lies `7.174e-3` above an exterior D14 numerical reference,
+  improving the Gate F D10 error against that same reference by `17.6%`.
+  D14 remains finite-basis numerical evidence; the N=2/4/6/8 resource trend
+  does not admit N=10 or an asymptotic scaling claim.
 
-See [the active execution plan](docs/exec-plans/active/phase19.md),
+See [the active execution plan](docs/exec-plans/active/phase20.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md), and
-[the Gate F report](docs/experiments/phase18_basis_n8_gate_report.md).
+[the Gate G report](docs/experiments/phase19_n8_refinement_gate_report.md).
 
 ## Development setup
 

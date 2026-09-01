@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "experiment": "phase19_chi32_staged_heff_resource_audit",
+  "formal_record": true,
+  "device": "cuda:2",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "dtype": "float64",
+  "predeclared_budgets": {
+    "peak_cuda_memory_bytes": 2147483648,
+    "global_energy_must_not_increase": true,
+    "two_sweep_energy_consistency_tolerance": 1e-06
+  },
+  "source_state": {
+    "source": "reproduced_phase18_best_blind_seed",
+    "seed": 1862,
+    "optimization_stages": [
+      {
+        "steps": 300,
+        "learning_rate": 0.01,
+        "optimizer": "adam",
+        "initial_energy": 392.34239893800344,
+        "final_energy": 45.00804429248471
+      },
+      {
+        "steps": 500,
+        "learning_rate": 0.003,
+        "optimizer": "adam",
+        "initial_energy": 45.00804429248471,
+        "final_energy": 44.45466949484011
+      },
+      {
+        "steps": 500,
+        "learning_rate": 0.001,
+        "optimizer": "adam",
+        "initial_energy": 44.45466949484011,
+        "final_energy": 44.45495845096901
+      },
+      {
+        "steps": 300,
+        "learning_rate": 0.0003,
+        "optimizer": "adam",
+        "initial_energy": 44.45495845096901,
+        "final_energy": 44.45437326357539
+      }
+    ],
+    "initial_energy": 392.34239893800344,
+    "final_energy": 44.45437326357539,
+    "actual_mps_maximum_bond": 32,
+    "mpo_compression_strategy": "incremental_structured_left_svd",
+    "dense_raw_fourier_bulk_materialized": false,
+    "elapsed_seconds": 128.9694342999719,
+    "peak_cuda_memory_bytes": 523293696
+  },
+  "configuration": {
+    "particles": 8,
+    "basis_order": 10,
+    "scale": 0.5,
+    "scale_ratio": 2.5,
+    "fourier_order": 96,
+    "local_quadrature_order": 192,
+    "mpo_maximum_bond": 128,
+    "mps_maximum_bond": 32,
+    "local_lanczos_maximum_iterations": 30,
+    "sweeps": 2
+  },
+  "mpo_build": {
+    "construction": "incremental_structured_left_svd",
+    "dense_raw_fourier_bulk_materialized": false,
+    "maximum_intermediate_tensor_elements": 5465600
+  },
+  "heff_contraction": {
+    "strategy": "four_explicit_two_operand_einsums",
+    "maximum_staged_temporary_element_bound": 13107200,
+    "maximum_staged_temporary_float64_bytes": 104857600,
+    "pre_change_observed_failed_allocation": "78.12 GiB"
+  },
+  "initial_energy": 44.45437326357539,
+  "history": [
+    {
+      "sweep": 0,
+      "direction": "right",
+      "energy": 44.45432190605033,
+      "local_last_energy": 44.454321906050275,
+      "truncation_errors": [
+        0.0,
+        0.0,
+        6.750155989724466e-14,
+        1.3625767181224873e-12,
+        1.835087637402933e-12,
+        7.01660951563104e-14,
+        0.0
+      ],
+      "max_trunc": 1.835087637402933e-12,
+      "bond_dims": [
+        10,
+        32,
+        32,
+        32,
+        32,
+        32,
+        10
+      ],
+      "max_bond": 32,
+      "solver": "lanczos"
+    },
+    {
+      "sweep": 1,
+      "direction": "left",
+      "energy": 44.45432190601349,
+      "local_last_energy": 44.45432190601338,
+      "truncation_errors": [
+        0.0,
+        4.973799150320824e-14,
+        2.1861401577896033e-12,
+        2.199906923295462e-12,
+        4.984901380570941e-14,
+        0.0,
+        0.0
+      ],
+      "max_trunc": 2.199906923295462e-12,
+      "bond_dims": [
+        10,
+        32,
+        32,
+        32,
+        32,
+        32,
+        10
+      ],
+      "max_bond": 32,
+      "solver": "lanczos"
+    }
+  ],
+  "final_energy": 44.45432190601349,
+  "energy_change": -5.1357561900999826e-05,
+  "two_sweep_energy_absolute_difference": 3.6841640849161195e-11,
+  "elapsed_seconds": 27.84334089991171,
+  "peak_cuda_memory_bytes": 736884736,
+  "memory_budget_pass": true,
+  "energy_nonincrease_pass": true,
+  "sweep_consistency_pass": true,
+  "chi32_local_resource_audit_pass": true
+}

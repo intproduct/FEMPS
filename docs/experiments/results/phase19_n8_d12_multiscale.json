@@ -1,0 +1,584 @@
+{
+  "schema_version": 1,
+  "experiment": "phase19_blind_n8_D12_multiscale_refinement",
+  "device": "cuda:2",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "dtype": "float64",
+  "predeclared_configuration": {
+    "scale_candidates": [
+      [
+        0.4,
+        2.5
+      ],
+      [
+        0.4,
+        3.0
+      ],
+      [
+        0.45,
+        2.5
+      ],
+      [
+        0.45,
+        3.0
+      ],
+      [
+        0.5,
+        2.5
+      ],
+      [
+        0.5,
+        3.0
+      ],
+      [
+        0.55,
+        2.5
+      ],
+      [
+        0.55,
+        3.0
+      ],
+      [
+        0.6,
+        2.5
+      ],
+      [
+        0.6,
+        3.0
+      ]
+    ],
+    "blind_scale_scan_steps": 250,
+    "blind_scale_scan_mps_bond": 16,
+    "production_stages": [
+      [
+        300,
+        0.01,
+        "adam"
+      ],
+      [
+        500,
+        0.003,
+        "adam"
+      ],
+      [
+        500,
+        0.001,
+        "adam"
+      ],
+      [
+        300,
+        0.0003,
+        "adam"
+      ]
+    ],
+    "production_mps_bond": 32,
+    "production_mpo_bond": 128,
+    "reference_agreement_tolerance": 0.012,
+    "local_optimizer_consistency_tolerance": 0.001,
+    "fourier_96_vs_112_tolerance": 5e-06,
+    "quadrature_192_vs_224_tolerance": 1e-08,
+    "peak_cuda_memory_budget_bytes": 2147483648
+  },
+  "blind_scale_scan": [
+    {
+      "scale": 0.4,
+      "scale_ratio": 2.5,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 634.7047768572038,
+          "final_energy": 44.51012451147365
+        }
+      ],
+      "initial_energy": 634.7047768572038,
+      "final_energy": 44.51012451147365,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 17.004188899998553,
+      "peak_cuda_memory_bytes": 759601664
+    },
+    {
+      "scale": 0.4,
+      "scale_ratio": 3.0,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 661.8861564417733,
+          "final_energy": 44.46406217043555
+        }
+      ],
+      "initial_energy": 661.8861564417733,
+      "final_energy": 44.46406217043555,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.627671500085853,
+      "peak_cuda_memory_bytes": 768221184
+    },
+    {
+      "scale": 0.45,
+      "scale_ratio": 2.5,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 520.5164379392448,
+          "final_energy": 44.60397605824051
+        }
+      ],
+      "initial_energy": 520.5164379392448,
+      "final_energy": 44.60397605824051,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.66392639989499,
+      "peak_cuda_memory_bytes": 768221184
+    },
+    {
+      "scale": 0.45,
+      "scale_ratio": 3.0,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 542.7467848613916,
+          "final_energy": 44.46679221974456
+        }
+      ],
+      "initial_energy": 542.7467848613916,
+      "final_energy": 44.46679221974456,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.743374399957247,
+      "peak_cuda_memory_bytes": 768221184
+    },
+    {
+      "scale": 0.5,
+      "scale_ratio": 2.5,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 442.33853485225575,
+          "final_energy": 44.465122104897766
+        }
+      ],
+      "initial_energy": 442.33853485225575,
+      "final_energy": 44.465122104897766,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.694955699960701,
+      "peak_cuda_memory_bytes": 768221184
+    },
+    {
+      "scale": 0.5,
+      "scale_ratio": 3.0,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 461.1937142432822,
+          "final_energy": 44.49916592905078
+        }
+      ],
+      "initial_energy": 461.1937142432822,
+      "final_energy": 44.49916592905078,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.8833504000213,
+      "peak_cuda_memory_bytes": 768221184
+    },
+    {
+      "scale": 0.55,
+      "scale_ratio": 2.5,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 388.07521832148336,
+          "final_energy": 44.46243809322133
+        }
+      ],
+      "initial_energy": 388.07521832148336,
+      "final_energy": 44.46243809322133,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.75927319994662,
+      "peak_cuda_memory_bytes": 768221184
+    },
+    {
+      "scale": 0.55,
+      "scale_ratio": 3.0,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 404.60148462402634,
+          "final_energy": 44.45961412594886
+        }
+      ],
+      "initial_energy": 404.60148462402634,
+      "final_energy": 44.45961412594886,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.798194300034083,
+      "peak_cuda_memory_bytes": 768221184
+    },
+    {
+      "scale": 0.6,
+      "scale_ratio": 2.5,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 350.44622323441735,
+          "final_energy": 44.46309132704866
+        }
+      ],
+      "initial_energy": 350.44622323441735,
+      "final_energy": 44.46309132704866,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.780437899986282,
+      "peak_cuda_memory_bytes": 768221184
+    },
+    {
+      "scale": 0.6,
+      "scale_ratio": 3.0,
+      "seed": 1940,
+      "requested_mps_bond": 16,
+      "optimization_stages": [
+        {
+          "steps": 250,
+          "learning_rate": 0.01,
+          "optimizer": "adam",
+          "initial_energy": 365.37129804383994,
+          "final_energy": 44.460752723442674
+        }
+      ],
+      "initial_energy": 365.37129804383994,
+      "final_energy": 44.460752723442674,
+      "actual_mps_maximum_bond": 16,
+      "mpo_compression_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "dense_raw_fourier_bulk_materialized": false,
+      "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+      "elapsed_seconds": 14.249462699983269,
+      "peak_cuda_memory_bytes": 768221184
+    }
+  ],
+  "selected_scale": 0.55,
+  "selected_scale_ratio": 3.0,
+  "production": {
+    "scale": 0.55,
+    "scale_ratio": 3.0,
+    "seed": 1941,
+    "requested_mps_bond": 32,
+    "optimization_stages": [
+      {
+        "steps": 300,
+        "learning_rate": 0.01,
+        "optimizer": "adam",
+        "initial_energy": 407.0522447184284,
+        "final_energy": 44.46363159757387
+      },
+      {
+        "steps": 500,
+        "learning_rate": 0.003,
+        "optimizer": "adam",
+        "initial_energy": 44.46363159757387,
+        "final_energy": 44.4533731881216
+      },
+      {
+        "steps": 500,
+        "learning_rate": 0.001,
+        "optimizer": "adam",
+        "initial_energy": 44.4533731881216,
+        "final_energy": 44.45290221256949
+      },
+      {
+        "steps": 300,
+        "learning_rate": 0.0003,
+        "optimizer": "adam",
+        "initial_energy": 44.45290221256949,
+        "final_energy": 44.45284422328475
+      }
+    ],
+    "initial_energy": 407.0522447184284,
+    "final_energy": 44.45284422328475,
+    "actual_mps_maximum_bond": 32,
+    "mpo_compression_ranks": [
+      128,
+      128,
+      128,
+      128,
+      128,
+      128,
+      128
+    ],
+    "dense_raw_fourier_bulk_materialized": false,
+    "maximum_mpo_build_intermediate_tensor_elements": 7870464,
+    "elapsed_seconds": 159.34852800006047,
+    "peak_cuda_memory_bytes": 768552960
+  },
+  "basis_control": {
+    "basis_order": 12,
+    "scale": 0.55,
+    "scale_ratio": 3.0,
+    "primitive_overlap_condition_number": 75353.05687412602,
+    "independent_quadrature_points": 1000,
+    "orthonormality_maximum_absolute_residual": 4.73499017772383e-11,
+    "collision_boundary_maximum_absolute_value": 0.0
+  },
+  "fixed_state_fourier_scan": [
+    {
+      "fourier_order": 80,
+      "local_quadrature_order": 224,
+      "mpo_maximum_bond": 160,
+      "energy_on_fixed_production_state": 44.45284852963206,
+      "dense_raw_fourier_bulk_materialized": false
+    },
+    {
+      "fourier_order": 96,
+      "local_quadrature_order": 224,
+      "mpo_maximum_bond": 160,
+      "energy_on_fixed_production_state": 44.45284193257854,
+      "dense_raw_fourier_bulk_materialized": false
+    },
+    {
+      "fourier_order": 112,
+      "local_quadrature_order": 224,
+      "mpo_maximum_bond": 160,
+      "energy_on_fixed_production_state": 44.45283910854241,
+      "dense_raw_fourier_bulk_materialized": false
+    }
+  ],
+  "fixed_state_local_quadrature_scan": [
+    {
+      "fourier_order": 96,
+      "local_quadrature_order": 160,
+      "mpo_maximum_bond": 160,
+      "energy_on_fixed_production_state": 44.452841932576305,
+      "dense_raw_fourier_bulk_materialized": false
+    },
+    {
+      "fourier_order": 96,
+      "local_quadrature_order": 192,
+      "mpo_maximum_bond": 160,
+      "energy_on_fixed_production_state": 44.452841932581705,
+      "dense_raw_fourier_bulk_materialized": false
+    },
+    {
+      "fourier_order": 96,
+      "local_quadrature_order": 224,
+      "mpo_maximum_bond": 160,
+      "energy_on_fixed_production_state": 44.45284193257854,
+      "dense_raw_fourier_bulk_materialized": false
+    }
+  ],
+  "independent_chi32_local_optimizer": {
+    "initial_energy": 44.45284422328475,
+    "history": [
+      {
+        "sweep": 0,
+        "direction": "right",
+        "energy": 44.45278808210106,
+        "local_last_energy": 44.45278808210092,
+        "truncation_errors": [
+          0.0,
+          0.0,
+          1.408873018250229e-13,
+          1.6325829577114613e-12,
+          2.326139281194456e-12,
+          1.3677947663383802e-13,
+          0.0
+        ],
+        "max_trunc": 2.326139281194456e-12,
+        "bond_dims": [
+          12,
+          32,
+          32,
+          32,
+          32,
+          32,
+          12
+        ],
+        "max_bond": 32,
+        "solver": "lanczos"
+      },
+      {
+        "sweep": 1,
+        "direction": "left",
+        "energy": 44.4527880820514,
+        "local_last_energy": 44.4527880820517,
+        "truncation_errors": [
+          0.0,
+          1.233457780358693e-13,
+          2.7594593277054796e-12,
+          2.7762236953786592e-12,
+          1.2456702336300393e-13,
+          -1.110223024625285e-16,
+          0.0
+        ],
+        "max_trunc": 2.7762236953786592e-12,
+        "bond_dims": [
+          12,
+          32,
+          32,
+          32,
+          32,
+          32,
+          12
+        ],
+        "max_bond": 32,
+        "solver": "lanczos"
+      }
+    ],
+    "final_energy": 44.4527880820514,
+    "absolute_difference_vs_global_AD": 5.614123335107024e-05,
+    "elapsed_seconds": 47.493753899936564,
+    "peak_cuda_memory_bytes": 1069710336
+  },
+  "exterior_D14_Q160_numerical_reference": 44.445670415298615,
+  "reference_is_numerical_not_continuum_bound": true,
+  "production_error_vs_exterior_D14_reference": 0.0071738079861347614,
+  "gate_f_D10_error_vs_same_D14_reference": 0.008702848276776365,
+  "basis_error_reduction_fraction_vs_gate_f_D10": 0.17569423733628242,
+  "fourier_96_vs_112_energy_absolute_difference": 2.8240361302778183e-06,
+  "quadrature_192_vs_224_energy_absolute_difference": 3.161915174132446e-12,
+  "reference_agreement_pass": true,
+  "basis_improves_vs_gate_f_D10": true,
+  "local_optimizer_consistency_pass": true,
+  "fourier_convergence_pass": true,
+  "local_quadrature_convergence_pass": true,
+  "memory_budget_pass": true,
+  "n8_D12_refinement_pass": true
+}

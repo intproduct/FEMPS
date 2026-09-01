@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "experiment": "phase19_n8_exterior_D14_reference_extension",
+  "hamiltonian": "spin-polarized N=8, g=a=omega=1 on R",
+  "truth_path": "direct four-index Slater-Condon exterior Hamiltonian",
+  "reference_is_numerical_not_continuum_bound": true,
+  "source_records": {
+    "D12": "docs\\experiments\\results\\soft_coulomb_n8_truth_sweep.json",
+    "D14_Q128": "tmp\\soft_coulomb_n8_d14_q128.json",
+    "D14_Q160": "tmp\\soft_coulomb_n8_d14_feasibility.json"
+  },
+  "D12_Q160": {
+    "N": 8,
+    "D": 12,
+    "Q": 160,
+    "exterior_dimension": 495,
+    "ground_energy": 44.446009528435034,
+    "hermiticity_residual": 1.585775334278158e-18,
+    "elapsed_seconds": 26.078575000050478,
+    "energy_difference_vs_largest_Q": 0.0
+  },
+  "D14_quadrature_scan": [
+    {
+      "N": 8,
+      "D": 14,
+      "Q": 128,
+      "exterior_dimension": 3003,
+      "ground_energy": 44.44567041529769,
+      "hermiticity_residual": 1.9796331508566653e-18,
+      "elapsed_seconds": 263.16375809989404,
+      "energy_difference_vs_largest_Q": 0.0,
+      "energy_difference_vs_largest_D": 0.0
+    },
+    {
+      "N": 8,
+      "D": 14,
+      "Q": 160,
+      "exterior_dimension": 3003,
+      "ground_energy": 44.445670415298615,
+      "hermiticity_residual": 2.093315712560524e-18,
+      "elapsed_seconds": 262.37032650003675,
+      "energy_difference_vs_largest_Q": 0.0,
+      "energy_difference_vs_largest_D": 0.0
+    }
+  ],
+  "D14_Q128_minus_Q160": -9.237055564881302e-13,
+  "D12_Q160_minus_D14_Q160": 0.00033911313641965535,
+  "strongest_numerical_reference": {
+    "basis_order": 14,
+    "quadrature_order": 160,
+    "ground_energy": 44.445670415298615
+  }
+}

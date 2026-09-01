@@ -60,3 +60,20 @@ training choices before same-basis truth/reference audits. It writes an ignored
 recoverable checkpoint before local DMRG, records the chi-32 resource rejection,
 and distinguishes the Gate F core pass from the failed auxiliary raw-gradient
 threshold.
+
+The completed Phase 19 Gate G evidence is reproduced from fresh AD states by:
+
+```powershell
+python scripts/benchmark_phase19_dmrg_memory.py --device auto
+python scripts/benchmark_phase19_mpo_tangent.py --device auto
+python scripts/benchmark_phase19_mpo_bond_training.py --device auto
+python scripts/benchmark_phase19_n8_d12_basis.py --device auto
+python scripts/build_phase19_resource_trend.py
+```
+
+These respectively audit the staged chi-32 effective-Hamiltonian contraction,
+left-gauge physical tangent derivatives across MPO bonds, matched bond
+training, blind D12 basis/operator/reference refinement, and the descriptive
+N=2/4/6/8 accuracy/resource trend. The raw Gate F tensor-gradient miss remains
+in its original record. The D14 exterior value is a numerical reference rather
+than a continuum certificate, and the trend explicitly does not admit N=10.

@@ -1,5 +1,27 @@
 # Research changelog
 
+## 2026-09-01 - Phase 19 resource-safe N=8 Gate G
+
+- Reordered latticeTN's two-site effective-Hamiltonian action into four bounded
+  contractions, removing a 78.12 GiB path; formal chi-32 N=8,D=10 DMRG peaks at
+  736,884,736 CUDA bytes and converges across two sweeps to `3.68e-11`.
+- Added left-gauge, many-body-normalized MPS physical tangent directions and
+  finite-difference tests. MPO bond 128 passes all tangent and energy budgets
+  against bond 192 while the Gate F raw-coordinate miss remains recorded.
+- Matched seed/schedule training at MPO bonds 128, 160, and 192; all pass the
+  reference-energy and 2 GiB budgets, retaining 128 as the smallest production
+  bond.
+- Extended the independent N=8 exterior reference to D=14; Q128/Q160 differs by
+  `9.24e-13`, with the value still labeled numerical rather than a continuum
+  bound.
+- Completed a blind N=8,D=12 multiscale run at `(ell,rho)=(0.55,3.0)`. Its
+  `7.174e-3` error against D14 is `17.6%` below Gate F D10 against the same
+  reference, and all Fourier/quadrature/optimizer/memory controls pass.
+- Reassessed N=2/4/6/8 accuracy and resources. Gate G passes at controlled N=8
+  scope, but N=10 and favorable asymptotic scaling remain unadmitted.
+- Issued ADR 0009 and advanced the active plan to a restricted exterior-
+  correlation gate beyond known finite LC-AGP/Gaussian structure.
+
 ## 2026-09-01 - Phase 16 continuous ordered-distance Gate D
 
 - Derived the exact unit-Jacobian center-of-mass/positive-gap map, its Cartan

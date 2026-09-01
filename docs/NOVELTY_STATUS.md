@@ -70,3 +70,14 @@ memory but do not establish a new ansatz class. The retained raw-gradient
 auxiliary miss, numerical rather than continuum N=8 reference, and chi-32
 local-solver resource rejection explicitly preclude an asymptotic or method-
 priority claim.
+
+Phase 19 closes those two operational Gate F qualifications without broadening
+the novelty claim. A bounded local effective-Hamiltonian contraction order, a
+left-gauge physical-tangent audit, matched MPO-bond training, and a blind D12
+refinement are implementation and evidence controls inside the same Hong et
+al./Li--Waintal parent route. The exterior D14 value remains a numerical
+reference, the N=2/4/6/8 trend does not admit N=10, and the route is still not
+called FEMPS. Phase 20 therefore returns to the unresolved novelty boundary: a
+restricted exterior correlation structure that is both genuinely beyond
+finite LC-AGP/Gaussian families and exactly polynomially contractible, or a
+documented negative classification.

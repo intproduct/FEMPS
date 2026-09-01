@@ -239,6 +239,21 @@ numerical reference. A right-canonical chi-16 local DMRG audit reaches
 chi-32 local contraction itself is resource rejected at a 78.12 GiB requested
 intermediate on a 23.89 GiB GPU.
 
+Phase 19 repairs that contraction ordering. Four explicit two-operand actions
+bound the staged intermediates, and a formal D=10,chi=32 reproduction peaks at
+736,884,736 CUDA bytes. A left-gauge physical-tangent audit compares bonds 128
+and 192 without raw tensor-coordinate ambiguity: the relative directional-
+derivative L2 difference is `2.02e-5`, maximum difference `3.94e-8`, and cosine
+`0.999999999811`.
+
+A blind D=12 scan selects `(ell,rho)=(0.55,3.0)` and gives production energy
+`44.4528442233`. Its error against an exterior D14 Q160 numerical reference is
+`7.174e-3`, `17.6%` below the Gate F D10 error against the same reference. The
+D14 Q128/Q160 difference is `9.24e-13`, while the D12-to-D14 reference shift is
+`3.391e-4`; neither observation supplies a continuum bound. Fixed-state
+M96/M112 and Q192/Q224 differences are `2.824e-6` and `3.162e-12`, and the
+D=12 chi-32 local optimizer stays below 1.1 GB.
+
 ## Gate E decision
 
 Gate E is **PASS (controlled unbounded N=6 prototype)**. The coordinate map,
@@ -266,3 +281,17 @@ The additional bond-128/192 raw parameter-gradient relative threshold misses
 gradient cosine similarity is `0.999999999584`. This auxiliary miss and the
 chi-32 local-solver resource rejection remain explicit. N=10, continuum
 convergence rates, and favorable asymptotic scaling are not inferred.
+
+## Gate G decision
+
+Gate G is **PASS (resource-closed controlled N=8 point)**. The chi-32 local
+resource rejection is removed by the bounded staged action, and bond 128
+passes predeclared energy plus left-gauge physical-tangent comparisons against
+bond 192. Matched bond training retains 128 as the smallest passing production
+choice. The blind D12 refinement passes its basis, Fourier, local-quadrature,
+independent-optimizer, reference-agreement, and 2 GiB resource budgets.
+
+The Gate F raw-coordinate threshold remains recorded as a historical auxiliary
+miss; it is not retroactively redefined. Exterior D14 remains a finite-basis
+numerical reference. The heterogeneous N=2/4/6/8 accuracy/resource trend is
+descriptive, not an asymptotic fit, and N=10 remains unadmitted.

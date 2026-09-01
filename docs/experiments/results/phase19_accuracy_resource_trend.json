@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "experiment": "phase19_n2_n4_n6_n8_accuracy_resource_reassessment",
+  "scope": "representative best controlled points; descriptive comparison, not a matched-order scaling fit",
+  "source_records": {
+    "phase18_controls": "docs\\experiments\\results\\phase18_basis_structured_controls.json",
+    "phase18_n6_n8": "docs\\experiments\\results\\phase18_multiscale_n6_n8.json",
+    "phase19_n8_D12": "docs\\experiments\\results\\phase19_n8_d12_multiscale.json"
+  },
+  "points": [
+    {
+      "particles": 2,
+      "basis_order": 10,
+      "energy": 2.5538319357803423,
+      "reference_energy": 2.553831733978763,
+      "absolute_reference_error": 2.0180157944693633e-07,
+      "reference_description": "independent relative-coordinate continuum numerical value",
+      "reference_is_numerical_not_continuum_bound": false,
+      "method": "dense_same_basis_eigensolve",
+      "mpo_internal_ranks": [
+        5
+      ],
+      "stored_mpo_tensor_elements": 1000,
+      "absolute_reference_error_per_stored_mpo_element_diagnostic": 2.0180157944693634e-10,
+      "elapsed_seconds": null,
+      "peak_cuda_memory_bytes": null,
+      "source_record": "docs\\experiments\\results\\phase18_basis_structured_controls.json"
+    },
+    {
+      "particles": 4,
+      "basis_order": 8,
+      "energy": 11.023980537318412,
+      "reference_energy": 11.023082853674637,
+      "absolute_reference_error": 0.0008976836437746272,
+      "reference_description": "exterior D=14 numerical reference",
+      "reference_is_numerical_not_continuum_bound": true,
+      "method": "matrix_free_product_basis_lanczos",
+      "mpo_internal_ranks": [
+        64,
+        64,
+        64
+      ],
+      "stored_mpo_tensor_elements": 532480,
+      "absolute_reference_error_per_stored_mpo_element_diagnostic": 1.6858541987954987e-09,
+      "elapsed_seconds": 0.5690266999881715,
+      "peak_cuda_memory_bytes": null,
+      "source_record": "docs\\experiments\\results\\phase18_basis_structured_controls.json"
+    },
+    {
+      "particles": 6,
+      "basis_order": 10,
+      "energy": 25.05183681557542,
+      "reference_energy": 25.049366416096817,
+      "absolute_reference_error": 0.0024703994786037242,
+      "reference_description": "exterior D=12 numerical reference",
+      "reference_is_numerical_not_continuum_bound": true,
+      "method": "native global-AD MPS/MPO production",
+      "mpo_internal_ranks": [
+        100,
+        128,
+        128,
+        128,
+        128
+      ],
+      "stored_mpo_tensor_elements": 6218000,
+      "absolute_reference_error_per_stored_mpo_element_diagnostic": 3.9729808276032873e-10,
+      "elapsed_seconds": 71.65474700008053,
+      "peak_cuda_memory_bytes": 424656896,
+      "source_record": "docs\\experiments\\results\\phase18_multiscale_n6_n8.json"
+    },
+    {
+      "particles": 8,
+      "basis_order": 12,
+      "energy": 44.45284422328475,
+      "reference_energy": 44.445670415298615,
+      "absolute_reference_error": 0.0071738079861347614,
+      "reference_description": "exterior D=14 numerical reference",
+      "reference_is_numerical_not_continuum_bound": true,
+      "method": "native global-AD MPS/MPO production",
+      "mpo_internal_ranks": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "stored_mpo_tensor_elements": 14192640,
+      "absolute_reference_error_per_stored_mpo_element_diagnostic": 5.054597302640497e-10,
+      "elapsed_seconds": 159.34852800006047,
+      "peak_cuda_memory_bytes": 768552960,
+      "source_record": "docs\\experiments\\results\\phase19_n8_d12_multiscale.json"
+    }
+  ],
+  "n8_vs_n6_production_ratios": {
+    "stored_mpo_tensor_elements": 2.282508845287874,
+    "elapsed_seconds": 2.2238377033119856,
+    "peak_cuda_memory_bytes": 1.8098209807477141,
+    "absolute_reference_error": 2.903906047692908
+  },
+  "interpretation": {
+    "accuracy_per_entry_is_descriptive_only": true,
+    "heterogeneous_solver_resources_are_not_directly_comparable": true,
+    "reference_errors_do_not_define_continuum_error_bounds": true,
+    "favorable_asymptotic_scaling_inferred": false,
+    "n10_admitted": false,
+    "n10_decision": "defer: the refined N=8 point is controlled, but reference error still grows with particle number at representative local orders and no continuum/asymptotic resource law exists"
+  },
+  "resource_reassessment_complete": true
+}

@@ -75,8 +75,17 @@ functional-basis layer for controlled small systems. Gate E adds the
 interacting unbounded odd-Hermite path through controlled N=6 and globally
 audited Fourier-MPO compression. Gate F adds the multiscale basis, removes raw
 `W^2 D^2` bulk materialization, and admits one qualified controlled N=8 point.
-The remaining resource boundary is the latticeTN chi-32 two-site effective-
-Hamiltonian contraction, not the production global-AD MPO builder.
+Gate F's remaining resource boundary was the latticeTN chi-32 two-site
+effective-Hamiltonian contraction, not the production global-AD MPO builder.
+
+Phase 19 replaces the local solver's single five-operand einsum by four
+explicit two-operand contractions. This bounds each intermediate by
+`chi_left*chi_right*W*D^2`; the formal N=8,D=10,chi=32 audit peaks below 1 GiB,
+and the refined D=12 audit remains below 1.1 GB. A FEMPS-side benchmark layer
+constructs left-gauge physical MPS tangent directions for operator audits, but
+the solver itself remains an upstream latticeTN component rather than code
+copied into this repository. Gate G admits the resource-closed D12 point while
+retaining N=10 and asymptotic claims as unapproved.
 
 The finite-AGP optimizer accepts either the configured harmonic/soft-Coulomb
 operators or an explicitly identified external one-/two-body functional

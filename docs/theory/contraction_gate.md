@@ -4,7 +4,8 @@
 > identities below remain valid, but the original `OPEN` decision was replaced
 > by ADR 0003 after Phase 13 proved a conditional #P-hardness obstruction for
 > the unrestricted family. Phases 20--22 then classified several restricted
-> algebras and sparse growing-memory candidates. See
+> algebras and sparse growing-memory candidates; Phase 26 strengthened the
+> obstruction to fixed maximum one-form bond three. See
 > `exterior_no_go_hierarchy.md` for the current boundary.
 
 ## Current exact routes
@@ -102,15 +103,19 @@ permanent-complexity assumption.** The two direct exact routes remain:
 - exponential virtual-path count, or
 - combinatorial exterior-space dimension.
 
-Phase 13 additionally embeds a row-ordered Cayley determinant over `Mat_2` into
-a polynomial-size matrix-pair state and then into one-form FEMPS. Exact squared-
-norm evaluation would therefore compute a permanent. Phase 22 gives an
-independent obstruction already for an upper-bidiagonal unique-path APG state.
+Phase 26 directly embeds a row-ordered Cayley determinant over `Mat_2` into
+site-indexed one-form cores of bond two; scalar-reference polarization raises
+the maximum bond only to three. Exact squared-norm evaluation for this fixed
+class would therefore solve a #P-hard source problem. Phase 13's tagged
+matrix-pair construction and Phase 22's upper-bidiagonal unique-path APG state
+remain independent mechanisms.
 
 A later structured family may pass only after a fresh gate proves both joint-
 polynomial observable contraction and a novelty boundary beyond polynomial
 LC-AGP/Gaussian prior art. The current generic FAIL does not rule out controlled
-approximation, statistics-carrier factorization, or ordered-sector methods.
+additive/promised approximation, physically restricted four-form families, or
+ordered-sector methods; the tested universal direct statistics-carrier tensor
+product was separately rejected in Phase 25.
 
 ## Literature boundary
 

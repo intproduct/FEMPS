@@ -29,7 +29,19 @@ short physics/method paper and a longer mathematical appendix.
 - Present small exact norm/operator oracles only as definition tests.
 - State explicitly that compact parameter count is not a contraction theorem.
 
-## 4. Sparse APG permanent obstruction
+## 4. Fixed-bond direct Cayley obstruction
+
+- Define site-indexed matrix-valued one-form cores.
+- Prove that the top exterior coefficient is the row-ordered `Mat_2` Cayley
+  determinant with no order tags and maximum hard-state bond two.
+- Recover signed amplitudes from two exact squared norms by adjoining a scalar
+  reference block, raising the maximum bond only to three.
+- State the fixed-parameter conditional #P-hardness theorem and its N=2--6
+  exact certificate.
+- Explain why site-labelled row order does not contradict the homogeneous
+  fixed-`Mat_2` pair-power collapse.
+
+## 5. Sparse APG permanent obstruction
 
 - Identify the unique-path upper-bidiagonal state as APG.
 - Attribute permanent-valued APG/APIG coefficients.
@@ -38,7 +50,7 @@ short physics/method paper and a longer mathematical appendix.
 - Embed the matrix-pair state into one-form FEMPS.
 - Explain why this is contraction hardness, not exterior AGP-rank hardness.
 
-## 5. Independent noncommutative order-memory obstruction
+## 6. Independent noncommutative order-memory obstruction
 
 - Introduce matrix-valued pair powers as a subfamily.
 - Derive the symmetrized noncommutative Pfaffian coefficient.
@@ -46,7 +58,7 @@ short physics/method paper and a longer mathematical appendix.
 - Embed into one-form FEMPS and reduce amplitude to exact squared norm.
 - State the conditional #P-hardness theorem and its exact certificate.
 
-## 6. Restricted-algebra classification
+## 7. Restricted-algebra classification
 
 - Prove the `T_2` and fixed `Mat_2` homogeneous-power collapses.
 - State the bounded Wedderburn--radical LC-AGP theorem draft.
@@ -54,7 +66,7 @@ short physics/method paper and a longer mathematical appendix.
 - Emphasize the corrected distinction between row-ordered determinant hardness
   and symmetrized pair powers.
 
-## 7. What remains algorithmically viable
+## 8. What remains algorithmically viable
 
 - Polynomial Pfaffian/finite-LC-AGP controls and their direct prior art.
 - Split approximate exterior contraction into the entrywise-nonnegative FPRAS
@@ -68,14 +80,14 @@ short physics/method paper and a longer mathematical appendix.
 - Ordered COM/gap functional MPS as the independently validated control,
   including its Hong/Li--Waintal parentage and finite-scope evidence.
 
-## 8. Numerical and exact evidence
+## 9. Numerical and exact evidence
 
 - 2201 baseline reproduction and GPU/backend validation.
 - N=2/4/6/8 controls demonstrating the representation distinction.
 - Exact certificate table with hashes, fields, and reproduction commands.
 - Do not mix exploratory floating-point ranks with mathematical proof.
 
-## 9. Discussion
+## 10. Discussion
 
 - Two independent costs: exchange representation versus exterior contraction.
 - Why fermionic signs/Grassmann bookkeeping alone do not create closure.

@@ -1,5 +1,39 @@
 # Research changelog
 
+## 2026-09-01 - Phase 26 manuscript v1 and fixed-bond proof audit
+
+- Replaced the provisional fixed-small-bond conjecture by a direct theorem:
+  site-indexed one-form cores encode the row-ordered Cayley determinant at
+  bond two, and a scalar-reference direct sum recovers its signed amplitude
+  from two exact squared-norm queries at maximum bond three.
+- Added an implementation-independent exact-integer verifier for orders 2--6,
+  all four matrix boundaries, the bond-three polarization construction, and
+  exact antisymmetry, with certificate hash
+  `1d2208d3e5cb14f5c8e6c875f7fddf51c47ce9a3e61be6cedb8246d662b3a016`.
+- Added the production one-form Cayley-core constructor and materialization/
+  squared-norm regressions for orders 2--4.
+- Assembled R1--R2 and C1--C6 into an 11-page internal synthesis manuscript,
+  including a proof-audit ledger, full evidence hashes, limitations, and an
+  expanded AGP/number-projection/Pfaffian/mVMC/fermionic-entropy bibliography.
+- Compiled the manuscript with resolved citations and no LaTeX, box, or layout
+  warnings; a full-page contact-sheet inspection found no clipping or broken
+  page flow.
+- Passed the complete `209`-test suite with one unchanged latticeTN report-path
+  warning and issued ADR 0016 for external proof review.
+
+## 2026-09-01 - First-draft reviewer-response handoff
+
+- Prepared a bilingual reviewer-response memorandum to accompany the second
+  draft, separating accepted, qualified, and not-adopted recommendations.
+- Synchronized the response with the Phase 24 approximation boundary and the
+  closed Phase 25 statistics-carrier result.
+- Recorded fixed-small-bond noncommutative-determinant hardness as a conjecture
+  at handoff; the subsequent Phase 26 audit resolved it by the direct
+  site-indexed one-form construction above.
+- Passed document structural and accessibility audits with zero reported
+  issues; page-render inspection remains unavailable in the current
+  environment because LibreOffice is not installed.
+
 ## 2026-09-01 - Phase 25 statistics-carrier/multiplicity Gate L
 
 - Defined the proposed cut object as the image of the exterior contraction map

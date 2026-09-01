@@ -1,12 +1,13 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newcommand{\Mat}{\operatorname{Mat}}
 \newcommand{\CayleyDet}{\operatorname{CDet}}
 
-\title{Exact and Relative-Approximation Squared-Norm Obstructions for Generic Matrix-Wedge FEMPS}
+\title{Fixed-Bond Exact and Relative-Approximation Squared-Norm Obstructions for Matrix-Wedge FEMPS}
 \author{Working theorem draft}
 \date{2026-09-01}
 
@@ -14,9 +15,15 @@
 \maketitle
 
 \paragraph{Evidence status.}
-The algebraic reduction below is a proof draft. An independent exact-integer
-enumerator verifies its core identity through order four. The complexity input
-is Theorem~3.5 of Chien--Harsha--Sinclair--Srinivasan
+The algebraic reductions below are proof drafts. An independent exact-integer
+enumerator verifies the direct fixed-bond identity, boundary contraction, and
+norm polarization through order six; its certificate hash is
+\begin{center}
+\small\texttt{1d2208d3e5cb14f5c8e6c875f7fddf51c47ce9a3e61be6cedb8246d662b3a016}.
+\end{center}
+The earlier shift-tag identity is independently certified through order four.
+The complexity input is Theorem~3.5 of
+Chien--Harsha--Sinclair--Srinivasan
 \cite{ChienEtAl2011}: the row-ordered
 determinant over $\Mat_2(\mathbb F)$ is \#P-hard when $\mathbb F$ has
 characteristic zero. The later bandwidth-one theorem uses Valiant's
@@ -24,6 +31,74 @@ characteristic zero. The later bandwidth-one theorem uses Valiant's
 integer/rational certificate through pair order six. A separate exact-rational
 certificate checks the approximation conditioning and Rayleigh-quotient bounds
 below. External proof review is still required.
+
+\section{Direct one-form Cayley coefficient}
+
+Let $A=(A_{ij})$ be an $n\times n$ matrix over $\Mat_d(\mathbb F)$ and define
+the site-dependent matrix-valued one-forms
+\[
+  \mathcal A^{[i]}=\sum_{j=1}^n A_{ij}e_j,
+  \qquad 1\le i\le n.
+\]
+For boundary vectors $u,v\in\mathbb F^d$, set
+\[
+  \Phi(A;u,v)=u^{\mathsf T}
+  \mathcal A^{[1]}\wedge\cdots\wedge\mathcal A^{[n]}v
+  \in\Lambda^n\mathbb F^n.
+\]
+After absorbing $u$ and $v$ into the endpoint cores, this is an open-boundary
+one-form FEMPS whose internal bonds are all at most $d$.
+
+\begin{lemma}[Direct coefficient identity]
+With the increasing top form given unit norm,
+\[
+  \Phi(A;u,v)=
+  \bigl(u^{\mathsf T}\CayleyDet(A)v\bigr)
+  e_1\wedge\cdots\wedge e_n.
+\]
+\end{lemma}
+
+\begin{proof}
+Expanding the wedge, a nonzero top-degree term chooses every basis vector once
+and is therefore indexed by a permutation $\sigma\in S_n$.  Its exterior sign
+is $\operatorname{sgn}(\sigma)$, while its virtual contraction preserves the
+site order and equals
+$u^{\mathsf T}A_{1,\sigma(1)}\cdots A_{n,\sigma(n)}v$.
+Summing the terms gives the row-ordered Cayley determinant.
+\end{proof}
+
+\begin{theorem}[Fixed-bond exact squared-norm obstruction]
+Over $\mathbb Q$, exact squared-norm evaluation for rational one-form
+matrix-wedge FEMPS is \#P-hard under polynomial-time Turing reductions even
+when $D=N$ and every internal bond is at most three.  Thus a generic exact
+contraction algorithm polynomial in $(N,D)$ for the fixed class $\chi\le3$
+would imply $\mathrm{FP}=\#\mathrm P$.
+\end{theorem}
+
+\begin{proof}
+Computing $\CayleyDet(A)$ for
+$A\in\Mat_n(\Mat_2(\mathbb Q))$ is \#P-hard
+\cite{ChienEtAl2011}.  For each pair of standard boundary vectors $u,v$, the
+lemma gives a bond-two state with top coefficient
+$x=u^{\mathsf T}\CayleyDet(A)v$ and squared norm $x^2$.
+
+Let $\Theta=e_1\wedge\cdots\wedge e_n$.  A block-diagonal virtual direct sum of
+the bond-two hard cores and the bond-one cores for $\Theta$ represents
+$\Phi+\Theta$ with maximum bond three and squared norm $(x+1)^2$.  Two exact
+squared-norm queries recover the signed rational amplitude through
+\[
+  x=\frac{(x+1)^2-x^2-1}{2}.
+\]
+The four standard boundary pairs recover the matrix output.  The direct-sum
+cores, their rational bit lengths, and the factorial-free normalization above
+have descriptions polynomial in the source input.  The resulting states are
+alternating by construction, so their antisymmetry residual is exactly zero.
+\end{proof}
+
+This theorem concerns site-dependent one-form cores.  It does not contradict
+the polynomial LC--AGP collapse of a fixed $\Mat_2$ \emph{homogeneous pair
+power}: repeating one even two-form symmetrizes factor order, whereas the
+one-form construction retains the row order through the physical site label.
 
 \section{Matrix-valued pair powers}
 
@@ -112,12 +187,11 @@ matrix-valued two-form $\Omega_B$. Repeat the two cores $M$ times, insert
 $l^{\mathsf T}/M!$ in the first core, and contract $r$ in the last core.
 \end{proof}
 
-\begin{theorem}[Conditional generic exact squared-norm obstruction]
-Over $\mathbb Q$, exact squared-norm evaluation for unrestricted rational
-matrix-wedge FEMPS is \#P-hard under polynomial-time Turing reductions, even
-when $D=N$ and the maximum one-form FEMPS bond is $O(N^2)$. Consequently, a
-generic exact contraction algorithm polynomial jointly in $(N,D,\chi)$ would
-imply $\mathrm{FP}=\#\mathrm P$.
+\begin{theorem}[Independent homogeneous pair-power obstruction]
+Over $\mathbb Q$, exact squared-norm evaluation for rational matrix-valued
+pair powers is \#P-hard under polynomial-time Turing reductions.  The
+construction has $D=N$ and embeds in one-form FEMPS with maximum bond
+$O(N^2)$.
 \end{theorem}
 
 \begin{proof}
@@ -138,8 +212,8 @@ Exact squared-norm queries give $x^2$ and $(x+q)^2$, hence
 \[
  x=\frac{(x+q)^2-x^2-q^2}{2q}.
 \]
-Thus an exact polynomial-time squared-norm oracle computes every required Cayley
-determinant entry and therefore solves a \#P-hard problem.
+Thus an exact polynomial-time squared-norm oracle computes every required
+Cayley determinant entry and therefore solves a \#P-hard problem.
 \end{proof}
 
 \section{A simpler sparse-path obstruction}
@@ -273,9 +347,9 @@ and $n\ge\widetilde n-\Delta_n>0$.
 \end{proof}
 
 \paragraph{Scope.}
-The first two theorems concern exact arithmetic. The PSD transfer separately
-rules out a generic relative scheme under its stated complexity assumption.
-The sparse exact theorem rules out a generic
+The fixed-bond, homogeneous pair-power, and sparse-path theorems concern exact
+arithmetic. The PSD transfer separately rules out a generic relative scheme
+under its stated complexity assumption. The sparse exact theorem rules out a generic
 algorithm for a family that contains the upper-bidiagonal specialization; it
 does not make every sparse instance hard. Neither result excludes other
 structured restrictions, entrywise-nonnegative or additive promised

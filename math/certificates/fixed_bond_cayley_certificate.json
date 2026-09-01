@@ -1,0 +1,96 @@
+{
+  "arithmetic": "exact integers",
+  "cases": [
+    {
+      "amplitudes": [
+        {"hard_squared_norm": 1156, "left": 0, "polarization_recovery": -34, "polarized_top_exterior_coefficient": -33, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 1089, "top_exterior_coefficient": -34},
+        {"hard_squared_norm": 1225, "left": 0, "polarization_recovery": -35, "polarized_top_exterior_coefficient": -34, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 1156, "top_exterior_coefficient": -35},
+        {"hard_squared_norm": 529, "left": 1, "polarization_recovery": -23, "polarized_top_exterior_coefficient": -22, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 484, "top_exterior_coefficient": -23},
+        {"hard_squared_norm": 2500, "left": 1, "polarization_recovery": 50, "polarized_top_exterior_coefficient": 51, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 2601, "top_exterior_coefficient": 50}
+      ],
+      "antisymmetry_residual": 0,
+      "cayley_matrix": [[-34, -35], [-23, 50]],
+      "hard_femps_max_bond": 2,
+      "input_sha256": "c904e2b7ce74dab55b06559ac894f347ed0ed74a7ac250d254f4274eaad1acd2",
+      "matrix_block_dimension": 2,
+      "one_particle_dimension": 2,
+      "order": 2,
+      "physical_permutation_count": 2,
+      "polarized_femps_max_bond": 3
+    },
+    {
+      "amplitudes": [
+        {"hard_squared_norm": 152100, "left": 0, "polarization_recovery": 390, "polarized_top_exterior_coefficient": 391, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 152881, "top_exterior_coefficient": 390},
+        {"hard_squared_norm": 342225, "left": 0, "polarization_recovery": 585, "polarized_top_exterior_coefficient": 586, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 343396, "top_exterior_coefficient": 585},
+        {"hard_squared_norm": 1521, "left": 1, "polarization_recovery": -39, "polarized_top_exterior_coefficient": -38, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 1444, "top_exterior_coefficient": -39},
+        {"hard_squared_norm": 67600, "left": 1, "polarization_recovery": -260, "polarized_top_exterior_coefficient": -259, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 67081, "top_exterior_coefficient": -260}
+      ],
+      "antisymmetry_residual": 0,
+      "cayley_matrix": [[390, 585], [-39, -260]],
+      "hard_femps_max_bond": 2,
+      "input_sha256": "a03c5eaca291656f5b9321ee7e15442c4f1a9af82d74d148a6cc992f411d5992",
+      "matrix_block_dimension": 2,
+      "one_particle_dimension": 3,
+      "order": 3,
+      "physical_permutation_count": 6,
+      "polarized_femps_max_bond": 3
+    },
+    {
+      "amplitudes": [
+        {"hard_squared_norm": 71402500, "left": 0, "polarization_recovery": -8450, "polarized_top_exterior_coefficient": -8449, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 71385601, "top_exterior_coefficient": -8450},
+        {"hard_squared_norm": 19307236, "left": 0, "polarization_recovery": -4394, "polarized_top_exterior_coefficient": -4393, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 19298449, "top_exterior_coefficient": -4394},
+        {"hard_squared_norm": 0, "left": 1, "polarization_recovery": 0, "polarized_top_exterior_coefficient": 1, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 1, "top_exterior_coefficient": 0},
+        {"hard_squared_norm": 1399489, "left": 1, "polarization_recovery": 1183, "polarized_top_exterior_coefficient": 1184, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 1401856, "top_exterior_coefficient": 1183}
+      ],
+      "antisymmetry_residual": 0,
+      "cayley_matrix": [[-8450, -4394], [0, 1183]],
+      "hard_femps_max_bond": 2,
+      "input_sha256": "64e424083b28934ea935974f67c0935cc98b8fd0197a69beb5d1907f6f8b2ef5",
+      "matrix_block_dimension": 2,
+      "one_particle_dimension": 4,
+      "order": 4,
+      "physical_permutation_count": 24,
+      "polarized_femps_max_bond": 3
+    },
+    {
+      "amplitudes": [
+        {"hard_squared_norm": 1742478049, "left": 0, "polarization_recovery": 41743, "polarized_top_exterior_coefficient": 41744, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 1742561536, "top_exterior_coefficient": 41743},
+        {"hard_squared_norm": 77228944, "left": 0, "polarization_recovery": 8788, "polarized_top_exterior_coefficient": 8789, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 77246521, "top_exterior_coefficient": 8788},
+        {"hard_squared_norm": 1086032025, "left": 1, "polarization_recovery": -32955, "polarized_top_exterior_coefficient": -32954, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 1085966116, "top_exterior_coefficient": -32955},
+        {"hard_squared_norm": 1742478049, "left": 1, "polarization_recovery": -41743, "polarized_top_exterior_coefficient": -41742, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 1742394564, "top_exterior_coefficient": -41743}
+      ],
+      "antisymmetry_residual": 0,
+      "cayley_matrix": [[41743, 8788], [-32955, -41743]],
+      "hard_femps_max_bond": 2,
+      "input_sha256": "0acf5c603d3efd222a2bec7a05d07238cf865d83744839e1075570f67f1df655",
+      "matrix_block_dimension": 2,
+      "one_particle_dimension": 5,
+      "order": 5,
+      "physical_permutation_count": 120,
+      "polarized_femps_max_bond": 3
+    },
+    {
+      "amplitudes": [
+        {"hard_squared_norm": 639532885264, "left": 0, "polarization_recovery": 799708, "polarized_top_exterior_coefficient": 799709, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 639534484681, "top_exterior_coefficient": 799708},
+        {"hard_squared_norm": 7341576489, "left": 0, "polarization_recovery": -85683, "polarized_top_exterior_coefficient": -85682, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 7341405124, "top_exterior_coefficient": -85683},
+        {"hard_squared_norm": 13051691536, "left": 1, "polarization_recovery": -114244, "polarized_top_exterior_coefficient": -114243, "reference_coefficient": 1, "right": 0, "shifted_squared_norm": 13051463049, "top_exterior_coefficient": -114244},
+        {"hard_squared_norm": 686029536361, "left": 1, "polarization_recovery": -828269, "polarized_top_exterior_coefficient": -828268, "reference_coefficient": 1, "right": 1, "shifted_squared_norm": 686027879824, "top_exterior_coefficient": -828269}
+      ],
+      "antisymmetry_residual": 0,
+      "cayley_matrix": [[799708, -85683], [-114244, -828269]],
+      "hard_femps_max_bond": 2,
+      "input_sha256": "d31d9bf3d4f3fc85bc708a0c2ffdb90aa09a5ec0247062b25a8e70600580dec5",
+      "matrix_block_dimension": 2,
+      "one_particle_dimension": 6,
+      "order": 6,
+      "physical_permutation_count": 720,
+      "polarized_femps_max_bond": 3
+    }
+  ],
+  "certificate_sha256": "1d2208d3e5cb14f5c8e6c875f7fddf51c47ce9a3e61be6cedb8246d662b3a016",
+  "construction": "site-indexed one-form cores with direct Cayley coefficient",
+  "max_order": 6,
+  "min_order": 2,
+  "reduction": "two squared-norm queries and a scalar reference direct sum",
+  "schema": "femps.fixed-bond-cayley-certificate.v1"
+}

@@ -9,9 +9,23 @@ test. Every certificate pipeline must record the base field, exact arithmetic
 backend, parameters, seed where relevant, artifact hash, and independent
 verification command.
 
-`generic_femps_contraction_obstruction.tex` contains the Phase 13/14 tagged
-Cayley-determinant reduction and the conditional #P-hardness theorem for exact
-generic matrix-wedge FEMPS norms.
+`femps_no_go_manuscript.tex` is the Phase 26 unified internal manuscript. It
+assembles the ordinary particle-TT rank results, fixed-bond and sparse exterior
+contraction obstructions, restricted-algebra collapses, approximation boundary,
+statistics-carrier obstruction, and the numerical-control context in one
+proof-audited source.
+
+`generic_femps_contraction_obstruction.tex` now begins with the direct
+site-indexed one-form Cayley identity and the conditional #P-hardness theorem
+for exact squared norms at maximum bond three. It retains the Phase 13/14
+shift-tagged homogeneous pair-power reduction as an independent mechanism.
+
+`certificates/verify_fixed_bond_cayley.py` is an implementation-independent
+exact-integer verifier for the direct theorem. For orders two through six it
+checks all four boundary entries, explicit one-form virtual paths, the
+bond-three scalar-reference polarization, and exact antisymmetry. Its committed
+certificate hash is
+`1d2208d3e5cb14f5c8e6c875f7fddf51c47ce9a3e61be6cedb8246d662b3a016`.
 
 `certificates/verify_tagged_cayley.py` is an implementation-independent exact
 integer verifier. It enumerates perfect matchings and factor permutations

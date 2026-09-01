@@ -2,6 +2,8 @@
 
 - Status: accepted
 - Date: 2026-09-01
+- Primary-proof choice superseded by: ADR 0016 (fixed-bond direct Cayley
+  reduction); the two-axis hierarchy remains accepted.
 
 ## Context
 

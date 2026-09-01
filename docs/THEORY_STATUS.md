@@ -5,7 +5,7 @@
 | A decomposable normalized Slater state has a flat particle-cut Schmidt spectrum | proved in draft and numerically verified | External proof review and literature cross-check |
 | Ordinary particle TT must pay the exchange-statistics Schmidt multiplicity | proved in draft and numerically verified | Stronger concise/full-support bounds remain open |
 | Matrix-wedge FEMPS is associative and strictly antisymmetric | proved from exterior associativity; small-N verified | External algebra review |
-| Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed by two exact reductions: Phase 13 embeds permanent-hard `Mat_2` Cayley determinants using growing order tags, while Phase 22 directly embeds a 0--1 permanent in the squared norm of a bandwidth-one, unique-path APG state; both map with polynomial bond into one-form FEMPS | External proof review; only separately gated restrictions or controlled approximation remain open |
+| Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed already at fixed maximum bond three: site-indexed one-form bond-two cores encode the `Mat_2` row-ordered Cayley determinant, and a scalar-reference direct sum recovers signed amplitudes from exact squared norms; the Phase 13 tagged pair-power and Phase 22 bandwidth-one APG reductions remain independent mechanisms | External proof review; only separately gated restrictions or controlled approximation remain open |
 | Generic sparse-path FEMPS has a relative squared-norm PRAS | conditionally obstructed: on real-PSD paired coefficients, `M! sqrt(n_tilde)` would be a PRAS for the PSD permanent, which Meiburg excludes unless `RP=NP`; an exact-rational conditioning/energy certificate passes | External proof review; entrywise-nonnegative FPRAS, additive estimates with a certified norm lower bound, and separately promised structures remain open |
 | Every exterior cut support factors as fixed statistics carrier times canonical correlation multiplicity, with Slater multiplicity one | disproved for the direct tensor product: Slater `r_1=N` forces carrier dimension `N`, but a full-support two-Slater family has stable `r_1=N+2`; exact all-cut controls pass for `3<=N<=8` | External proof review; Hamiltonian-specific symmetry sectors and genuinely different categorical structures are not ruled out |
 | Uniformly bounded coefficient algebras define a distinct tractable matrix-pair family beyond finite LC-AGP | disproved in theorem draft: if the largest semisimple matrix block `p` and radical nilpotency index `d` are fixed, arbitrary-boundary pair powers collapse to polynomial-size LC-AGP; exact-rational `T2` M=1--6 and `Mat2` M=1--4 base cases pass | External proof review; search only growing-`p`/growing-`d` exact structures or controlled approximate contractions |
@@ -25,14 +25,16 @@ gauge-invariant multiplicity diagnostic, not an entanglement spectrum. Phase 12
 shows that the LC-AGP subclass is numerically systematic, but prior AGP-CI work
 precludes treating that fact as the core FEMPS method contribution.
 
-Phase 13 strengthens the generic status from “no recurrence known” to a
-conditional algebraic-complexity obstruction. The unrestricted dense
-matrix-wedge ansatz cannot be the promised exact polynomial solver unless the
-permanent admits a polynomial algorithm. This does not apply automatically to
-additional structured core algebras or approximation. Phase 24 separately
+Phase 26 strengthens the generic status from joint-polynomial hardness at
+growing bond to fixed-parameter hardness: exact squared-norm contraction for
+the admitted one-form class with `chi<=3` would imply `FP=#P`. The direct
+construction preserves row order through site labels and therefore does not
+contradict the polynomial LC-AGP collapse of a repeated homogeneous `Mat_2`
+pair power. This does not apply automatically to additional structured core
+algebras or approximation. Phase 24 separately
 rules out a generic **relative** squared-norm PRAS through real-PSD permanent
 inapproximability, while preserving entrywise-nonnegative and additive/
-conditioned approximation as explicit special cases. Phase 25 now tests the
+conditioned approximation as explicit special cases. Phase 25 then tested the
 remaining statistics-carrier/correlation-multiplicity factorization directly.
 
 Phase 25 rejects that factorization in its literal direct-tensor-product form.
@@ -40,8 +42,10 @@ The rank obstruction is coordinate/gauge invariant and stable, while standard
 symmetry adaptation yields either the one-dimensional sign irrep or the full
 orbital exterior representation. The Phase 22 projective-Slater output also
 shows that intrinsic multiplicity one does not evaluate a hard scalar from
-compact cores. Phase 26 now consolidates the full result package for external
-proof review rather than opening another optimizer branch.
+compact cores. Phase 26 consolidates the full result package in a single
+proof-audited manuscript and advances the research program to an independent
+four-form/exterior-geometry phase rather than another generic matrix-wedge
+optimizer branch.
 
 ADR 0004 makes ordered-sector/interparticle-distance functional TN the primary
 numerical research route. Phase 15 and ADR 0005 replace its dense comparator by

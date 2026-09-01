@@ -11,6 +11,57 @@ import torch
 from .reference import alternating_projection, normalized_slater_from_minors
 
 
+def cayley_femps_cores(
+    matrix_entries: torch.Tensor,
+    left_boundary: torch.Tensor,
+    right_boundary: torch.Tensor,
+) -> list[torch.Tensor]:
+    """Embed a row-ordered Cayley determinant at fixed FEMPS bond.
+
+    ``matrix_entries`` has shape ``(N, N, chi, chi)``. Site ``i`` emits the
+    one-form ``sum_j matrix_entries[i, j] e_j``; the virtual boundaries are
+    absorbed into the first and last cores. The coefficient of
+    ``e_1 wedge ... wedge e_N`` is therefore
+
+    ``left_boundary @ CDet(matrix_entries) @ right_boundary``.
+
+    This is an exact small-system construction, not a polynomial contraction
+    routine. In particular, ``chi=2`` already contains the standard hard
+    noncommutative-determinant family.
+    """
+
+    if matrix_entries.ndim != 4:
+        raise ValueError("matrix_entries must have shape (N, N, chi, chi)")
+    particles, dimension, left_bond, right_bond = matrix_entries.shape
+    if particles != dimension or left_bond != right_bond or particles < 1:
+        raise ValueError("matrix_entries must have shape (N, N, chi, chi), N >= 1")
+    if left_boundary.shape != (left_bond,) or right_boundary.shape != (left_bond,):
+        raise ValueError("boundaries must have shape (chi,)")
+    if (
+        left_boundary.dtype != matrix_entries.dtype
+        or right_boundary.dtype != matrix_entries.dtype
+        or left_boundary.device != matrix_entries.device
+        or right_boundary.device != matrix_entries.device
+    ):
+        raise ValueError("matrix entries and boundaries must share dtype and device")
+
+    if particles == 1:
+        value = torch.einsum(
+            "a,jab,b->j", left_boundary, matrix_entries[0], right_boundary
+        )
+        return [value.reshape(1, 1, 1)]
+
+    first = torch.einsum("a,jab->jb", left_boundary, matrix_entries[0])
+    cores = [first.unsqueeze(0)]
+    cores.extend(
+        matrix_entries[site].permute(1, 0, 2)
+        for site in range(1, particles - 1)
+    )
+    last = torch.einsum("jab,b->ja", matrix_entries[-1], right_boundary)
+    cores.append(last.transpose(0, 1).unsqueeze(-1))
+    return cores
+
+
 def wedge_tensors(left: torch.Tensor, right: torch.Tensor) -> torch.Tensor:
     """Wedge two forms stored in the normalized antisymmetric tensor convention."""
 

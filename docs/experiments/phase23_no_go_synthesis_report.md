@@ -1,5 +1,9 @@
 # Phase 23 report: exact exterior no-go hierarchy
 
+> Historical phase report. Phase 26 later found a stronger direct Cayley
+> reduction at maximum one-form bond three; the sparse APG result remains the
+> simplest mechanism using only the ordinary 0--1 permanent.
+
 ## Outcome
 
 The project now has one logically consistent theorem/evidence package rather

@@ -1,3 +1,5 @@
+import math
+
 import pytest
 import torch
 
@@ -5,6 +7,8 @@ from femps.exterior import (
     agp_tensor,
     antisymmetry_residual,
     bivector_decomposition_length,
+    cayley_determinant,
+    cayley_femps_cores,
     materialize_femps_matrix,
     materialize_femps_as_agp_path_sum,
     materialize_femps_paths,
@@ -36,6 +40,37 @@ def test_chi_one_femps_is_exactly_one_decomposable_wedge() -> None:
     observed = materialize_femps_matrix(cores)
     expected = normalized_slater_from_minors(orbitals)
     torch.testing.assert_close(observed, expected, atol=3e-13, rtol=3e-13)
+
+
+@pytest.mark.parametrize("particles", [2, 3, 4])
+def test_fixed_bond_femps_top_coefficient_is_cayley_determinant(
+    particles: int,
+) -> None:
+    entries = torch.randint(
+        -2,
+        3,
+        (particles, particles, 2, 2),
+        generator=torch.Generator().manual_seed(100 + particles),
+        dtype=torch.int64,
+    ).to(torch.float64)
+    left = torch.tensor([2.0, -1.0], dtype=torch.float64)
+    right = torch.tensor([1.0, 3.0], dtype=torch.float64)
+    cores = cayley_femps_cores(entries, left, right)
+    observed = materialize_femps_matrix(cores)
+    expected = left @ cayley_determinant(entries) @ right
+    top_coefficient = math.sqrt(math.factorial(particles)) * observed[
+        tuple(range(particles))
+    ]
+    torch.testing.assert_close(top_coefficient, expected, atol=2e-12, rtol=2e-12)
+    torch.testing.assert_close(
+        torch.vdot(observed.ravel(), observed.ravel()).real,
+        expected.square(),
+        atol=2e-11,
+        rtol=2e-11,
+    )
+    assert max(core.shape[0] for core in cores) <= 2
+    assert max(core.shape[2] for core in cores) <= 2
+    assert antisymmetry_residual(observed).item() < 1e-14
 
 
 def test_every_even_slater_is_one_fixed_number_agp() -> None:

@@ -17,6 +17,7 @@ from .reference import (
 )
 from .matrix_wedge import (
     bivector_decomposition_length,
+    cayley_femps_cores,
     materialize_femps_matrix,
     materialize_femps_paths,
     matrix_wedge,
@@ -102,6 +103,7 @@ __all__ = [
     "particle_unfolding",
     "slater_flat_spectrum",
     "bivector_decomposition_length",
+    "cayley_femps_cores",
     "materialize_femps_matrix",
     "materialize_femps_paths",
     "matrix_wedge",

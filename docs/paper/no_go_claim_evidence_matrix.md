@@ -11,7 +11,7 @@ shortcuts that would overstate scope or novelty.
 | Ordinary particle-TT bond floor | proof draft plus exact tests | standard TT unfolding-rank identity | every nonzero alternating `N`-tensor has particle-cut rank at least `binom(N,k)` | all fermionic tensor networks require exponential bond |
 | Slater approximate floor | proof draft plus exact tests | Schmidt decomposition and Eckart--Young | a normalized Slater has a flat particle-cut spectrum, so ordinary particle-TT needs a binomial fraction of the bond for fixed relative error | every correlated fermionic state has a flat spectrum |
 | Exterior carrier strict antisymmetry | elementary proof plus materialization tests | exterior algebra | matrix-wedge states are alternating by construction | exterior form implies efficient contraction |
-| Generic matrix-wedge exact contraction | exact reduction draft plus order-4 certificate | Chien et al. noncommutative determinant hardness | unrestricted exact squared-norm contraction is #P-hard under a polynomial-time Turing reduction | no FEMPS approximation or restricted family can be efficient |
+| Generic matrix-wedge exact contraction | exact reduction draft plus direct N=2--6 certificate | Chien et al. noncommutative determinant hardness | exact squared-norm contraction is #P-hard under a polynomial-time Turing reduction already for site-indexed one-form cores with maximum bond three | no FEMPS approximation can be efficient; no restricted FEMPS family can be efficient; fixed homogeneous `Mat_2` pair powers are hard |
 | Bounded coefficient algebra | theorem draft; `T_2`/`Mat_2` exact certificates | Wedderburn--Malcev, polarization, existing LC-AGP | fixed largest simple block and radical depth imply a polynomial exact LC-AGP expansion | every bounded algebra gives a novel efficient FEMPS |
 | One-counter/fixed-state growing memory | theorem draft plus all-boundary certificates | interpolation, Waring/Veronese, weighted automata | these admitted graded memories remain polynomial LC-AGP | every growing radical collapses |
 | Sparse growing-width path | elementary proof plus exact M<=6 certificate | APG/APIG, Fischer decomposition, Valiant permanent | the generic fixed-bandwidth class contains a bandwidth-one APG instance with #P-hard exact squared norm | APG is new; APG has proved exponential minimal AGP rank; every sparse instance is hard |
@@ -25,7 +25,11 @@ shortcuts that would overstate scope or novelty.
 - Say “exact squared norm” for `<Psi|Psi>` in theorem statements.
 - Say “would imply `FP=#P`” or “conditional on the standard permanent-
   complexity assumption”; do not state an unconditional runtime lower bound.
-- Phase 13 is a Turing reduction using boundary and interference queries.
+- Phase 26 C1 is a Turing reduction using four boundary pairs and two norm
+  queries per signed entry; the hard state has bond two and the interference
+  state has maximum bond three.
+- Phase 13 remains an independent Turing reduction for homogeneous pair powers
+  using growing order tags, boundary queries, and norm interference.
 - Phase 22 is a one-query exact-value reduction followed by polynomial-time
   exact arithmetic and a nonnegative integer square root.
 - Phase 24 addresses relative squared-norm approximation on a real-PSD

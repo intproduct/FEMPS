@@ -2,6 +2,7 @@
 
 - Status: accepted
 - Date: 2026-09-01
+- Strengthened by: ADR 0016 (fixed maximum one-form bond three)
 
 ## Context
 

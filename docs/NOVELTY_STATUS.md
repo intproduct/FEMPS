@@ -11,13 +11,15 @@ Uemura--Kasamatsu--Sugino (2015) already use deterministic linear combinations
 of independently optimized AGPs with quadratic term-count cost; Dutta et al.
 (2021) and Kawasaki--Gao--Scuseria (2026) further develop nonorthogonal LC-AGP
 and AGP-CI constructions. The present finite-AGP implementation is therefore a
-validated fallback and benchmark baseline, not a new ansatz class. The active
-novelty question is now explicitly beyond LC-AGP: generic matrix-wedge
-contraction or a proved statistics-carrier/correlation-multiplicity structure.
+validated fallback and benchmark baseline, not a new ansatz class. The two
+tested beyond-LC-AGP claims---generic matrix-wedge exact contraction and a
+universal statistics-carrier/correlation-multiplicity tensor product---are now
+closed negatively; the active question has moved to independent four-form and
+exterior-geometry structures with their own contraction theorem.
 
-Phase 13 rules out the first branch as a generic exact solver, conditionally on
-standard permanent hardness, by an explicit tagged Cayley-determinant
-reduction. Thus “generic matrix-wedge FEMPS with polynomial exact contraction”
+Phase 13 first ruled out the generic exact branch at growing bond by an
+explicit tagged Cayley-determinant reduction; Phase 26 strengthens this to
+fixed maximum bond three. Thus “generic matrix-wedge FEMPS with polynomial exact contraction”
 is no longer an admissible novelty claim. A future method claim must instead
 identify a systematically improvable restricted algebra with a surviving
 novelty boundary, prove a stronger statistics-carrier factorization, or use
@@ -35,8 +37,8 @@ to ordered coordinates or distance-variable MPS.
 
 Phase 15 closes only the finite-grid contraction gate: the exact hard-charge
 gap MPS, `O(N^2(L-N))` raw operator bond, and native AD optimizer are an
-implementation/evidence result, not a new ansatz claim. The next novelty gate
-is whether full-line center-of-mass and Dirichlet half-line distance bases can
+implementation/evidence result, not a new ansatz claim. The subsequent Phase 16
+gate asked whether full-line center-of-mass and Dirichlet half-line distance bases can
 retain the distinctive 2201 orthonormal functional-operator calculus with
 controlled continuum convergence. Until that comparison is complete, the
 ordered-distance branch has no affirmative method-priority claim.
@@ -143,8 +145,8 @@ coefficient arrays, however, the sparse APG identity transfers Meiburg's
 relative inapproximability directly to the squared norm: a generic PRAS would
 imply `RP=NP`. The project-specific content is this FEMPS/APG transfer and the
 simultaneous Rayleigh denominator certificate, not any permanent algorithm or
-hardness theorem. Gate K therefore closes without a solver. The next novelty
-question is whether a canonical statistics-carrier/correlation-multiplicity
+hardness theorem. Gate K therefore closes without a solver. The question passed
+to Phase 25 was whether a canonical statistics-carrier/correlation-multiplicity
 factorization can satisfy Slater multiplicity one, safe truncation, and
 polynomial contraction without hiding the same permanent or binomial cost.
 
@@ -159,3 +161,16 @@ result is the exact dimension obstruction and its link to compact-input
 permanent contraction. “Canonical FEMPS correlation spectrum” is therefore no
 longer an admissible claim for the current construction. Phase 26 shifts from
 method invention to a manuscript-level proof and novelty audit.
+
+Phase 26 resolves the reviewer-requested fixed-small-bond checkpoint more
+strongly than the earlier tagged construction. Site-indexed one-form cores of
+bond two preserve the row order of a `Mat_2` Cayley determinant directly; a
+bond-one scalar reference raises the maximum bond only to three and recovers
+the signed coefficient from two exact squared norms. Conditional on the
+published noncommutative-determinant hardness theorem, generic exact
+one-form-FEMPS contraction is therefore already #P-hard at fixed `chi<=3`.
+This is a project-specific representation transfer, not a new complexity
+theorem. It does not conflict with the LC-AGP collapse of fixed `Mat_2`
+homogeneous pair powers, which symmetrize factor order. The defensible Phase 26
+output is now a unified no-go/classification manuscript plus exact certificates;
+it is not an affirmative scalable FEMPS method claim.

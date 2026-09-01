@@ -99,8 +99,15 @@ is gated by an explicit contraction-complexity audit.
   Fixed `Mat2` pair powers are explicitly corrected to the polynomial LC-AGP
   side. The conclusion covers the tested exact coefficient-memory corridor,
   not every structured or approximate exterior method.
+- Phase 27 establishes the first two exact values in the independent
+  four-form program. Source-complete orbit classifications and independent
+  exact certificates give `mu_4^Q(7)=mu_4^Qbar(7)=12` and
+  `mu_4^C(8)=mu_4^Qbar(8)=mu_4^Q(8)=12`. The 16D rank-22/23 provenance is
+  still missing; the only certified 16D statement remains the rational upper
+  bound `mu_4^Q(16)<=24`.
 
-See [the active execution plan](docs/exec-plans/active/phase24.md),
+See [the active execution plan](docs/exec-plans/active/phase27.md),
+[the exact four-form workspace](math/four_forms/README.md),
 [the no-go hierarchy](docs/theory/exterior_no_go_hierarchy.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md),
 [the Gate G report](docs/experiments/phase19_n8_refinement_gate_report.md),

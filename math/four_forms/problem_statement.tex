@@ -138,3 +138,100 @@ verifier checks the payload hash, exterior signs, coordinate duals, all
 five contraction ranks, and the stated minimum.  The verifier does not
 claim to re-prove the literature classification; the source theorem is
 the separate orbit-coverage input.
+
+\subsection{The exact eight-dimensional value}
+
+Fix a coordinate volume form on an eight-dimensional complex vector space.
+Contraction with that volume identifies $\bigwedge^4V$ with
+$\bigwedge^4V^*$, equivariantly for $\operatorname{SL}(V)$.  Thus the
+four-vector classification and the covariant contraction-rank problem may be
+compared without changing any rank.
+
+Antonyan's classification, in Oeding's translation and appendix, gives an
+explicit seven-dimensional Cartan subspace $\mathfrak c\subset\bigwedge^4V$
+and normal forms for all 94 nilpotent $\operatorname{SL}(8,\mathbb C)$ orbits
+\cite{Oeding2022Antonyan}.  In the exterior sign convention used here, a basis
+of $\mathfrak c$ is
+\[
+\begin{split}
+ p_1&=1234+5678, & p_2&=1357+2468,\\
+ p_3&=1256+3478, & p_4&=1368+2457,\\
+ p_5&=1458+2367, & p_6&=-1467-2358,\\
+ p_7&=-1278-3456.
+\end{split}
+\]
+Here, for example, $1234$ abbreviates
+$e_1^*\wedge e_2^*\wedge e_3^*\wedge e_4^*$.
+
+\begin{lemma}[Cartan middle-rank bound]
+\label{lem:eight-cartan-rank}
+Every nonzero element of $\mathfrak c$ has middle contraction rank at least
+$12$.
+\end{lemma}
+
+\begin{proof}
+In the ordered basis of the 28 coordinate two-forms, the seven symmetric
+matrices $C_2(p_i)$ commute.  An exact integral simultaneous eigenbasis gives
+28 distinct weights $w\in\{-1,0,1\}^7$, each with three nonzero coordinates.
+Consequently, for $a=(a_1,\ldots,a_7)$,
+\[
+  \operatorname{rank}C_2\!\left(\sum_i a_ip_i\right)
+  =\#\{w:w\mathbin{\cdot}a\ne0\}.
+\]
+An exhaustive check of the $3^7-1=2186$ nonzero normals over $\mathbb F_3$
+shows that at most 16 of the 28 integral weights lie in any such finite-field
+hyperplane.  This finite check also proves the characteristic-zero assertion:
+if 17 integral weights lay in a complex hyperplane, their integer row matrix
+would have rank at most six over $\mathbb C$.  All its $7$-minors would then
+vanish as integers, so reduction modulo three would have rank at most six and
+would produce a nonzero $\mathbb F_3$ normal vanishing on those same 17
+weights, a contradiction.  At least $28-16=12$ eigenvalues are therefore
+nonzero.
+\end{proof}
+
+\begin{theorem}[Eight-dimensional minimum]
+\label{thm:mu-four-eight}
+One has
+\[
+  \mu_4^{\mathbb C}(8)
+  =\mu_4^{\overline{\mathbb Q}}(8)
+  =\mu_4^{\mathbb Q}(8)
+  =12.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $x\in\bigwedge^4\mathbb C^8$ and write $x=x_s+x_n$ for its theta-group
+Jordan decomposition.  The orbit of the semisimple part $x_s$ is the unique
+closed orbit in the closure of $\operatorname{SL}(8,\mathbb C)x$, and every
+semisimple element is conjugate into a Cartan subspace
+\cite{GalitskiTimashev1999Metabelian,Oeding2022Antonyan}.  The locus
+$\{x:\operatorname{rank}C_2(x)<12\}$ is invariant and Zariski closed, since it
+is cut out by minors.  Hence a form in this locus has $x_s$ in the same locus.
+Lemma~\ref{lem:eight-cartan-rank} forces $x_s=0$, so $x$ is nilpotent.
+
+It remains to inspect the nilpotent cone.  Exact elimination on all 94 source
+normal forms finds 85 concise orbits.  Their least middle rank is 12; the
+unique minimizing nilpotent orbit is number 6, represented by
+\[
+  1235+1246+1347+2348,
+\]
+with rank vector $(1,8,12,8,1)$.  The source table supplies exhaustiveness,
+while the independent certificate supplies the transcription and rank
+calculations.  This proves the complex lower bound.  The rational form
+\[
+  1234+5678
+\]
+also has rank vector $(1,8,12,8,1)$ and gives the upper bound over every field
+listed in the statement.  Finally, scalar extension from $\mathbb Q$ or
+$\overline{\mathbb Q}$ to $\mathbb C$ preserves all contraction ranks and
+conciseness, so the complex lower bound descends to both fields.
+\end{proof}
+
+The artifact \texttt{eight\_dimensional\_four\_form\_minimum.json} records
+the 94 nilpotent rows, the seven Cartan generators, all 28 joint eigenpairs,
+the finite-field hyperplane enumeration, and the rational witness.  Its
+standard-library verifier recomputes every stated rank and hash independently
+of the project exact-arithmetic module.  As in dimension seven, the cited
+classification and theta-group theorems, not the verifier, provide orbit
+coverage and the orbit-closure bridge.

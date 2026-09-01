@@ -28,6 +28,13 @@
   coverage, while a standard-library-only independent verifier checks the
   transcribed representatives, all exact contraction ranks, and payload hash
   `94f1a654978dd1d37770b5a2171a07a5a839525dac1d16b6247a3b1ab2665f21`.
+- Closed the eight-dimensional extremum:
+  `mu_4^C(8)=mu_4^Qbar(8)=mu_4^Q(8)=12`. Antonyan--Oeding's Cartan subspace and
+  94 nilpotent normal forms, joined by the theta-group orbit-closure theorem,
+  reduce the lower bound to exact finite checks. The independent verifier
+  recomputes all 94 rank vectors, 28 Cartan joint eigenpairs, the `F_3`
+  hyperplane bound, and payload hash
+  `44288f6097c7f56c746f3e3c39885fe707704acf47b957129e786afab044214b`.
 - Ruled out ordinary commutative socle-degree-four Gorenstein Hilbert vectors
   as the missing source of the 16D alternatives: their classified `r=16`
   minimum is 15 and belongs to a different symmetric-algebra problem.

@@ -27,6 +27,14 @@ production `femps` package and of PyTorch.
   Cohen--Helminck's nine seven-dimensional trivector orbits, transported by a
   coordinate volume dual and reranked exactly, give
   `mu_4^Q(7) = mu_4^Qbar(7) = 12`.
+- **Theorem / source-backed orbit and closure coverage plus exact certificate:**
+  Antonyan--Oeding's eight-dimensional Cartan subspace and 94 nilpotent
+  normal forms, together with the theta-group orbit-closure theorem, reduce
+  every possible low-rank form to two exact checks. A simultaneous Cartan
+  eigenbasis and an `F_3` hyperplane certificate bound every nonzero
+  semisimple form by rank 12; exact reranking of all nilpotent normal forms
+  gives the same concise lower bound. Hence
+  `mu_4^C(8) = mu_4^Qbar(8) = mu_4^Q(8) = 12`.
 - **Working reconstruction, not an inherited theorem:** until a primary source
   or old certificate is recovered, this project writes
 
@@ -101,11 +109,26 @@ Its payload SHA-256 is
 The script verifies the source transcription and exact ranks; the cited
 Cohen--Helminck theorem, rather than the script, supplies orbit exhaustiveness.
 
+The eight-dimensional semisimple/nilpotent certificate is independently
+checked with:
+
+```powershell
+python math/four_forms/verify_eight_dimensional_minimum.py --verify math/four_forms/eight_dimensional_four_form_minimum.json
+```
+
+Its mathematical-payload SHA-256 is
+`44288f6097c7f56c746f3e3c39885fe707704acf47b957129e786afab044214b`;
+the 94-row source-transcription SHA-256 is
+`bde922dcdf7766082b1fc2bb8d7f844ae24dff7aa0fe381504cb5cc68a453648`.
+The verifier recomputes all contraction ranks, Cartan joint eigenpairs, and
+the finite-field hyperplane enumeration. Antonyan--Oeding Table 10 and the
+theta-group theorem remain the separate orbit-coverage inputs.
+
 ## Current boundary
 
-The controls now establish the exact seven-dimensional value in addition to
-the earlier low-dimensional consistency checks. They do not establish a sharp
-value of `mu_4(16)`. In particular, the direct
+The controls now establish the exact seven- and eight-dimensional values in
+addition to the earlier low-dimensional consistency checks. They do not
+establish a sharp value of `mu_4(16)`. In particular, the direct
 sum of four disjoint volume forms is a concise rational 16-dimensional control
 of middle rank 24, hence only the elementary upper bound
 `mu_4^Q(16) <= 24`. It is not evidence for rank 22 or 23.

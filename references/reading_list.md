@@ -46,6 +46,15 @@ secant sources needed to define and audit `mu_4(m)` and the 16D 22/23 branch.
   volume duality plus exact elimination closes
   `mu_4^Q(7)=mu_4^Qbar(7)=12`; the source supplies orbit coverage and the
   independent certificate supplies the rank table.
+- Antonyan--Oeding (2022), especially the explicit Cartan subspace and Table
+  10: supplies the semisimple normal-form slice and all 94 nilpotent
+  `SL(8,C)` normal forms for four-vectors. Exact Cartan and orbit certificates
+  close `mu_4^C(8)=mu_4^Qbar(8)=mu_4^Q(8)=12`; this is a project derivation
+  from the established classification, not a new classification.
+- Galitski--Timashev (1999), Theorem 2.1: for theta-group representations, the
+  semisimple part is the unique closed orbit in the orbit closure and every
+  semisimple element is conjugate into a Cartan subspace. This is the required
+  bridge from the exact Cartan bound to arbitrary four-forms.
 - Migliore--Zanello (2017), Theorem 3.2: classifies the analogous-looking
   Hilbert vectors `(1,r,h_2,r,1)` for ordinary commutative Artinian Gorenstein
   quotients through `r<=17`. In particular its `r=16` minimum is 15, so it is
@@ -56,6 +65,6 @@ No primary source or repository artifact found so far uses the project's exact
 notation `mu_4(m)` or supplies a 16-dimensional rank-22/23 candidate. The
 definition in `math/four_forms/README.md` is therefore explicitly a working
 reconstruction. The exterior apolar perfect-pairing statement is now proved
-self-containedly, and the seven-dimensional value is closed, but sharp
-four-form rank strata beyond the low-dimensional classifications and the 16D
-origin remain open audit items.
+self-containedly, and the seven- and eight-dimensional values are closed, but
+sharp four-form rank strata in dimensions nine and above and the 16D origin
+remain open audit items.

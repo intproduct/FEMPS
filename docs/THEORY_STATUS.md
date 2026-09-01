@@ -5,6 +5,7 @@
 | A decomposable normalized Slater state has a flat particle-cut Schmidt spectrum | proved in draft and numerically verified | External proof review and literature cross-check |
 | Ordinary particle TT must pay the exchange-statistics Schmidt multiplicity | proved in draft and numerically verified | Stronger concise/full-support bounds remain open |
 | The seven-dimensional concise four-form minimum is `mu_4^Q(7)=mu_4^Qbar(7)=12` | **theorem draft**: Cohen--Helminck supplies exhaustive nine-orbit coverage after scalar extension; an implementation-independent exact certificate verifies every orbit rank, conciseness flag, and payload hash | External algebra review; audit the characteristic-positive and real-field refinements separately before extending the field statement |
+| The eight-dimensional concise four-form minimum is `mu_4^C(8)=mu_4^Qbar(8)=mu_4^Q(8)=12` | **theorem draft**: Antonyan--Oeding supplies the Cartan subspace and all 94 nilpotent orbits; theta-group closure reduces an arbitrary low-rank candidate to those two cases; an independent exact certificate verifies the Cartan eigenbasis, `F_3` hyperplane bound, every nilpotent rank, and both payload hashes | External invariant-theory review; audit the real and positive-characteristic variants separately before extending the field statement |
 | The 16D concise four-form minimum middle rank is 22 or 23 | **conjecture** with missing provenance; neither alternative is currently admitted. An **exact certificate** gives only the explicit rational upper bound `mu_4^Q(16)<=24`; a 120,000-sample finite-field screen found no lower coordinate-hypergraph candidate | Recover a primary definition/candidate or construct one from scratch; certify rank and complete orbit/chart coverage over an explicit field before claiming sharpness |
 | Matrix-wedge FEMPS is associative and strictly antisymmetric | proved from exterior associativity; small-N verified | External algebra review |
 | Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed already at fixed maximum bond three: site-indexed one-form bond-two cores encode the `Mat_2` row-ordered Cayley determinant, and a scalar-reference direct sum recovers signed amplitudes from exact squared norms; the Phase 13 tagged pair-power and Phase 22 bandwidth-one APG reductions remain independent mechanisms | External proof review; only separately gated restrictions or controlled approximation remain open |
@@ -59,8 +60,11 @@ or unsampled characteristic-zero orbits. Separately, exterior apolarity now
 identifies every rank vector with the Hilbert vector of a canonical exterior
 Poincare-duality quotient. Cohen--Helminck's complete seven-dimensional orbit
 table plus independent rational reranking closes
-`mu_4^Q(7)=mu_4^Qbar(7)=12`; this low-dimensional theorem does not supply the
-missing 16D lower bound.
+`mu_4^Q(7)=mu_4^Qbar(7)=12`. Antonyan--Oeding's Cartan and 94 nilpotent
+normal forms, joined by the theta-group orbit-closure theorem and independently
+verified exact calculations, further close
+`mu_4^C(8)=mu_4^Qbar(8)=mu_4^Q(8)=12`. These low-dimensional theorems do not
+yet supply the missing 16D lower bound.
 
 ADR 0004 makes ordered-sector/interparticle-distance functional TN the primary
 numerical research route. Phase 15 and ADR 0005 replace its dense comparator by

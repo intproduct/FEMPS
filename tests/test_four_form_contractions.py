@@ -175,3 +175,35 @@ def test_seven_dimensional_orbit_rank_certificate_verifies_independently() -> No
     assert result["concise_middle_rank_minimum"] == 12
     assert len(result["verified_orbits"]) == 9
     assert "Cohen--Helminck" in result["classification_exhaustiveness"]
+
+
+def test_eight_dimensional_rational_witness_has_exact_minimum_rank_vector() -> None:
+    form = ff.canonical_form({(0, 1, 2, 3): 1, (4, 5, 6, 7): 1})
+
+    assert ff.four_form_hilbert_vector(form, 8) == (1, 8, 12, 8, 1)
+    assert ff.is_concise(form, 8)
+
+
+def test_eight_dimensional_minimum_certificate_verifies_independently() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "math" / "four_forms" / "verify_eight_dimensional_minimum.py"),
+            "--verify",
+            str(ROOT / "math" / "four_forms" / "eight_dimensional_four_form_minimum.json"),
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    result = json.loads(completed.stdout)
+
+    assert result["conclusion"]["value"] == 12
+    assert result["nilpotent_certificate"]["orbit_count"] == 94
+    assert result["nilpotent_certificate"]["concise_orbit_count"] == 85
+    assert result["nilpotent_certificate"]["minimizing_orbits"] == [6]
+    assert result["cartan_certificate"]["joint_weight_count"] == 28
+    assert result["cartan_certificate"][
+        "nonzero_semisimple_middle_rank_lower_bound"
+    ] == 12
+    assert "Antonyan--Oeding" in result["classification_exhaustiveness"]

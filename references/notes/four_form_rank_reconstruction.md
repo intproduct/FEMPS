@@ -97,6 +97,45 @@ artifact `seven_dimensional_orbit_ranks.json` and verifier are responsible for
 the transcription, exterior signs, and exact rank calculations. Payload hash:
 `94f1a654978dd1d37770b5a2171a07a5a839525dac1d16b6247a3b1ab2665f21`.
 
+### Antonyan--Oeding and theta groups: exact dimension eight
+
+Oeding's translation of Antonyan gives a seven-dimensional Cartan subspace for
+`Lambda^4(C^8)` and Table 10 normal forms for all 94 nilpotent `SL(8,C)`
+orbits. Galitski--Timashev's theta-group theorem supplies the orbit-closure
+bridge: the semisimple part is the unique closed orbit in an orbit closure,
+and every semisimple element is conjugate into a Cartan subspace.
+
+For the seven recorded Cartan generators, the exact `C_2` matrices commute and
+have an integral simultaneous eigenbasis with 28 distinct weights in
+`{-1,0,1}^7`. An exhaustive check of all `3^7-1` nonzero normals over `F_3`
+finds at most 16 weights in a hyperplane. This proves the complex bound, rather
+than merely suggesting it: 17 integral weights in a complex hyperplane would
+have integer row rank at most six, hence also rank at most six modulo three,
+contradicting the finite enumeration. Thus every nonzero semisimple form has
+middle rank at least 12.
+
+The determinantal locus `rank C_2 < 12` is invariant and Zariski closed. If it
+contained a form with nonzero semisimple part, its orbit closure would contain
+a nonzero Cartan form in the same locus, contradicting the preceding bound.
+Any remaining candidate is nilpotent. Exact reranking of all 94 source normal
+forms finds 85 concise orbits and a minimum middle rank of 12; orbit 6 is the
+unique concise nilpotent minimizer. Finally `1234+5678` is a rational concise
+witness with ranks `(1,8,12,8,1)`. Therefore
+
+```text
+mu_4^C(8) = mu_4^Qbar(8) = mu_4^Q(8) = 12.
+```
+
+The independent artifact
+`math/four_forms/eight_dimensional_four_form_minimum.json` records all 94 rows,
+the Cartan joint eigenbasis, finite-field enumeration, and witness. Its
+mathematical-payload hash is
+`44288f6097c7f56c746f3e3c39885fe707704acf47b957129e786afab044214b`;
+its source-transcription hash is
+`bde922dcdf7766082b1fc2bb8d7f844ae24dff7aa0fe381504cb5cc68a453648`.
+The source theorems, not the verifier, supply orbit coverage and Jordan/closure
+theory.
+
 ### A rejected provenance lead: commutative Gorenstein vectors
 
 Migliore--Zanello classify ordinary commutative Artinian Gorenstein Hilbert
@@ -115,6 +154,8 @@ provides a valid lower bound for the present problem.
   classification.
 - In dimension seven, source-complete orbit coverage and an independent exact
   rank-table certificate prove `mu_4^Q(7)=mu_4^Qbar(7)=12`.
+- In dimension eight, the Cartan/closure reduction and all 94 nilpotent normal
+  forms prove `mu_4^C(8)=mu_4^Qbar(8)=mu_4^Q(8)=12`.
 - Direct sums of `t` disjoint four-dimensional volume forms have ranks
   `(1,4t,6t,4t,1)`. In particular dimension 16 has a rational rank-24 control.
 
@@ -127,7 +168,7 @@ The exact implementation and tests live in `math/four_forms/` and
 - Continue searching for prior exterior/skew inverse-system terminology for
   the now self-contained perfect-pairing proposition; do not make priority
   claims from absence of a source.
-- Find sharp rank-stratum results for four-forms beyond the six-variable case.
+- Find sharp rank-stratum results for four-forms in dimensions nine and above.
 - Audit orbit classifications separately over `Q`, `R`, `C`, and finite fields.
 - Locate the origin of the 16D alternatives 22 and 23; absent that, construct a
   candidate from scratch and label the search as exploratory.

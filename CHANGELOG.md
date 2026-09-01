@@ -1,6 +1,6 @@
 # Research changelog
 
-## 2026-09-01 - Phase 20 interim bounded-radical classification
+## 2026-09-01 - Phase 20 bounded coefficient-algebra classification
 
 - Re-audited the Phase 13 tagged Cayley obstruction against the original
   noncommutative-determinant theorem and corrected a stale novelty-matrix entry.
@@ -10,9 +10,12 @@
 - Added an exact rational interpolation construction, an implementation-
   independent M=1--6 certificate, complex128 exterior equivalence, and
   restricted reverse-mode gradient tests.
-- Rejected this square-zero-radical candidate as a new solver family and
-  advanced the classification target to bounded radical nilpotency with
-  commutative semisimple quotient. Gate H remains open.
+- Proved in theorem-draft form that fixed semisimple block size and fixed
+  radical nilpotency index imply a polynomial-size exact LC-AGP expansion,
+  including noncommutative semisimple quotients.
+- Added a complementary exact-rational M=1--4 `Mat2` certificate with term
+  bound `binom(M+3,3)` and closed Gate H negatively for the entire uniformly
+  bounded coefficient-algebra candidate class.
 
 ## 2026-09-01 - Phase 19 resource-safe N=8 Gate G
 

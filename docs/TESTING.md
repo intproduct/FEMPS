@@ -17,17 +17,18 @@ The validation hierarchy follows the Master Plan.
 Default tests are deterministic, CPU-only, and use float64 or complex128.
 GPU benchmarks are opt-in and are never hidden inside pytest.
 
-The Phase 20 `T2` upper-triangular pair collapse is checked by:
+The Phase 20 `T2` and `Mat2` pair-collapse base cases are checked by:
 
 ```powershell
 python math/certificates/verify_triangular_pair_collapse.py --verify math/certificates/triangular_pair_lc_agp_certificate.json
+python math/certificates/verify_mat2_pair_collapse.py --verify math/certificates/mat2_pair_lc_agp_certificate.json
 python -m pytest -q tests/test_triangular_pair.py tests/test_exact_certificates.py
 ```
 
-The first command uses exact rational polynomial arithmetic and imports neither
-PyTorch nor `femps`. The numerical tests independently compare exterior states,
-genuinely noncommuting samples, and reverse-mode gradients restricted to the
-admitted skew/upper-triangular parameter manifold.
+The first two commands use exact rational polynomial arithmetic and import
+neither PyTorch nor `femps`. The numerical tests independently compare exterior
+states, genuinely noncommuting samples, and reverse-mode gradients restricted
+to the admitted skew/upper-triangular parameter manifold.
 
 The current CPU/Blackwell forward-and-gradient parity smoke is:
 

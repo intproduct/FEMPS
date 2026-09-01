@@ -1,12 +1,15 @@
-# Bounded-radical matrix-pair candidates: the T2 collapse
+# Bounded Wedderburn--radical matrix-pair collapse
 
 ## Status
 
 The `2 x 2` upper-triangular coefficient-algebra result below is a proved
 algebraic identity with an implementation-independent exact-rational
 certificate. It classifies the first Phase 20 candidate as tractable but not
-beyond polynomial-size LC-AGP organization. The proposed generalization to
-arbitrary bounded radical nilpotency remains a conjecture.
+beyond polynomial-size LC-AGP organization. The subsequent theorem draft
+extends the collapse to every finite-dimensional complex coefficient algebra
+whose largest semisimple matrix block and radical nilpotency index are both
+uniformly bounded. The theorem draft awaits external algebraic review; its
+`Mat_2` and `T_2` base cases have independent exact-rational certificates.
 
 ## Motivation from noncommutative determinant complexity
 
@@ -132,17 +135,97 @@ Independent complex128 tests compare the matrix-pair exterior recurrence to
 the constructed LC-AGP sum for M=1,2,3, include explicitly noncommuting
 coefficient samples, and compare restricted reverse-mode gradients.
 
-## Scope and next conjecture
+## Full Mat2 semisimple base case
 
-No claim is made here for all upper-triangular sizes or all algebras with
-commutative semisimple quotient. The next candidate theorem is:
+The collapse does not require commutativity of the coefficient algebra. Let
+`Omega` be a generic `2 x 2` matrix whose four entries are scalar physical
+two-forms. After applying any fixed boundary functional, `Omega^M` is a
+homogeneous degree-M polynomial in those four commuting even forms. Over
+characteristic zero, M-th powers of linear forms span the space of homogeneous
+degree-M polynomials in four variables. Therefore
 
-> If a split finite-dimensional coefficient algebra has commutative
-> semisimple quotient and radical nilpotency index bounded by a constant
-> independent of `(N,D,chi)`, then its matrix-pair states have a polynomial-size
-> exact LC-AGP expansion.
+```text
+K <= dim Sym^M(C^4) = binom(M+3,3) = O(M^3)
+```
 
-The intended proof expands by the number of radical insertions (strictly below
-the nilpotency index), resolves semisimple idempotent paths, and polarizes the
-resulting bounded-variable homogeneous two-form monomials. Until the term
-count is derived jointly in algebra dimension and M, this remains a conjecture.
+scalar AGPs suffice for every boundary contraction. This is true even though
+`Mat_2(C)` is simple and noncommutative. The exact verifier
+`math/certificates/verify_mat2_pair_collapse.py` raises the fully generic
+symbolic matrix over `Q[x0,x1,x2,x3]`, applies deterministic nonzero rational
+boundaries, and reconstructs the result on an integer simplex grid. Its M=1--4
+certificate has hash
+`74d2de4a2cedcbaf548cd4c9895d0ea4af48e6bb485b72966562e46277a6d20d`.
+The certificate is an exact base-case check, while the arbitrary-boundary
+statement follows from the spanning argument rather than from that one boundary
+sample.
+
+## Bounded Wedderburn--radical collapse theorem draft
+
+**Theorem draft.** Let `A` be a finite-dimensional unital complex algebra with
+Jacobson radical `R`, `R^d=0`, and Wedderburn--Malcev decomposition
+
+```text
+A = S direct_sum R,   S = direct_sum_(a=1)^q Mat_(p_a)(C).
+```
+
+Set `p=max_a p_a` and `rho=dim R`. For `Omega` in
+`A tensor Lambda^2(V)`, any linear boundary functional `lambda:A -> C`, and
+`N=2M`, the normalized state `lambda(Omega^M)/M!` is an exact LC-AGP with
+
+```text
+K <= sum_(k=0)^min(d-1,M)
+       q^(k+1) rho^k binom(M+v_k-1,v_k-1),
+v_k = (k+1) p^2 + k.
+```
+
+When `R=0`, only the `k=0` summand is present. Hence, for fixed `p` and `d`,
+the term count and the existing finite-LC-AGP contractions are polynomial
+jointly in `M`, `D`, and `dim A` (and therefore in an ambient virtual dimension
+`chi`, since `dim A <= chi^2`).
+
+**Proof.** Write `Omega=Omega_S+Omega_R` and expand its M-fold product into
+noncommutative words. A word containing `k` radical factors lies in `R^k`, even
+when semisimple factors occur between them, so every word with `k>=d` vanishes.
+For a surviving `k`, resolve the `k+1` semisimple runs into a path through the
+`q` simple blocks and resolve each radical insertion in a basis of `R`. There
+are at most `q^(k+1) rho^k` such structural choices.
+
+For any fixed choice, collect the sum over all possible lengths of the
+semisimple runs before applying `lambda`. Each run uses at most `p^2` scalar
+two-form coordinates and each selected radical insertion contributes one more
+scalar two-form. The result is therefore a scalar homogeneous degree-M
+polynomial in at most
+
+```text
+v_k = (k+1) p^2 + k
+```
+
+commuting variables; physical two-forms commute because they have even exterior
+degree. In characteristic zero, the Veronese powers `L^M` span
+`Sym^M(C^(v_k))`. Selecting a basis of such powers expands the structural
+polynomial using at most `binom(M+v_k-1,v_k-1)` terms. After substituting the
+actual two-forms back for the formal coordinates, every `L^M/M!` is one scalar
+fixed-number AGP. Summing the structural choices gives the stated bound. QED.
+
+This proof is constructive in arithmetic-operation complexity: truncated
+polynomial matrix multiplication plus multivariate interpolation produces the
+coefficients. It does not assert favorable floating-point conditioning for
+every interpolation grid.
+
+## Classification consequence
+
+The theorem is stronger than the original commutative-semisimple-quotient
+conjecture: bounded noncommutative simple blocks also collapse. Consequently,
+within finite-dimensional matrix-pair coefficient algebras, a family can avoid
+this polynomial LC-AGP classification only if its largest simple block size
+`p` or radical nilpotency index `d` grows with the problem, or if it leaves the
+exact finite-algebra setting. This is a necessary escape condition, not a claim
+that every growing-`p` or growing-`d` family is hard or useful.
+
+Phase 13's shift-tag construction uses an upper-triangular path algebra whose
+nilpotency index grows with the determinant order, exactly outside the bounded-
+`d` theorem. Conversely, the fully noncommutative `Mat_2` pair power remains
+easy here despite the permanent-hard row-ordered determinant over `Mat_2`:
+symmetrized even-form powers erase the row-order resource unless growing memory
+is introduced. Thus neither coefficient noncommutativity nor bounded radical
+memory alone supplies the desired beyond-LC-AGP FEMPS family.

@@ -29,8 +29,9 @@ neither PyTorch nor `femps`.
 
 Do not benchmark H1 as a new solver family: its polynomial contraction is
 already supplied by the existing finite LC-AGP engine, whose prior-art boundary
-is established. Retain H1 as the base case for a general bounded-radical
-collapse theorem. Gate H remains open.
+is established. H1 is the first exact base case of the subsequently proved
+bounded Wedderburn--radical theorem draft. Gate H is closed negatively for that
+broader candidate class in `phase20_bounded_wedderburn_report.md` and ADR 0010.
 
 ## Reproduction
 

@@ -23,3 +23,11 @@ Phase 20 `T_2` upper-triangular matrix-pair collapse using exact rational
 polynomial arithmetic. It checks both the symbolic matrix power and a rational
 LC-AGP power interpolation for pair orders one through six, importing neither
 PyTorch nor `femps`.
+
+`certificates/verify_mat2_pair_collapse.py` checks the complementary semisimple
+base case. It raises a generic symbolic `2 x 2` matrix over four commuting
+two-form variables, applies deterministic nonzero rational boundaries, and
+reconstructs the resulting pair powers by exact rational simplex interpolation.
+The committed certificate covers M=1 through 4 and imports neither PyTorch nor
+`femps`; arbitrary-boundary coverage follows separately from homogeneous-power
+spanning.

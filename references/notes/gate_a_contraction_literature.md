@@ -47,4 +47,10 @@ amplitude and then into a generic FEMPS norm. Phase 20 checks the opposite
 boundary. For `T2`, whose radical squares to zero, the entire arbitrary-boundary
 matrix-pair state collapses over characteristic zero to `O(M^2)` scalar AGPs.
 Thus the smallest noncommuting determinant-easy algebra is also tractable here,
-but only through an explicit polynomial-size LC-AGP organization.
+but only through an explicit polynomial-size LC-AGP organization. The same
+homogeneous-power argument gives `O(M^3)` AGPs for the fully noncommutative
+semisimple algebra `Mat_2`. A Wedderburn--radical word expansion then proves the
+general pair-state boundary: fixed maximum simple-block size and fixed radical
+nilpotency index imply a polynomial-size LC-AGP expansion, even when the
+semisimple quotient is noncommutative. This project result is independent of,
+and should not be attributed to, the row-ordered determinant theorem.

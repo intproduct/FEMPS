@@ -1,0 +1,61 @@
+{
+  "arithmetic": "exact rational",
+  "boundaries": {
+    "left": [
+      2,
+      3
+    ],
+    "right": [
+      5,
+      7
+    ]
+  },
+  "cases": [
+    {
+      "lc_agp_term_bound": 4,
+      "maximum_weight_denominator_bits": 1,
+      "maximum_weight_numerator_bits": 6,
+      "nonzero_terms_for_deterministic_boundaries": 4,
+      "pairs": 1,
+      "target_sha256": "3ba9fb685e0566d81b9abb625c2c251ae3dbd3daa74823a9b63cc50425786969",
+      "weights_sha256": "4b5799ab44e30422cf4d00c8d940738929979032efe596fa7fbb974787fa6f4a"
+    },
+    {
+      "lc_agp_term_bound": 10,
+      "maximum_weight_denominator_bits": 3,
+      "maximum_weight_numerator_bits": 7,
+      "nonzero_terms_for_deterministic_boundaries": 10,
+      "pairs": 2,
+      "target_sha256": "e3be3b86adcaf45260382fed3b2bd7a22dc90839fc77be89b2fb8b5e5a70353d",
+      "weights_sha256": "10df3de5bf9bc238c3be2e900f0a05247435a4244bc3adc8b30c195a41affa58"
+    },
+    {
+      "lc_agp_term_bound": 20,
+      "maximum_weight_denominator_bits": 4,
+      "maximum_weight_numerator_bits": 8,
+      "nonzero_terms_for_deterministic_boundaries": 20,
+      "pairs": 3,
+      "target_sha256": "baaad6e0283383f47fbf3595d08087ac7b1122404f5e212f3399a91bafcd68f7",
+      "weights_sha256": "6f3fa7e54cbb5d8d6e0c0007827e146bd7ed69727ab41406e8b7dcab1f511537"
+    },
+    {
+      "lc_agp_term_bound": 35,
+      "maximum_weight_denominator_bits": 7,
+      "maximum_weight_numerator_bits": 10,
+      "nonzero_terms_for_deterministic_boundaries": 33,
+      "pairs": 4,
+      "target_sha256": "6b913cb831fdd2fbbe2221625de1e35c2887b108a69607c761a31faab1e3d161",
+      "weights_sha256": "6fe6753b9b3d2224575d30e2173f6244ffc840003cc485616c8ee04128c28f53"
+    }
+  ],
+  "certificate_sha256": "74d2de4a2cedcbaf548cd4c9895d0ea4af48e6bb485b72966562e46277a6d20d",
+  "matrix": "[[x0,x1],[x2,x3]]",
+  "orders": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "schema": "femps.mat2-pair-lc-agp-collapse.v1",
+  "term_bound": "binom(M+3,3)"
+}

@@ -1,4 +1,4 @@
-# Active execution plan: Phase 30 FEMPS Method Consolidation
+# Completed execution plan: Phase 30 FEMPS Method Consolidation
 
 ## Objective
 
@@ -34,6 +34,20 @@ particle-number expansion is part of this phase.
 5. Decide in an ADR whether an optional second-quantized DMRG control adds
    information beyond current exact CI. It must remain an external comparator
    and may not be called FEMPS.
+
+## Current status
+
+- [x] A deterministic seven-entry reproduction manifest records artifact
+  SHA-256 hashes, schemas, commands, seeds, tolerances, evidence labels, and
+  scientific boundaries.
+- [x] Its independent verifier invokes every registered artifact verifier and
+  returns 7/7 pass without rerunning long optimizations.
+- [x] `docs/METHOD_CLAIM_EVIDENCE_MATRIX.md` separates proved structure,
+  bounded numerical evidence, limitations, and forbidden claims.
+- [x] ADR 0020 defers second-quantized DMRG because exact CI is strictly more
+  informative in the current 210-dimensional truth spaces.
+- [x] Produce paper-ready method summary tables/figures only from manifest-
+  hashed artifacts and verify their source provenance.
 
 ## Scientific and scope limits
 

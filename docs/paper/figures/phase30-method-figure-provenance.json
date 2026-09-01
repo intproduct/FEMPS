@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "evidence_level": "numerical",
+  "scientific_boundary": "paper figures from seven manifest-hashed artifacts; no asymptotic or superiority claim",
+  "manifest": "docs\\experiments\\results\\phase30_reproduction_manifest.json",
+  "manifest_sha256": "1fc219d31ef8ff5d3c2d7e87786cb0ac2df25b62e358696d144e04f8edc122c1",
+  "source_artifact_sha256": {
+    "n4_harmonic_e4_closure": "15c9198db60783e5c62843485e5701ee129807bc2ff943cd73b866c09c8c481a",
+    "n4_soft_coulomb_transferability": "6b16ed8076dccb909f98896dd475149530a9618ad2065ce730c68e99c5ee5658",
+    "n4_soft_coulomb_basis_extension": "dc0602d1a2740244f4f07691b5d5c7875dcba4b15e0788f8c100e8ff955279ff",
+    "n4_soft_coulomb_high_basis_correlation": "1fcf764fad1b6b2a08b4a5f39ad32b699a8b7b2a4b9aa2d01f4e7cfe1ad40dc0",
+    "n6_soft_coulomb_pilot": "6083be7debd4eef4c974d07f9e939f1fdea4a96b3a778cf53368198429bbb4fc",
+    "n6_soft_coulomb_multiseed": "867fcf27b6dd68f74ae2f45431deb45e49ef5e6b6b1731801a8363dd3da54976",
+    "matched_n4_n6_transition_cost": "49fa73d34132da31366b752d5d463e826a0d99e5989145730e1bbe7908e52b27"
+  },
+  "figures": {
+    "docs\\paper\\figures\\femps-convergence-summary.png": "e6d97080719196f44ba0a937a33df6d86f64e82fea6c3c9028d16a1c66afb4be",
+    "docs\\paper\\figures\\femps-convergence-summary.pdf": "d0a47e106426dcaab5cba914313147d56823b10f4d53d0681e7d220e13d5f4bd",
+    "docs\\paper\\figures\\femps-structure-cost-summary.png": "a2f849d2b6f72e6c128e99eb984c73d67ba44c4c86ddf55252f7be8a59b4b1e9",
+    "docs\\paper\\figures\\femps-structure-cost-summary.pdf": "7c8dfac16c5a67f789644e42200cf30de097721ff597f6c504569aae94a40852"
+  },
+  "plotted_data": {
+    "femps-convergence-summary": {
+      "N4_D6_K_axis": {
+        "K": [
+          1,
+          2,
+          4
+        ],
+        "error_vs_same_basis_CI": [
+          0.001441308914834849,
+          2.896514727446231e-05,
+          6.305041999610239e-08
+        ]
+      },
+      "N4_K4_D_axis": {
+        "D": [
+          6,
+          8,
+          10,
+          12
+        ],
+        "absolute_error_vs_D14": [
+          0.0007549225791283476,
+          0.00034204789187697315,
+          0.0001551042169136707,
+          9.49422685145862e-05
+        ]
+      },
+      "N6_D10_K_comparison": {
+        "labels": [
+          "K1\nblind",
+          "K4\ncontinuation",
+          "K4\nseed 31",
+          "K4\nseed 37",
+          "K4\nseed 43"
+        ],
+        "error_vs_same_basis_CI": [
+          0.0026029428927465403,
+          0.00013824199317724606,
+          0.0002493777756775728,
+          0.0002932292382133994,
+          0.00040312307667278446
+        ]
+      },
+      "D14_role": "finite-basis numerical reference, not a continuum theorem"
+    },
+    "femps-structure-cost-summary": {
+      "timing_modes": [
+        "auto_forward",
+        "auto_forward_backward",
+        "minor_forward",
+        "minor_forward_backward"
+      ],
+      "N4_median_seconds": [
+        0.0925236000912264,
+        0.2990366000449285,
+        0.3940540000330657,
+        1.2243425999768078
+      ],
+      "N6_median_seconds": [
+        0.11462030000984669,
+        0.30623049999121577,
+        0.8334218000527471,
+        2.733280900050886
+      ],
+      "ordinary_particle_TT_center_ranks": {
+        "N4": [
+          24,
+          45
+        ],
+        "N6": [
+          80,
+          120
+        ]
+      },
+      "fixed_correlation_terms_K": 4
+    }
+  }
+}

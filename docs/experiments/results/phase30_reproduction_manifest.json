@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "manifest": "phase30_femps_method_reproduction",
+  "evidence_policy": "only independently verified committed numerical artifacts are admitted",
+  "solver_contract": {
+    "document": "docs/DIAGONAL_PATH_SOLVER_CONTRACT.md",
+    "result_schema_version": 2,
+    "checkpoint_schema_version": 1
+  },
+  "global_boundaries": [
+    "restricted nonbranching diagonal-path FEMPS only",
+    "first quantized continuous functional basis",
+    "numerical artifacts are not theorems",
+    "no generic contraction, asymptotic scaling, runtime superiority, or N8 claim",
+    "direct CI remains faster in the current bounded truth region"
+  ],
+  "entries": [
+    {
+      "id": "n4_harmonic_e4_closure",
+      "claim": "N4 interacting harmonic diagonal-path FEMPS passes blind stability, D/K convergence, and exact comparator gates.",
+      "artifact": "docs/experiments/results/phase28_e4_closure.json",
+      "verifier_module": "scripts.verify_phase28_e4_closure",
+      "verifier_argument": "json_payload",
+      "benchmark_command": "python scripts/benchmark_phase28_e4_closure.py",
+      "verify_command": "python scripts/verify_phase28_e4_closure.py",
+      "seeds": [
+        17,
+        23,
+        41
+      ],
+      "registered_tolerances": {
+        "finite_basis_error": 0.001,
+        "variance": 0.01,
+        "antisymmetry_residual": 1e-12
+      },
+      "artifact_sha256": "15c9198db60783e5c62843485e5701ee129807bc2ff943cd73b866c09c8c481a",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "restricted nonorthogonal multideterminant FEMPS; not generic FEMPS and not a second-quantized MPS"
+    },
+    {
+      "id": "n4_soft_coulomb_transferability",
+      "claim": "N4 soft-Coulomb FEMPS passes three-seed D6/D8 transferability and independent K/D axes.",
+      "artifact": "docs/experiments/results/phase28_soft_coulomb_transferability.json",
+      "verifier_module": "scripts.verify_phase28_soft_coulomb_transferability",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase28_soft_coulomb_transferability.py",
+      "verify_command": "python scripts/verify_phase28_soft_coulomb_transferability.py",
+      "seeds": [
+        17,
+        23,
+        41
+      ],
+      "artifact_sha256": "6b16ed8076dccb909f98896dd475149530a9618ad2065ce730c68e99c5ee5658",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "restricted nonorthogonal multideterminant FEMPS; not generic FEMPS or second quantization",
+      "registered_tolerances": {
+        "dense_ci_error": 0.0002,
+        "variance": 0.002,
+        "norm_error": 1e-10,
+        "antisymmetry_residual": 1e-12,
+        "factorization_error": 1e-11
+      }
+    },
+    {
+      "id": "n4_soft_coulomb_basis_extension",
+      "claim": "At fixed K4, the N4 soft-Coulomb D8-to-D12 lineage passes direct-CI and basis-convergence gates.",
+      "artifact": "docs/experiments/results/phase28_soft_coulomb_basis_extension.json",
+      "verifier_module": "scripts.verify_phase28_soft_coulomb_basis_extension",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase28_soft_coulomb_basis_extension.py",
+      "verify_command": "python scripts/verify_phase28_soft_coulomb_basis_extension.py",
+      "seeds": [
+        17
+      ],
+      "artifact_sha256": "dc0602d1a2740244f4f07691b5d5c7875dcba4b15e0788f8c100e8ff955279ff",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "single seed bounded basis lineage; not a scaling claim",
+      "registered_tolerances": {
+        "dense_ci_error": 0.0002,
+        "variance": 0.002,
+        "norm_error": 1e-10,
+        "antisymmetry_residual": 1e-12,
+        "factorization_error": 1e-11
+      }
+    },
+    {
+      "id": "n4_soft_coulomb_high_basis_correlation",
+      "claim": "At N4,D12, blind K4-to-K5 growth materially reduces same-basis CI error and variance.",
+      "artifact": "docs/experiments/results/phase28_soft_coulomb_high_basis_correlation.json",
+      "verifier_module": "scripts.verify_phase28_soft_coulomb_high_basis_correlation",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase28_soft_coulomb_high_basis_correlation.py",
+      "verify_command": "python scripts/verify_phase28_soft_coulomb_high_basis_correlation.py",
+      "seeds": [
+        2812
+      ],
+      "artifact_sha256": "1fcf764fad1b6b2a08b4a5f39ad32b699a8b7b2a4b9aa2d01f4e7cfe1ad40dc0",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "single seeded blind added determinant; not a K-scaling claim",
+      "registered_tolerances": {
+        "dense_ci_error": 0.0002,
+        "variance": 0.002,
+        "norm_error": 1e-10,
+        "antisymmetry_residual": 1e-12,
+        "factorization_error": 1e-11,
+        "material_error_reduction_fraction": 0.1
+      }
+    },
+    {
+      "id": "n6_soft_coulomb_pilot",
+      "claim": "The resource-capped N6,D10,K1-to-K4 soft-Coulomb pilot passes direct-CI, symmetry, variance, and resource gates.",
+      "artifact": "docs/experiments/results/phase29_n6_soft_coulomb_pilot.json",
+      "verifier_module": "scripts.verify_phase29_n6_soft_coulomb_pilot",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase29_n6_soft_coulomb_pilot.py",
+      "verify_command": "python scripts/verify_phase29_n6_soft_coulomb_pilot.py",
+      "seeds": [
+        29,
+        2914
+      ],
+      "artifact_sha256": "6083be7debd4eef4c974d07f9e939f1fdea4a96b3a778cf53368198429bbb4fc",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "single-seed feasibility pilot; not stability or scaling evidence",
+      "registered_tolerances": {
+        "peak_cpu_rss_bytes": 1610612736,
+        "wall_time_seconds_per_point": 600.0,
+        "factorization_error": 1e-11,
+        "norm_error": 1e-10,
+        "antisymmetry_residual": 1e-12,
+        "K4_dense_ci_error": 0.0005,
+        "K4_error_ratio_vs_K1": 0.5,
+        "K4_variance": 0.005
+      }
+    },
+    {
+      "id": "n6_soft_coulomb_multiseed",
+      "claim": "N6,D10,K4 soft-Coulomb FEMPS passes three fixed blind-seed stability gates.",
+      "artifact": "docs/experiments/results/phase29_n6_multiseed_stability.json",
+      "verifier_module": "scripts.verify_phase29_n6_multiseed_stability",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase29_n6_multiseed_stability.py",
+      "verify_command": "python scripts/verify_phase29_n6_multiseed_stability.py",
+      "seeds": [
+        31,
+        37,
+        43
+      ],
+      "artifact_sha256": "867fcf27b6dd68f74ae2f45431deb45e49ef5e6b6b1731801a8363dd3da54976",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "three fixed blind seeds at one N,D,K point; not scaling evidence",
+      "registered_tolerances": {
+        "dense_ci_error": 0.0005,
+        "variance": 0.005,
+        "norm_error": 1e-10,
+        "antisymmetry_residual": 1e-12,
+        "retained_condition_number": 100000000.0,
+        "factorization_error": 1e-11,
+        "peak_cpu_rss_bytes": 1610612736,
+        "wall_time_seconds_per_point": 600.0,
+        "energy_spread": 0.00025
+      }
+    },
+    {
+      "id": "matched_n4_n6_transition_cost",
+      "claim": "At fixed D10,K4,L19, N4/N6 value-gradient kernels pass matched value, operation-count, and cost audits.",
+      "artifact": "docs/experiments/results/phase29_n4_n6_matched_cost.json",
+      "verifier_module": "scripts.verify_phase29_n4_n6_matched_cost",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase29_n4_n6_matched_cost.py",
+      "verify_command": "python scripts/verify_phase29_n4_n6_matched_cost.py",
+      "seeds": [],
+      "registered_tolerances": {
+        "auto_minor_value_difference": 1e-10,
+        "operator_factorization_error": 1e-11
+      },
+      "artifact_sha256": "49fa73d34132da31366b752d5d463e826a0d99e5989145730e1bbe7908e52b27",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "matched kernel timing at fixed D,K,L; not asymptotic scaling"
+    }
+  ]
+}

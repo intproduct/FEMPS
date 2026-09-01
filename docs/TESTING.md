@@ -144,3 +144,14 @@ million-coefficient particle materialization only in bounded validation. Its
 production FEMPS contraction enumerates zero virtual paths. The committed
 artifact is single-seed numerical feasibility evidence, not N6 stability or
 scaling evidence.
+
+The Phase 30 method evidence manifest is rebuilt and verified by:
+
+```powershell
+python scripts/build_phase30_reproduction_manifest.py
+python scripts/verify_phase30_reproduction_manifest.py
+```
+
+The verifier checks artifact SHA-256 hashes and schema/evidence labels, then
+invokes all seven registered independent artifact verifiers without rerunning
+the long optimizations.

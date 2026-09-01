@@ -8,10 +8,39 @@ from femps.exterior import agp_exterior_coefficients
 from femps.hamiltonians import (
     agp_energy,
     antisymmetric_two_particle_hamiltonian,
+    factorize_dense_two_body_operator,
     soft_coulomb_dense_quadrature,
     soft_coulomb_operator,
     soft_coulomb_two_fermion_relative_grid_energy,
 )
+
+
+def test_physical_two_body_svd_reconstructs_exchange_symmetric_tensor() -> None:
+    generator = torch.Generator().manual_seed(19)
+    raw = torch.randn((4, 4, 4, 4), generator=generator, dtype=torch.float64)
+    dense = 0.5 * (raw + raw.permute(1, 0, 3, 2))
+    operator, diagnostics = factorize_dense_two_body_operator(dense)
+    assert torch.allclose(operator.dense(), dense, atol=2e-13, rtol=2e-13)
+    assert diagnostics.retained_rank <= 16
+    assert diagnostics.dense_relative_error < 2e-14
+    assert diagnostics.particle_exchange_residual < 2e-14
+
+
+@pytest.mark.parametrize("dimension", [10, 12])
+def test_physical_soft_coulomb_factorization_stays_accurate_at_larger_basis(
+    dimension: int,
+) -> None:
+    operator, diagnostics = soft_coulomb_operator(
+        dimension,
+        quadrature_order=128,
+        relative_threshold=1e-13,
+        factorization_backend="physical",
+    )
+    direct = soft_coulomb_dense_quadrature(dimension, quadrature_order=128)
+    relative_error = torch.linalg.vector_norm(operator.dense() - direct) / torch.linalg.vector_norm(direct)
+    assert diagnostics.factorization_backend == "physical_operator_svd"
+    assert diagnostics.dense_relative_factorization_error < 1e-11
+    assert relative_error < 1e-11
 
 
 def test_soft_coulomb_factorization_matches_direct_quadrature() -> None:

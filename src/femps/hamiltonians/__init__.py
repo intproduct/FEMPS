@@ -2,6 +2,7 @@
 
 from .harmonic_fermions import (
     FactorizedTwoBodyOperator,
+    TwoBodyFactorizationDiagnostics,
     agp_energy,
     agp_hamiltonian_transition_matrices,
     agp_sum_energy,
@@ -11,6 +12,7 @@ from .harmonic_fermions import (
     exact_interacting_harmonic_fermion_energy,
     exact_interacting_pair_energy,
     exact_noninteracting_fermion_energy,
+    factorize_dense_two_body_operator,
     harmonic_pair_hamiltonian,
 )
 from .soft_coulomb import (
@@ -22,6 +24,7 @@ from .soft_coulomb import (
 
 __all__ = [
     "FactorizedTwoBodyOperator",
+    "TwoBodyFactorizationDiagnostics",
     "agp_energy",
     "agp_hamiltonian_transition_matrices",
     "agp_sum_energy",
@@ -31,6 +34,7 @@ __all__ = [
     "exact_interacting_harmonic_fermion_energy",
     "exact_interacting_pair_energy",
     "exact_noninteracting_fermion_energy",
+    "factorize_dense_two_body_operator",
     "harmonic_pair_hamiltonian",
     "SoftCoulombDiagnostics",
     "soft_coulomb_dense_quadrature",

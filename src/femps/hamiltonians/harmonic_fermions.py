@@ -63,6 +63,62 @@ class FactorizedTwoBodyOperator:
         return 0.5 * (direct + swapped)
 
 
+@dataclass(frozen=True, slots=True)
+class TwoBodyFactorizationDiagnostics:
+    """Error and rank of a physical operator-Schmidt factorization."""
+
+    retained_rank: int
+    discarded_rank: int
+    relative_threshold: float
+    dense_relative_error: float
+    particle_exchange_residual: float
+
+
+def factorize_dense_two_body_operator(
+    dense: torch.Tensor,
+    *,
+    relative_threshold: float = 0.0,
+) -> tuple[FactorizedTwoBodyOperator, TwoBodyFactorizationDiagnostics]:
+    """Factorize a physical four-index pair tensor in the ``D^2`` space.
+
+    The SVD is applied after grouping indices as ``(p,r)|(q,s)``.  The
+    returned operator represents the particle-exchange symmetrization of the
+    input; callers requiring an exact reconstruction must provide a tensor
+    symmetric under ``(p,r) <-> (q,s)``.
+    """
+
+    if dense.ndim != 4 or len(set(dense.shape)) != 1:
+        raise ValueError("dense two-body tensor must have shape (D,D,D,D)")
+    if not (dense.is_floating_point() or dense.is_complex()):
+        raise ValueError("dense two-body tensor must use a floating or complex dtype")
+    if not 0 <= relative_threshold < 1:
+        raise ValueError("relative_threshold must lie in [0,1)")
+    dimension = dense.shape[0]
+    matrix = dense.permute(0, 2, 1, 3).reshape(dimension**2, dimension**2)
+    exchange_residual = torch.linalg.vector_norm(matrix - matrix.transpose(0, 1))
+    dense_norm = torch.linalg.vector_norm(matrix)
+    if float(dense_norm.detach().cpu()) == 0.0:
+        raise ValueError("cannot factorize the zero two-body operator")
+    left_vectors, singular_values, right_vectors_h = torch.linalg.svd(
+        matrix, full_matrices=False
+    )
+    keep = singular_values > relative_threshold * singular_values[0]
+    left = left_vectors[:, keep].transpose(0, 1).reshape(-1, dimension, dimension)
+    right = right_vectors_h[keep].reshape(-1, dimension, dimension)
+    weights = singular_values[keep].to(dtype=dense.dtype)
+    operator = FactorizedTwoBodyOperator(
+        left.to(dtype=dense.dtype), right.to(dtype=dense.dtype), weights
+    )
+    error = torch.linalg.vector_norm(operator.dense() - dense) / dense_norm
+    return operator, TwoBodyFactorizationDiagnostics(
+        retained_rank=int(torch.count_nonzero(keep)),
+        discarded_rank=int(torch.count_nonzero(~keep)),
+        relative_threshold=relative_threshold,
+        dense_relative_error=float(error.detach().cpu()),
+        particle_exchange_residual=float((exchange_residual / dense_norm).detach().cpu()),
+    )
+
+
 def exact_noninteracting_fermion_energy(particles: int, *, omega: float = 1.0) -> float:
     """Ground energy of spinless noninteracting fermions in a 1D HO trap."""
 

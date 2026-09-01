@@ -8,7 +8,10 @@ import math
 import numpy as np
 import torch
 
-from .harmonic_fermions import FactorizedTwoBodyOperator
+from .harmonic_fermions import (
+    FactorizedTwoBodyOperator,
+    factorize_dense_two_body_operator,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -27,6 +30,7 @@ class SoftCoulombDiagnostics:
     dense_relative_factorization_error: float
     dense_hermiticity_residual: float
     exchange_symmetry_residual: float
+    factorization_backend: str
 
 
 def _validate_parameters(
@@ -128,6 +132,7 @@ def soft_coulomb_operator(
     coupling: float = 1.0,
     softening: float = 1.0,
     relative_threshold: float = 1e-12,
+    factorization_backend: str = "kernel",
     dtype: torch.dtype = torch.complex128,
     device: torch.device | str = "cpu",
 ) -> tuple[FactorizedTwoBodyOperator, SoftCoulombDiagnostics]:
@@ -143,6 +148,34 @@ def soft_coulomb_operator(
     densities, kernel = _quadrature_components(
         basis_order, quadrature_order, softening, device=device
     )
+    direct = coupling * torch.einsum(
+        "ipr,ij,jqs->pqrs", densities, kernel, densities
+    ).to(dtype)
+    direct_norm = torch.linalg.vector_norm(direct)
+    matrix = direct.reshape(basis_order**2, basis_order**2)
+    hermiticity = torch.linalg.vector_norm(matrix - matrix.mH) / direct_norm
+    exchange = torch.linalg.vector_norm(direct - direct.permute(1, 0, 3, 2)) / direct_norm
+    if factorization_backend == "physical":
+        operator, physical = factorize_dense_two_body_operator(
+            direct, relative_threshold=relative_threshold
+        )
+        return operator, SoftCoulombDiagnostics(
+            basis_order=basis_order,
+            quadrature_order=quadrature_order,
+            coupling=coupling,
+            softening=softening,
+            retained_rank=physical.retained_rank,
+            discarded_rank=physical.discarded_rank,
+            relative_threshold=relative_threshold,
+            largest_kernel_eigenvalue_magnitude=0.0,
+            discarded_kernel_eigenvalue_magnitude=0.0,
+            dense_relative_factorization_error=physical.dense_relative_error,
+            dense_hermiticity_residual=float(hermiticity.detach().cpu()),
+            exchange_symmetry_residual=float(exchange.detach().cpu()),
+            factorization_backend="physical_operator_svd",
+        )
+    if factorization_backend != "kernel":
+        raise ValueError("factorization_backend must be kernel or physical")
     eigenvalues, eigenvectors = torch.linalg.eigh(kernel)
     largest = torch.max(torch.abs(eigenvalues))
     keep = torch.abs(eigenvalues) > relative_threshold * largest
@@ -152,15 +185,8 @@ def soft_coulomb_operator(
     weights = (coupling * retained_values).to(dtype)
     operator = FactorizedTwoBodyOperator(factors, factors, weights)
 
-    direct = coupling * torch.einsum(
-        "ipr,ij,jqs->pqrs", densities, kernel, densities
-    ).to(dtype)
     reconstructed = operator.dense()
-    direct_norm = torch.linalg.vector_norm(direct)
     factorization_error = torch.linalg.vector_norm(reconstructed - direct) / direct_norm
-    matrix = direct.reshape(basis_order**2, basis_order**2)
-    hermiticity = torch.linalg.vector_norm(matrix - matrix.mH) / direct_norm
-    exchange = torch.linalg.vector_norm(direct - direct.permute(1, 0, 3, 2)) / direct_norm
     discarded = torch.abs(eigenvalues[~keep])
     diagnostics = SoftCoulombDiagnostics(
         basis_order=basis_order,
@@ -177,6 +203,7 @@ def soft_coulomb_operator(
         dense_relative_factorization_error=float(factorization_error.detach().cpu()),
         dense_hermiticity_residual=float(hermiticity.detach().cpu()),
         exchange_symmetry_residual=float(exchange.detach().cpu()),
+        factorization_backend="quadrature_kernel_eigh",
     )
     return operator, diagnostics
 

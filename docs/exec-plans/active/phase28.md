@@ -158,3 +158,10 @@ symmetry, time, memory, and zero-path-enumeration requirements are independently
 verified in `docs/experiments/phase28_soft_coulomb_transferability_report.md`.
 The next bounded point is a single `D=8 -> 10 -> 12` lineage with dense-CI
 audits; larger `N` or truth-free dimensions remain deferred.
+
+The operator audit preceding that lineage found roundoff amplification in the
+quadrature-kernel factorization above `D=8`. A physical `D^2` operator-SVD
+fallback now reconstructs `D=10,12` soft-Coulomb tensors below `4e-15` with
+ranks 19 and 23. The seed-17 `D=8 -> 10` pilot passes the registered state
+error, variance, norm, and symmetry tolerances; details are in
+`docs/experiments/phase28_physical_operator_factorization_report.md`.

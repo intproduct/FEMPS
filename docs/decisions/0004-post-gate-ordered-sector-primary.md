@@ -9,8 +9,12 @@ ADR 0003 conditionally rejects unrestricted dense matrix-wedge FEMPS exact
 contraction. Phase 14 then classified the principal restricted coefficient
 algebras. The proved tractable cases reduce to AGP/LC-AGP or Gaussian
 structure; bounded nilpotent/triangular hierarchies put the improvement order
-in the polynomial exponent and overlap AGP jets/border rank; a noncommutative
-semisimple `Mat_2` block contains the hard reduction.
+in the polynomial exponent and overlap AGP jets/border rank. Phase 20 later
+corrected the provisional `Mat_2` analogy used at the time of this decision:
+a fixed `Mat_2` pair power collapses to polynomial LC-AGP, while the Phase 13
+hard reduction requires growing shift memory. Phase 22 independently restores
+the generic obstruction with a bandwidth-one APG permanent instance. This
+correction does not change the ordered-sector decision.
 
 The ordered-coordinate representation is unitarily equivalent to the
 antisymmetric full-space problem, with collision boundaries carrying Pauli

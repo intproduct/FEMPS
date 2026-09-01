@@ -1,5 +1,11 @@
 # Phase 14 report: exact obstruction hardening and post-gate pivot
 
+> **Later correction.** Phase 20 showed that a fixed `Mat_2` symmetrized pair
+> power is polynomial LC-AGP; the hard Phase 13 instance uses growing shift
+> memory. Phase 22 supplies an independent bandwidth-one APG permanent
+> obstruction. The Phase 14 route decision remains valid, but the original
+> fixed-`Mat_2` wording below has been corrected.
+
 ## Outcome
 
 The generic FEMPS contraction obstruction now has an independent exact
@@ -32,9 +38,10 @@ determinant, proves the polynomial-bond one-form FEMPS embedding, and gives the
 direct-sum norm-interference reduction. It explicitly distinguishes a
 conditional complexity theorem from an unconditional class separation.
 
-The local MiKTeX installation has not completed first-run setup, so PDF
-compilation remains an environment task. The TeX source and all executable
-certificates are present.
+At Phase 14 the local MiKTeX first-run setup still blocked PDF compilation.
+Phase 23 completed that setup and compiled the updated theorem draft twice with
+resolved cross-references and no layout warnings. All executable certificates
+remain present.
 
 ## Restricted-algebra result
 
@@ -47,7 +54,8 @@ The classification in `docs/theory/restricted_algebra_triage.md` finds:
 - upper-triangular/radical-index hierarchies have comparator costs such as
   `poly(N^r)`, failing the joint criterion when r is improvable;
 - Gaussian/matchgate closure is established prior structure; and
-- a genuine `Mat_2` semisimple sector contains hard instances.
+- a fixed `Mat_2` pair power was then unclassified; Phase 20 later proved its
+  polynomial LC-AGP collapse, while locating hardness in growing order memory.
 
 No class is admitted as a new scalable exterior solver.
 

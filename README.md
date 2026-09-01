@@ -90,11 +90,18 @@ is gated by an explicit contraction-complexity audit.
 - Phase 22 closes the sparse growing-width path gate. The weakest upper-
   bidiagonal endpoint state is exactly APG/APIG. With paired edge forms it
   encodes an arbitrary 0--1 permanent in a unique-path top coefficient and
-  `perm(A)^2/(M!)^2` in the normalized exact norm, despite bandwidth one and
+  `perm(A)^2/(M!)^2` in the normalized exact squared norm, despite bandwidth one and
   only `O(M^2)` input. Gate J therefore fails on both direct-prior-art and
   exact-contraction grounds. The result is not an LC-AGP rank lower bound.
+- Phase 23 consolidates the result into a two-axis no-go hierarchy. The sparse
+  APG permanent is now the simplest generic exact squared-norm proof; the
+  tagged Cayley construction independently diagnoses growing row-order memory.
+  Fixed `Mat2` pair powers are explicitly corrected to the polynomial LC-AGP
+  side. The conclusion covers the tested exact coefficient-memory corridor,
+  not every structured or approximate exterior method.
 
-See [the active execution plan](docs/exec-plans/active/phase23.md),
+See [the active execution plan](docs/exec-plans/active/phase24.md),
+[the no-go hierarchy](docs/theory/exterior_no_go_hierarchy.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md),
 [the Gate G report](docs/experiments/phase19_n8_refinement_gate_report.md),
 [the Phase 20 negative-classification report](docs/experiments/phase20_bounded_wedderburn_report.md), and

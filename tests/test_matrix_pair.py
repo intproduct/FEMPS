@@ -1,4 +1,5 @@
 import itertools
+import math
 
 import torch
 
@@ -197,3 +198,54 @@ def test_matrix_pair_power_has_polynomial_bond_matrix_wedge_embedding() -> None:
         atol=3e-10,
         rtol=3e-11,
     )
+
+
+@torch.no_grad()
+def test_sparse_path_apg_top_coefficient_and_norm_are_a_permanent() -> None:
+    for order in (1, 2, 3, 4):
+        matrix = [
+            [((row + 1) * (column + 2) + row + column + order) % 3
+             for column in range(order)]
+            for row in range(order)
+        ]
+        permanent = sum(
+            math.prod(matrix[row][column] for row, column in enumerate(permutation))
+            for permutation in itertools.permutations(range(order))
+        )
+        dimension = 2 * order
+        bond = order + 1
+        pair_matrices = torch.zeros(
+            dimension, dimension, bond, bond, dtype=torch.float64
+        )
+        for row in range(order):
+            for column in range(order):
+                value = matrix[row][column]
+                pair_matrices[2 * column, 2 * column + 1, row, row + 1] = value
+                pair_matrices[2 * column + 1, 2 * column, row, row + 1] = -value
+        left = torch.zeros(bond, dtype=torch.float64)
+        right = torch.zeros_like(left)
+        left[0] = 1
+        right[-1] = 1
+        expected = torch.tensor(
+            permanent / math.factorial(order), dtype=torch.float64
+        )
+
+        coefficients = matrix_pair_exterior_coefficients(
+            pair_matrices, order, left, right
+        )
+        assert coefficients.shape == (1,)
+        torch.testing.assert_close(coefficients[0], expected, atol=0.0, rtol=0.0)
+        torch.testing.assert_close(
+            matrix_pair_norm(pair_matrices, order, left, right),
+            expected.square(),
+            atol=0.0,
+            rtol=0.0,
+        )
+
+        cores = matrix_pair_femps_cores(pair_matrices, order, left, right)
+        torch.testing.assert_close(
+            femps_exterior_coefficients(cores),
+            coefficients,
+            atol=5e-15,
+            rtol=5e-15,
+        )

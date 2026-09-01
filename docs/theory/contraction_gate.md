@@ -1,5 +1,12 @@
 # Gate A contraction analysis
 
+> **Superseded status (2026-09-01).** The route costs and small-system
+> identities below remain valid, but the original `OPEN` decision was replaced
+> by ADR 0003 after Phase 13 proved a conditional #P-hardness obstruction for
+> the unrestricted family. Phases 20--22 then classified several restricted
+> algebras and sparse growing-memory candidates. See
+> `exterior_no_go_hierarchy.md` for the current boundary.
+
 ## Current exact routes
 
 Let the open bonds be `chi_0=chi_N=1`, and write
@@ -89,17 +96,21 @@ FEMPS advantage over determinant expansions.
 
 ## Gate status
 
-**OPEN.** Generic exact contraction currently has two alternatives:
+**FAIL for unrestricted generic exact contraction, conditional on the standard
+permanent-complexity assumption.** The two direct exact routes remain:
 
 - exponential virtual-path count, or
 - combinatorial exterior-space dimension.
 
-A PASS requires a recurrence polynomial in `N,D,chi` for a nontrivial generic
-family. A CONDITIONAL outcome remains possible if a more structured
-statistics-carrier/correlation-multiplicity subclass is shown to be both
-polynomial and more expressive than a plain polynomial-size Slater sum.
+Phase 13 additionally embeds a row-ordered Cayley determinant over `Mat_2` into
+a polynomial-size matrix-pair state and then into one-form FEMPS. Exact squared-
+norm evaluation would therefore compute a permanent. Phase 22 gives an
+independent obstruction already for an upper-bidiagonal unique-path APG state.
 
-No hardness theorem has yet been proved, so a FAIL decision would be premature.
+A later structured family may pass only after a fresh gate proves both joint-
+polynomial observable contraction and a novelty boundary beyond polynomial
+LC-AGP/Gaussian prior art. The current generic FAIL does not rule out controlled
+approximation, statistics-carrier factorization, or ordered-sector methods.
 
 ## Literature boundary
 

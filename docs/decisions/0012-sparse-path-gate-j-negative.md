@@ -13,7 +13,7 @@ recurrence beyond polynomial LC-AGP.
 The upper-bidiagonal endpoint specialization has a unique virtual path and is
 exactly APG. In a paired-orbital basis, its top coefficient is the permanent of
 an arbitrary `M x M` 0--1 matrix. The normalized squared norm is the permanent
-squared divided by `(M!)^2`, so exact norm evaluation recovers the permanent.
+squared divided by `(M!)^2`, so exact squared-norm evaluation recovers the permanent.
 The instance uses `D=2M`, width `M+1`, bandwidth one, and `O(M^2)` sparse input.
 
 APG/APIG, Fischer conversion to AGP sums, and permanent-valued coefficients are

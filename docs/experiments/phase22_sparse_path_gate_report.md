@@ -17,7 +17,7 @@ coefficient is `perm(A)`. Under the normalized pair-power convention,
 ||Psi||^2 = perm(A)^2 / (M!)^2.
 ```
 
-For 0--1 `A`, an exact norm oracle therefore recovers a #P-complete permanent.
+For 0--1 `A`, an exact squared-norm oracle therefore recovers a #P-complete permanent.
 The construction has `D=2M`, width `M+1`, bandwidth one, one virtual path, and
 only `O(M^2)` binary input coefficients. Tridiagonal and broader fixed-bandwidth
 families inherit the obstruction because they contain this specialization.

@@ -151,7 +151,7 @@ permanent-valued APG determinant coefficients and identify the single-pairing-
 scheme APIG restriction [@RicherKimAyers2025GraphicalGeminals]. Thus the
 permanent structure itself is prior art.
 
-## Corollary 3: exact norm is #P-hard
+## Corollary 3: exact squared norm is #P-hard
 
 Restrict `A` to 0--1 entries. Valiant proves that computing `perm(A)` for this
 input class is #P-complete [@Valiant1979Permanent]. The sparse-path instance is
@@ -168,7 +168,7 @@ s = perm(A)^2 / (M!)^2.
 ```
 
 Exact multiplication by `(M!)^2` followed by the nonnegative integer square
-root recovers `perm(A)` in polynomial time. Therefore generic exact norm
+root recovers `perm(A)` in polynomial time. Therefore generic exact squared-norm
 contraction for this upper-bidiagonal family is #P-hard. A polynomial algorithm
 jointly in `(M,D,w)` would imply `FP=#P`.
 
@@ -226,7 +226,7 @@ normalization. The all-`M` proof is the symbolic argument above.
 
 Gate J is **FAIL** for generic growing-width path/fixed-bandwidth pair matrices.
 The weakest unique-path member is established APG/APIG rather than a new state
-family, while its exact norm contains the 0--1 permanent. The two required gate
+family, while its exact squared norm contains the 0--1 permanent. The two required gate
 conditions therefore fail independently:
 
 1. novelty/separation is not established and the selected state is direct APG

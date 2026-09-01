@@ -150,6 +150,14 @@ separation of complexity classes. It applies to the unrestricted dense
 noncommuting family. It does not rule out physically meaningful restricted
 coefficient algebras, approximation schemes, or ordered-sector formulations.
 
+Phase 22 later supplies a simpler independent generic obstruction. Upper-
+bidiagonal coefficient matrices of growing width have a unique virtual path and
+produce an APG product. Paired-orbital edge forms encode a 0--1 permanent in
+the top coefficient and its square in the normalized squared norm. Thus dense
+noncommutativity is not required for generic hardness; the shift-tag result is
+retained because it separately identifies growing order memory as a hard
+resource. See `sparse_path_apg_obstruction.md`.
+
 ## Gauge-invariant correlation multiplicity
 
 For any normalized fixed-N state let `gamma` be its one-body density matrix,

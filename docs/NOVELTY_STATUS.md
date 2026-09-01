@@ -125,3 +125,12 @@ introduced APG, its Waring decomposition, or its permanent structure. Ordinary
 polynomial Waring rank is also not asserted as a physical LC-AGP lower bound
 after exterior quotienting. Phase 23 therefore consolidates a no-go theorem
 package rather than opening another exact solver branch.
+
+Phase 23 makes that package manuscript-explicit. The shortest generic exact
+contraction obstruction is the bandwidth-one APG permanent, while the earlier
+tagged Cayley theorem remains an independent classification of growing
+noncommutative order memory. Fixed `Mat_2` pair powers are on the polynomial
+LC-AGP side, correcting a stale Phase 14 analogy. No universal no-go or
+approximation-hardness claim is made. Any approximate exterior method now
+requires a separate error-certified Gate K and a fresh audit against established
+APG selection, low-rank, and stochastic contraction methods.

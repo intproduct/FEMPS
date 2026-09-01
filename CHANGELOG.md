@@ -1,5 +1,23 @@
 # Research changelog
 
+## 2026-09-01 - Phase 23 exact exterior no-go synthesis
+
+- Separated ordinary particle-TT exchange rank from compact exterior
+  contraction complexity in one theorem dependency and coverage map.
+- Promoted the bandwidth-one APG permanent identity to the simplest generic
+  exact squared-norm obstruction while retaining the tagged Cayley theorem as
+  an independent growing-order-memory result.
+- Corrected stale Gate A and Phase 14 statements, especially the former
+  conflation of fixed `Mat_2` pair powers with row-ordered determinants.
+- Added manuscript-safe/forbidden claim language, a paper outline, full
+  certificate hashes, and explicit field/normalization/reduction qualifiers.
+- Added a production matrix-pair and one-form FEMPS regression for the sparse
+  permanent identity.
+- Compiled both theorem drafts successfully; the updated contraction draft has
+  resolved references and no layout warnings.
+- Passed the complete `203`-test suite with one unchanged latticeTN report-path
+  warning and advanced to a controlled-approximation Gate K.
+
 ## 2026-09-01 - Phase 22 sparse growing-width path gate
 
 - Identified the upper-bidiagonal endpoint pair-matrix state exactly as an

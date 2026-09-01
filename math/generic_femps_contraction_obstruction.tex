@@ -6,7 +6,7 @@
 \newcommand{\Mat}{\operatorname{Mat}}
 \newcommand{\CayleyDet}{\operatorname{CDet}}
 
-\title{A Conditional Exact-Contraction Obstruction for Generic Matrix-Wedge FEMPS}
+\title{Conditional Exact Squared-Norm Obstructions for Generic Matrix-Wedge FEMPS}
 \author{Working theorem draft}
 \date{2026-09-01}
 
@@ -16,9 +16,13 @@
 \paragraph{Evidence status.}
 The algebraic reduction below is a proof draft. An independent exact-integer
 enumerator verifies its core identity through order four. The complexity input
-is Theorem~3.5 of Chien--Harsha--Sinclair--Srinivasan: the row-ordered
+is Theorem~3.5 of Chien--Harsha--Sinclair--Srinivasan
+\cite{ChienEtAl2011}: the row-ordered
 determinant over $\Mat_2(\mathbb F)$ is \#P-hard when $\mathbb F$ has
-characteristic zero. External proof review is still required.
+characteristic zero. The later bandwidth-one theorem uses Valiant's
+\#P-completeness of the zero--one permanent and has an independent exact
+integer/rational certificate through pair order six. External proof review is
+still required.
 
 \section{Matrix-valued pair powers}
 
@@ -76,8 +80,11 @@ $r=e_{n+1}\otimes v$, then the unique top-degree coefficient is
 
 \begin{proof}
 Only matchings joining every $x_i$ to a distinct $y_{\sigma(i)}$ can
-contribute. Relative to the displayed physical order, the sign of this
-matching is $(-1)^{n(n-1)/2}\operatorname{sgn}(\sigma)$. For any fixed
+contribute. Relative to the displayed physical order, the sign is
+\[
+ (-1)^{n(n-1)/2}\operatorname{sgn}(\sigma).
+\]
+For any fixed
 matching, Equation~\eqref{eq:sym-pf} symmetrizes all $n!$ factor orders.
 The matrix-unit product is zero for every order except increasing row order,
 where
@@ -87,7 +94,7 @@ where
 Contracting the tag endpoints and summing over $\sigma$ gives the formula.
 \end{proof}
 
-\section{Embedding into one-form matrix-wedge FEMPS}
+\section{One-form FEMPS embedding}
 
 \begin{lemma}[Polynomial-bond embedding]
 Every state $\Psi_M(B;l,r)$ has an exact open-chain one-form matrix-wedge
@@ -104,8 +111,8 @@ matrix-valued two-form $\Omega_B$. Repeat the two cores $M$ times, insert
 $l^{\mathsf T}/M!$ in the first core, and contract $r$ in the last core.
 \end{proof}
 
-\begin{theorem}[Conditional generic exact-norm obstruction]
-Over $\mathbb Q$, exact norm evaluation for unrestricted rational
+\begin{theorem}[Conditional generic exact squared-norm obstruction]
+Over $\mathbb Q$, exact squared-norm evaluation for unrestricted rational
 matrix-wedge FEMPS is \#P-hard under polynomial-time Turing reductions, even
 when $D=N$ and the maximum one-form FEMPS bond is $O(N^2)$. Consequently, a
 generic exact contraction algorithm polynomial jointly in $(N,D,\chi)$ would
@@ -121,23 +128,108 @@ pair state has $D=N=2n$ and pair bond $2(n+1)$; the embedding lemma gives
 maximum one-form FEMPS bond $4n(n+1)=O(N^2)$. Its explicit description and
 all rational bit lengths are polynomial in the input size.
 
-It remains to reduce a signed amplitude $x$ to norms. The top exterior space
+It remains to reduce a signed amplitude $x$ to squared norms. The top exterior space
 $\Lambda^{2n}\mathbb Q^{2n}$ is one-dimensional. A scalar block with only
 $B_{x_i y_i}=1$ supplies a known top coefficient
 $q=(-1)^{n(n-1)/2}$. A virtual direct sum adds this scalar block to the hard
 block, producing amplitude $x+q$ with only constant additive bond overhead.
-Exact norm queries give $x^2$ and $(x+q)^2$, hence
+Exact squared-norm queries give $x^2$ and $(x+q)^2$, hence
 \[
  x=\frac{(x+q)^2-x^2-q^2}{2q}.
 \]
-Thus an exact polynomial-time norm oracle computes every required Cayley
+Thus an exact polynomial-time squared-norm oracle computes every required Cayley
 determinant entry and therefore solves a \#P-hard problem.
 \end{proof}
 
+\section{A simpler sparse-path obstruction}
+
+The generic consequence above has a direct proof that does not require
+noncommutative determinant hardness. It also shows that dense virtual matrices
+and multiple virtual paths are not the source of the obstruction.
+
+Let $n=M$, $D=2n$, and define orthonormal pair forms
+\[
+ P_j=e_{2j-1}\wedge e_{2j},\qquad 1\le j\le n.
+\]
+Given a zero--one matrix $A\in\{0,1\}^{n\times n}$, take virtual dimension
+$n+1$ and set
+\[
+ B_{2j-1,2j}=\sum_{i=1}^n A_{ij}E_{i,i+1},
+\]
+with every other independent physical-pair coefficient zero. Equivalently,
+the matrix of two-forms is upper bidiagonal with edge forms
+\[
+ F_i=\sum_{j=1}^n A_{ij}P_j.
+\]
+
+\begin{theorem}[Bandwidth-one permanent obstruction]
+With boundaries $l=e_1$ and $r=e_{n+1}$,
+\[
+ \Psi_n(B;l,r)
+ =\frac{\operatorname{perm}(A)}{n!}
+   P_1\wedge\cdots\wedge P_n,
+ \qquad
+ \langle\Psi_n,\Psi_n\rangle
+ =\frac{\operatorname{perm}(A)^2}{(n!)^2}.
+\]
+Consequently exact squared-norm evaluation is \#P-hard already for upper-
+bidiagonal pair matrices with one endpoint path, $D=2n$, pair bond $n+1$,
+and $O(n^2)$ binary input coefficients.
+\end{theorem}
+
+\begin{proof}
+The unique length-$n$ virtual path gives
+$F_1\wedge\cdots\wedge F_n/n!$. In its multilinear expansion, a repeated
+$P_j$ vanishes. Every surviving term therefore selects a permutation
+$\sigma\in S_n$. Pair forms have even degree and commute, so every term has
+the same top form, with total coefficient
+$\sum_\sigma\prod_i A_{i,\sigma(i)}=\operatorname{perm}(A)$. The top form has
+unit norm. Since the permanent of a zero--one matrix is \#P-complete
+\cite{Valiant1979}, an exact
+squared-norm value recovers it by multiplying by $(n!)^2$ and taking the
+nonnegative integer square root.
+\end{proof}
+
+The state is an antisymmetrized product of geminals; permanent-valued APG/APIG
+coefficients and Fischer APG-to-AGP expansions are established
+\cite{RicherKimAyers2025,KawasakiNakatani2024}. This theorem is a compact-
+input contraction obstruction, not a lower bound on physical LC--AGP rank: the
+output lies in the one-dimensional top exterior sector. The row-order theorem
+above remains an independent demonstration of a different hard resource,
+namely growing noncommutative order memory.
+
 \paragraph{Scope.}
-The theorem concerns the unrestricted dense family and exact arithmetic. It
-does not rule out structured coefficient algebras, approximate contractions,
-or ordered-sector first-quantized representations. It also does not assert an
-unconditional separation of complexity classes.
+The theorems concern exact arithmetic. The sparse theorem rules out a generic
+algorithm for a family that contains the upper-bidiagonal specialization; it
+does not make every sparse instance hard. Neither result excludes other
+structured restrictions, approximate contractions, or ordered-sector
+first-quantized representations. Neither asserts an unconditional separation
+of complexity classes.
+
+\begin{thebibliography}{9}
+
+\bibitem{ChienEtAl2011}
+S.~Chien, P.~Harsha, A.~Sinclair, and S.~Srinivasan,
+``Almost settling the hardness of noncommutative determinant,''
+in \emph{Proceedings of STOC}, pp.~499--508 (2011).
+
+\bibitem{Valiant1979}
+L.~G.~Valiant,
+``The complexity of computing the permanent,''
+\emph{Theoretical Computer Science} \textbf{8}, 189--201 (1979).
+
+\bibitem{RicherKimAyers2025}
+M.~Richer, T.~D.~Kim, and P.~W.~Ayers,
+``Graphical approach to interpreting and efficiently evaluating geminal
+wavefunctions,''
+\emph{International Journal of Quantum Chemistry} \textbf{125}, e70000
+(2025).
+
+\bibitem{KawasakiNakatani2024}
+A.~Kawasaki and N.~Nakatani,
+``Low-rank decomposition on the antisymmetric product of geminals for strongly
+correlated electrons,'' arXiv:2410.06666 (2024).
+
+\end{thebibliography}
 
 \end{document}

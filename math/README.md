@@ -43,3 +43,13 @@ noncommutative growing-memory algebra with `x^2=y^2=0`. It compares direct word-
 algebra powers with the nested exact decomposition from its
 `Mat_2(Q[z]/(z^d))` embedding for every boundary word, `1<=M<=3`, and
 `1<=d<=4`.
+
+`certificates/verify_sparse_path_apg_permanent.py` checks the Phase 22
+upper-bidiagonal APG permanent reduction. It compares exact virtual-path,
+square-zero exterior-subset, and permutation-enumeration routes for three
+matrix families at every `1<=M<=6`; it also records the normalized squared norm
+as an exact rational.
+
+`docs/theory/exterior_no_go_hierarchy.md` is the Phase 23 synthesis entry point.
+It distinguishes ordinary particle-TT representation rank from exact exterior
+contraction complexity and records the coverage boundary of every theorem.

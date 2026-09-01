@@ -32,7 +32,7 @@ variational implementation.
 
 Gate J is **FAIL for generic growing-width path and fixed-bandwidth pair
 matrices**. The weakest upper-bidiagonal candidate is established APG/APIG,
-while exact norm contraction recovers the #P-complete 0--1 permanent. Sparse
+while exact squared-norm contraction recovers the #P-complete 0--1 permanent. Sparse
 virtual degree, a unique path, and polynomial parameter count therefore do not
 supply a tractable exterior state family.
 

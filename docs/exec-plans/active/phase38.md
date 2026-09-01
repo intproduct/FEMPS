@@ -54,3 +54,13 @@ the seed or expand the search. Classify the Phase 37 success as schedule
 sensitive, keep the public command bounded, and make optimizer/initialization
 stability the next gate. Failure does not authorize N/D expansion, automatic
 stopping, generic-FEMPS claims, or pure-mathematics work.
+
+## Preregistration checkpoint
+
+ADR 0027 and the two machine-readable configurations
+`phase38_n4_d6_k4_seed_a.json` and `phase38_n4_d6_k4_seed_b.json` freeze the
+fresh schedules and aggregate gates before either production result is opened.
+Schedule A uses source/candidate/optimizer seeds 3801,
+3811/3812, 3821/3822, and 3831/3832; schedule B uses 3901,
+3911/3912, 3921/3922, and 3931/3932.  A is interrupted at K2, resumed, and
+cleanly repeated; B is run once.  No outcome-dependent retry is admitted.

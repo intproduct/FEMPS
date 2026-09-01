@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "method": "slater_source_adaptive_diagonal_path_femps",
+  "evidence_level": "numerical",
+  "particles": 4,
+  "basis_order": 6,
+  "device": "cpu",
+  "model": {
+    "interaction": "soft_coulomb",
+    "omega": 1.0,
+    "coupling": 1.0,
+    "softening": 1.0,
+    "quadrature_order": 128,
+    "relative_factor_threshold": 1e-13,
+    "factorization_backend": "physical"
+  },
+  "source_optimizer": {
+    "seed": 3801,
+    "steps": 60,
+    "learning_rate": 0.005,
+    "final_learning_rate": 1e-5,
+    "record_points": 10,
+    "checkpoint_every": 60,
+    "lbfgs_refinement_steps": 40,
+    "lbfgs_learning_rate": 0.5
+  },
+  "adaptive": {
+    "max_terms": 4,
+    "pool_size": 32,
+    "overlap_relative_threshold": 1e-10,
+    "condition_threshold": 1e8,
+    "energy_nesting_tolerance": 1e-10,
+    "stages": [
+      {"target_terms": 2, "candidate_seed": 3811, "optimizer_seed": 3812},
+      {"target_terms": 3, "candidate_seed": 3821, "optimizer_seed": 3822},
+      {"target_terms": 4, "candidate_seed": 3831, "optimizer_seed": 3832}
+    ]
+  },
+  "stage_optimizer": {
+    "steps": 60,
+    "learning_rate": 0.005,
+    "final_learning_rate": 1e-5,
+    "record_points": 10,
+    "checkpoint_every": 60,
+    "lbfgs_refinement_steps": 40,
+    "lbfgs_learning_rate": 0.5
+  },
+  "validation": {
+    "truth_maximum_dimension": 300,
+    "particle_tensor_maximum_coefficients": 100000
+  },
+  "acceptance": {
+    "resume_energy_tolerance": 1e-11,
+    "energy_nesting_tolerance": 1e-9,
+    "source_ci_error_maximum": 0.002,
+    "source_variance_maximum": 0.01,
+    "final_ci_error_maximum": 1e-6,
+    "final_variance_maximum": 1e-5,
+    "final_energy_spread_maximum": 2e-6,
+    "fresh_difference_from_phase37_maximum": 1e-6,
+    "optimizer_failure_count_maximum": 0,
+    "norm_error_maximum": 1e-10,
+    "antisymmetry_residual_maximum": 1e-12,
+    "factorization_error_maximum": 1e-11,
+    "stage_wall_time_maximum_seconds": 120.0,
+    "command_wall_time_maximum_seconds": 600.0,
+    "peak_cpu_rss_maximum_bytes": 2147483648
+  },
+  "checkpoint_path": "checkpoints/phase38_clean_source_seed_a/resumed.pt",
+  "output_path": "docs/experiments/results/phase38_clean_source_seed_a.json"
+}

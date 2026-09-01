@@ -165,3 +165,17 @@ fallback now reconstructs `D=10,12` soft-Coulomb tensors below `4e-15` with
 ranks 19 and 23. The seed-17 `D=8 -> 10` pilot passes the registered state
 error, variance, norm, and symmetry tolerances; details are in
 `docs/experiments/phase28_physical_operator_factorization_report.md`.
+
+The formal checkpointed `D=8 -> 10 -> 12,K=4` lineage now passes without
+relaxing any threshold. Same-basis dense-CI errors are `1.042e-4` and
+`8.314e-5` at `D=10,12`; variances remain below `1e-3`, both antisymmetry
+residuals are zero, and absolute error versus the `D=14` numerical reference
+decreases at every basis step. The independent verifier and complete cost,
+operator, CI, and particle-TT-rank audit are documented in
+`docs/experiments/phase28_soft_coulomb_basis_extension_report.md`.
+
+The restricted route therefore satisfies the minimum Phase 28 interacting
+algorithm-and-physics recovery criteria. Before considering larger `N`, the
+remaining bounded consolidation gate is a clean-process lineage reproduction
+and one high-basis correlation check separating fixed-`K` error from basis
+error. No generic scalability or superiority claim is admitted.

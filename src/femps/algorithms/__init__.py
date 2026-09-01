@@ -40,6 +40,18 @@ from .diagonal_path_contract import (
     validate_diagonal_path_checkpoint,
     validate_diagonal_path_result,
 )
+from .adaptive_diagonal_path_contract import (
+    ADAPTIVE_DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
+    ADAPTIVE_DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
+    load_adaptive_diagonal_path_checkpoint,
+    validate_adaptive_diagonal_path_checkpoint,
+    validate_adaptive_diagonal_path_result,
+)
+from .adaptive_diagonal_path_training import (
+    AdaptiveDiagonalPathConfig,
+    AdaptiveDiagonalPathStageConfig,
+    run_bounded_adaptive_diagonal_path,
+)
 
 __all__ = [
     "GeneralizedEigenResult",
@@ -70,4 +82,12 @@ __all__ = [
     "load_diagonal_path_checkpoint",
     "validate_diagonal_path_checkpoint",
     "validate_diagonal_path_result",
+    "ADAPTIVE_DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION",
+    "ADAPTIVE_DIAGONAL_PATH_RESULT_SCHEMA_VERSION",
+    "load_adaptive_diagonal_path_checkpoint",
+    "validate_adaptive_diagonal_path_checkpoint",
+    "validate_adaptive_diagonal_path_result",
+    "AdaptiveDiagonalPathConfig",
+    "AdaptiveDiagonalPathStageConfig",
+    "run_bounded_adaptive_diagonal_path",
 ]

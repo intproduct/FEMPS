@@ -1,6 +1,6 @@
 # Diagonal-path FEMPS solver and reproduction contract
 
-Contract version: 2 (Phase 34 compatible extension, 2026-09-01)
+Contract version: 3 (Phase 36 compatible adaptive extension, 2026-09-01)
 
 ## Scientific scope
 
@@ -32,6 +32,25 @@ reproduction line:
 - `validate_diagonal_path_checkpoint` and `validate_diagonal_path_result`;
 - `DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION` and
   `DIAGONAL_PATH_RESULT_SCHEMA_VERSION`.
+
+Phase 36 adds a public bounded adaptive orchestration layer:
+
+- `AdaptiveDiagonalPathStageConfig` records one explicit target K, candidate
+  seed, and optimizer seed;
+- `AdaptiveDiagonalPathConfig` requires a finite external `max_terms` and a
+  complete consecutive stage schedule;
+- `run_bounded_adaptive_diagonal_path` performs truth-free select/optimize
+  stages and writes an outer checkpoint after every completed K;
+- `load_adaptive_diagonal_path_checkpoint`,
+  `validate_adaptive_diagonal_path_checkpoint`, and
+  `validate_adaptive_diagonal_path_result` enforce source/operator identities,
+  schemas, symmetry/resource fields, and the external-cap boundary;
+- `ADAPTIVE_DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION` and
+  `ADAPTIVE_DIAGONAL_PATH_RESULT_SCHEMA_VERSION` version those records.
+
+The adaptive layer does not infer a stopping K. `max_terms` must be strictly
+larger than the source K, and the caller must supply candidate and optimizer
+seeds for every intermediate K. Automatic stopping remains `not_admitted`.
 
 Fields may be added compatibly, but existing names, meanings, tensor ordering,
 or units cannot change without a schema increment and migration note. The
@@ -67,6 +86,11 @@ Checkpoints contain configuration, operator identity, current/best `(K,D,N)`
 orbitals, best energy, optimizer/scheduler state, step, and history. Formal
 scripts load them only through `load_diagonal_path_checkpoint`; direct
 `torch.load` is not an admitted reproduction path.
+
+Adaptive outer checkpoints are loaded only through
+`load_adaptive_diagonal_path_checkpoint`. They contain the canonical current
+orbitals and all completed stage records; per-K optimizer checkpoints retain
+the existing single-K schema.
 
 Checkpoints are ignored runtime artifacts. A committed result must include the
 commands and lineage needed to regenerate them. Bitwise equality across

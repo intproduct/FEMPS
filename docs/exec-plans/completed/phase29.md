@@ -1,4 +1,4 @@
-# Active execution plan: Phase 29 Restricted FEMPS N6 Decision
+# Completed execution plan: Phase 29 Restricted FEMPS N6 Decision
 
 ## Objective
 
@@ -77,3 +77,16 @@ The active milestone is now a matched N4-to-N6 structural and contraction-cost
 audit at fixed `D=10,K=4,L=19`. It must separate operation-count scaling from
 different optimizer budgets and report that direct CI remains faster in the
 current truth region. No N8 diagonal-path calculation is authorized.
+
+## Matched-cost result
+
+The audit passes. Exact N6/N4 structural ratios are 1.5 for stored orbitals and
+one-body determinants and 2.5 for two-body minors. Matched minor value/gradient
+timings grow by 2.115x/2.232x; the vectorized inverse path grows by
+1.239x/1.024x over these two small points and accelerates the N6 minor path by
+7.27x/8.93x. Auto/minor values agree within `1.07e-14`.
+
+At fixed FEMPS `K=4`, ordinary particle-TT center ranks are 24 at N4 and 80 at
+N6, versus dense-CI ranks 45 and 120. This is the measured exchange-carrier /
+correlation-multiplicity separation, not a runtime superiority claim. Phase 29
+is complete and particle-number expansion stops.

@@ -1,11 +1,12 @@
-# Active execution plan: Phase 28 FEMPS Algorithm and Physics Recovery
+# Completed execution plan: Phase 28 FEMPS Algorithm and Physics Recovery
 
 ## Status and objective
 
-**Status:** algorithm-recovery gate passed on 2026-09-01; the paper-third-draft
-track remains active. This plan supersedes Phase 27 for project priority
-without weakening any established no-go theorem or changing the first-
-quantized continuous functional-basis definition of FEMPS.
+**Status:** completed on 2026-09-01. The solver, interacting physics,
+reproduction, and structural-paper third-draft gates pass. This plan superseded
+Phase 27 for project priority without weakening any established no-go theorem
+or changing the first-quantized continuous functional-basis definition of
+FEMPS.
 
 Deliver a minimal FEMPS solver that is runnable, independently verifiable, and
 able to optimize at least one nontrivial interacting continuous fermion model.

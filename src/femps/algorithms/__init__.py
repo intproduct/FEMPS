@@ -28,6 +28,13 @@ from .diagonal_path_training import (
     extend_diagonal_path_terms,
     run_diagonal_path_variable_projection,
 )
+from .diagonal_path_contract import (
+    DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
+    DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
+    load_diagonal_path_checkpoint,
+    validate_diagonal_path_checkpoint,
+    validate_diagonal_path_result,
+)
 
 __all__ = [
     "GeneralizedEigenResult",
@@ -50,4 +57,9 @@ __all__ = [
     "embed_diagonal_path_orbitals",
     "extend_diagonal_path_terms",
     "run_diagonal_path_variable_projection",
+    "DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION",
+    "DIAGONAL_PATH_RESULT_SCHEMA_VERSION",
+    "load_diagonal_path_checkpoint",
+    "validate_diagonal_path_checkpoint",
+    "validate_diagonal_path_result",
 ]

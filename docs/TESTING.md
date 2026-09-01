@@ -125,3 +125,18 @@ training, blind D12 basis/operator/reference refinement, and the descriptive
 N=2/4/6/8 accuracy/resource trend. The raw Gate F tensor-gradient miss remains
 in its original record. The D14 exterior value is a numerical reference rather
 than a continuum certificate, and the trend explicitly does not admit N=10.
+
+The frozen diagonal-path FEMPS contract and resource-capped N6 pilot are
+validated by:
+
+```powershell
+python -m pytest tests/test_diagonal_path_training.py -q
+python scripts/benchmark_phase29_n6_soft_coulomb_pilot.py
+python scripts/verify_phase29_n6_soft_coulomb_pilot.py
+```
+
+The benchmark uses direct exterior CI because `binom(10,6)=210` and performs
+million-coefficient particle materialization only in bounded validation. Its
+production FEMPS contraction enumerates zero virtual paths. The committed
+artifact is single-seed numerical feasibility evidence, not N6 stability or
+scaling evidence.

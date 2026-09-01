@@ -14,6 +14,7 @@ import torch
 from femps.algorithms import (
     DiagonalPathConfig,
     embed_diagonal_path_orbitals,
+    load_diagonal_path_checkpoint,
     run_diagonal_path_variable_projection,
 )
 from femps.benchmarks import ProcessRSSMonitor
@@ -149,7 +150,7 @@ def _run_point(
     )
     initial = None
     if source_checkpoint is not None:
-        payload = torch.load(source_checkpoint, map_location="cpu", weights_only=False)
+        payload = load_diagonal_path_checkpoint(source_checkpoint)
         initial = embed_diagonal_path_orbitals(payload["best_raw"], dimension)
     result = run_diagonal_path_variable_projection(
         config,

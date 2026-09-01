@@ -1,13 +1,19 @@
 from pathlib import Path
 
+import pytest
 import torch
 
 from femps.algorithms import (
+    DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
+    DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
     DiagonalPathConfig,
     canonical_slater_orbitals,
     embed_diagonal_path_orbitals,
     extend_diagonal_path_terms,
+    load_diagonal_path_checkpoint,
     run_diagonal_path_variable_projection,
+    validate_diagonal_path_checkpoint,
+    validate_diagonal_path_result,
 )
 
 
@@ -77,6 +83,8 @@ def test_k_one_noninteracting_training_is_exact_and_audited() -> None:
         checkpoint_every=1,
     )
     result = run_diagonal_path_variable_projection(config)
+    validate_diagonal_path_result(result, require_completed=True)
+    assert result["schema_version"] == DIAGONAL_PATH_RESULT_SCHEMA_VERSION
     assert result["completed"]
     assert abs(result["energy"] - 2.0) < 1e-12
     assert result["finite_basis_reference_energy"] == 2.0
@@ -130,6 +138,12 @@ def test_checkpoint_resume_matches_uninterrupted_run(tmp_path: Path) -> None:
     partial = run_diagonal_path_variable_projection(
         config, checkpoint_path=checkpoint, max_steps_this_call=2
     )
+    payload = load_diagonal_path_checkpoint(checkpoint)
+    assert payload["schema_version"] == DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION
+    incompatible = dict(payload)
+    incompatible["schema_version"] = 999
+    with pytest.raises(ValueError, match="schema version"):
+        validate_diagonal_path_checkpoint(incompatible)
     assert not partial["completed"]
     resumed = run_diagonal_path_variable_projection(
         config, checkpoint_path=checkpoint, resume=True

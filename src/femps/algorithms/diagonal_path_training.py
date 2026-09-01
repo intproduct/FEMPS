@@ -36,6 +36,12 @@ from femps.hamiltonians import (
 )
 
 from .agp_subspace import GeneralizedEigenResult, solve_generalized_hermitian
+from .diagonal_path_contract import (
+    DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
+    DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
+    load_diagonal_path_checkpoint,
+    validate_diagonal_path_result,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -307,7 +313,7 @@ def _save_checkpoint(
     path.parent.mkdir(parents=True, exist_ok=True)
     torch.save(
         {
-            "schema_version": 1,
+            "schema_version": DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
             "config": asdict(config),
             "operator_id": operator_id,
             "step": step,
@@ -356,11 +362,13 @@ def _run_diagonal_path_variable_projection_impl(
     if resume:
         if checkpoint_path is None or not checkpoint_path.exists():
             raise ValueError("resume requires an existing checkpoint_path")
-        payload = torch.load(checkpoint_path, map_location=device, weights_only=False)
-        if payload["config"] != asdict(config):
-            raise ValueError("checkpoint configuration does not match requested run")
-        if payload.get("operator_id") != operator_id:
-            raise ValueError("checkpoint operator_id does not match requested run")
+        payload = load_diagonal_path_checkpoint(
+            checkpoint_path,
+            map_location=device,
+            expected_config=asdict(config),
+            expected_operator_id=operator_id,
+            verify_operator_id=True,
+        )
         raw = torch.nn.Parameter(payload["raw"].to(device))
         best_raw = payload["best_raw"].to(device)
         best_energy = float(payload["best_energy"])
@@ -590,7 +598,7 @@ def _run_diagonal_path_variable_projection_impl(
         else None
     )
     return {
-        "schema_version": 2,
+        "schema_version": DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
         "method": "diagonal_path_femps",
         "evidence_level": "numerical",
         "config": asdict(config),
@@ -687,4 +695,5 @@ def run_diagonal_path_variable_projection(
     result["cpu_memory"] = memory_record.as_dict()
     result["peak_cpu_rss_bytes"] = memory_record.peak_rss_bytes
     result["peak_cpu_rss_delta_bytes"] = memory_record.peak_delta_rss_bytes
+    validate_diagonal_path_result(result)
     return result

@@ -63,6 +63,11 @@ flowchart LR
   error-axis closure for controlled comparisons.
 - `math/`: proof and certificate pipelines, isolated from production solvers.
 
+The restricted nonbranching diagonal-path FEMPS public interface and its
+versioned result/checkpoint semantics are frozen in
+`docs/DIAGONAL_PATH_SOLVER_CONTRACT.md`. Formal Phase 28/29 scripts use the
+validated checkpoint loader rather than reading Torch payloads directly.
+
 `latticeTN` stays an upstream sibling dependency. FEMPS reuses its PyTorch MPS,
 native contractions, device/dtype conventions, and AD infrastructure instead
 of copying them.

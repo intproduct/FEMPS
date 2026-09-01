@@ -117,10 +117,19 @@ is gated by an explicit contraction-complexity audit.
   tested `N=4` forward/backward kernels by roughly `2--4x`. This route remains
   close to nonorthogonal selected CI and carries no generic-contraction,
   novelty, asymptotic-scalability, or superiority claim.
+- Phase 28 now closes at a truth-controlled `N=4,D=12,K=5` soft-Coulomb point.
+  A frozen result/checkpoint contract gates formal reproduction. ADR 0018 then
+  admits one `N=6,D=10` pilot: blind `K=1 -> 4` growth reduces the same-basis
+  CI error from `2.603e-3` to `1.382e-4`, with variance `1.197e-3`, zero
+  structural/materialized antisymmetry residual, 85.6 s runtime, and 798 MB
+  sampled peak RSS. This is single-seed feasibility evidence, not scaling or
+  stability evidence.
 
 See [the active execution plan](docs/exec-plans/active/phase28.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
+[the diagonal-path solver contract](docs/DIAGONAL_PATH_SOLVER_CONTRACT.md),
+[the N6 soft-Coulomb pilot](docs/experiments/phase29_n6_soft_coulomb_pilot_report.md),
 [the exact four-form workspace](math/four_forms/README.md),
 [the no-go hierarchy](docs/theory/exterior_no_go_hierarchy.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md),

@@ -15,6 +15,7 @@ from femps.algorithms import (
     DiagonalPathConfig,
     FiniteAgpConfig,
     embed_diagonal_path_orbitals,
+    load_diagonal_path_checkpoint,
     run_diagonal_path_variable_projection,
     run_finite_agp_variable_projection,
 )
@@ -77,7 +78,7 @@ def _run_point(
     )
     initial_orbitals = None
     if source_checkpoint is not None:
-        source = torch.load(source_checkpoint, map_location="cpu", weights_only=False)
+        source = load_diagonal_path_checkpoint(source_checkpoint)
         initial_orbitals = embed_diagonal_path_orbitals(
             source["best_raw"], dimension
         )

@@ -11,6 +11,7 @@ import torch
 from femps.algorithms import (
     DiagonalPathConfig,
     extend_diagonal_path_terms,
+    load_diagonal_path_checkpoint,
     run_diagonal_path_variable_projection,
 )
 from femps.hamiltonians import harmonic_pair_hamiltonian, soft_coulomb_operator
@@ -93,9 +94,7 @@ def main() -> None:
     if not args.source_checkpoint.exists():
         raise ValueError("missing D12,K4 source checkpoint; reproduce the basis extension")
 
-    source_payload = torch.load(
-        args.source_checkpoint, map_location="cpu", weights_only=False
-    )
+    source_payload = load_diagonal_path_checkpoint(args.source_checkpoint)
     source_artifact = json.loads(args.source_artifact.read_text(encoding="utf-8"))
     source_point = source_artifact["extension_points"][1]
     if (

@@ -11,6 +11,7 @@ import torch
 from femps.algorithms import (
     DiagonalPathConfig,
     embed_diagonal_path_orbitals,
+    load_diagonal_path_checkpoint,
     run_diagonal_path_variable_projection,
 )
 from femps.hamiltonians import harmonic_pair_hamiltonian, soft_coulomb_operator
@@ -55,7 +56,7 @@ def _run_extension(
     steps: int,
     lbfgs_steps: int,
 ) -> tuple[dict, dict]:
-    source = torch.load(source_checkpoint, map_location="cpu", weights_only=False)
+    source = load_diagonal_path_checkpoint(source_checkpoint)
     initial = embed_diagonal_path_orbitals(source["best_raw"], dimension)
     one_body = harmonic_pair_hamiltonian(
         dimension, kappa=0.0, dtype=torch.complex128, device="cpu"

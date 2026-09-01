@@ -1,5 +1,27 @@
 # Research changelog
 
+## 2026-09-02 - Preregistered interacting N4 explicit-correlation D gate
+
+- Added a checkpointed CPU/float64 stochastic Adam/QR optimizer for the
+  continuous explicit-correlator/exterior-Slater state. Minimal tests prove
+  exact interrupted/resumed versus clean trajectories and reject changed
+  checkpoint initialization identities.
+- Accepted ADR 0033 before any interacting `N=4` coordinate-VMC production
+  result. It freezes `D={4,6,8}`, `P=5`, two optimizer lineages, independent
+  selection and held-out confirmation seeds, all sampler/optimizer budgets,
+  a reference-use firewall, and a conservative uncertainty-aware advantage
+  rule.
+- Froze the disclosed Phase 37 `D=6,K=1,seed=3701` single-Slater carrier as
+  the only preoptimization source. No multideterminant stage, CI vector, or
+  reference energy initializes the state.
+- Reused already-computed D4/D6/D8 CI and fixed-K4 NOCI comparators; no new
+  ordinary NOCI point is authorized. Phase 44 must retain a failed outcome
+  without changing axes, thresholds, states, or budgets.
+- Closed Phase 43 at fixed-state estimator validation and opened Phase 44 for
+  the one interacting differentiator experiment. Paper B remains closed.
+- The standard repository suite passes `300` tests in 655.30 s with the one
+  known latticeTN report-path scalar-conversion warning.
+
 ## 2026-09-02 - Phase 43 fixed-state coordinate-VMC validation
 
 - Added a general-small-`N`, CPU/float64 coordinate-space VMC backend for a

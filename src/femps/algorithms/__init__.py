@@ -96,6 +96,11 @@ from .correlated_exterior_vmc import (
     vmc_energy_gradient,
     vmc_observables,
 )
+from .correlated_exterior_vmc_training import (
+    VMC_OPTIMIZER_CHECKPOINT_SCHEMA_VERSION,
+    CorrelatedExteriorVMCOptimizerConfig,
+    run_correlated_exterior_vmc_optimization,
+)
 
 __all__ = [
     "GeneralizedEigenResult",
@@ -170,4 +175,7 @@ __all__ = [
     "sampled_antisymmetry_residual",
     "vmc_energy_gradient",
     "vmc_observables",
+    "VMC_OPTIMIZER_CHECKPOINT_SCHEMA_VERSION",
+    "CorrelatedExteriorVMCOptimizerConfig",
+    "run_correlated_exterior_vmc_optimization",
 ]

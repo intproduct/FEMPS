@@ -209,7 +209,7 @@ This is a bounded `N=2`, explicitly materialized `Q^2` basis-efficiency result,
 not an external replication, scalable contraction claim, new Jastrow ansatz,
 or authorization for Paper B.
 
-See [the active execution plan](docs/exec-plans/active/phase43_n4_controlled_vmc_backend.md),
+See [the active execution plan](docs/exec-plans/active/phase44_n4_explicit_correlation_d_gate.md),
 [the Phase 43 fixed-state VMC report](docs/experiments/phase43_fixed_state_vmc_validation_report.md),
 [the restored D8 internal report](docs/experiments/phase39_n4_d8_internal_report.md),
 [the completed single-manuscript audit](docs/exec-plans/completed/phase39.md),

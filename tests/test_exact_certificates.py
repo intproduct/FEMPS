@@ -87,3 +87,27 @@ def test_truncated_polynomial_pair_lc_agp_exact_certificate() -> None:
         check=True,
         cwd=root,
     )
+
+
+def test_alternating_word_pair_lc_agp_exact_certificate() -> None:
+    root = Path(__file__).resolve().parents[1]
+    subprocess.run(
+        [
+            sys.executable,
+            str(
+                root
+                / "math"
+                / "certificates"
+                / "verify_alternating_word_pair_collapse.py"
+            ),
+            "--verify",
+            str(
+                root
+                / "math"
+                / "certificates"
+                / "alternating_word_pair_lc_agp_certificate.json"
+            ),
+        ],
+        check=True,
+        cwd=root,
+    )

@@ -37,3 +37,9 @@ growing-radical candidate `Q[z]/(z^d)`. For every `1<=M,d<=4`, it constructs
 exact rational coefficient-extraction weights, expands both sides in all pair-
 form coordinates, and verifies every boundary basis functional. This proves
 arbitrary-boundary coverage by linearity for the certified cases.
+
+`certificates/verify_alternating_word_pair_collapse.py` checks the minimal
+noncommutative growing-memory algebra with `x^2=y^2=0`. It compares direct word-
+algebra powers with the nested exact decomposition from its
+`Mat_2(Q[z]/(z^d))` embedding for every boundary word, `1<=M<=3`, and
+`1<=d<=4`.

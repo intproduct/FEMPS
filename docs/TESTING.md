@@ -41,6 +41,17 @@ The verifier covers every boundary basis functional for all 16 cases with
 `1<=M,d<=4`, so arbitrary boundaries follow by exact linearity rather than a
 selected numerical sample.
 
+The Phase 21 alternating-word noncommutative certificate is checked by:
+
+```powershell
+python math/certificates/verify_alternating_word_pair_collapse.py --verify math/certificates/alternating_word_pair_lc_agp_certificate.json
+python -m pytest -q tests/test_exact_certificates.py
+```
+
+It compares direct word-algebra multiplication with nested exact z-coefficient
+and `Mat2` power interpolation for every boundary word in all 12 cases with
+`1<=M<=3` and `1<=d<=4`.
+
 The current CPU/Blackwell forward-and-gradient parity smoke is:
 
 ```powershell

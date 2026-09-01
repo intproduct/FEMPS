@@ -82,12 +82,19 @@ is gated by an explicit contraction-complexity audit.
   commuting path coordinate is therefore insufficient even when its memory
   depth grows; the next exact candidate must be genuinely multibranch and
   noncommutative.
+- Phase 21 then rejects the minimal noncommutative alternating-word algebra and
+  its fixed-state graded generalization. The `2d-1` dimensional algebra embeds
+  in `Mat2(C[z]/z^d)` and needs at most
+  `[M(d-1)+1] binom(M+3,3)` AGPs; every boundary word is certified exactly for
+  `1<=M<=3,1<=d<=4`. Gate I closes negatively. The next gate targets sparse
+  growing-width path memory, where both LC-AGP rank and contraction hardness
+  must be resolved before implementation.
 
-See [the active execution plan](docs/exec-plans/active/phase21.md),
+See [the active execution plan](docs/exec-plans/active/phase22.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md),
 [the Gate G report](docs/experiments/phase19_n8_refinement_gate_report.md),
 [the Phase 20 negative-classification report](docs/experiments/phase20_bounded_wedderburn_report.md), and
-[the Phase 21 growing-memory report](docs/experiments/phase21_truncated_polynomial_collapse_report.md).
+[the Phase 21 fixed-state report](docs/experiments/phase21_alternating_word_collapse_report.md).
 
 ## Development setup
 

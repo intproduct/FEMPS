@@ -13,6 +13,13 @@
 - Rejected the one-generator commutative path algebra without numerical solver
   development; the next candidate must use controlled multibranch
   noncommutative growing memory.
+- Embedded the minimal noncommutative alternating-word algebra of dimension
+  `2d-1` into `Mat_2(C[z]/z^d)` and derived the exact bound
+  `[M(d-1)+1] binom(M+3,3)`.
+- Added a direct-word versus nested-interpolation exact certificate for every
+  boundary word at `1<=M<=3,1<=d<=4`.
+- Generalized the collapse to fixed matrix-state width over a fixed number of
+  commuting grading counters and closed Gate I negatively for that class.
 
 ## 2026-09-01 - Phase 20 bounded coefficient-algebra classification
 

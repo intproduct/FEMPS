@@ -102,3 +102,13 @@ osculating, and nonorthogonal AGP territory. Exact and border rank are kept
 separate: the first jet has exact rank M but border rank two. The result narrows
 the next candidate to genuinely multibranch noncommutative growing memory; it
 does not create a new method claim.
+
+The second Phase 21 candidate adds genuine noncommutativity and two alternating
+branches with dimension `2d-1`, but embeds in `Mat_2(C[z]/z^d)` and collapses to
+at most `[M(d-1)+1] binom(M+3,3)` AGPs. More generally, fixed matrix-state width
+over a fixed number of commuting grading counters always gives a polynomial
+LC-AGP expansion. Finite-state matrix representations are established weighted-
+automata/rational-series machinery. Gate I therefore closes negatively for
+fixed-state graded memory; the next exact boundary requires growing state width
+or growing independent noncommutative counters and remains subject to the Phase
+13 hardness obstruction.

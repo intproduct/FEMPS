@@ -6,6 +6,7 @@ from femps.algorithms import (
     DiagonalPathConfig,
     canonical_slater_orbitals,
     embed_diagonal_path_orbitals,
+    extend_diagonal_path_terms,
     run_diagonal_path_variable_projection,
 )
 
@@ -33,6 +34,33 @@ def test_nested_basis_embedding_preserves_orbitals_and_orthonormality() -> None:
     torch.testing.assert_close(
         embedded.transpose(1, 2) @ embedded,
         torch.eye(3).expand(2, 3, 3),
+    )
+
+
+def test_term_embedding_preserves_source_and_is_seeded() -> None:
+    source = torch.complex(
+        torch.randn(
+            (2, 6, 4),
+            generator=torch.Generator().manual_seed(2808),
+            dtype=torch.float64,
+        ),
+        torch.randn(
+            (2, 6, 4),
+            generator=torch.Generator().manual_seed(2809),
+            dtype=torch.float64,
+        ),
+    )
+    extended = extend_diagonal_path_terms(source, 5, seed=2810)
+    repeated = extend_diagonal_path_terms(source, 5, seed=2810)
+
+    assert extended.shape == (5, 6, 4)
+    assert torch.equal(extended[:2], source)
+    assert torch.equal(extended, repeated)
+    torch.testing.assert_close(
+        extended[2:].mH @ extended[2:],
+        torch.eye(4, dtype=torch.complex128).expand(3, 4, 4),
+        atol=3e-14,
+        rtol=3e-14,
     )
 
 

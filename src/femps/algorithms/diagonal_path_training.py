@@ -128,6 +128,43 @@ def embed_diagonal_path_orbitals(
     return embedded
 
 
+def extend_diagonal_path_terms(
+    orbitals: torch.Tensor, target_terms: int, *, seed: int
+) -> torch.Tensor:
+    """Nest a ``K``-term state in a larger blind determinant span.
+
+    Existing determinants are preserved exactly. Additional determinants use
+    seeded random orthonormal orbitals, so variable projection can retain the
+    source state without using a truth eigenvector to choose the new terms.
+    """
+
+    if orbitals.ndim != 3 or orbitals.shape[1] < orbitals.shape[2]:
+        raise ValueError("orbitals must have shape (K,D,N) with D >= N")
+    if target_terms < orbitals.shape[0]:
+        raise ValueError("target term count cannot be smaller than the source")
+    if target_terms == orbitals.shape[0]:
+        return orbitals.clone()
+    if not (orbitals.is_floating_point() or orbitals.is_complex()):
+        raise ValueError("orbitals must use a floating or complex dtype")
+
+    generator = torch.Generator().manual_seed(seed)
+    extra_shape = (
+        target_terms - orbitals.shape[0],
+        orbitals.shape[1],
+        orbitals.shape[2],
+    )
+    real = torch.randn(extra_shape, generator=generator, dtype=torch.float64)
+    if orbitals.is_complex():
+        imaginary = torch.randn(extra_shape, generator=generator, dtype=torch.float64)
+        extra = torch.complex(real, imaginary)
+    else:
+        extra = real
+    extra = canonical_slater_orbitals(
+        extra.to(dtype=orbitals.dtype, device=orbitals.device)
+    )
+    return torch.cat((orbitals, extra), dim=0)
+
+
 def _random_initial_orbitals(config: DiagonalPathConfig, device: torch.device) -> torch.Tensor:
     generator = torch.Generator().manual_seed(config.seed)
     shape = (config.terms, config.basis_order, config.particles)

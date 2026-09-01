@@ -179,3 +179,17 @@ algorithm-and-physics recovery criteria. Before considering larger `N`, the
 remaining bounded consolidation gate is a clean-process lineage reproduction
 and one high-basis correlation check separating fixed-`K` error from basis
 error. No generic scalability or superiority claim is admitted.
+
+Both consolidation items now pass. The formal D8-to-D12 lineage was reproduced
+from the registered checkpoints in a fresh interpreter. At `D=12`, an exact
+term embedding retained the accepted `K=4` span and added one seeded blind
+Slater; `K=5` reduced the same-basis CI error by 44.35% and the variance by
+41.31%, with zero norm and antisymmetry residuals. Runtime increased by a
+factor 1.53, consistent with the explicit `K^2` transition cost. The registered
+decision and independent verifier are documented in
+`docs/experiments/phase28_soft_coulomb_high_basis_correlation_report.md`.
+
+Phase 28 has therefore met its stated success criteria for the restricted
+diagonal-path route. The next bounded milestone is to freeze the solver API and
+reproduction contract, then record a go/no-go ADR for one resource-capped
+`N=6` interacting pilot. High-dimensional form-rank searches remain parked.

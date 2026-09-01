@@ -1,0 +1,566 @@
+{
+  "schema_version": 1,
+  "experiment": "phase28_soft_coulomb_D12_K4_K5_correlation_growth",
+  "evidence_level": "numerical",
+  "scientific_boundary": "single seeded blind added determinant; not a K-scaling claim",
+  "thresholds": {
+    "dense_ci_error": 0.0002,
+    "variance": 0.002,
+    "norm_error": 1e-10,
+    "antisymmetry_residual": 1e-12,
+    "factorization_error": 1e-11,
+    "material_error_reduction_fraction": 0.1
+  },
+  "source_K4_point": {
+    "schema_version": 2,
+    "method": "diagonal_path_femps",
+    "evidence_level": "numerical",
+    "config": {
+      "basis_order": 12,
+      "particles": 4,
+      "terms": 4,
+      "kappa": 0.35,
+      "omega": 1.0,
+      "steps": 80,
+      "learning_rate": 0.001,
+      "final_learning_rate": 1e-05,
+      "seed": 17,
+      "device": "cpu",
+      "record_points": 10,
+      "checkpoint_every": 80,
+      "overlap_relative_threshold": 1e-10,
+      "truth_maximum_dimension": 600,
+      "particle_tensor_maximum_coefficients": 100000,
+      "interaction_model": "soft_coulomb",
+      "soft_coulomb_coupling": 1.0,
+      "soft_coulomb_softening": 1.0,
+      "soft_coulomb_quadrature_order": 128,
+      "soft_coulomb_relative_threshold": 1e-13,
+      "lbfgs_refinement_steps": 40,
+      "lbfgs_learning_rate": 0.5
+    },
+    "environment": {
+      "python": "3.12.13",
+      "torch": "2.11.0+cu128",
+      "device": "cpu",
+      "cuda_device_name": null
+    },
+    "operator": {
+      "model": "provided"
+    },
+    "operator_id": "soft_D12_Q128_physical_svd",
+    "initialization": "provided_orbitals",
+    "resumed": false,
+    "completed": true,
+    "completed_steps": 80,
+    "energy": 11.023177795943152,
+    "continuum_reference_energy": null,
+    "error_vs_continuum": null,
+    "explicit_exterior_energy": 11.023177795943136,
+    "finite_basis_reference_energy": 11.023094656411185,
+    "error_vs_finite_basis": 8.313953196648072e-05,
+    "polynomial_explicit_absolute_difference": 1.5987211554602254e-14,
+    "energy_variance": 0.0009014082187846876,
+    "energy_uncertainty": null,
+    "norm": 0.9999999999999997,
+    "norm_error": 3.3306690738754696e-16,
+    "structural_antisymmetry_residual": 0.0,
+    "materialized_antisymmetry_residual": 0.0,
+    "ordinary_particle_tt_ranks": [
+      12,
+      24,
+      12
+    ],
+    "retained_rank": 4,
+    "discarded_rank": 0,
+    "retained_condition_number": 3.496402429069736,
+    "raw_overlap_condition_number": 3.4964024290697364,
+    "generalized_residual_norm": 8.507525377806865e-15,
+    "structural_counts": {
+      "stored_orbital_scalars": 192,
+      "stored_amplitude_scalars": 4,
+      "transition_pairs": 16,
+      "one_body_determinants": 64,
+      "two_body_determinants": 4416,
+      "enumerated_virtual_paths": 0,
+      "materialized_particle_coefficients": 0
+    },
+    "transition_diagnostics": {
+      "transition_pairs": 16,
+      "well_conditioned_inverse_pairs": 16,
+      "singular_safe_minor_pairs": 0
+    },
+    "history": [
+      {
+        "step": 0,
+        "optimizer": "adam",
+        "energy": 11.023237957891544,
+        "learning_rate": 0.001,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.2652081807376128,
+        "raw_overlap_condition_number": 3.2652081807376105,
+        "generalized_residual_norm": 1.399860924254506e-14
+      },
+      {
+        "step": 8,
+        "optimizer": "adam",
+        "energy": 11.023257812755405,
+        "learning_rate": 0.0009757729755661012,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.289690823572343,
+        "raw_overlap_condition_number": 3.289690823572345,
+        "generalized_residual_norm": 9.112794177093357e-15
+      },
+      {
+        "step": 16,
+        "optimizer": "adam",
+        "energy": 11.02323127725488,
+        "learning_rate": 0.0009054634122155992,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.297833413077307,
+        "raw_overlap_condition_number": 3.297833413077304,
+        "generalized_residual_norm": 5.424493346140812e-15
+      },
+      {
+        "step": 24,
+        "optimizer": "adam",
+        "energy": 11.02320256038433,
+        "learning_rate": 0.0007959536998847743,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.31559005240854,
+        "raw_overlap_condition_number": 3.315590052408542,
+        "generalized_residual_norm": 8.777961335927866e-15
+      },
+      {
+        "step": 32,
+        "optimizer": "adam",
+        "energy": 11.023196603153096,
+        "learning_rate": 0.0006579634122155992,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.3345037752322657,
+        "raw_overlap_condition_number": 3.3345037752322635,
+        "generalized_residual_norm": 4.6204489227285734e-15
+      },
+      {
+        "step": 40,
+        "optimizer": "adam",
+        "energy": 11.02319274820788,
+        "learning_rate": 0.0005050000000000001,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.355348730545178,
+        "raw_overlap_condition_number": 3.3553487305451775,
+        "generalized_residual_norm": 5.315174613145601e-15
+      },
+      {
+        "step": 48,
+        "optimizer": "adam",
+        "energy": 11.023190300367755,
+        "learning_rate": 0.0003520365877844012,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.37357806269674,
+        "raw_overlap_condition_number": 3.3735780626967404,
+        "generalized_residual_norm": 9.896565655006096e-15
+      },
+      {
+        "step": 56,
+        "optimizer": "adam",
+        "energy": 11.023188903022161,
+        "learning_rate": 0.00021404630011522587,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.3867836625195586,
+        "raw_overlap_condition_number": 3.38678366251956,
+        "generalized_residual_norm": 1.1717981964273217e-14
+      },
+      {
+        "step": 64,
+        "optimizer": "adam",
+        "energy": 11.023188149838232,
+        "learning_rate": 0.00010453658778440107,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.3943412502482766,
+        "raw_overlap_condition_number": 3.3943412502482775,
+        "generalized_residual_norm": 4.599057840605876e-15
+      },
+      {
+        "step": 72,
+        "optimizer": "adam",
+        "energy": 11.023187818592646,
+        "learning_rate": 3.4227024433899e-05,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.3979947864210387,
+        "raw_overlap_condition_number": 3.397994786421041,
+        "generalized_residual_norm": 6.81522320124573e-15
+      },
+      {
+        "step": 80,
+        "optimizer": "adam",
+        "energy": 11.023187724874681,
+        "learning_rate": 1e-05,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.399063511569575,
+        "raw_overlap_condition_number": 3.3990635115695764,
+        "generalized_residual_norm": 8.737673859982476e-15
+      },
+      {
+        "step": 80,
+        "optimizer": "lbfgs",
+        "energy": 11.023177795943152,
+        "learning_rate": 0.5,
+        "retained_rank": 4,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.496402429069736,
+        "raw_overlap_condition_number": 3.4964024290697364,
+        "generalized_residual_norm": 8.507525377806865e-15
+      }
+    ],
+    "refinement": {
+      "optimizer": "lbfgs",
+      "requested_steps": 40,
+      "closure_calls": 42,
+      "initial_energy": 11.023187724874681,
+      "final_energy": 11.023177795943152,
+      "accepted": true
+    },
+    "elapsed_seconds_this_call": 54.02379939996172,
+    "peak_cuda_memory_bytes": null,
+    "optimization_elapsed_seconds_this_call": 54.02379939996172,
+    "total_elapsed_seconds_this_call": 92.76837529998738,
+    "cpu_memory": {
+      "method": "sampled_process_resident_set",
+      "sampling_interval_seconds": 0.005,
+      "samples": 5902,
+      "baseline_rss_bytes": 708317184,
+      "peak_rss_bytes": 823091200,
+      "final_rss_bytes": 802852864,
+      "peak_delta_rss_bytes": 114774016
+    },
+    "peak_cpu_rss_bytes": 823091200,
+    "peak_cpu_rss_delta_bytes": 114774016,
+    "point_id": "N4_D12_K4_seed17_basis_extension",
+    "initialization_lineage": {
+      "kind": "nested_basis_zero_padding",
+      "source_checkpoint": "checkpoints\\phase28_soft_coulomb_basis_extension\\N4_D10_K4_seed17.pt",
+      "truth_state_used": false
+    },
+    "dense_quadrature_reference_energy": 11.02309465641118,
+    "error_vs_dense_quadrature_ci": 8.313953197180979e-05,
+    "error_vs_D14_numerical_reference": 9.49422685145862e-05
+  },
+  "K5_point": {
+    "schema_version": 2,
+    "method": "diagonal_path_femps",
+    "evidence_level": "numerical",
+    "config": {
+      "basis_order": 12,
+      "particles": 4,
+      "terms": 5,
+      "kappa": 0.35,
+      "omega": 1.0,
+      "steps": 100,
+      "learning_rate": 0.0008,
+      "final_learning_rate": 1e-05,
+      "seed": 2812,
+      "device": "cpu",
+      "record_points": 10,
+      "checkpoint_every": 100,
+      "overlap_relative_threshold": 1e-10,
+      "truth_maximum_dimension": 600,
+      "particle_tensor_maximum_coefficients": 100000,
+      "interaction_model": "soft_coulomb",
+      "soft_coulomb_coupling": 1.0,
+      "soft_coulomb_softening": 1.0,
+      "soft_coulomb_quadrature_order": 128,
+      "soft_coulomb_relative_threshold": 1e-13,
+      "lbfgs_refinement_steps": 50,
+      "lbfgs_learning_rate": 0.5
+    },
+    "environment": {
+      "python": "3.12.13",
+      "torch": "2.11.0+cu128",
+      "device": "cpu",
+      "cuda_device_name": null
+    },
+    "operator": {
+      "model": "provided"
+    },
+    "operator_id": "soft_D12_Q128_physical_svd_K5_growth",
+    "initialization": "provided_orbitals",
+    "resumed": false,
+    "completed": true,
+    "completed_steps": 100,
+    "energy": 11.02314092399732,
+    "continuum_reference_energy": null,
+    "error_vs_continuum": null,
+    "explicit_exterior_energy": 11.023140923997293,
+    "finite_basis_reference_energy": 11.023094656411185,
+    "error_vs_finite_basis": 4.626758613390791e-05,
+    "polynomial_explicit_absolute_difference": 2.6645352591003757e-14,
+    "energy_variance": 0.000529068443894751,
+    "energy_uncertainty": null,
+    "norm": 1.0,
+    "norm_error": 0.0,
+    "structural_antisymmetry_residual": 0.0,
+    "materialized_antisymmetry_residual": 0.0,
+    "ordinary_particle_tt_ranks": [
+      12,
+      30,
+      12
+    ],
+    "retained_rank": 5,
+    "discarded_rank": 0,
+    "retained_condition_number": 4.152076529769244,
+    "raw_overlap_condition_number": 4.152076529769246,
+    "generalized_residual_norm": 9.732881527976441e-15,
+    "structural_counts": {
+      "stored_orbital_scalars": 240,
+      "stored_amplitude_scalars": 5,
+      "transition_pairs": 25,
+      "one_body_determinants": 100,
+      "two_body_determinants": 6900,
+      "enumerated_virtual_paths": 0,
+      "materialized_particle_coefficients": 0
+    },
+    "transition_diagnostics": {
+      "transition_pairs": 25,
+      "well_conditioned_inverse_pairs": 25,
+      "singular_safe_minor_pairs": 0
+    },
+    "history": [
+      {
+        "step": 0,
+        "optimizer": "adam",
+        "energy": 11.023177768091395,
+        "learning_rate": 0.0008,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.5286966761312986,
+        "raw_overlap_condition_number": 3.5286966761312955,
+        "generalized_residual_norm": 6.532002142372186e-15
+      },
+      {
+        "step": 10,
+        "optimizer": "adam",
+        "energy": 11.023218491369681,
+        "learning_rate": 0.0007806673239365858,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.5345795297657943,
+        "raw_overlap_condition_number": 3.5345795297657983,
+        "generalized_residual_norm": 1.0261758444987487e-14
+      },
+      {
+        "step": 20,
+        "optimizer": "adam",
+        "energy": 11.023182544011812,
+        "learning_rate": 0.0007245617127781045,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.562870572098622,
+        "raw_overlap_condition_number": 3.562870572098622,
+        "generalized_residual_norm": 7.650589174622815e-15
+      },
+      {
+        "step": 30,
+        "optimizer": "adam",
+        "energy": 11.023169895306472,
+        "learning_rate": 0.000637175174655527,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.590320173434575,
+        "raw_overlap_condition_number": 3.5903201734345767,
+        "generalized_residual_norm": 1.6001661053723793e-14
+      },
+      {
+        "step": 40,
+        "optimizer": "adam",
+        "energy": 11.023167266866027,
+        "learning_rate": 0.0005270617127781044,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.6203785390773056,
+        "raw_overlap_condition_number": 3.6203785390773,
+        "generalized_residual_norm": 8.816765131289922e-15
+      },
+      {
+        "step": 50,
+        "optimizer": "adam",
+        "energy": 11.023164609511289,
+        "learning_rate": 0.0004050000000000003,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.6467329027218636,
+        "raw_overlap_condition_number": 3.646732902721869,
+        "generalized_residual_norm": 6.855135537394063e-15
+      },
+      {
+        "step": 60,
+        "optimizer": "adam",
+        "energy": 11.023163091768854,
+        "learning_rate": 0.0002829382872218961,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.6671052713198113,
+        "raw_overlap_condition_number": 3.6671052713198073,
+        "generalized_residual_norm": 5.367977836107235e-15
+      },
+      {
+        "step": 70,
+        "optimizer": "adam",
+        "energy": 11.023162107003852,
+        "learning_rate": 0.00017282482534447326,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.68308943012752,
+        "raw_overlap_condition_number": 3.6830894301275214,
+        "generalized_residual_norm": 1.0824532152874249e-14
+      },
+      {
+        "step": 80,
+        "optimizer": "adam",
+        "energy": 11.023161546969499,
+        "learning_rate": 8.543828722189585e-05,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.69191601912631,
+        "raw_overlap_condition_number": 3.691916019126311,
+        "generalized_residual_norm": 5.759332100703387e-15
+      },
+      {
+        "step": 90,
+        "optimizer": "adam",
+        "energy": 11.023161297738099,
+        "learning_rate": 2.9332676063414374e-05,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.696141848802551,
+        "raw_overlap_condition_number": 3.6961418488025535,
+        "generalized_residual_norm": 1.0896184667885716e-14
+      },
+      {
+        "step": 100,
+        "optimizer": "adam",
+        "energy": 11.023161219168898,
+        "learning_rate": 1e-05,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 3.697486368828055,
+        "raw_overlap_condition_number": 3.6974863688280535,
+        "generalized_residual_norm": 1.0236286766955518e-14
+      },
+      {
+        "step": 100,
+        "optimizer": "lbfgs",
+        "energy": 11.02314092399732,
+        "learning_rate": 0.5,
+        "retained_rank": 5,
+        "discarded_rank": 0,
+        "retained_condition_number": 4.152076529769244,
+        "raw_overlap_condition_number": 4.152076529769246,
+        "generalized_residual_norm": 9.732881527976441e-15
+      }
+    ],
+    "refinement": {
+      "optimizer": "lbfgs",
+      "requested_steps": 50,
+      "closure_calls": 52,
+      "initial_energy": 11.023161219168898,
+      "final_energy": 11.02314092399732,
+      "accepted": true
+    },
+    "elapsed_seconds_this_call": 102.38201569998637,
+    "peak_cuda_memory_bytes": null,
+    "optimization_elapsed_seconds_this_call": 102.38201569998637,
+    "total_elapsed_seconds_this_call": 141.91358559997752,
+    "cpu_memory": {
+      "method": "sampled_process_resident_set",
+      "sampling_interval_seconds": 0.005,
+      "samples": 9004,
+      "baseline_rss_bytes": 554631168,
+      "peak_rss_bytes": 827375616,
+      "final_rss_bytes": 763875328,
+      "peak_delta_rss_bytes": 272744448
+    },
+    "peak_cpu_rss_bytes": 827375616,
+    "peak_cpu_rss_delta_bytes": 272744448,
+    "point_id": "N4_D12_K5_seed2812_blind_term_growth",
+    "initialization_lineage": {
+      "kind": "exact_K4_span_plus_seeded_blind_slater",
+      "source_checkpoint": "checkpoints\\phase28_soft_coulomb_basis_extension\\N4_D12_K4_seed17.pt",
+      "truth_state_used": false,
+      "new_term_seed": 2812
+    },
+    "dense_quadrature_reference_energy": 11.02309465641118,
+    "error_vs_dense_quadrature_ci": 4.626758613923698e-05
+  },
+  "operator_audit": {
+    "backend": "physical_operator_svd",
+    "rank": 23,
+    "dense_relative_factorization_error": 3.8469276716702315e-15
+  },
+  "dense_ci_audit": {
+    "method": "dense_quadrature_finite_basis_ci",
+    "role": "bounded independent truth, not FEMPS production",
+    "D": 12,
+    "Q": 128,
+    "energy": 11.02309465641118,
+    "error_vs_D14_numerical_reference": 1.1802736542776415e-05,
+    "energy_variance": 5.381685412122632e-29,
+    "norm_error": 2.220446049250313e-16,
+    "antisymmetry_residual": 0.0,
+    "ordinary_particle_tt_ranks": [
+      12,
+      66,
+      12
+    ],
+    "exterior_dimension": 495,
+    "elapsed_seconds": 16.06316269992385,
+    "cpu_memory": {
+      "method": "sampled_process_resident_set",
+      "sampling_interval_seconds": 0.005,
+      "samples": 1015,
+      "baseline_rss_bytes": 763936768,
+      "peak_rss_bytes": 815849472,
+      "final_rss_bytes": 815849472,
+      "peak_delta_rss_bytes": 51912704
+    }
+  },
+  "correlation_axis": [
+    {
+      "K": 4,
+      "energy": 11.023177795943152,
+      "error": 8.313953197180979e-05
+    },
+    {
+      "K": 5,
+      "energy": 11.02314092399732,
+      "error": 4.626758613923698e-05
+    }
+  ],
+  "diagnostics": {
+    "initial_nested_energy": 11.023177768091395,
+    "source_span_nonworsening": true,
+    "optimization_nonworsening": true,
+    "error_reduction_fraction": 0.4434947486242167
+  },
+  "acceptance": {
+    "state_pass": true,
+    "operator_pass": true,
+    "audit_pass": true,
+    "material_improvement": true
+  },
+  "config": {
+    "steps": 100,
+    "lbfgs_steps": 50
+  }
+}

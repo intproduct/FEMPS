@@ -25,6 +25,7 @@ from .diagonal_path_training import (
     DiagonalPathConfig,
     canonical_slater_orbitals,
     embed_diagonal_path_orbitals,
+    extend_diagonal_path_terms,
     run_diagonal_path_variable_projection,
 )
 
@@ -47,5 +48,6 @@ __all__ = [
     "DiagonalPathConfig",
     "canonical_slater_orbitals",
     "embed_diagonal_path_orbitals",
+    "extend_diagonal_path_terms",
     "run_diagonal_path_variable_projection",
 ]

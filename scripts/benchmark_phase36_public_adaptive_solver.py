@@ -84,7 +84,9 @@ def main() -> None:
     parser.add_argument(
         "--checkpoint",
         type=Path,
-        default=Path("checkpoints/phase36_public_adaptive_solver/lineage1.pt"),
+        default=Path(
+            "checkpoints/phase36_public_adaptive_solver/lineage1_canonical_once.pt"
+        ),
     )
     parser.add_argument(
         "--output",
@@ -109,9 +111,8 @@ def main() -> None:
         raise RuntimeError("Phase 36 outer checkpoint already exists")
 
     one_body, interaction, operator_diagnostics = _operators()
-    source = canonical_slater_orbitals(
-        load_diagonal_path_checkpoint(args.source_checkpoint)["best_raw"]
-    )
+    source_raw = load_diagonal_path_checkpoint(args.source_checkpoint)["best_raw"]
+    source = canonical_slater_orbitals(source_raw)
     schedule = AdaptiveDiagonalPathConfig(
         max_terms=6,
         pool_size=POOL_SIZE,
@@ -125,7 +126,7 @@ def main() -> None:
     template = _config(4, 0)
 
     partial = run_bounded_adaptive_diagonal_path(
-        source,
+        source_raw,
         one_body,
         interaction,
         template,
@@ -140,7 +141,7 @@ def main() -> None:
         raise RuntimeError("registered interruption did not stop after K5")
 
     final = run_bounded_adaptive_diagonal_path(
-        source,
+        source_raw,
         one_body,
         interaction,
         template,

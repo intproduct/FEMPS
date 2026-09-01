@@ -1,0 +1,753 @@
+{
+  "schema_version": 1,
+  "experiment": "phase43_fixed_state_correlated_exterior_vmc_validation",
+  "evidence_level": "preregistered estimator validation",
+  "scientific_boundary": "fixed-state N2 deterministic-truth and N4 noninteracting checks; not an interacting N4 result, scalable solver claim, external replication, or Paper B",
+  "adr": "docs/decisions/0032-preregister-phase43-fixed-state-vmc-validation.md",
+  "phase40_fixture": {
+    "artifact": "docs/experiments/results/phase40_explicit_correlation_gate.json",
+    "D": 4,
+    "P": 3,
+    "seed": 40001,
+    "selection_disclosure": "post-Phase40 stable implementation-validation fixture, not an independently predicted physics point",
+    "raw_carrier": [
+      [
+        0.9768900080085665,
+        0.21195728822883925
+      ],
+      [
+        -0.2120109879460882,
+        0.9771375758736602
+      ],
+      [
+        0.026941759929617167,
+        0.005844808982219465
+      ],
+      [
+        -0.0033756206898244772,
+        0.015559691204676993
+      ]
+    ],
+    "amplitudes": [
+      -0.16248880200169646,
+      -0.0156435111985054,
+      -0.002094409717707806
+    ],
+    "exponents": [
+      0.25,
+      1.0,
+      4.0
+    ]
+  },
+  "frozen_thresholds": {
+    "energy_sigma_multiplier": 5.0,
+    "energy_absolute_floor": 0.0002,
+    "distinct_seed_absolute_floor": 0.0001,
+    "gradient_sigma_multiplier": 5.0,
+    "gradient_absolute_floor": 0.005,
+    "acceptance_interval": [
+      0.15,
+      0.85
+    ],
+    "maximum_rhat": 1.1,
+    "minimum_effective_sample_size": 1000,
+    "symmetry_residual": 1e-12,
+    "n4_energy_error": 1e-12,
+    "n4_variance": 1e-20
+  },
+  "frozen_configs": {
+    "n2": {
+      "43011": {
+        "particles": 2,
+        "chains": 32,
+        "burn_in_sweeps": 500,
+        "samples_per_chain": 3000,
+        "thinning_sweeps": 3,
+        "proposal_scale": 0.8,
+        "seed": 43011,
+        "max_autocorrelation_lag": 100,
+        "checkpoint_every": 500,
+        "omega": 1.0,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "device": "cpu"
+      },
+      "43012": {
+        "particles": 2,
+        "chains": 32,
+        "burn_in_sweeps": 500,
+        "samples_per_chain": 3000,
+        "thinning_sweeps": 3,
+        "proposal_scale": 0.8,
+        "seed": 43012,
+        "max_autocorrelation_lag": 100,
+        "checkpoint_every": 500,
+        "omega": 1.0,
+        "coupling": 1.0,
+        "softening": 1.0,
+        "device": "cpu"
+      }
+    },
+    "n4_noninteracting": {
+      "particles": 4,
+      "chains": 16,
+      "burn_in_sweeps": 100,
+      "samples_per_chain": 200,
+      "thinning_sweeps": 2,
+      "proposal_scale": 0.7,
+      "seed": 43021,
+      "max_autocorrelation_lag": 50,
+      "checkpoint_every": 40,
+      "omega": 1.0,
+      "coupling": 0.0,
+      "softening": 1.0,
+      "device": "cpu"
+    }
+  },
+  "deterministic_n2_truth": {
+    "quadrature_order": 160,
+    "energy": 2.553833552207632,
+    "orbital_gradient": [
+      [
+        2.0442683381550324e-08,
+        4.7386066389487216e-08
+      ],
+      [
+        -3.259584853465536e-08,
+        -2.171739435612276e-08
+      ],
+      [
+        -7.412705557814363e-07,
+        -1.718215903087934e-06
+      ],
+      [
+        2.0469710495507586e-06,
+        1.3637612346104295e-06
+      ]
+    ],
+    "amplitude_gradient": [
+      2.2477217203123456e-07,
+      -3.877226667503564e-08,
+      -3.998900424684315e-07
+    ]
+  },
+  "n2_runs": [
+    {
+      "energy": 2.5538493112501035,
+      "kinetic_energy": 0.919906482547628,
+      "trap_energy": 1.0909025407547774,
+      "interaction_energy": 0.5430402879476984,
+      "energy_variance": 1.3456000645235162e-05,
+      "energy_standard_error": 1.2468797311456468e-05,
+      "ess_standard_error": 1.2468797311456468e-05,
+      "blocking_standard_error": 1.229434405869797e-05,
+      "chain_mean_standard_error": 1.2373469367951457e-05,
+      "blocking_size": 4,
+      "blocks_per_chain": 750,
+      "effective_sample_size": 86549.95945748557,
+      "integrated_autocorrelation_times": [
+        1.1383557462593654,
+        1.2332501340057342,
+        1.173223214556353,
+        1.0112258687608116,
+        1.147900748396989,
+        1.3772619776846509,
+        1.0390056315329648,
+        1.0176218760353841,
+        1.0110115133198745,
+        1.5120889854865116,
+        1.0594593153369984,
+        1.0708420738323385,
+        1.0722589241965739,
+        1.009054091094421,
+        1.0,
+        1.095579646870368,
+        1.2418402119108696,
+        1.0897536928457778,
+        1.0523138562895666,
+        1.187488232524452,
+        1.260443341000942,
+        1.0156949127806936,
+        1.1512045473261823,
+        1.285743811049623,
+        1.3180084074823015,
+        1.0437149343617484,
+        1.0,
+        1.1030068266413822,
+        1.0656181805015188,
+        1.0240493450870756,
+        1.0701451270478208,
+        1.0
+      ],
+      "rhat": 1.0000153870809587,
+      "chain_means": [
+        2.553918633719477,
+        2.553831215251183,
+        2.553795742675094,
+        2.553849210859548,
+        2.553879471376566,
+        2.5539801713589045,
+        2.5538066758321922,
+        2.5538572866180806,
+        2.5539134108629833,
+        2.553914070924865,
+        2.553889975074032,
+        2.5538011103149345,
+        2.554017403913791,
+        2.5537387312216175,
+        2.5537887119867593,
+        2.5538571382237194,
+        2.553934148981176,
+        2.553826380025359,
+        2.5538598906275882,
+        2.5538283553359493,
+        2.5537823478602757,
+        2.5539268455971587,
+        2.5536820820500217,
+        2.5538935259846,
+        2.55382716663493,
+        2.5538082278607943,
+        2.553796896735574,
+        2.55384254894422,
+        2.553911619814795,
+        2.5537540523405835,
+        2.5538206841441355,
+        2.5538442268524157
+      ],
+      "symmetry": {
+        "antisymmetry_residual": 3.8324869599352303e-16,
+        "correlator_symmetry_residual": 0.0
+      },
+      "completed": true,
+      "completed_samples_per_chain": 3000,
+      "acceptance_rate": 0.6216496710526316,
+      "accepted_proposals": 377963,
+      "total_proposals": 608000,
+      "checkpoint_path": "checkpoints/phase43_fixed_state_vmc_validation/n2_d4_p3_seed43011.pt",
+      "D": 4,
+      "P": 3,
+      "seed": 43011,
+      "fixture_source_seed": 40001,
+      "deterministic_energy": 2.553833552207632,
+      "energy_error": 1.575904247141935e-05,
+      "energy_allowance": 0.0002,
+      "gradient": {
+        "vmc_orbital": [
+          [
+            -1.0939071526342186e-07,
+            -5.940730774709919e-07
+          ],
+          [
+            -1.296039301987028e-07,
+            -2.1295689178458782e-07
+          ],
+          [
+            3.966345246578223e-06,
+            2.154063415309421e-05
+          ],
+          [
+            8.139268161107626e-06,
+            1.3374648943626372e-05
+          ]
+        ],
+        "deterministic_orbital": [
+          [
+            2.0442683381550324e-08,
+            4.7386066389487216e-08
+          ],
+          [
+            -3.259584853465536e-08,
+            -2.171739435612276e-08
+          ],
+          [
+            -7.412705557814363e-07,
+            -1.718215903087934e-06
+          ],
+          [
+            2.0469710495507586e-06,
+            1.3637612346104295e-06
+          ]
+        ],
+        "orbital_chain_standard_error": [
+          [
+            2.0850414548261012e-06,
+            9.489477763920999e-07
+          ],
+          [
+            1.5332800135662373e-06,
+            9.3542695106112e-07
+          ],
+          [
+            7.560211652297405e-05,
+            3.440807010134807e-05
+          ],
+          [
+            9.629086274352883e-05,
+            5.874515549609714e-05
+          ]
+        ],
+        "orbital_absolute_difference": [
+          [
+            1.298333986449722e-07,
+            6.414591438604792e-07
+          ],
+          [
+            9.700808166404743e-08,
+            1.9123949742846506e-07
+          ],
+          [
+            4.7076158023596595e-06,
+            2.3258850056182145e-05
+          ],
+          [
+            6.092297111556868e-06,
+            1.2010887709015944e-05
+          ]
+        ],
+        "orbital_allowance": [
+          [
+            0.005010425207274131,
+            0.005004744738881961
+          ],
+          [
+            0.005007666400067831,
+            0.005004677134755306
+          ],
+          [
+            0.00537801058261487,
+            0.00517204035050674
+          ],
+          [
+            0.005481454313717644,
+            0.005293725777480485
+          ]
+        ],
+        "vmc_amplitude": [
+          -1.5478511941042291e-06,
+          5.886581182370228e-06,
+          6.188129453228723e-06
+        ],
+        "deterministic_amplitude": [
+          2.2477217203123456e-07,
+          -3.877226667503564e-08,
+          -3.998900424684315e-07
+        ],
+        "amplitude_chain_standard_error": [
+          9.348735489940187e-06,
+          6.576180712705837e-06,
+          4.9984922211685334e-06
+        ],
+        "amplitude_absolute_difference": [
+          1.7726233661354637e-06,
+          5.925353449045264e-06,
+          6.588019495697154e-06
+        ],
+        "amplitude_allowance": [
+          0.005046743677449701,
+          0.0050328809035635295,
+          0.005024992461105843
+        ]
+      },
+      "gates": {
+        "energy_pass": true,
+        "acceptance_pass": true,
+        "rhat_pass": true,
+        "effective_sample_size_pass": true,
+        "orbital_gradient_pass": true,
+        "amplitude_gradient_pass": true,
+        "antisymmetry_pass": true,
+        "correlator_symmetry_pass": true,
+        "all_pass": true
+      },
+      "elapsed_seconds": 15.974106200039387,
+      "cpu_memory": {
+        "method": "sampled_process_resident_set",
+        "sampling_interval_seconds": 0.005,
+        "samples": 1013,
+        "baseline_rss_bytes": 574566400,
+        "peak_rss_bytes": 685420544,
+        "final_rss_bytes": 658325504,
+        "peak_delta_rss_bytes": 110854144
+      },
+      "peak_cpu_rss_bytes": 685420544,
+      "materialization": {
+        "coordinate_samples_stored": 192000,
+        "D_to_the_N_tensor": false,
+        "full_alternating_coefficient_tensor": false,
+        "virtual_paths": 0
+      }
+    },
+    {
+      "energy": 2.5538200029647813,
+      "kinetic_energy": 0.9183529900885166,
+      "trap_energy": 1.0938559762524152,
+      "interaction_energy": 0.5416110366238497,
+      "energy_variance": 1.2942138425187297e-05,
+      "energy_standard_error": 1.2453254292119904e-05,
+      "ess_standard_error": 1.2453254292119904e-05,
+      "blocking_standard_error": 1.208113473089366e-05,
+      "chain_mean_standard_error": 1.1818731650846909e-05,
+      "blocking_size": 4,
+      "blocks_per_chain": 750,
+      "effective_sample_size": 83452.68762592696,
+      "integrated_autocorrelation_times": [
+        1.1233311686864975,
+        1.0589015554844305,
+        1.48735806403611,
+        1.123093765617444,
+        1.2261618818683298,
+        1.1360634579937496,
+        1.059598690449944,
+        1.3130609282079178,
+        1.0452341762369606,
+        1.6215980582726626,
+        1.094846554311097,
+        1.0995848198354197,
+        1.1098301297699287,
+        1.1201363370918698,
+        1.1081175974950739,
+        1.3438811857597608,
+        1.103222609742975,
+        1.2345199113606529,
+        1.0,
+        1.1962638812373194,
+        1.6002889177434045,
+        1.0458937020022794,
+        1.0,
+        1.0490190100758574,
+        1.0,
+        1.1653242339530425,
+        1.1038882075246967,
+        1.1734547559258133,
+        1.1236602465670285,
+        1.1038171976672762,
+        1.2628250426719063,
+        1.1211546191845523
+      ],
+      "rhat": 1.0000060207554975,
+      "chain_means": [
+        2.5537893466001353,
+        2.553790777656917,
+        2.5538574346681115,
+        2.5538249084551308,
+        2.5538710514301033,
+        2.5537037421961215,
+        2.553814579611308,
+        2.5538700163796832,
+        2.5538505332814467,
+        2.5538176305868356,
+        2.5537072363964417,
+        2.5538458163063216,
+        2.5539953772706405,
+        2.5537740515767475,
+        2.55383997504721,
+        2.5537203518652247,
+        2.553941733720543,
+        2.5537609198824978,
+        2.5538864177234317,
+        2.5537808445071817,
+        2.553831253563434,
+        2.553883921001104,
+        2.5537074940621074,
+        2.5538006514115996,
+        2.5537618064824943,
+        2.553876212149213,
+        2.553818628711191,
+        2.553868059881878,
+        2.5538455472843142,
+        2.5538511062672007,
+        2.5537351912793884,
+        2.5538174776170464
+      ],
+      "symmetry": {
+        "antisymmetry_residual": 3.8324871747339074e-16,
+        "correlator_symmetry_residual": 0.0
+      },
+      "completed": true,
+      "completed_samples_per_chain": 3000,
+      "acceptance_rate": 0.622421052631579,
+      "accepted_proposals": 378432,
+      "total_proposals": 608000,
+      "checkpoint_path": "checkpoints/phase43_fixed_state_vmc_validation/n2_d4_p3_seed43012.pt",
+      "D": 4,
+      "P": 3,
+      "seed": 43012,
+      "fixture_source_seed": 40001,
+      "deterministic_energy": 2.553833552207632,
+      "energy_error": 1.3549242850796617e-05,
+      "energy_allowance": 0.0002,
+      "gradient": {
+        "vmc_orbital": [
+          [
+            2.9557728150165547e-06,
+            1.2404169160512836e-06
+          ],
+          [
+            -3.095373660321247e-07,
+            1.136916952544993e-06
+          ],
+          [
+            -0.00010717523957138624,
+            -4.497596719231778e-05
+          ],
+          [
+            1.9433663556447448e-05,
+            -7.14001151523681e-05
+          ]
+        ],
+        "deterministic_orbital": [
+          [
+            2.0442683381550324e-08,
+            4.7386066389487216e-08
+          ],
+          [
+            -3.259584853465536e-08,
+            -2.171739435612276e-08
+          ],
+          [
+            -7.412705557814363e-07,
+            -1.718215903087934e-06
+          ],
+          [
+            2.0469710495507586e-06,
+            1.3637612346104295e-06
+          ]
+        ],
+        "orbital_chain_standard_error": [
+          [
+            2.399477840982001e-06,
+            1.0005327177847252e-06
+          ],
+          [
+            1.2770492340630592e-06,
+            7.584165112046531e-07
+          ],
+          [
+            8.700413953946598e-05,
+            3.627873352494203e-05
+          ],
+          [
+            8.019755900345014e-05,
+            4.7628600580725856e-05
+          ]
+        ],
+        "orbital_absolute_difference": [
+          [
+            2.9353301316350043e-06,
+            1.1930308496617964e-06
+          ],
+          [
+            2.769415174974693e-07,
+            1.1586343469011159e-06
+          ],
+          [
+            0.0001064339690156048,
+            4.3257751289229846e-05
+          ],
+          [
+            1.7386692506896688e-05,
+            7.276387638697853e-05
+          ]
+        ],
+        "orbital_allowance": [
+          [
+            0.00501199738920491,
+            0.005005002663588924
+          ],
+          [
+            0.005006385246170315,
+            0.005003792082556024
+          ],
+          [
+            0.00543502069769733,
+            0.00518139366762471
+          ],
+          [
+            0.005400987795017251,
+            0.005238143002903629
+          ]
+        ],
+        "vmc_amplitude": [
+          5.92138437983976e-06,
+          -2.6445449140660033e-06,
+          -2.4974472455953847e-06
+        ],
+        "deterministic_amplitude": [
+          2.2477217203123456e-07,
+          -3.877226667503564e-08,
+          -3.998900424684315e-07
+        ],
+        "amplitude_chain_standard_error": [
+          9.927878316734855e-06,
+          7.79205038083975e-06,
+          5.336287447312534e-06
+        ],
+        "amplitude_absolute_difference": [
+          5.696612207808526e-06,
+          2.6057726473909676e-06,
+          2.097557203126953e-06
+        ],
+        "amplitude_allowance": [
+          0.005049639391583674,
+          0.005038960251904199,
+          0.005026681437236563
+        ]
+      },
+      "gates": {
+        "energy_pass": true,
+        "acceptance_pass": true,
+        "rhat_pass": true,
+        "effective_sample_size_pass": true,
+        "orbital_gradient_pass": true,
+        "amplitude_gradient_pass": true,
+        "antisymmetry_pass": true,
+        "correlator_symmetry_pass": true,
+        "all_pass": true
+      },
+      "elapsed_seconds": 15.718459099996835,
+      "cpu_memory": {
+        "method": "sampled_process_resident_set",
+        "sampling_interval_seconds": 0.005,
+        "samples": 1000,
+        "baseline_rss_bytes": 658354176,
+        "peak_rss_bytes": 692674560,
+        "final_rss_bytes": 667942912,
+        "peak_delta_rss_bytes": 34320384
+      },
+      "peak_cpu_rss_bytes": 692674560,
+      "materialization": {
+        "coordinate_samples_stored": 192000,
+        "D_to_the_N_tensor": false,
+        "full_alternating_coefficient_tensor": false,
+        "virtual_paths": 0
+      }
+    }
+  ],
+  "n2_distinct_seed_comparison": {
+    "absolute_energy_difference": 2.9308285322215966e-05,
+    "allowance": 0.0001881127755859482,
+    "pass": true
+  },
+  "n4_noninteracting": {
+    "energy": 8.0,
+    "kinetic_energy": 3.96718916681339,
+    "trap_energy": 4.03281083318661,
+    "interaction_energy": 0.0,
+    "energy_variance": 4.961513414519149e-31,
+    "energy_standard_error": 1.245179883405299e-17,
+    "ess_standard_error": 1.245179883405299e-17,
+    "blocking_standard_error": 1.0535793355757639e-17,
+    "chain_mean_standard_error": 0.0,
+    "blocking_size": 2,
+    "blocks_per_chain": 100,
+    "effective_sample_size": 3200.0,
+    "integrated_autocorrelation_times": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "rhat": 1.0,
+    "chain_means": [
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0
+    ],
+    "symmetry": {
+      "antisymmetry_residual": 7.186207645706585e-16,
+      "correlator_symmetry_residual": 0.0
+    },
+    "completed": true,
+    "completed_samples_per_chain": 200,
+    "acceptance_rate": 0.58334375,
+    "accepted_proposals": 18667,
+    "total_proposals": 32000,
+    "checkpoint_path": "checkpoints/phase43_fixed_state_vmc_validation/n4_noninteracting_seed43021.pt",
+    "D": 4,
+    "P": 0,
+    "seed": 43021,
+    "exact_energy": 8.0,
+    "energy_error": 0.0,
+    "forced_partial_samples_per_chain": 80,
+    "gates": {
+      "partial_stopped_at_80": true,
+      "energy_pass": true,
+      "variance_pass": true,
+      "resume_samples_identical": true,
+      "resume_observables_identical": true,
+      "antisymmetry_pass": true,
+      "correlator_symmetry_pass": true,
+      "all_pass": true
+    },
+    "materialization": {
+      "coordinate_samples_stored": 12800,
+      "D_to_the_N_tensor": false,
+      "full_alternating_coefficient_tensor": false,
+      "virtual_paths": 0
+    }
+  },
+  "sample_archive": {
+    "path": "docs/experiments/results/phase43_fixed_state_vmc_samples.npz",
+    "sha256": "a59d3ca34610e34e01006b8797153d5c8a9fe8cedfb87d71d3efd509fe6055c6",
+    "arrays": {
+      "n2_seed43011": [
+        3000,
+        32,
+        2
+      ],
+      "n2_seed43012": [
+        3000,
+        32,
+        2
+      ],
+      "n4_seed43021": [
+        200,
+        16,
+        4
+      ]
+    }
+  },
+  "source_hashes": {
+    "src/femps/algorithms/correlated_exterior_vmc.py": "deffaaa8af24efa10ac25b35417d410cc83062bf3d155d0ce3838d0e2035cab4",
+    "scripts/benchmark_phase43_fixed_state_vmc_validation.py": "f61ac584b65cbe57931ec0e40c903f667caf5c9127490e1f9b72d6fe9d1440d8",
+    "docs/decisions/0032-preregister-phase43-fixed-state-vmc-validation.md": "5c0c9c2a7d5bc8b002a3779e8263d46475d1f7b5bc57558d2be554115e69ed2a"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128",
+    "numpy": "2.3.5",
+    "device": "cpu",
+    "dtype": "float64"
+  },
+  "acceptance": {
+    "all_n2_point_gates_pass": true,
+    "n2_distinct_seed_agreement_pass": true,
+    "n4_noninteracting_resume_pass": true,
+    "phase43_fixed_state_validation_pass": true
+  }
+}

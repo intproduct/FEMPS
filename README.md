@@ -171,6 +171,14 @@ is gated by an explicit contraction-complexity audit.
   same-basis CI error `2.523e-9`, maximum variance `1.462e-8`, zero optimizer
   failures, and zero antisymmetry/enumeration residuals. This is bounded seed
   robustness at one point, not universal seed independence or scaling.
+- Phase 43 validates a coordinate-space stochastic backend for a symmetric
+  explicit correlator times an exterior Slater carrier. Two frozen `N=2`
+  sample sets agree with deterministic quadrature within registered errors;
+  ESS exceeds `8.3e4`, R-hat is below `1.000016`, and antisymmetry residuals
+  are below `3.84e-16`. A forced-resume `N=4` noninteracting run gives energy
+  exactly 8 and variance `4.96e-31`, with samples identical to a clean run.
+  This is fixed-state estimator validation without a `D^N` tensor, not an
+  interacting result, scalable-solver claim, external replication, or Paper B.
 
 ## Publication scope
 
@@ -201,7 +209,8 @@ This is a bounded `N=2`, explicitly materialized `Q^2` basis-efficiency result,
 not an external replication, scalable contraction claim, new Jastrow ansatz,
 or authorization for Paper B.
 
-See [the active execution plan](docs/exec-plans/active/phase41_manuscript_a_theory_closure.md),
+See [the active execution plan](docs/exec-plans/active/phase43_n4_controlled_vmc_backend.md),
+[the Phase 43 fixed-state VMC report](docs/experiments/phase43_fixed_state_vmc_validation_report.md),
 [the restored D8 internal report](docs/experiments/phase39_n4_d8_internal_report.md),
 [the completed single-manuscript audit](docs/exec-plans/completed/phase39.md),
 [the explicit-correlation audit](docs/experiments/phase39_distinctiveness_audit.md),

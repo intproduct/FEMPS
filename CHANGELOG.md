@@ -1,5 +1,28 @@
 # Research changelog
 
+## 2026-09-02 - Phase 43 fixed-state coordinate-VMC validation
+
+- Added a general-small-`N`, CPU/float64 coordinate-space VMC backend for a
+  symmetric Gaussian correlator times a continuous exterior Slater carrier.
+  It evaluates analytic local energies and covariance gradients without a
+  `D^N` coefficient tensor, full alternating tensor, or virtual-path scan.
+- Implemented deterministic multi-chain sampling, autocorrelation/ESS,
+  blocking and chain uncertainties, R-hat, sampled antisymmetry residuals,
+  atomic checkpoints, and exact RNG-aware resume.
+- Passed the frozen ADR-0032 validation. Two `N=2` runs agree with `Q=160`
+  deterministic truth within preregistered uncertainty, with ESS above
+  `8.3e4`, R-hat below `1.000016`, and antisymmetry residual below `3.84e-16`.
+  The `N=4` noninteracting run gives energy exactly 8, variance `4.96e-31`,
+  and bitwise-identical interrupted/resumed and clean samples.
+- Added a hashed 2.9 MB raw-coordinate archive and independent verifier that
+  recomputes every stored observable and gradient with zero current-
+  environment difference and independently repeats the `N=4` resume path.
+- Retained the scientific boundary: the near-stationary `N=2` gradient test is
+  an absolute-error implementation check; no interacting `N=4` result,
+  external replication, scalable-solver claim, or Paper B is admitted.
+- The standard repository suite passes `298` tests in 655.68 s with the one
+  known latticeTN report-path scalar-conversion warning.
+
 ## 2026-09-02 - Phase 40 explicit-correlation differentiator and clean reproduction
 
 - Resumed only the preregistered non-NOCI differentiator after manuscript-A's

@@ -51,6 +51,33 @@ Concrete chain counts, seeds, sample budgets, error floors, optimizer budgets,
 and the interacting `N=4` comparison must be frozen in a new ADR after the
 fixed-state estimator tests, but before the first interacting production run.
 
+ADR 0032 separately freezes the fixed-state estimator-validation fixtures and
+budgets. It does not freeze or authorize the interacting production point.
+
+## Progress checkpoint: fixed-state validation complete
+
+- The arbitrary-small-`N` continuous exterior-Slater/symmetric-Gaussian
+  correlator evaluator, analytic local energy, deterministic multi-chain
+  Metropolis sampler, uncertainty diagnostics, covariance gradient,
+  checkpoint, and exact resume path are implemented.
+- Both frozen `N=2` runs pass the deterministic-energy, seed-agreement,
+  acceptance, ESS, R-hat, gradient, and symmetry gates. The two energy errors
+  are `1.576e-5` and `1.355e-5`; ESS values exceed `8.3e4` and sampled
+  antisymmetry residuals are below `3.84e-16`.
+- The frozen `N=4` noninteracting state has energy exactly `8`, numerical
+  local-energy variance `4.96e-31`, and antisymmetry residual `7.19e-16`.
+  Forced interruption/resume and clean sampling are exactly identical.
+- A hashed raw-sample archive and independent verifier reproduce all stored
+  observables and gradients with zero difference in the current environment.
+- The near-stationary `N=2` fixture makes the gradient result an absolute-error
+  implementation check, not a strong relative-gradient or interacting-
+  optimization result.
+
+The next action is a new ADR for an interacting `N=4` production experiment.
+It must freeze a genuine non-NOCI comparison question, reference-use firewall,
+`D`/correlator axes, sampler/optimizer budgets, seeds, and failure rules before
+any production result is observed. No Paper B source is authorized.
+
 ## Scientific boundary
 
 Phase 40 establishes only a low-`D`, `N=2` basis-efficiency differentiator.

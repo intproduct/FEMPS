@@ -80,6 +80,22 @@ from .correlated_exterior import (
     project_correlated_two_fermion_coefficients,
     run_correlated_exterior_optimization,
 )
+from .correlated_exterior_vmc import (
+    VMC_CHECKPOINT_SCHEMA_VERSION,
+    CorrelatedExteriorVMCConfig,
+    LocalEnergyResult,
+    canonical_exterior_carrier,
+    canonical_lowest_orbitals,
+    correlated_exterior_local_energy,
+    correlated_exterior_wavefunction_value,
+    gaussian_pair_log_correlator,
+    load_correlated_exterior_vmc_checkpoint,
+    log_abs_correlated_exterior_wavefunction,
+    run_correlated_exterior_vmc,
+    sampled_antisymmetry_residual,
+    vmc_energy_gradient,
+    vmc_observables,
+)
 
 __all__ = [
     "GeneralizedEigenResult",
@@ -140,4 +156,18 @@ __all__ = [
     "initial_two_orbital_carrier",
     "project_correlated_two_fermion_coefficients",
     "run_correlated_exterior_optimization",
+    "VMC_CHECKPOINT_SCHEMA_VERSION",
+    "CorrelatedExteriorVMCConfig",
+    "LocalEnergyResult",
+    "canonical_exterior_carrier",
+    "canonical_lowest_orbitals",
+    "correlated_exterior_local_energy",
+    "correlated_exterior_wavefunction_value",
+    "gaussian_pair_log_correlator",
+    "load_correlated_exterior_vmc_checkpoint",
+    "log_abs_correlated_exterior_wavefunction",
+    "run_correlated_exterior_vmc",
+    "sampled_antisymmetry_residual",
+    "vmc_energy_gradient",
+    "vmc_observables",
 ]

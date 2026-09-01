@@ -147,3 +147,15 @@ hardness theorem. Gate K therefore closes without a solver. The next novelty
 question is whether a canonical statistics-carrier/correlation-multiplicity
 factorization can satisfy Slater multiplicity one, safe truncation, and
 polynomial contraction without hiding the same permanent or binomial cost.
+
+Phase 25 answers that question negatively for the direct universal tensor
+product. A two-Slater family has stable one-cut rank `N+2`, whereas Slater
+multiplicity one forces a fixed carrier dimension `N`; the required
+divisibility fails for every `N>=3`. This does not challenge established
+symmetry-adapted TN: particle permutation antisymmetry has a one-dimensional
+sign irrep, and Hamiltonian-specific charge/multiplet decompositions remain
+valid. Nor is state-adaptive Slater/secant geometry new. The project-specific
+result is the exact dimension obstruction and its link to compact-input
+permanent contraction. “Canonical FEMPS correlation spectrum” is therefore no
+longer an admissible claim for the current construction. Phase 26 shifts from
+method invention to a manuscript-level proof and novelty audit.

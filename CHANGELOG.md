@@ -1,5 +1,27 @@
 # Research changelog
 
+## 2026-09-01 - Phase 25 statistics-carrier/multiplicity Gate L
+
+- Defined the proposed cut object as the image of the exterior contraction map
+  rather than an informal “reduced bond.”
+- Proved that Slater multiplicity one forces a one-cut carrier of dimension
+  `N`, while a two-Slater full-support family has rank `N+2`; hence no
+  universal free tensor product exists for `N>=3`.
+- Separated valid symmetry-adapted structural/degeneracy tensors from the
+  failed analogy: particle antisymmetry has a one-dimensional sign irrep and
+  `GL(V)` retains the full exterior irrep.
+- Classified state-adaptive occupied spaces and Slater/secant decompositions as
+  established, nonfree determinant-channel structures rather than a canonical
+  FEMPS multiplicity spectrum.
+- Reapplied the sparse-path permanent example: its output is projectively one
+  Slater, yet compact-input scale/norm contraction remains hard.
+- Added exact all-cut, component-locking, orbital-permutation, direct-embedding,
+  and perturbation controls for `3<=N<=8`, with certificate hash
+  `06025f168a49c0ab857c2163103ffabcb56fb04cd1fed4df9120d25ef6bc60df`.
+- Compiled a four-page theorem draft without layout/reference warnings and
+  passed the complete `205`-test suite with one unchanged latticeTN warning.
+- Closed Gate L and advanced to a unified manuscript v1/proof-audit phase.
+
 ## 2026-09-01 - Phase 24 controlled approximate exterior Gate K
 
 - Separated exact permanent hardness from approximation complexity; the 0--1

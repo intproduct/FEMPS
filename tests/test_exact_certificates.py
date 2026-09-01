@@ -159,3 +159,27 @@ def test_approximate_exterior_gate_exact_certificate() -> None:
         check=True,
         cwd=root,
     )
+
+
+def test_statistics_carrier_obstruction_exact_certificate() -> None:
+    root = Path(__file__).resolve().parents[1]
+    subprocess.run(
+        [
+            sys.executable,
+            str(
+                root
+                / "math"
+                / "certificates"
+                / "verify_statistics_carrier_obstruction.py"
+            ),
+            "--verify",
+            str(
+                root
+                / "math"
+                / "certificates"
+                / "statistics_carrier_obstruction_certificate.json"
+            ),
+        ],
+        check=True,
+        cwd=root,
+    )

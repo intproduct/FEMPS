@@ -50,6 +50,18 @@ square-zero exterior-subset, and permutation-enumeration routes for three
 matrix families at every `1<=M<=6`; it also records the normalized squared norm
 as an exact rational.
 
+`certificates/verify_approximate_exterior_gate.py` supplies the exact Phase 24
+conditioning controls for positive, cancelling, signed-PSD, and Rayleigh-
+quotient cases. The approximation-complexity conclusion itself depends on the
+published real-PSD permanent theorem, not on bounded enumeration.
+
+`statistics_carrier_obstruction.tex` contains the Phase 25 cut-rank
+divisibility obstruction to a universal direct statistics-carrier tensor
+factorization. `certificates/verify_statistics_carrier_obstruction.py` checks
+all cuts for `3<=N<=8`, component-channel locking, orbital permutations,
+direct orbital embeddings, and full-support perturbations over exact
+rationals.
+
 `docs/theory/exterior_no_go_hierarchy.md` is the Phase 23 synthesis entry point.
 It distinguishes ordinary particle-TT representation rank from exact exterior
 contraction complexity and records the coverage boundary of every theorem.

@@ -1,0 +1,190 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\im}{\operatorname{im}}
+
+\title{An Obstruction to a Universal Fermionic Statistics-Carrier Tensor Factorization}
+\author{Working theorem draft}
+\date{2026-09-01}
+
+\begin{document}
+\maketitle
+
+\paragraph{Evidence status.}
+The dimension obstruction is an elementary proof. An implementation-independent
+exact-rational verifier checks all exterior flattening ranks for
+$3\le N\le8$. Its certificate hash is
+\begin{center}
+\small\texttt{06025f168a49c0ab857c2163103ffabcb56fb04cd1fed4df9120d25ef6bc60df}.
+\end{center}
+The representation-theory statements use standard sign-representation and
+Littlewood--Richardson facts. External proof review is still required.
+
+\section{Cut object and proposed factorization}
+
+Let $0\ne C\in\Lambda^N V$. At a particle cut $k\mid N-k$, define
+\[
+ c_{C,k}:\Lambda^kV^*\longrightarrow\Lambda^{N-k}V,
+ \qquad c_{C,k}(\alpha)=\iota_\alpha C.
+\]
+Its rank is the particle-cut Schmidt rank, up to a fixed normalization of the
+exterior coproduct. Write $\mathcal B_k(C)=\im c_{C,k}$.
+
+The literal statistics-carrier proposal asks for finite-dimensional spaces
+with
+\begin{equation}
+ \mathcal B_k(C)\cong
+ \mathcal S^{\mathrm{fermion}}_{N,k}\otimes\mathcal M_k(C),
+ \label{eq:factor}
+\end{equation}
+where the first factor is fixed by $(N,k)$ and every nonzero Slater determinant
+has $\dim\mathcal M_k=1$.
+
+\section{Dimension obstruction}
+
+\begin{theorem}
+For every $N\ge3$, no factorization of the form \eqref{eq:factor} is exact for
+all nonzero $N$-forms.
+\end{theorem}
+
+\begin{proof}
+At the $1\mid N-1$ cut, every nonzero Slater determinant has rank $N$.
+The multiplicity-one condition therefore forces
+$\dim\mathcal S^{\mathrm{fermion}}_{N,1}=N$, so every rank admitted by
+\eqref{eq:factor} must be divisible by $N$.
+
+Let $\dim V=N+2$ and, with the empty product interpreted as one, set
+\[
+ W=e_6\wedge\cdots\wedge e_{N+2},\qquad
+ C_N=e_1\wedge(e_2\wedge e_3+e_4\wedge e_5)\wedge W.
+\]
+The $N+2$ contractions $\iota_{e_i^*}C_N$ are linearly independent.
+For $i=2,3,4,5$ each contains a distinct monomial with the full factor $W$.
+The $i=1$ contraction is the only one without $e_1$. For $i\ge6$, the two
+monomials have a distinct missing factor of $W$. These monomial supports cannot
+cancel across the displayed groups. Hence
+\[
+ \rank c_{C_N,1}=N+2.
+\]
+But $N\nmid N+2$ for $N\ge3$, contradicting \eqref{eq:factor}.
+\end{proof}
+
+The counterexample is a sum of two Slaters. If the two component contraction
+maps were supplied independent covectors, their images would give $2N$
+dimensions. In the physical sum the same covector acts on both maps, locking
+$N-2$ shared-orbital channels and leaving rank $N+2$. Thus a free
+two-dimensional multiplicity misses state-dependent linear relations even at
+Slater-sum length two.
+
+\section{What symmetry adaptation actually gives}
+
+Symmetry-adapted tensor networks split invariant tensors into fixed
+group-theoretic structural tensors and free degeneracy tensors
+\cite{SinghPfeiferVidal2010,Weichselbaum2012}. The relevant symmetries here do
+not produce \eqref{eq:factor}.
+
+\begin{lemma}
+Particle-permutation symmetry supplies a one-dimensional sign carrier. Under
+$GL(V)$, the exterior coproduct supplies a multiplicity-one equivariant
+coupling, while retaining the full orbital exterior representation.
+\end{lemma}
+
+\begin{proof}
+The antisymmetric sector is the one-dimensional sign representation of $S_N$.
+On restriction to $S_k\times S_{N-k}$ it is
+$\operatorname{sgn}_k\otimes\operatorname{sgn}_{N-k}$, again once. Therefore
+$\binom Nk$ is not an $S_N$ structural-irrep or degeneracy dimension.
+
+For $GL(V)$, $\Lambda^N V$ is irreducible. The Littlewood--Richardson
+coefficient of $\Lambda^N V$ in
+$\Lambda^kV\otimes\Lambda^{N-k}V$ is one, so the exterior coproduct is the
+unique equivariant coupling up to scale. Treating $C$ as a covariant external
+irrep vector retains $\binom DN$ orbital components; it does not isolate a
+smaller correlation multiplicity.
+\end{proof}
+
+Hamiltonian-specific orbital symmetry groups can yield useful multiplet and
+charge degeneracies. Those are established symmetry-adapted TN structures,
+depend on the physical symmetry and sector, and do not universally give Slater
+multiplicity one.
+
+\section{State-adaptive alternatives}
+
+For a decomposable form, the occupied $N$-plane is intrinsic and its exterior
+powers explain the binomial cut rank. A general correlated form has no
+canonical occupied $N$-plane. Choosing a Slater/secant expansion instead gives
+an established determinant expansion. Slater rank is standard already for two
+fermions \cite{SchliemannEtAl2001}; in higher degree uniqueness becomes a
+Grassmannian-secant identifiability problem with nonuniform geometry
+\cite{BallicoEtAl2013,GalganoStaffolani2024}.
+
+The ordinary singular values of $c_{C,k}$ are canonical under orbital
+unitaries and give the usual truncation spectrum. They reproduce the flat
+$\binom Nk$ Slater spectrum, so
+they do not remove the exchange rank. A chosen nonorthogonal Slater/AGP sum can
+be truncated only with its overlap Gram matrix and an explicit state or energy
+error bound; it is not a canonical tensor factor of $C$.
+
+\section{The compact-input contraction cost remains}
+
+\begin{corollary}
+An intrinsic multiplicity-one label for Slater states does not imply a
+polynomial compiler or norm contraction from compact matrix-wedge input.
+\end{corollary}
+
+\begin{proof}
+The sparse-path construction of the companion contraction theorem produces
+\[
+ \Psi_A=\frac{\operatorname{perm}(A)}{M!}
+ e_1\wedge\cdots\wedge e_{2M}.
+\]
+Whenever nonzero, this is projectively a single Slater and therefore must have
+correlation multiplicity one under the proposed sanity condition. Yet obtaining
+its scale and squared norm from the compact path data computes the permanent.
+Thus the hard scalar lies outside the state-intrinsic label.
+\end{proof}
+
+This corollary concerns the required norm and reconstruction algorithm. It does
+not claim that every normalized observable on this one-dimensional output
+family is hard.
+
+\paragraph{Decision.}
+The direct universal statistics-carrier tensor product fails exactness,
+canonicality, and compact-input contraction. Symmetry-adapted charge networks
+and state-adaptive finite Slater/AGP expansions remain valid established
+methods, not the missing universal FEMPS multiplicity spectrum.
+
+\begin{thebibliography}{9}
+
+\bibitem{SinghPfeiferVidal2010}
+S.~Singh, R.~N.~C.~Pfeifer, and G.~Vidal,
+``Tensor network decompositions in the presence of a global symmetry,''
+\emph{Physical Review A} \textbf{82}, 050301 (2010).
+
+\bibitem{Weichselbaum2012}
+A.~Weichselbaum,
+``Non-Abelian symmetries in tensor networks: a quantum symmetry space
+approach,'' \emph{Annals of Physics} \textbf{327}, 2972--3047 (2012).
+
+\bibitem{SchliemannEtAl2001}
+J.~Schliemann, J.~I.~Cirac, M.~Ku\'s, M.~Lewenstein, and D.~Loss,
+``Quantum correlations in two-fermion systems,''
+\emph{Physical Review A} \textbf{64}, 022303 (2001).
+
+\bibitem{BallicoEtAl2013}
+E.~Ballico, A.~Bernardi, M.~V.~Catalisano, and L.~Chiantini,
+``Grassmann secants, identifiability, and linear systems of tensors,''
+\emph{Linear Algebra and its Applications} \textbf{438}, 121--135 (2013).
+
+\bibitem{GalganoStaffolani2024}
+V.~Galgano and R.~Staffolani,
+``Identifiability and singular locus of secant varieties to Grassmannians,''
+\emph{Collectanea Mathematica} (2024).
+
+\end{thebibliography}
+
+\end{document}

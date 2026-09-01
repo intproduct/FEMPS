@@ -62,7 +62,9 @@ short physics/method paper and a longer mathematical appendix.
   relative-norm obstruction inherited from real-PSD permanents.
 - Give the simultaneous norm/numerator confidence interval required for a
   certified Rayleigh quotient.
-- Statistics-carrier/correlation-multiplicity factorization as an open theorem.
+- Reject the literal universal statistics-carrier tensor product by cut-rank
+  divisibility, and separate it from valid Hamiltonian-specific symmetry TNs
+  and state-adaptive Slater/secant expansions.
 - Ordered COM/gap functional MPS as the independently validated control,
   including its Hong/Li--Waintal parentage and finite-scope evidence.
 
@@ -90,3 +92,4 @@ short physics/method paper and a longer mathematical appendix.
 - E: sparse-path APG permanent proof.
 - F: certificate schemas and independent verifier descriptions.
 - G: real-PSD approximation transfer and Rayleigh-quotient error propagation.
+- H: statistics-carrier dimension obstruction and symmetry/Slater alternatives.

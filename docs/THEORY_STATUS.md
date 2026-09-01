@@ -7,6 +7,7 @@
 | Matrix-wedge FEMPS is associative and strictly antisymmetric | proved from exterior associativity; small-N verified | External algebra review |
 | Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed by two exact reductions: Phase 13 embeds permanent-hard `Mat_2` Cayley determinants using growing order tags, while Phase 22 directly embeds a 0--1 permanent in the squared norm of a bandwidth-one, unique-path APG state; both map with polynomial bond into one-form FEMPS | External proof review; only separately gated restrictions or controlled approximation remain open |
 | Generic sparse-path FEMPS has a relative squared-norm PRAS | conditionally obstructed: on real-PSD paired coefficients, `M! sqrt(n_tilde)` would be a PRAS for the PSD permanent, which Meiburg excludes unless `RP=NP`; an exact-rational conditioning/energy certificate passes | External proof review; entrywise-nonnegative FPRAS, additive estimates with a certified norm lower bound, and separately promised structures remain open |
+| Every exterior cut support factors as fixed statistics carrier times canonical correlation multiplicity, with Slater multiplicity one | disproved for the direct tensor product: Slater `r_1=N` forces carrier dimension `N`, but a full-support two-Slater family has stable `r_1=N+2`; exact all-cut controls pass for `3<=N<=8` | External proof review; Hamiltonian-specific symmetry sectors and genuinely different categorical structures are not ruled out |
 | Uniformly bounded coefficient algebras define a distinct tractable matrix-pair family beyond finite LC-AGP | disproved in theorem draft: if the largest semisimple matrix block `p` and radical nilpotency index `d` are fixed, arbitrary-boundary pair powers collapse to polynomial-size LC-AGP; exact-rational `T2` M=1--6 and `Mat2` M=1--4 base cases pass | External proof review; search only growing-`p`/growing-`d` exact structures or controlled approximate contractions |
 | One-generator growing radical `C[z]/(z^d)` escapes polynomial LC-AGP | disproved in theorem draft: arbitrary boundaries use at most `M(d-1)+1` AGPs; all boundary basis functionals pass exact-rational checks for `1<=M,d<=4` | External proof review; classify the smallest multibranch noncommutative growing-memory algebra |
 | Fixed-state noncommutative graded memory escapes polynomial LC-AGP | disproved in theorem draft: fixed matrix width `w` and fixed commuting-counter count `g` give an explicit polynomial LC-AGP bound; the `2d-1` dimensional alternating-word algebra passes every exact boundary at `1<=M<=3,1<=d<=4` | External proof review; incorporated into the Phase 23 no-go synthesis |
@@ -33,6 +34,14 @@ rules out a generic **relative** squared-norm PRAS through real-PSD permanent
 inapproximability, while preserving entrywise-nonnegative and additive/
 conditioned approximation as explicit special cases. Phase 25 now tests the
 remaining statistics-carrier/correlation-multiplicity factorization directly.
+
+Phase 25 rejects that factorization in its literal direct-tensor-product form.
+The rank obstruction is coordinate/gauge invariant and stable, while standard
+symmetry adaptation yields either the one-dimensional sign irrep or the full
+orbital exterior representation. The Phase 22 projective-Slater output also
+shows that intrinsic multiplicity one does not evaluate a hard scalar from
+compact cores. Phase 26 now consolidates the full result package for external
+proof review rather than opening another optimizer branch.
 
 ADR 0004 makes ordered-sector/interparticle-distance functional TN the primary
 numerical research route. Phase 15 and ADR 0005 replace its dense comparator by

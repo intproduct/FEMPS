@@ -54,9 +54,10 @@ flowchart TD
     L2 --> S
     H2 --> S
     S --> R1[promised approximation]
-    S --> R2[proved statistics/correlation factorization]
+    S --> R2[proposed statistics/correlation factorization]
     S --> R3[ordered continuous control route]
     H2 --> H3[real PSD relative-approximation obstruction]
+    R2 --> H4[direct tensor product rank-divisibility obstruction]
 ```
 
 ## Theorem hierarchy
@@ -192,6 +193,37 @@ polynomial additive estimators for arbitrary complex matrices
 under a denominator certificate `n_tilde>Delta_n`; cancelling inputs can make
 the true exterior norm exponentially small in input precision.
 
+### C6. The direct statistics-carrier tensor product is not universal
+
+Let `B_k(C)` be the image of the exterior contraction map at the particle cut.
+If
+
+```text
+B_k(C) ~= S_(N,k)^fermion tensor M_k(C)
+```
+
+were exact for every state and a Slater had `dim M_k=1`, then at `k=1` the
+fixed carrier would have dimension `N` and every cut rank would be divisible by
+`N`. For every `N>=3`, however,
+
+```text
+C_N = e_1 wedge (e_2 wedge e_3 + e_4 wedge e_5)
+      wedge e_6 wedge ... wedge e_(N+2)
+```
+
+has `r_1=N+2`. Its `N+2` one-index contractions are independent, and the full
+rank persists under orbital changes, direct embeddings, and generic small
+perturbations. Thus the literal tensor product is impossible.
+
+Standard symmetry adaptation does not repair the proposal. The `S_N` sign
+representation is one-dimensional; under `GL(V)`, `Lambda^N V` is irreducible
+and occurs with Littlewood--Richardson multiplicity one in the exterior cut,
+leaving the full orbital irrep rather than a free correlation degeneracy.
+State-adaptive Slater/secant channels are established determinant expansions,
+not a canonical tensor factor. Finally, the C4 output is projectively one
+Slater but its scalar is a permanent, so intrinsic multiplicity one does not
+compile compact cores into a norm algorithm.
+
 ## Claim-to-evidence map
 
 | ID | Field and scope | Proof artifact | Independent exact evidence | External dependency |
@@ -202,6 +234,7 @@ the true exterior norm exponentially small in input precision.
 | C3 | complex characteristic zero, fixed `(w,g)` graded representation | growing/fixed-state collapse notes | all `C[z]/z^d` boundaries hash `07a222de3f44ced1b3fe155638299fdb8443a54f3d9f36479b994f32f9f0fd55`; alternating words hash `082238ff6e6783b7533b3b2a59f3664beb1820794bcae573add98baf43370030` | Vandermonde interpolation; Waring/automata prior art |
 | C4 | nonnegative integer/rational, even `N` | `sparse_path_apg_obstruction.md` | three routes, M=1--6, hash `dd72c1aaeb0bc2a6b9206992cde9099f2f568b7ff6c8ed8eb7e38d958f78e790` | Valiant 0--1 permanent #P-completeness; APG prior art |
 | C5 | real PSD rational input; randomized relative squared norm | `approximate_exterior_contraction_gate.md` | exact positive/cancelling/conditioned/PSD and energy controls, hash `c15e7ff268a962e2790004c7f63d47bedb53be0c887ab0241e671b7fe4ff3b16` | Meiburg PSD-permanent inapproximability; JSV and Gurvits positive boundaries |
+| C6 | real/complex, `N>=3`, direct carrier tensor product | `statistics_carrier_multiplicity_obstruction.md`; `math/statistics_carrier_obstruction.tex` | exact all-cut, orbital-permutation, embedding, and perturbation ranks for N=3--8, hash `06025f168a49c0ab857c2163103ffabcb56fb04cd1fed4df9120d25ef6bc60df` | symmetry-adapted TN and Grassmannian-secant prior art; standard sign/Littlewood--Richardson facts |
 
 ## Coverage boundary
 
@@ -218,8 +251,8 @@ It classifies the tested design corridor. Specifically, it does not cover:
   specializations;
 - a growing number of counters with additional low-treewidth or integrable
   structure;
-- a canonical statistics-carrier/correlation-multiplicity factorization not
-  expressible as these coefficient-algebra powers;
+- a different categorical carrier that does not assert the rejected direct
+  tensor product and proves its own reconstruction/contraction theorem;
 - ordered-coordinate/chamber representations; or
 - second-quantized/occupation tensor networks, which are outside the method
   definition rather than ruled out.
@@ -240,10 +273,13 @@ The manuscript-safe conclusion is:
 > even sparse growing-width families already contain permanent-hard exact
 > squared-norm instances. On the same sparse path, a generic relative squared-
 > norm scheme would also approximate real-PSD permanents; additive and promised
-> positive approximations remain separate possibilities.
+> positive approximations remain separate possibilities. The literal universal
+> statistics-carrier tensor product also fails because general exterior cut
+> ranks are not multiples of the Slater carrier rank.
 
 The next affirmative exterior method must therefore use an explicit promise
 that excludes the PSD embedding and carry a norm/numerator error certificate,
-or prove a stronger carrier/multiplicity factorization.
+or define a genuinely different categorical structure with its own exactness
+and contraction proof.
 The ordered continuous MPS branch remains the validated first-quantized control
 route, with its Hong/Li--Waintal parentage stated directly.

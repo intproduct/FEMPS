@@ -1,10 +1,17 @@
-# FEMPS structural/no-go paper: third-draft status
+# FEMPS combined structural/no-go manuscript status
 
 ## Status
 
-Completed on 2026-09-01. The authoritative source is
-`math/femps_no_go_manuscript.tex`; the review artifact is
-`output/pdf/femps_no_go_manuscript_v3.pdf`.
+The third-draft structural checkpoint was completed on 2026-09-01. ADR 0028
+supersedes the later two-paper split on 2026-09-02. The authoritative source is
+`math/femps_no_go_manuscript.tex`; the current combined review artifact is
+`output/pdf/femps_combined_manuscript_v4.pdf`. The previous v3 PDF is retained
+as a historical checkpoint.
+
+The restricted diagonal-path method draft is now an internal working note, not
+a second publication manuscript. Its admitted numerical evidence is summarized
+inside the combined paper subject to the NOCI-equivalence limitation. See
+`docs/paper/SINGLE_MANUSCRIPT_SCOPE.md`.
 
 ## Scientific revisions
 
@@ -13,6 +20,10 @@ Completed on 2026-09-01. The authoritative source is
 - Fixed-bond exact squared-norm hardness remains a representation-specific
   algorithm-design constraint, not a claim against all restricted,
   approximate, stochastic, Pfaffian, or ordered-coordinate methods.
+- The earlier Theorems 1--3 are again displayed as three explicit structural
+  results. The hard pointwise amplitude at `chi=2` is separated from the proved
+  exact squared-norm result at maximum bond three; the `chi=2` norm sharpening
+  is explicitly labeled a conjecture.
 - The finite functional-basis space is stated to be exactly
   `Lambda^N V_D`, shared with same-orbital FCI and quantum-chemistry DMRG; no
   larger variational space or efficiency advantage is claimed.
@@ -32,6 +43,10 @@ Completed on 2026-09-01. The authoritative source is
   antisymmetry residuals; no generic scalability or superiority claim is made.
 - Higher-dimensional four-form classification is explicitly parked unless it
   controls an algorithmic or physical decision.
+- The diagonal-path solver is identified as NOCI-equivalent numerical evidence,
+  not an independent method contribution. A future method paper is gated on a
+  non-NOCI explicit-correlation `D`-convergence advantage or a matched
+  Li--Waintal/same-basis-DMRG comparison.
 
 ## Reviewer and submission hygiene
 
@@ -47,16 +62,16 @@ Completed on 2026-09-01. The authoritative source is
 
 ## Validation
 
-- PDFLaTeX and BibTeX completed successfully.
-- Final PDF: 13 A4 pages, 364,782 bytes.
-- Final PDF SHA-256:
-  `EE08B89F52D87AFFB3DEBBF21247AFE1FB3CEBBCD66DCC727AAA61666D73F4A5`.
+- PDFLaTeX and BibTeX completed successfully for the combined v4 source.
+- Current PDF: 14 A4 pages, 368,760 bytes.
+- Current PDF SHA-256:
+  `C6C1F5F9DE65C47E9AFCFB6A90CC2A5DEAE47AD1A7C01C0A43CC07BE3A9EDECE`.
 - Build log: no undefined citation/reference, overfull/underfull box, package,
   LaTeX, or font warnings.
-- All 13 pages were rendered to PNG and inspected for clipping, overlap,
+- All 14 pages were rendered to PNG and inspected for clipping, overlap,
   table legibility, formula placement, section transitions, and pagination.
-- Standard repository suite: `238 passed, 1 known latticeTN report-path
-  warning` in 22.59 s, using a workspace-local pytest temporary directory.
+- Standard repository suite: `277 passed, 1 known latticeTN report-path
+  warning` in 688.51 s, using a workspace-local pytest temporary directory.
 
 The next project milestone is the registered nonquadratic soft-Coulomb
 transferability benchmark. It must preserve the established truth, variance,

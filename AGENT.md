@@ -365,12 +365,23 @@ Grassmann algebra、determinant identities、Pfaffian、JW/parity 或其他 ferm
 4. structure-preserving approximation 与 TT truncation 的区别；
 5. 一般 antisymmetric tensors approximate rank 的开放问题。
 
+论文组织以一个合并主稿为准：`math/femps_no_go_manuscript.tex` 同时承载
+结构/no-go 结果和当前受限求解器的数值演算。原工作稿中的定理 1--3 必须
+保持显式可见；固定键维边界必须区分“点值振幅在 \(\chi=2\) 已困难”与
+“现有平方范数困难性证明使用最大键维 3”，后者的 \(\chi=2\) 强化只能
+标为 conjecture。
+
 ### A4. 重新激活条件与论文归属
 
-* 若数学结果形成独立完整定理体系：单独发表；
-* 若成果主要作为 FEMPS motivation/no-go：主文理论节 + 长附录；
+* 当前结构/no-go 与受限数值结果合并为一篇主文；
+* diagonal-path \(K\)-Slater 路线等价于有限 NOCI，只能作为主文数值章节，
+  不得作为独立 FEMPS 方法论文；
 * 已有四形式结果可作为独立数学成果投稿，FEMPS 文中只引用直接相关的 no-go theorem；
 * 新的高维问题必须在 ADR 中写明它阻塞的具体算法、复杂度或物理判据，才可重新进入 active plan。
+
+只有非 NOCI 的一阶量子化连续 FEMPS 获得可复现的显式关联 \(D\)-收敛
+优势，或完成与 Li--Waintal / 同基 DMRG 的匹配比较并显示清晰取舍后，
+才允许启动第二篇方法论文。在此之前不得继续维护“两篇论文并行”的目标。
 
 不得为了“合成一篇大论文”强行牺牲两个方向各自的逻辑完整性。
 
@@ -694,7 +705,7 @@ references/
 
 当前首选是可精确收缩的受限 matrix-wedge FEMPS：用一个全局守恒 virtual label 表示 (K=\chi\) 个非分支 Slater paths，按 (K^2\) 个 determinant/Slater–Condon transition 计算 observable。它严格包含单 Slater，并随 (K\) 系统扩展到非正交多行列式。备用路线仅为带非渐近误差/方差和反对称残差的 VMC；在主路线没有完成 E1--E4 之前，不启动通用 FEMPS VMC 的大规模开发。
 
-Phase 32 已完成相互作用 N=6 soft-Coulomb 的独立 \(D\) 与 \(K\) 收敛。Phase 33 在严格 value/gradient parity 下批处理 transition/factor 轴，使注册的 CPU kernel 相对参考实现加速 34.926 倍；ADR 0022 接纳 Blackwell 而保留 CPU 默认。Phase 34 的预注册 truth-free 自适应 D12 K=4→5→6 lineage 又把同基组 CI 误差从 1.04729e-4 降至 3.20214e-5、方差降至 3.72621e-4，并比同预算 cold K6 低 2.44109e-4；选择阶段只读取 factorized transition 和条件数，CI 在三次优化冻结后才构造。Phase 35 的三条新候选池 lineage 全部通过：K6 能量展宽为 4.87701e-6，最大同基组 CI 误差为 3.76345e-5，最大方差为 4.54299e-4。六个预测与实际增长决定均为 continue，因此候选池稳定性成立，但没有观察到 stop 事件，自动停止规则不得接纳，K 必须继续由外部上限控制。Phase 36 已把该流程收束为公共有界 API：显式完整 seed schedule、源/算符哈希、逐 K 外层 checkpoint、恢复验证和强制 `max_terms` 均进入稳定契约；预注册 K5 中断/K6 恢复运行精确复现 Phase 35 lineage 1 的候选 12/3 与两级能量。Phase 37 已从 canonical Slater 和显式模型参数出发完成 N4,D6,K1→K4 的端到端命令闭环；clean/resume 逐 K 精确一致，最终同基组 CI 误差为 4.883e-10，且所有结构反对称与生产枚举残差为零。唯一 active 数值任务为 Phase 38：在同一 N4,D6 物理点预注册并审计额外 clean-source seed schedules，先判断端到端结果是否对候选池/优化种子稳健；在该审计闭合前不得扩大 N、D、接纳自动停止或重启高维形式秩搜索。
+Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。最新 N4,D6 三组最终能量展宽为 2.035e-9，最大同基组 CI 误差为 2.523e-9，优化失败及反对称/枚举残差均为零；这些结果的精确数据和边界保存在各 completed plan、实验报告和 reproduction manifest 中。ADR 0028 明确该路线等价于有限 NOCI，不能独立成文。当前 Phase 39 先闭合结构/no-go 与受限数值演算的单一合并稿，再审计至多两条非 NOCI 差异化路线；D8 的同类 NOCI 数值只能作为支持材料，不能开启第二篇论文。
 
 旧 Phase 0--7 条目保留为历史设计与已完成工作的索引；若与本 recovery stage 冲突，以当前阶段和最新 ADR 为准。
 
@@ -840,23 +851,23 @@ generic exponential，但有物理上有意义、systematically improvable 的 p
 
 ## Phase 7 — 论文决策
 
-### Paper A：FEMPS / Fermionic FTN 主文
+### 当前唯一主稿：结构/no-go + 受限数值演算
 
-成立条件：
+`math/femps_no_go_manuscript.tex` 是唯一投稿候选。它必须保留完整 no-go
+定理链、\(\chi=2\) / \(\chi\le3\) 边界、2201 动机和受限算法的诚实数值
+后果。现有 diagonal-path 结果属于 NOCI 等价的数值演算，不能独立成文。
 
-* representation 有明确新意；
-* contraction Gate PASS/CONDITIONAL；
-* 至少有 \(N=2,N=4\) interacting continuum benchmarks；
-* 与 2201、Li–Waintal、HS-MPS、Grassmann TN 等差异清楚；
-* no-go theorem 有完整理论支持。
+### 未来方法论文的开启条件
 
-### Paper B：Antisymmetric TT rank mathematics
+同时满足以下科学前提之一并完成可复现 benchmark 后，才建立新的方法稿：
 
-若四形式和一般 spectrum 结果足够完整，则独立投稿；FEMPS 只引用核心 theorem。
+* representation 超出有限 NOCI，并由显式关联带来匹配成本下的
+  functional-basis \(D\)-收敛优势；
+* 与 Li–Waintal 和/或同轨道基 DMRG 完成匹配比较，显示无法由普通 NOCI
+  解释的准确性、稳定性、内存或复杂度取舍。
 
-### 合并条件
-
-只有数学结果能够直接服务 FEMPS 的核心理论，而篇幅仍可控制时才合并。不要把大量 orbit/Gröbner 证明塞进主物理论文正文。
+增加 Slater 项数、随机种子、同类基组点或实现加速本身不满足独立成文条件。
+四形式分类只有在直接决定上述算法门槛时才进入主文，否则继续独立封存。
 
 ---
 

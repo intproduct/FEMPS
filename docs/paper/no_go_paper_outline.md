@@ -2,9 +2,10 @@
 
 ## Provisional scope
 
-This outline assumes the main result is a theory/evidence paper rather than a
-claim of a new scalable generic FEMPS solver. It can later be split into a
-short physics/method paper and a longer mathematical appendix.
+This outline governs the single combined theory/evidence manuscript rather
+than a claim of a new scalable generic FEMPS solver. ADR 0028 removes the prior
+planned split. Current restricted-solver numerics remain one numerical section;
+a separate method paper is not opened without a non-NOCI differentiator.
 
 ## 1. Motivation from continuous functional tensor networks
 
@@ -38,6 +39,9 @@ short physics/method paper and a longer mathematical appendix.
   reference block, raising the maximum bond only to three.
 - State the fixed-parameter conditional #P-hardness theorem and its N=2--6
   exact certificate.
+- State the sharp boundary: hard pointwise amplitude is already at `chi=2`,
+  while the proved signed squared-norm reduction has maximum bond three;
+  `chi=2` exact-norm hardness remains a conjecture.
 - Explain why site-labelled row order does not contradict the homogeneous
   fixed-`Mat_2` pair-power collapse.
 
@@ -84,10 +88,16 @@ short physics/method paper and a longer mathematical appendix.
 
 - 2201 baseline reproduction and GPU/backend validation.
 - N=2/4/6/8 controls demonstrating the representation distinction.
+- Restricted diagonal-path data only as an NOCI-equivalent numerical exercise;
+  do not present it as a distinct method contribution.
 - Exact certificate table with hashes, fields, and reproduction commands.
 - Do not mix exploratory floating-point ranks with mathematical proof.
 
 ## 10. Discussion
+
+- Keep all current theory and numerical evidence in one manuscript.
+- Require explicit-correlation `D`-convergence advantage or a matched
+  Li--Waintal/same-basis-DMRG tradeoff before opening a separate method paper.
 
 - Two independent costs: exchange representation versus exterior contraction.
 - Why fermionic signs/Grassmann bookkeeping alone do not create closure.

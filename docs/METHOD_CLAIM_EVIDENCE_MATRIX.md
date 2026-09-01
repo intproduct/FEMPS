@@ -1,6 +1,7 @@
-# FEMPS method claim and evidence matrix
+# FEMPS combined-manuscript claim and evidence matrix
 
-This matrix governs method-facing language after Phase 29. Machine-readable
+This matrix governs method-facing language inside the single combined
+structural/no-go manuscript after ADR 0028. Machine-readable
 artifact hashes, commands, seeds, tolerances, boundaries, and verifier results
 are in `docs/experiments/results/phase30_reproduction_manifest.json`.
 
@@ -21,9 +22,11 @@ are in `docs/experiments/results/phase30_reproduction_manifest.json`.
 | Adaptive K growth is stable across fresh candidate pools | numerical evidence for three new D12 K5/K6 lineages | Phase 35 six-optimization artifact and independent exterior verifier | all three lineages improve and have `K=6` energy spread `4.877e-6`; automatic stopping remains unadmitted because no stop event occurred |
 | Adaptive K growth is available as a reproducible public solver operation | implemented API plus numerical reproduction | Phase 36 schemas, identity/resume/materialization/AD tests, physical artifact, and independent verifier | bounded explicit K schedules are checkpointable and reproduce one frozen N6,D12 lineage; no automatic-stop or generic-solver claim |
 | A clean canonical Slater can drive the public solver without historical FEMPS state | implemented command plus numerical reproduction | Phase 37 command/checkpoint schemas, N2 materialization/AD/resume tests, N4,D6 artifact, and independent verifier | K1--K4 clean and resumed runs agree exactly and reach `4.883e-10` same-basis CI error; one bounded truth point, no scaling or automatic-stop claim |
-| Diagonal-path FEMPS is novel beyond nonorthogonal selected CI | not established | novelty comparison remains qualified | describe the exterior/functional integration and measured tradeoff, not categorical novelty |
+| Clean-source growth is stable under fresh candidate/optimizer schedules | preregistered numerical evidence at one N4,D6 point | Phase 38 two-schedule artifact, forced-resume control, explicit exterior reconstruction, and independent verifier | distinct candidate paths have `2.035e-9` combined final-energy spread and maximum CI error `2.523e-9`; this is not universal seed independence, N/D scaling, or automatic stopping |
+| Diagonal-path FEMPS is novel beyond nonorthogonal selected CI | not established; current class is NOCI-equivalent | exact finite nonorthogonal Slater embedding and determinant-transition implementation | retain only as a numerical exercise in the combined paper; no independent method-paper claim |
+| A separate FEMPS method paper is justified | gate closed | no non-NOCI explicit-correlation D-convergence advantage and no matched Li--Waintal/same-basis-DMRG tradeoff yet | do not open Paper B until one differentiator is reproduced |
 
-## Required paper language
+## Required combined-paper language
 
 - Every floating-point table or figure is labeled numerical evidence.
 - `K` is a restricted determinant-path correlation multiplicity, not a
@@ -32,3 +35,6 @@ are in `docs/experiments/results/phase30_reproduction_manifest.json`.
   future second-quantized DMRG calculation retain their own names.
 - The current practical claim is bounded to the verified nonbranching
   first-quantized continuous functional-basis subclass.
+- The nonbranching diagonal-path subclass is explicitly NOCI-equivalent.
+- `math/femps_no_go_manuscript.tex` is the sole submission source; the existing
+  restricted-method draft is an internal working note.

@@ -24,7 +24,8 @@
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \title{Fermionic Extensions of Continuous Functional Tensor Networks:\\
-Exchange-Rank and Exterior-Contraction Obstructions}
+Exchange-Rank and Exterior-Contraction Obstructions\\
+with Restricted Numerical Consequences}
 \author{Author information withheld for review}
 \date{}
 
@@ -52,10 +53,13 @@ permanents, whereas entrywise-nonnegative and additive promised cases remain
 open.  Finally, cut-rank divisibility rejects the proposed universal direct
 tensor product of a statistics carrier and a Slater-normalized correlation
 multiplicity.  Exact certificates and controlled ordered-coordinate
-calculations support the proof audit.  These exact obstructions constrain, but
-do not exclude, restricted polynomially contractible subclasses or controlled
-approximate and stochastic algorithms; they do not establish a scalable
-generic fermionic solver.
+calculations support the proof audit.  A nonbranching exterior subclass is also
+evaluated as a numerical consequence of these constraints.  Because that
+subclass is algebraically a finite nonorthogonal Slater expansion, the data are
+not claimed as a method distinct from nonorthogonal configuration interaction
+(NOCI).  These exact obstructions constrain, but do not exclude, genuinely
+distinct restricted or controlled approximate algorithms; they do not
+establish a scalable generic fermionic solver.
 \end{abstract}
 
 \section{Scope and thesis}
@@ -115,24 +119,31 @@ by
 \]
 Write $C_{(k)}$ for the $k\mid N-k$ particle matricization.
 
-\begin{theorem}[Exact TT ranks and exchange floor]
+\begin{theorem}[Structural result I: exact particle-TT ranks]
 For $1\le k<N$, the minimal exact ordinary-TT bond is
 \[
  r_k^{\TT}(C)=\rank C_{(k)}.
 \]
-If $0\ne C\in\Lambda^N V$, then
-\[
-\rank C_{(k)}\ge \binom{N}{k}.
-\]
-The lower bound is attained by every nonzero decomposable $N$-form.
 \label{thm:r1}
 \end{theorem}
 
 \begin{proof}
 Any TT cut factors $C_{(k)}$ through its bond space, and successive exact
 singular-value decompositions attain all unfolding ranks
-\cite{Oseledets2011TT}.  For the alternating lower bound, choose a nonzero
-coefficient $c_I$ on an $N$-element support $I$.  Restrict rows to
+\cite{Oseledets2011TT}.
+\end{proof}
+
+\begin{theorem}[Structural result II: universal exchange floor]
+If $0\ne C\in\Lambda^N V$, then
+\[
+\rank C_{(k)}\ge \binom{N}{k}.
+\]
+The lower bound is attained by every nonzero decomposable $N$-form.
+\label{thm:exchange-floor}
+\end{theorem}
+
+\begin{proof}
+Choose a nonzero coefficient $c_I$ on an $N$-element support $I$.  Restrict rows to
 $k$-subsets $A\subset I$ and columns to $I\setminus A$.  The resulting
 $\binom{N}{k}$ square minor is diagonal up to signs: its diagonal entries are
 $\pm c_I$, while an off-diagonal entry repeats an index and vanishes.
@@ -152,7 +163,7 @@ entropy-minimization statements studied for fermionic reduced density
 matrices \cite{CarlenLiebReuvers2016FermionicEntropy,
 LiWaintal2026FirstQuantization}.
 
-\begin{proposition}[Known flat Slater particle spectrum]
+\begin{theorem}[Structural result III: known flat Slater particle spectrum]
 For orthonormal $u_1,\ldots,u_N$, the normalized Slater determinant $\Phi$
 has Schmidt decomposition
 \[
@@ -168,7 +179,7 @@ squared error
 so error at most $\epsilon$ requires
 $r_k^{\TT}\ge\lceil(1-\epsilon^2)\binom{N}{k}\rceil$.
 \label{thm:r2}
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
 Partition the signed permutation sum by the set of orbitals in the first $k$
@@ -180,7 +191,8 @@ structure of a Slater determinant \cite{Coleman1963FermionRDM}.
 \end{proof}
 
 No flat spectrum is asserted for a general correlated alternating tensor.
-Theorem~\ref{thm:r1} and Proposition~\ref{thm:r2} concern labelled-particle TT only; they do
+Theorems~\ref{thm:r1}, \ref{thm:exchange-floor}, and~\ref{thm:r2} concern
+labelled-particle TT only; they do
 not apply to mode MPS, ordered chambers, or exterior/determinant carriers.
 
 For a fixed orthonormal one-particle basis of size $D$, all of these
@@ -274,6 +286,23 @@ $(x+1)^2$.  Two norm queries recover the sign and value through
 Four boundary pairs recover the $2\times2$ matrix output.  Core construction,
 query count, and rational bit lengths are polynomial in the source input.
 \end{proof}
+
+The sharp bond boundary must be stated carefully.  The Cayley amplitude state
+in the proof already has maximum bond $\chi=2$ and its norm is $x^2$.  The
+proved signed-amplitude recovery, however, adjoins the scalar reference
+$\Theta$ and therefore uses maximum bond three.  Consequently the theorem
+above proves exact squared-norm hardness for fixed $\chi\le3$; it does
+\emph{not} prove the corresponding statement with the promise $\chi=2$.
+
+\begin{conjecture}[Bond-two exact squared-norm boundary]
+Exact squared-norm evaluation remains \#P-hard for rational one-form
+\FEMPS{} whose maximum internal bond is two.
+\label{conj:chi2-norm}
+\end{conjecture}
+
+Conjecture~\ref{conj:chi2-norm} is a precise open sharpening, not a theorem or
+an exact certificate.  The established $\chi=2$ fact is the pointwise hard
+amplitude encoding; the established norm theorem has maximum bond three.
 
 An independent integer verifier checks the site/physical permutation sum,
 all four boundary entries, the explicit bond-three direct sum, polarization,
@@ -629,7 +658,7 @@ chemistry DMRG in the same orbital basis and a matched first-quantized
 comparator.
 
 The structural results were subsequently used to choose, rather than reject,
-a restricted solver.  A nonbranching diagonal-path subclass represents a sum
+a restricted numerical control.  A nonbranching diagonal-path subclass represents a sum
 of $K$ Slater paths and evaluates determinant transition quantities in
 $O(K^2)$ path pairs without enumerating all virtual histories or materializing
 the alternating coefficient tensor.  As numerical evidence, for four
@@ -641,9 +670,15 @@ $8.1\times10^{-5}$ and variance $1.1\times10^{-3}$.  At $D=6$, the error falls
 from $5.3\times10^{-3}$ at $K=1$ to $2.3\times10^{-11}$ at $K=2$; at $K=4$,
 the continuum error decreases monotonically over $D=5,6,7$.  Norm errors are
 below $5\times10^{-16}$ and structural and materialized antisymmetry residuals
-are zero.  These small-system data demonstrate a viable restricted route, not
-generic polynomial contraction, asymptotic scalability, or superiority over
-FCI, particle TT, or DMRG.
+are zero.  Two additional clean-source schedules select different determinant
+paths but give a combined final-energy spread of $2.035\times10^{-9}$, maximum
+same-basis CI error $2.523\times10^{-9}$, maximum variance
+$1.462\times10^{-8}$, and no optimization failures.  These data are retained
+in this manuscript as a bounded numerical exercise.  The subclass is exactly
+a finite nonorthogonal Slater sum, so the calculation does not establish an
+ansatz beyond NOCI, an explicit-correlation advantage, improved functional-
+basis $D$ convergence, asymptotic scalability, or superiority over FCI,
+particle TT, Li--Waintal, or same-basis DMRG.
 
 \section{Logical boundaries of the results}
 
@@ -748,13 +783,15 @@ state its exactness,
 reconstruction cost, and contraction theorem rather than assume a free direct
 product.
 
-The structural/complexity manuscript and the continuous ordered-coordinate
-method should be evaluated as separate publication projects.  Higher-
-dimensional alternating-form rank classification is not pursued here unless a
-specific rank question determines a contraction rule, expressivity bound,
-truncation criterion, or physical benchmark.  The current algorithmic program
-instead tests restricted exact contraction and error-controlled approximate
-routes on continuous interacting models.
+The structural results and all currently admitted restricted-solver numerics
+belong to this single manuscript.  No separate \FEMPS{} method paper is claimed
+from the diagonal-path data.  A future method manuscript is opened only after
+a representation beyond finite NOCI demonstrates a matched, reproducible
+advantage---for example, explicit correlation that improves functional-basis
+$D$ convergence, or a controlled comparison with Li--Waintal and same-basis
+DMRG that identifies a genuine accuracy, stability, or complexity tradeoff.
+Higher-dimensional alternating-form rank classification is not pursued unless
+a specific rank question determines such an algorithmic or physical decision.
 
 OpenAI Codex (GPT-5 family, accessed in August--September 2026) was used under
 human direction for literature discovery, code and proof exploration,
@@ -772,11 +809,13 @@ removes that representation charge, but generic exact squared-norm contraction
 is already hard at fixed one-form bond, while a direct universal carrier
 factorization fails dimensionally.  The tested tractable matrix-pair memories
 reduce to established LC--AGP structure, and a unique sparse path already
-contains a permanent.  The resulting map is an algorithm-design constraint,
-not a denial of numerical \FEMPS{}: polynomially contractible restricted
-subclasses and error-controlled approximate methods remain open and must be
-judged by interacting benchmarks, convergence, cost, uncertainty, and
-antisymmetry residuals rather than by parameter counts alone.
+contains a permanent.  The nonbranching $K$-path calculation is correspondingly
+a useful NOCI-equivalent numerical control, not yet an independent method
+contribution.  The resulting map is an algorithm-design constraint, not a
+denial of numerical \FEMPS{}: genuinely distinct restricted subclasses and
+error-controlled approximate methods remain open and must be judged by matched
+interacting benchmarks, $D$ and correlation convergence, cost, uncertainty,
+and antisymmetry residuals rather than by parameter counts alone.
 
 \appendix
 \section{Detailed bounded-algebra collapse proof}

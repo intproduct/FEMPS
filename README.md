@@ -165,8 +165,30 @@ is gated by an explicit contraction-complexity audit.
   structural antisymmetry and production-enumeration residuals are zero. This
   is one bounded end-to-end solver point, not an automatic-stop, scaling, or
   superiority claim.
+- Phase 38 preregisters two fresh complete clean-source schedules at the same
+  N4,D6 point. They select different K2/K3/K4 candidates (`1/13/22` versus
+  `31/26/25`) but have a combined final-energy spread of `2.035e-9`, maximum
+  same-basis CI error `2.523e-9`, maximum variance `1.462e-8`, zero optimizer
+  failures, and zero antisymmetry/enumeration residuals. This is bounded seed
+  robustness at one point, not universal seed independence or scaling.
 
-See [the active execution plan](docs/exec-plans/active/phase38.md),
+## Publication scope
+
+ADR 0028 restores a single combined manuscript. The authoritative submission
+source is `math/femps_no_go_manuscript.tex`; it contains the structural/no-go
+theorems and the present restricted-solver numerics as one bounded numerical
+section. The diagonal-path implementation is a finite NOCI-equivalent Slater
+expansion and is not an independent method-paper contribution.
+
+The original structural Theorems 1--3 remain explicit. The hard pointwise
+amplitude is already represented at `chi=2`, whereas the proved signed exact
+squared-norm reduction has maximum bond three; exact norm hardness restricted
+to `chi=2` remains a conjecture. A future separate method paper is gated on a
+non-NOCI explicit-correlation `D`-convergence advantage or a matched
+Li--Waintal/same-basis-DMRG comparison with a genuine measured tradeoff.
+
+See [the active execution plan](docs/exec-plans/active/phase39.md),
+[the single-manuscript scope](docs/paper/SINGLE_MANUSCRIPT_SCOPE.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
 [the diagonal-path solver contract](docs/DIAGONAL_PATH_SOLVER_CONTRACT.md),
@@ -177,7 +199,8 @@ See [the active execution plan](docs/exec-plans/active/phase38.md),
 [the adaptive-pool stability report](docs/experiments/phase35_adaptive_pool_stability_report.md),
 [the public adaptive-solver report](docs/experiments/phase36_public_adaptive_solver_report.md),
 [the clean Slater-source solver report](docs/experiments/phase37_slater_source_solver_report.md),
-[the method claim/evidence matrix](docs/METHOD_CLAIM_EVIDENCE_MATRIX.md),
+[the clean-source seed-robustness report](docs/experiments/phase38_clean_source_seed_robustness_report.md),
+[the combined-manuscript claim/evidence matrix](docs/METHOD_CLAIM_EVIDENCE_MATRIX.md),
 [the Phase 30 reproduction manifest](docs/experiments/results/phase30_reproduction_manifest.json),
 [the exact four-form workspace](math/four_forms/README.md),
 [the no-go hierarchy](docs/theory/exterior_no_go_hierarchy.md),

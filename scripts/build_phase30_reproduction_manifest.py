@@ -171,6 +171,26 @@ ENTRIES = (
         "verify_command": "python scripts/verify_phase37_slater_source_solver.py",
         "seeds": [3701, 3711, 3712, 3721, 3722, 3731, 3732],
     },
+    {
+        "id": "n4_clean_source_seed_robustness",
+        "claim": "Two fresh clean-source N4,D6 schedules with distinct candidate paths pass interruption/resume, accuracy, variance, symmetry, resource, and spread gates.",
+        "artifact": "docs/experiments/results/phase38_clean_source_seed_robustness.json",
+        "verifier_module": "scripts.verify_phase38_clean_source_seed_robustness",
+        "verifier_argument": "path",
+        "benchmark_command": "python scripts/benchmark_phase38_clean_source_seed_robustness.py",
+        "verify_command": "python scripts/verify_phase38_clean_source_seed_robustness.py",
+        "seeds": [
+            3801, 3811, 3812, 3821, 3822, 3831, 3832,
+            3901, 3911, 3912, 3921, 3922, 3931, 3932,
+        ],
+        "registered_tolerances": {
+            "final_ci_error": 1e-6,
+            "final_variance": 1e-5,
+            "combined_final_energy_spread": 2e-6,
+            "antisymmetry_residual": 1e-12,
+            "optimizer_failures": 0,
+        },
+    },
 )
 
 

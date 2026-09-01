@@ -37,9 +37,11 @@ not claimed efficiently contractible.
 
 ## Paper boundary
 
-This method manuscript is separate from the structural/no-go paper. They may
-cross-reference constraints, but numerical and exact mathematical claims retain
-separate evidence labels.
+Historical decision at Phase 31: this draft was prepared separately from the
+structural/no-go paper. ADR 0028 supersedes that publication split. The draft is
+now a frozen internal working note; its admitted numerical claims belong to the
+single combined structural/no-go manuscript and retain their numerical-evidence
+labels.
 
 ## Completion record (2026-09-01)
 

@@ -379,6 +379,42 @@
       "evidence_level": "numerical",
       "scientific_boundary": "clean single-Slater-source command for restricted nonbranching first-quantized continuous functional-basis FEMPS; bounded numerical evidence; no automatic stopping",
       "registered_tolerances": {}
+    },
+    {
+      "id": "n4_clean_source_seed_robustness",
+      "claim": "Two fresh clean-source N4,D6 schedules with distinct candidate paths pass interruption/resume, accuracy, variance, symmetry, resource, and spread gates.",
+      "artifact": "docs/experiments/results/phase38_clean_source_seed_robustness.json",
+      "verifier_module": "scripts.verify_phase38_clean_source_seed_robustness",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase38_clean_source_seed_robustness.py",
+      "verify_command": "python scripts/verify_phase38_clean_source_seed_robustness.py",
+      "seeds": [
+        3801,
+        3811,
+        3812,
+        3821,
+        3822,
+        3831,
+        3832,
+        3901,
+        3911,
+        3912,
+        3921,
+        3922,
+        3931,
+        3932
+      ],
+      "registered_tolerances": {
+        "final_ci_error": 1e-06,
+        "final_variance": 1e-05,
+        "combined_final_energy_spread": 2e-06,
+        "antisymmetry_residual": 1e-12,
+        "optimizer_failures": 0
+      },
+      "artifact_sha256": "37fcff3f41f3b190bae27190141742e179f883a55550da34deeeeb84a2949ef2",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "two additional registered clean-source schedules at N4,D6; no universal seed-independence, scaling, or automatic-stop claim"
     }
   ]
 }

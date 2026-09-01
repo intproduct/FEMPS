@@ -1,5 +1,41 @@
 # Research changelog
 
+## 2026-09-02 - Single-manuscript restoration and distinctiveness gate
+
+- Accepted ADR 0028 and withdrew the two-paper split. The structural/no-go
+  manuscript is again the sole submission candidate; current diagonal-path
+  results are retained only as an NOCI-equivalent numerical section.
+- Restored the original three-result theory chain as explicit Structural
+  results I--III and made the fixed-bond boundary visible: the hard pointwise
+  amplitude uses `chi=2`, the proved signed exact-norm reduction reaches maximum
+  bond three, and the `chi=2` exact-norm sharpening is a conjecture.
+- Froze the standalone restricted-method draft as an internal working note.
+  Any future method paper now requires either a non-NOCI explicit-correlation
+  functional-basis `D`-convergence advantage or a matched Li--Waintal/
+  same-basis-DMRG comparison with a genuine measured tradeoff.
+- Replaced the planned N4,D8-first Phase 39 priority by combined-manuscript
+  closure and a bounded audit of at most two differentiating algorithm routes.
+- Rebuilt the 14-page combined PDF, visually inspected every page, and passed
+  the standard suite: `277 passed, 1 known latticeTN report-path warning` in
+  688.51 s.
+
+## 2026-09-02 - Phase 38 clean-source seed robustness closure
+
+- Preregistered two fresh complete N4,D6 clean-source schedules before
+  production, retaining the Phase 37 model, K1--K4 budgets, tolerances, public
+  command contract, and external K cap.
+- Forced schedule A through a K2 interruption/resume and clean repeat with
+  exact energy/candidate agreement; schedule B completed cleanly with a
+  distinct candidate path. No outcome-dependent retry occurred.
+- Independently reconstructed all 12 complete-run exterior states. Including
+  Phase 37, the final-energy spread is `2.035e-9`; maximum fresh CI error is
+  `2.523e-9`, maximum variance `1.462e-8`, and optimizer failures, structural
+  antisymmetry residuals, and production enumeration counts are zero.
+- Expanded the numerical reproduction manifest to 15 independently verified
+  artifacts and closed Phase 38. ADR 0028 subsequently replaced the planned
+  N4 D6-to-D8-first priority with combined-manuscript closure and a
+  distinctiveness audit.
+
 ## 2026-09-01 - Phase 37 clean Slater-source solver closure
 
 - Added a public command that constructs the registered N4,D6,Q128

@@ -298,6 +298,42 @@
         "peak_cpu_rss_bytes": 2147483648,
         "wall_time_seconds_per_point": 600.0
       }
+    },
+    {
+      "id": "n6_adaptive_pool_stability",
+      "claim": "Three fresh truth-free N6,D12 adaptive K5/K6 candidate-pool lineages pass stability gates; the automatic stop rule remains unadmitted.",
+      "artifact": "docs/experiments/results/phase35_adaptive_pool_stability.json",
+      "verifier_module": "scripts.verify_phase35_adaptive_pool_stability",
+      "verifier_argument": "path",
+      "benchmark_command": "python scripts/benchmark_phase35_adaptive_pool_stability.py",
+      "verify_command": "python scripts/verify_phase35_adaptive_pool_stability.py",
+      "seeds": [
+        3511,
+        3512,
+        3521,
+        3522,
+        3531,
+        3532
+      ],
+      "artifact_sha256": "8b1ad9688185177bf0cd546dac0fe02069c8a716533f481ff80ffc92b11c6bcc",
+      "artifact_schema_version": 1,
+      "evidence_level": "numerical",
+      "scientific_boundary": "three fresh 32-candidate K4-to-K6 lineages at one N6,D12 model; pool stability evidence, not N/D/asymptotic scaling",
+      "registered_tolerances": {
+        "energy_monotonicity_tolerance": 1e-09,
+        "minimum_K4_to_K6_improvement": 1e-08,
+        "K6_CI_error": 0.00011,
+        "K6_variance": 0.0015,
+        "K6_energy_spread": 0.0001,
+        "norm_error": 1e-10,
+        "antisymmetry_residual": 1e-12,
+        "retained_condition_number": 100000000.0,
+        "factorized_vs_dense_energy": 1e-10,
+        "operator_factorization_error": 1e-11,
+        "quadrature_relative_change": 2e-12,
+        "peak_cpu_rss_bytes": 2147483648,
+        "wall_time_seconds_per_point": 600.0
+      }
     }
   ]
 }

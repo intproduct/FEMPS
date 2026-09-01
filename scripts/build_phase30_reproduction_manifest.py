@@ -137,6 +137,16 @@ ENTRIES = (
         "verify_command": "python scripts/verify_phase34_adaptive_k_growth.py",
         "seeds": [3451, 3452, 3460],
     },
+    {
+        "id": "n6_adaptive_pool_stability",
+        "claim": "Three fresh truth-free N6,D12 adaptive K5/K6 candidate-pool lineages pass stability gates; the automatic stop rule remains unadmitted.",
+        "artifact": "docs/experiments/results/phase35_adaptive_pool_stability.json",
+        "verifier_module": "scripts.verify_phase35_adaptive_pool_stability",
+        "verifier_argument": "path",
+        "benchmark_command": "python scripts/benchmark_phase35_adaptive_pool_stability.py",
+        "verify_command": "python scripts/verify_phase35_adaptive_pool_stability.py",
+        "seeds": [3511, 3512, 3521, 3522, 3531, 3532],
+    },
 )
 
 

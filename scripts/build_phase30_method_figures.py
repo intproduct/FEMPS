@@ -205,7 +205,7 @@ def main() -> None:
     provenance = {
         "schema_version": 1,
         "evidence_level": "numerical",
-        "scientific_boundary": "paper figures from eight manifest-hashed artifacts; no asymptotic or superiority claim",
+        "scientific_boundary": "paper figures from twelve manifest-hashed artifacts; no asymptotic or superiority claim",
         "manifest": str(MANIFEST),
         "manifest_sha256": _sha256(MANIFEST),
         "source_artifact_sha256": source_hashes,

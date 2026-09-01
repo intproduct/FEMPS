@@ -42,6 +42,7 @@ def verify_manuscript(path: Path) -> dict:
         "CPU remains faster",
         "batched $K^2$ determinant transitions",
         "truth-free $D=12$ adaptive continuation",
+        "three fresh candidate-pool lineages",
         "no $N=8$",
     )
     for phrase in required_scope:
@@ -73,6 +74,7 @@ def verify_manuscript(path: Path) -> dict:
         "tab:cost-counts": {"matched_n4_n6_transition_cost"},
         "tab:vectorized-backend": {"n6_vectorized_transition_backend"},
         "tab:n6-adaptive": {"n6_adaptive_correlation_growth"},
+        "tab:n6-adaptive-pools": {"n6_adaptive_pool_stability"},
         "fig:convergence": {
             "n4_soft_coulomb_transferability",
             "n4_soft_coulomb_basis_extension",

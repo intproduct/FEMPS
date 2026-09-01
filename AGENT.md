@@ -694,7 +694,7 @@ references/
 
 当前首选是可精确收缩的受限 matrix-wedge FEMPS：用一个全局守恒 virtual label 表示 (K=\chi\) 个非分支 Slater paths，按 (K^2\) 个 determinant/Slater–Condon transition 计算 observable。它严格包含单 Slater，并随 (K\) 系统扩展到非正交多行列式。备用路线仅为带非渐近误差/方差和反对称残差的 VMC；在主路线没有完成 E1--E4 之前，不启动通用 FEMPS VMC 的大规模开发。
 
-Phase 32 已完成相互作用 N=6 soft-Coulomb 的独立 \(D\) 与 \(K\) 收敛。Phase 33 在严格 value/gradient parity 下批处理 transition/factor 轴，使注册的 CPU kernel 相对参考实现加速 34.926 倍；ADR 0022 接纳 Blackwell 而保留 CPU 默认。Phase 34 的预注册 truth-free 自适应 D12 K=4→5→6 lineage 又把同基组 CI 误差从 1.04729e-4 降至 3.20214e-5、方差降至 3.72621e-4，并比同预算 cold K6 低 2.44109e-4；选择阶段只读取 factorized transition 和条件数，CI 在三次优化冻结后才构造。该结果仍只有一个候选池 lineage。唯一 active 数值任务为 Phase 35：从同一 K4 状态完成三条预注册新候选池的 K5/K6 稳定性和停止信号审计；不得扩大 N、D 或重启高维形式秩搜索。
+Phase 32 已完成相互作用 N=6 soft-Coulomb 的独立 \(D\) 与 \(K\) 收敛。Phase 33 在严格 value/gradient parity 下批处理 transition/factor 轴，使注册的 CPU kernel 相对参考实现加速 34.926 倍；ADR 0022 接纳 Blackwell 而保留 CPU 默认。Phase 34 的预注册 truth-free 自适应 D12 K=4→5→6 lineage 又把同基组 CI 误差从 1.04729e-4 降至 3.20214e-5、方差降至 3.72621e-4，并比同预算 cold K6 低 2.44109e-4；选择阶段只读取 factorized transition 和条件数，CI 在三次优化冻结后才构造。Phase 35 的三条新候选池 lineage 全部通过：K6 能量展宽为 4.87701e-6，最大同基组 CI 误差为 3.76345e-5，最大方差为 4.54299e-4。六个预测与实际增长决定均为 continue，因此候选池稳定性成立，但没有观察到 stop 事件，自动停止规则不得接纳，K 必须继续由外部上限控制。唯一 active 数值任务为 Phase 36：把已验证的增长流程收束为具有确定种子序列、逐级 checkpoint 和强制 `max_K` 的公共自适应求解器 API；不得扩大 N、D 或重启高维形式秩搜索。
 
 旧 Phase 0--7 条目保留为历史设计与已完成工作的索引；若与本 recovery stage 冲突，以当前阶段和最新 ADR 为准。
 

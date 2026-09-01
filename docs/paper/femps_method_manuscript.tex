@@ -48,7 +48,11 @@ $N=6$ axes further give monotone energies for $K=1,2,4$ at $D=10$ and
 $D=8,10,12$ at $K=4$; the final $D=12$ CI error is
 $1.05\times10^{-4}$.  A preregistered truth-free $D=12$ adaptive continuation
 to $K=6$ further reduces that error to $3.20\times10^{-5}$ and the variance to
-$3.73\times10^{-4}$, while beating a same-budget cold $K=6$ control.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
+$3.73\times10^{-4}$, while beating a same-budget cold $K=6$ control.  Three
+fresh candidate-pool lineages give $K=6$ energy spread $4.88\times10^{-6}$,
+maximum CI error $3.76\times10^{-5}$, and maximum variance
+$4.54\times10^{-4}$; all continue decisions agree, but no automatic stopping
+rule is admitted because no stop event occurs.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
 $N=6$, while the \FEMPS{} correlation control remains $K=4$; matched kernel
 measurements expose the corresponding polynomial cost.  The method is a
 restricted nonorthogonal multideterminant algorithm, not an efficient generic
@@ -264,7 +268,7 @@ than relabeled as \FEMPS{}.
 \section{Numerical evidence}
 
 All floating-point results in this section are numerical evidence.  The full
-manifest contains eleven independently verified artifacts.
+manifest contains twelve independently verified artifacts.
 
 \subsection{\texorpdfstring{$N=2$}{N=2}: analytic and finite-basis checks}
 
@@ -441,6 +445,38 @@ source record predates Phase 33 and is not a matched timing comparator.  The
 K6 pruning gate does not trigger (claim
 \claimid{n6_adaptive_correlation_growth}).
 
+ADR 0024 freezes three fresh candidate-pool seed pairs before production and
+withholds dense CI until all six K5/K6 optimizations finish.  The three K6
+records in Table~\ref{tab:n6-adaptive-pools} are independently reconstructed
+from their exterior coefficients.
+
+\begin{table}[t]
+\centering
+\caption{Fresh-pool adaptive \texorpdfstring{$N=6,D=12,K=6$}{N=6,D=12,K=6}
+stability (numerical evidence).}
+\label{tab:n6-adaptive-pools}
+\begin{tabular}{lrrrr}
+\toprule
+Seeds K5/K6 & Energy & Error versus CI & Variance & Condition \\
+\midrule
+3511/3512 & 25.049399173589 & $3.276\times10^{-5}$ & $3.898\times10^{-4}$ & 2.750 \\
+3521/3522 & 25.049400347160 & $3.393\times10^{-5}$ & $4.151\times10^{-4}$ & 2.787 \\
+3531/3532 & 25.049404050601 & $3.763\times10^{-5}$ & $4.543\times10^{-4}$ & 3.072 \\
+\bottomrule
+\end{tabular}
+\par\smallskip{\scriptsize Evidence: \claimid{n6_adaptive_pool_stability}.}
+\end{table}
+
+The K6 energy spread is $4.877\times10^{-6}$ and the minimum K4-to-K6
+improvement is $6.709\times10^{-5}$.  All norm errors are below
+$1.34\times10^{-15}$; structural antisymmetry residuals and the virtual-path
+and particle-tensor enumeration counters are zero.  Every fixed-span predicted
+gain and fully reoptimized gain exceeds the preregistered $10^{-8}$ continuation
+threshold.  Thus all six predicted and realized decisions agree as
+\emph{continue}.  Since no stop event is observed, this evidence admits
+candidate-pool stability but not automatic termination; $K$ remains externally
+capped (claim \claimid{n6_adaptive_pool_stability}).
+
 \section{Exchange carrier, correlation multiplicity, and cost}
 
 At fixed $D=10,K=4,L=19$, the exact structural counts grow as shown in
@@ -561,9 +597,10 @@ determinant costs.
 Direct CI is faster in the current truth spaces, which extend to
 $\binom{12}{6}=924$.  The evidence demonstrates correctness, optimization
 stability, three-point N6 basis/correlation convergence, and a structural
-tradeoff, not an end-to-end speed or memory advantage.  Adaptive K growth has
-one registered candidate-pool lineage and one cold control; it does not yet
-establish pool-seed stability or a universal stopping rule.  Three basis points and
+tradeoff, not an end-to-end speed or memory advantage.  Adaptive K growth now
+has one initial lineage, one cold control, and three fresh candidate-pool lineages.
+This establishes bounded pool-seed stability at one physical point,
+but no observed stop event and hence no universal stopping rule.  Three basis points and
 two particle counts cannot establish asymptotic scaling; no $N=8$ diagonal-path
 calculation is admitted.  DMRG has been deferred
 because it would be weaker than exact CI in the present finite spaces; no
@@ -588,8 +625,9 @@ Controlled N2/N4/N6 calculations establish a functioning restricted solver:
 energies improve systematically in $D$ and $K$ on registered axes, blind
 interacting runs are stable, and every accepted approximation/error/resource
 quantity is explicit.  Truth-free fixed-pool growth at N6,D12 converts the
-correlation control into a measurable solver improvement, while its single-pool
-scope remains explicit.  The ordinary particle-TT comparison makes the intended
+correlation control into a measurable solver improvement; three fresh pools
+retain that gain within a $4.877\times10^{-6}$ K6 energy spread.  Automatic
+stopping remains unadmitted and the schedule is externally capped.  The ordinary particle-TT comparison makes the intended
 separation visible: exchange support grows while $K$ remains the chosen
 correlation multiplicity.  At the same time, current CI references are faster
 and the method is close to established nonorthogonal determinant expansions.
@@ -632,6 +670,7 @@ Identifier & Scope \\
 \claimid{n6_independent_dk_convergence} & N6 independent D8/D10/D12 and K1/K2/K4 axes \\
 \claimid{n6_vectorized_transition_backend} & Batched CPU/Blackwell parity and matched solve \\
 \claimid{n6_adaptive_correlation_growth} & Truth-free N6,D12 K4-to-K6 growth and cold K6 control \\
+\claimid{n6_adaptive_pool_stability} & Three fresh N6,D12 K5/K6 pools and stop calibration \\
 \bottomrule
 \end{tabularx}
 \end{table}

@@ -17,7 +17,8 @@ are in `docs/experiments/results/phase30_reproduction_manifest.json`.
 | FEMPS is faster than CI/DMRG | not established | CI is faster in current truth spaces; DMRG not yet admitted | no runtime-superiority claim |
 | FEMPS scales to N8 or asymptotically | not established | no admitted N8 diagonal-path artifact | no N8 or asymptotic claim |
 | Batched transition contractions accelerate the reference implementation | numerical backend evidence at N6,D10,K4 | Phase 33 value/gradient parity and matched CPU/Blackwell artifact | CPU batched kernel is faster than the pairwise reference; Blackwell is admitted but CPU remains faster on the registered workload |
-| Truth-free adaptive K growth improves a fixed interacting N6 state | numerical evidence for one D12 seed-pool lineage | Phase 34 K4-to-K5-to-K6 artifact, cold K6 control, and independent exterior verifier | measurable monotone improvement for the registered lineage; no multiseed, asymptotic, or superiority claim |
+| Truth-free adaptive K growth improves a fixed interacting N6 state | numerical evidence for one D12 seed-pool lineage | Phase 34 K4-to-K5-to-K6 artifact, cold K6 control, and independent exterior verifier | measurable monotone improvement for the registered lineage; no asymptotic or superiority claim |
+| Adaptive K growth is stable across fresh candidate pools | numerical evidence for three new D12 K5/K6 lineages | Phase 35 six-optimization artifact and independent exterior verifier | all three lineages improve and have `K=6` energy spread `4.877e-6`; automatic stopping remains unadmitted because no stop event occurred |
 | Diagonal-path FEMPS is novel beyond nonorthogonal selected CI | not established | novelty comparison remains qualified | describe the exterior/functional integration and measured tradeoff, not categorical novelty |
 
 ## Required paper language

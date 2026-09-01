@@ -143,10 +143,15 @@ is gated by an explicit contraction-complexity audit.
   `1.04729e-4` to `3.20214e-5` and the variance from `1.12233e-3` to
   `3.72621e-4`; adaptive K6 is `2.44109e-4` below a same-budget cold K6.
   Selection sees only factorized determinant transitions and conditioning;
-  dense CI is constructed after optimization. This is one seed-pool lineage,
-  not multiseed or asymptotic evidence.
+  dense CI is constructed after optimization.
+- Phase 35 repeats K5/K6 growth with three fresh preregistered candidate-pool
+  seed pairs. All three lineages pass; their K6 energies span `4.87701e-6`,
+  with maximum same-basis CI error `3.76345e-5` and maximum variance
+  `4.54299e-4`. All six predicted and realized decisions say `continue`, so
+  pool stability is admitted but automatic stopping is not: adaptive solves
+  retain a mandatory external `max_K`.
 
-See [the active execution plan](docs/exec-plans/active/phase35.md),
+See [the active execution plan](docs/exec-plans/active/phase36.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
 [the diagonal-path solver contract](docs/DIAGONAL_PATH_SOLVER_CONTRACT.md),
@@ -154,6 +159,7 @@ See [the active execution plan](docs/exec-plans/active/phase35.md),
 [the N6 independent convergence report](docs/experiments/phase32_n6_convergence_report.md),
 [the vectorized transition report](docs/experiments/phase33_vectorized_transitions_report.md),
 [the adaptive K-growth report](docs/experiments/phase34_adaptive_k_growth_report.md),
+[the adaptive-pool stability report](docs/experiments/phase35_adaptive_pool_stability_report.md),
 [the method claim/evidence matrix](docs/METHOD_CLAIM_EVIDENCE_MATRIX.md),
 [the Phase 30 reproduction manifest](docs/experiments/results/phase30_reproduction_manifest.json),
 [the exact four-form workspace](math/four_forms/README.md),

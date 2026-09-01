@@ -22,6 +22,9 @@ provenance before making any extremal claim.
   reproduction commands separated from production FEMPS code.
 - [ ] Reconstruct all known low-dimensional values/bounds and test Hodge dual,
   complementary-cut, support-reduction, and direct-sum consistency identities.
+  Dimension seven is now closed exactly over `Q` and its algebraic closure:
+  Cohen--Helminck orbit coverage plus an independent rank-table certificate
+  gives `mu_4(7)=12`; dimensions eight and above remain under audit.
 - [x] Locate or regenerate the 16D rank-22/23 candidate data; if no provenance
   exists, label it a conjectural target rather than inherited evidence.
 - [ ] Choose exact rational and/or recorded finite-field charts and specify how

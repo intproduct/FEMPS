@@ -1,4 +1,7 @@
 import importlib.util
+import json
+import subprocess
+import sys
 from fractions import Fraction
 from pathlib import Path
 
@@ -144,3 +147,31 @@ def test_hypergraph_screen_is_seeded_and_explicitly_nonproof() -> None:
     assert first == second
     assert first["evidence_status"] == "numerical evidence"
     assert first["screen_field"] == "F_2"
+
+
+def test_seven_dimensional_rational_witness_has_exact_minimum_rank_vector() -> None:
+    trivector = ff.canonical_form({(0, 1, 2): 1, (3, 4, 5): 1})
+    four_form = ff.hodge_dual(trivector, 7)
+
+    assert four_form == ff.canonical_form({(3, 4, 5, 6): 1, (0, 1, 2, 6): -1})
+    assert ff.four_form_hilbert_vector(four_form, 7) == (1, 7, 12, 7, 1)
+    assert ff.is_concise(four_form, 7)
+
+
+def test_seven_dimensional_orbit_rank_certificate_verifies_independently() -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "math" / "four_forms" / "verify_seven_dimensional_classification.py"),
+            "--verify",
+            str(ROOT / "math" / "four_forms" / "seven_dimensional_orbit_ranks.json"),
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    result = json.loads(completed.stdout)
+
+    assert result["concise_middle_rank_minimum"] == 12
+    assert len(result["verified_orbits"]) == 9
+    assert "Cohen--Helminck" in result["classification_exhaustiveness"]

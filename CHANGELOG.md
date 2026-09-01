@@ -19,6 +19,18 @@
 - Screened 120,000 seeded coordinate-hypergraph samples over `F_2`; 118,317
   were concise and none had middle rank below 24. This is recorded only as
   numerical evidence and supplies no lower bound or orbit/chart coverage.
+- Proved the exterior-apolar identity
+  `Hilb(Lambda(V)/Ann_wedge(omega)) = (rank C_j(omega))`, separating the
+  canonical four-form quotient from arbitrary formal-dimension-four PD
+  algebras.
+- Closed the first nontrivial low-dimensional extremum:
+  `mu_4^Q(7)=mu_4^Qbar(7)=12`. Cohen--Helminck supplies exhaustive nine-orbit
+  coverage, while a standard-library-only independent verifier checks the
+  transcribed representatives, all exact contraction ranks, and payload hash
+  `94f1a654978dd1d37770b5a2171a07a5a839525dac1d16b6247a3b1ab2665f21`.
+- Ruled out ordinary commutative socle-degree-four Gorenstein Hilbert vectors
+  as the missing source of the 16D alternatives: their classified `r=16`
+  minimum is 15 and belongs to a different symmetric-algebra problem.
 
 ## 2026-09-01 - Phase 26 manuscript v1 and fixed-bond proof audit
 

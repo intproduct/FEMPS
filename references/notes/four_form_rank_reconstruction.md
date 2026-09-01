@@ -55,6 +55,56 @@ eight. DOI: <https://doi.org/10.1142/S0219199719500615>.
 Its decomposition rank is not `rank C_2`; it is retained to prevent a silent
 rank-notion substitution in later searches.
 
+### Suciu (2020) and the exterior apolar quotient
+
+Suciu defines a formal-dimension-`d` Poincare-duality algebra by perfect
+multiplication pairings and associates an alternating top form to every such
+graded skew-commutative algebra. The paper's bijection between alternating
+forms and algebra is specifically a formal-dimension-three statement. It
+cannot be quoted as a degree-four classification.
+
+For the present problem one instead defines
+
+```text
+A_omega = Lambda(V) / Ann_wedge(omega),
+Ann_wedge(omega)_j = ker C_j(omega).
+```
+
+The annihilator is a homogeneous ideal, and quotienting the left and right
+kernels of the pairing `omega(a wedge b)` gives perfect complementary-degree
+pairings. Thus `dim (A_omega)_j = rank C_j(omega)` and a concise four-form has
+Hilbert vector `(1,m,r_2,m,1)`. A self-contained proof is now in
+`math/four_forms/problem_statement.tex`; Suciu supplies the established PD
+terminology, not the missing four-form extremum.
+
+### Cohen--Helminck (1988): exact dimension seven
+
+Theorem 2.1 and Table 1 classify the nine nonzero three-form orbits over an
+algebraically closed field in dimension seven. Coordinate Hodge duality turns
+these into four-form orbit representatives; projective orbit correspondence
+uses the surjective contragredient automorphism of `GL(7)` and a determinant
+scalar, not same-matrix equivariance. Exact rational
+elimination gives middle ranks `6,10,12,12,16,15,18,15,21` and first ranks
+`4,6,7,7,7,7,7,6,7`; hence the concise minimum is 12. The orbit `f_3=123+456`
+has rational dual `4567-1237`, proving
+
+```text
+mu_4^Q(7) = mu_4^Qbar(7) = 12.
+```
+
+The classification source is responsible for exhaustiveness. The independent
+artifact `seven_dimensional_orbit_ranks.json` and verifier are responsible for
+the transcription, exterior signs, and exact rank calculations. Payload hash:
+`94f1a654978dd1d37770b5a2171a07a5a839525dac1d16b6247a3b1ab2665f21`.
+
+### A rejected provenance lead: commutative Gorenstein vectors
+
+Migliore--Zanello classify ordinary commutative Artinian Gorenstein Hilbert
+vectors `(1,r,h_2,r,1)` through `r<=17`; at `r=16` their minimum is 15. This is
+the symmetric-polynomial/Macaulay setting, not a quotient of an exterior
+algebra by an alternating four-form. It neither supplies the values 22/23 nor
+provides a valid lower bound for the present problem.
+
 ## Exact elementary controls
 
 - A coordinate volume form in dimension four has ranks `(1,4,6,4,1)`.
@@ -63,6 +113,8 @@ rank-notion substitution in later searches.
 - In dimension six, the Hodge dual of a nondegenerate two-form is concise and
   has ranks `(1,6,15,6,1)`, agreeing with the published six-variable rank
   classification.
+- In dimension seven, source-complete orbit coverage and an independent exact
+  rank-table certificate prove `mu_4^Q(7)=mu_4^Qbar(7)=12`.
 - Direct sums of `t` disjoint four-dimensional volume forms have ranks
   `(1,4t,6t,4t,1)`. In particular dimension 16 has a rational rank-24 control.
 
@@ -72,8 +124,9 @@ The exact implementation and tests live in `math/four_forms/` and
 
 ## Open provenance checklist
 
-- Find an exterior/skew Artinian Gorenstein source that states the perfect
-  pairing/Hilbert vector for a principal alternating inverse system.
+- Continue searching for prior exterior/skew inverse-system terminology for
+  the now self-contained perfect-pairing proposition; do not make priority
+  claims from absence of a source.
 - Find sharp rank-stratum results for four-forms beyond the six-variable case.
 - Audit orbit classifications separately over `Q`, `R`, `C`, and finite fields.
 - Locate the origin of the 16D alternatives 22 and 23; absent that, construct a

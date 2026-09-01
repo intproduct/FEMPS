@@ -36,9 +36,26 @@ secant sources needed to define and audit `mu_4(m)` and the 16D 22/23 branch.
   Grassmann/Skew decomposition rank. Its principal algorithmic range is degree
   at most three. This rank notion is a comparator, not the middle contraction
   rank used in the 16D branch.
+- Suciu (2020), especially Sections 4.1--4.3: supplies the graded
+  skew-commutative Poincare-duality definition and the alternating top form of
+  a PD algebra. Its form/algebra bijection is proved in formal dimension three,
+  not four. Phase 27 therefore proves the needed four-form exterior apolar
+  quotient directly instead of extending that bijection silently.
+- Cohen--Helminck (1988), Theorem 2.1 and Table 1: exhausts the nine nonzero
+  `GL(7)` orbits of trivectors over an algebraically closed field. Coordinate
+  volume duality plus exact elimination closes
+  `mu_4^Q(7)=mu_4^Qbar(7)=12`; the source supplies orbit coverage and the
+  independent certificate supplies the rank table.
+- Migliore--Zanello (2017), Theorem 3.2: classifies the analogous-looking
+  Hilbert vectors `(1,r,h_2,r,1)` for ordinary commutative Artinian Gorenstein
+  quotients through `r<=17`. In particular its `r=16` minimum is 15, so it is
+  not the origin of the exterior 16D alternatives 22/23. Symmetric-polynomial
+  Macaulay bounds must not be imported into the exterior problem.
 
 No primary source or repository artifact found so far uses the project's exact
 notation `mu_4(m)` or supplies a 16-dimensional rank-22/23 candidate. The
 definition in `math/four_forms/README.md` is therefore explicitly a working
-reconstruction. The exterior-Gorenstein Hilbert-function and sharp low-rank
-quadric/orbit sources remain open audit items.
+reconstruction. The exterior apolar perfect-pairing statement is now proved
+self-containedly, and the seven-dimensional value is closed, but sharp
+four-form rank strata beyond the low-dimensional classifications and the 16D
+origin remain open audit items.

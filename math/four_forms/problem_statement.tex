@@ -1,0 +1,140 @@
+\section{Exterior apolarity and the four-form minimum}
+\label{sec:four-form-problem}
+
+Let $K$ be a field, let $V$ be an $m$-dimensional $K$-vector space, and
+let $0\ne\omega\in\bigwedge^d V^*$.  For $0\leq j\leq d$, write
+\[
+  C_j(\omega):\bigwedge^jV\longrightarrow
+  \left(\bigwedge^{d-j}V\right)^*,
+  \qquad
+  C_j(\omega)(a)(b)=\omega(a\wedge b).
+\]
+The convention is intrinsic and does not require an inner product.  When
+$d=4$, $C_2(\omega)$ is symmetric because degree-two exterior elements
+commute.  If $\operatorname{char}K\ne2$, it is, up to a nonzero scalar,
+the polar form of the Pluecker quadric associated with $\omega$.
+
+Define the homogeneous exterior annihilator and apolar quotient by
+\[
+  \operatorname{Ann}_\wedge(\omega)_j
+  =\ker C_j(\omega),
+  \qquad
+  A_\omega=\bigwedge V/\operatorname{Ann}_\wedge(\omega),
+\]
+where every component of degree greater than $d$ is included in the
+annihilator.
+
+\begin{proposition}[Exterior apolar duality]
+\label{prop:exterior-apolar-duality}
+The space $\operatorname{Ann}_\wedge(\omega)$ is a homogeneous ideal.
+Multiplication followed by evaluation against $\omega$ induces perfect
+pairings
+\[
+  (A_\omega)_j\times(A_\omega)_{d-j}\longrightarrow K
+  \quad(0\leq j\leq d).
+\]
+Consequently $A_\omega$ is a graded skew-commutative Poincare-duality
+algebra of formal dimension $d$, and
+\[
+  \dim_K(A_\omega)_j=\operatorname{rank}_K C_j(\omega).
+\]
+In particular, for a concise four-form,
+\[
+  \operatorname{Hilb}(A_\omega)
+  =\bigl(1,m,\operatorname{rank}C_2(\omega),m,1\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+If $a\in\ker C_j(\omega)$ and $c\in\bigwedge^qV$, then for every
+$b\in\bigwedge^{d-j-q}V$ one has
+$\omega((a\wedge c)\wedge b)=0$, after only the exterior sign needed to
+move $c$ past $b$.  Thus the annihilator is an ideal.  The left kernel of
+the degree-$(j,d-j)$ pairing is exactly $\ker C_j(\omega)$ and its right
+kernel is exactly $\ker C_{d-j}(\omega)$.  After quotienting, the pairing
+is nondegenerate on both sides.  Equivalently, the induced injection from
+$(A_\omega)_j$ to $(A_\omega)_{d-j}^*$ is an isomorphism, since $C_j$ and
+its signed transpose $C_{d-j}$ have the same rank.  The dimension formula
+and the four-form specialization follow.
+\end{proof}
+
+This proposition identifies the current extremal quantity as
+\[
+  \mu_4^K(m)=min\left\{
+    \dim_K(A_\omega)_2:
+    \omega\in\bigwedge^4(K^m)^*,\ 
+    \dim_K(A_\omega)_1=m
+  \right\}.
+\]
+It is important not to replace $A_\omega$ by an arbitrary
+Poincare-duality algebra.  In formal dimension three, the multiplication
+of a degree-one-generated Poincare-duality algebra is recovered from its
+alternating top form~\cite{Suciu2020PoincareDuality}.  In formal dimension
+four, an arbitrary algebra may
+contain additional degree-two multiplication data; $A_\omega$ is the
+canonical exterior apolar quotient attached to the specified four-form.
+
+\subsection{The exact seven-dimensional value}
+
+After a basis is fixed, coordinate Hodge duality identifies covariant
+three-forms with covariant four-forms.  It sends general-linear orbits to
+general-linear orbits projectively: the acting matrix is changed by the
+surjective contragredient automorphism $g\mapsto g^{-T}$ and by a determinant
+scalar.  Cohen and Helminck classify the nonzero seven-dimensional
+three-form orbits over an algebraically closed field into the nine classes
+$f_1,\ldots,f_9$ listed in their Table~1
+\cite{CohenHelminck1988TrilinearForms}.  In characteristic zero, coordinate
+duality and exact elimination give the following contraction data.
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+trivector orbit & representative & $\operatorname{rank}C_1(*f_i)$
+& $\operatorname{rank}C_2(*f_i)$ \\
+\hline
+$f_1$ & $123$ & 4 & 6 \\
+$f_2$ & $123+145$ & 6 & 10 \\
+$f_3$ & $123+456$ & 7 & 12 \\
+$f_4$ & $162+243+135$ & 7 & 12 \\
+$f_5$ & $123+456+147$ & 7 & 16 \\
+$f_6$ & $152+174+163+243$ & 7 & 15 \\
+$f_7$ & $146+157+245+367$ & 7 & 18 \\
+$f_8$ & $123+145+167$ & 6 & 15 \\
+$f_9$ & $123+456+147+257+367$ & 7 & 21
+\end{tabular}
+\end{center}
+
+Here $ijk$ abbreviates $e_i^*\wedge e_j^*\wedge e_k^*$; reordering a
+displayed term contributes its exterior sign.
+
+\begin{theorem}[Seven-dimensional minimum]
+\label{thm:mu-four-seven}
+Over $K=\mathbb Q$ and over every algebraically closed field of
+characteristic zero,
+\[
+  \mu_4^K(7)=12.
+\]
+\end{theorem}
+
+\begin{proof}
+Over an algebraically closed characteristic-zero field, the cited
+classification is exhaustive.  The table shows that precisely
+$f_3,f_4,f_5,f_6,f_7,f_9$ yield concise dual four-forms and that their
+smallest middle contraction rank is $12$.  The representative $f_3$ is
+rational; its coordinate dual is
+\[
+  *f_3=e_{4567}^*-e_{1237}^*,
+\]
+which has contraction-rank vector $(1,7,12,7,1)$ and supplies the rational
+upper bound.  Conversely, scalar extension from $\mathbb Q$ to
+$\overline{\mathbb Q}$ preserves the ranks of all contraction matrices.
+The algebraically closed lower bound therefore also applies over
+$\mathbb Q$.
+\end{proof}
+
+The JSON artifact
+\texttt{seven\_dimensional\_orbit\_ranks.json} records the nine source
+representatives and the rank table.  Its independent standard-library
+verifier checks the payload hash, exterior signs, coordinate duals, all
+five contraction ranks, and the stated minimum.  The verifier does not
+claim to re-prove the literature classification; the source theorem is
+the separate orbit-coverage input.

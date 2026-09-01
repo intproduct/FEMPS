@@ -17,6 +17,16 @@ production `femps` package and of PyTorch.
   2-vectors commute in the exterior algebra, while `C_3 = -C_1^T` in the basis
   convention implemented here. Consequently the contraction-rank vector of a
   concise four-form is `(1, m, r_2, m, 1)`.
+- **Theorem / exterior apolarity:** with
+  `A_omega = Lambda(V)/Ann_wedge(omega)` and
+  `Ann_wedge(omega)_j = ker C_j(omega)`, multiplication gives perfect
+  complementary-degree pairings and
+  `dim (A_omega)_j = rank C_j(omega)`. The self-contained statement and proof
+  are in `problem_statement.tex`.
+- **Theorem / source-backed orbit coverage plus exact certificate:**
+  Cohen--Helminck's nine seven-dimensional trivector orbits, transported by a
+  coordinate volume dual and reranked exactly, give
+  `mu_4^Q(7) = mu_4^Qbar(7) = 12`.
 - **Working reconstruction, not an inherited theorem:** until a primary source
   or old certificate is recovered, this project writes
 
@@ -63,10 +73,12 @@ From the repository root:
 python -m pytest -q tests/test_four_form_contractions.py
 ```
 
-`exact_contractions.py` uses only the Python standard library. Certificate
-artifacts added later must validate against `certificate.schema.json`, include
-their base field and characteristic, hash their mathematical payload, and be
-checked by a second verifier that does not import this module.
+`exact_contractions.py` uses only the Python standard library. Single-form
+certificate artifacts validate against `certificate.schema.json`; a
+classification table may use a purpose-specific schema enforced by its
+independent verifier. Every proof artifact records its field, hashes its
+mathematical payload, and is checked by a verifier that does not import the
+exact utility module.
 
 The first such artifact is `direct_sum_16_rank24_certificate.json`. Verify it
 independently with:
@@ -78,10 +90,22 @@ python math/four_forms/verify_direct_sum_control.py --verify math/four_forms/dir
 Its mathematical-payload SHA-256 is
 `3e48d8e9e0ed1802805d5446c573cef7daca05146abae45d90679fa5a633edcd`.
 
+The seven-dimensional source-orbit table is independently checked with:
+
+```powershell
+python math/four_forms/verify_seven_dimensional_classification.py --verify math/four_forms/seven_dimensional_orbit_ranks.json
+```
+
+Its payload SHA-256 is
+`94f1a654978dd1d37770b5a2171a07a5a839525dac1d16b6247a3b1ab2665f21`.
+The script verifies the source transcription and exact ranks; the cited
+Cohen--Helminck theorem, rather than the script, supplies orbit exhaustiveness.
+
 ## Current boundary
 
-The committed controls establish definitions and low-dimensional consistency;
-they do not establish a sharp value of `mu_4(16)`. In particular, the direct
+The controls now establish the exact seven-dimensional value in addition to
+the earlier low-dimensional consistency checks. They do not establish a sharp
+value of `mu_4(16)`. In particular, the direct
 sum of four disjoint volume forms is a concise rational 16-dimensional control
 of middle rank 24, hence only the elementary upper bound
 `mu_4^Q(16) <= 24`. It is not evidence for rank 22 or 23.

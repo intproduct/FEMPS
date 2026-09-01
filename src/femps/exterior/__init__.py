@@ -36,6 +36,10 @@ from .matrix_pair import (
     tagged_cayley_expected_amplitude,
     tagged_cayley_pair_data,
 )
+from .triangular_pair import (
+    triangular_pair_lc_agp_decomposition,
+    triangular_pair_lc_agp_term_bound,
+)
 from .contractions import (
     apply_one_body_sum,
     apply_two_body_sum,
@@ -114,6 +118,8 @@ __all__ = [
     "matrix_pair_tensor",
     "tagged_cayley_expected_amplitude",
     "tagged_cayley_pair_data",
+    "triangular_pair_lc_agp_decomposition",
+    "triangular_pair_lc_agp_term_bound",
     "apply_one_body_sum",
     "apply_two_body_sum",
     "exterior_dynamic_program_cost",

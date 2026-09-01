@@ -68,6 +68,12 @@ is gated by an explicit contraction-complexity audit.
   improving the Gate F D10 error against that same reference by `17.6%`.
   D14 remains finite-basis numerical evidence; the N=2/4/6/8 resource trend
   does not admit N=10 or an asymptotic scaling claim.
+- Phase 20 rejects the first restricted exterior candidate without a numerical
+  detour: arbitrary-boundary `2 x 2` upper-triangular matrix-pair powers
+  collapse exactly to at most `binom(M+2,2)+2` scalar AGPs. An independent
+  exact-rational M=1--6 certificate and complex128 state/gradient checks pass.
+  The next question is whether this collapse extends to all uniformly bounded
+  radical nilpotency with commutative semisimple quotient.
 
 See [the active execution plan](docs/exec-plans/active/phase20.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md), and

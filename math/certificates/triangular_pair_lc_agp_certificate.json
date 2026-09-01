@@ -1,0 +1,76 @@
+{
+  "arithmetic": "exact rational",
+  "cases": [
+    {
+      "arbitrary_boundary_term_bound": 5,
+      "maximum_weight_denominator_bits": 1,
+      "maximum_weight_numerator_bits": 1,
+      "nonzero_lc_agp_terms_for_offdiagonal": 2,
+      "pairs": 1,
+      "target_polynomial_sha256": "33e4ebe3f3d3a10e8befd554507b1dd138f299c9de3cd4a8913c3ab20ca45664",
+      "triangular_grid_terms": 3,
+      "weights_sha256": "cc9486dd50f9ff24cfd3a161224a02b96574d5e92eb7c4e973da0e8f966a83a9"
+    },
+    {
+      "arbitrary_boundary_term_bound": 8,
+      "maximum_weight_denominator_bits": 3,
+      "maximum_weight_numerator_bits": 1,
+      "nonzero_lc_agp_terms_for_offdiagonal": 5,
+      "pairs": 2,
+      "target_polynomial_sha256": "daf1f90fe42c09519fd9afbab75664ebdb904d09ed87292a9506340288e847f0",
+      "triangular_grid_terms": 6,
+      "weights_sha256": "371267773832e92a40a1c39eacf9c25d19d56668cb095f587325c8c2d5be6066"
+    },
+    {
+      "arbitrary_boundary_term_bound": 12,
+      "maximum_weight_denominator_bits": 4,
+      "maximum_weight_numerator_bits": 3,
+      "nonzero_lc_agp_terms_for_offdiagonal": 9,
+      "pairs": 3,
+      "target_polynomial_sha256": "609f1328b8ed612811f31ff56c487cb4cf15779402675d56675ae5c22068d559",
+      "triangular_grid_terms": 10,
+      "weights_sha256": "98e22c5f362fc9ae08fa8dd40054b28a2340c23fd1502f353ae28e06b7d81d1e"
+    },
+    {
+      "arbitrary_boundary_term_bound": 17,
+      "maximum_weight_denominator_bits": 8,
+      "maximum_weight_numerator_bits": 6,
+      "nonzero_lc_agp_terms_for_offdiagonal": 13,
+      "pairs": 4,
+      "target_polynomial_sha256": "7d92382a1fc86317790e6c6601e5041754e02a50704317a80769897253f27c28",
+      "triangular_grid_terms": 15,
+      "weights_sha256": "020b49d15ce51122d512b254e1bfca4832e0f10fa5bd857eaff12776948cc3ce"
+    },
+    {
+      "arbitrary_boundary_term_bound": 23,
+      "maximum_weight_denominator_bits": 10,
+      "maximum_weight_numerator_bits": 7,
+      "nonzero_lc_agp_terms_for_offdiagonal": 20,
+      "pairs": 5,
+      "target_polynomial_sha256": "faaf1a885c208f902a9055fc90b5f6a4847221529d66802626485c0eb1d74abc",
+      "triangular_grid_terms": 21,
+      "weights_sha256": "1ce2531980bea602d3daaca5bc14e09c2a4a4422ced916689893a748a9daa8d4"
+    },
+    {
+      "arbitrary_boundary_term_bound": 30,
+      "maximum_weight_denominator_bits": 16,
+      "maximum_weight_numerator_bits": 14,
+      "nonzero_lc_agp_terms_for_offdiagonal": 27,
+      "pairs": 6,
+      "target_polynomial_sha256": "c9ae2158f5cefe77b13345c37a916c7bcf8d6512c0f8a0932b61d8c11ddd8f89",
+      "triangular_grid_terms": 28,
+      "weights_sha256": "b604c0c66da803208a2b9236b08ef1977625fabc957f8514f3620abc567fc1a4"
+    }
+  ],
+  "certificate_sha256": "f671c2c10376c39cfb8c223edafba370570b9c417e8b12bcaaeb2f0f66cf078c",
+  "identity": "([[F,G],[0,H]]^M)[0,1] = sum_(t=0)^(M-1) F^t G H^(M-1-t) = rational sum of (F+bG+cH)^M",
+  "orders": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "schema": "femps.triangular-pair-lc-agp-collapse.v1"
+}

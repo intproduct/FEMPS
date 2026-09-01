@@ -17,3 +17,9 @@ generic matrix-wedge FEMPS norms.
 integer verifier. It enumerates perfect matchings and factor permutations
 directly and checks `certificates/tagged_cayley_certificate.json` for orders
 one through four. It imports neither PyTorch nor `femps`.
+
+`certificates/verify_triangular_pair_collapse.py` independently verifies the
+Phase 20 `T_2` upper-triangular matrix-pair collapse using exact rational
+polynomial arithmetic. It checks both the symbolic matrix power and a rational
+LC-AGP power interpolation for pair orders one through six, importing neither
+PyTorch nor `femps`.

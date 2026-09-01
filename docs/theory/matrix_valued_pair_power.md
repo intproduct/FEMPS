@@ -67,7 +67,10 @@ in the increasing exterior basis and independently compares it with
   most chi terms, with weights `(l^T S)_a (S^-1 r)_a`.
 - Simultaneous triangularizability alone is weaker: nilpotent off-diagonal
   pieces can produce derivative-like mixed contributions, so the diagonal
-  LC-AGP statement must not be asserted without diagonalizability.
+  LC-AGP statement must not be asserted without diagonalizability. Phase 20
+  sharpens the smallest case: for `2 x 2` upper-triangular coefficients the
+  mixed contribution still has an exact `O(M^2)` LC-AGP expansion, proved in
+  `bounded_radical_pair_collapse.md`.
 - The similarity action `B_ij -> G^-1 B_ij G`, `l^T -> l^T G`, and
   `r -> G^-1 r` leaves the state invariant.
 

@@ -30,3 +30,21 @@ The next contraction search should test Gaussian/Pfaffian closure or a bounded
 non-Gaussian extension explicitly. Re-expressing the current generic cores in
 Grassmann variables without such closure would only reproduce the exterior
 Fock-space dimension already measured by the dynamic program.
+
+## Noncommutative determinant boundary
+
+Chien--Harsha--Sinclair--Srinivasan prove permanent hardness for the
+row-ordered determinant already over `2 x 2` matrix entries. Their finite-
+algebra easy side assumes a commutative quotient by the radical and has runtime
+`N^O(d)`, where `d` is the radical nilpotency index. The main classification is
+over finite fields; their appendix records the bounded-nilpotency extension for
+rational input algebras. Consequently, an upper-triangular bond size that grows
+with particle number is not a jointly polynomial consequence of that theorem.
+
+Phase 13 supplies the previously missing project-specific link: growing shift
+tags embed the hard row-ordered determinant into one symmetrized matrix-pair
+amplitude and then into a generic FEMPS norm. Phase 20 checks the opposite
+boundary. For `T2`, whose radical squares to zero, the entire arbitrary-boundary
+matrix-pair state collapses over characteristic zero to `O(M^2)` scalar AGPs.
+Thus the smallest noncommuting determinant-easy algebra is also tractable here,
+but only through an explicit polynomial-size LC-AGP organization.

@@ -1,5 +1,19 @@
 # Research changelog
 
+## 2026-09-01 - Phase 20 interim bounded-radical classification
+
+- Re-audited the Phase 13 tagged Cayley obstruction against the original
+  noncommutative-determinant theorem and corrected a stale novelty-matrix entry.
+- Proved that arbitrary-boundary `2 x 2` upper-triangular matrix-pair powers
+  collapse to at most `binom(M+2,2)+2` scalar AGPs, even for genuinely
+  noncommuting coefficients.
+- Added an exact rational interpolation construction, an implementation-
+  independent M=1--6 certificate, complex128 exterior equivalence, and
+  restricted reverse-mode gradient tests.
+- Rejected this square-zero-radical candidate as a new solver family and
+  advanced the classification target to bounded radical nilpotency with
+  commutative semisimple quotient. Gate H remains open.
+
 ## 2026-09-01 - Phase 19 resource-safe N=8 Gate G
 
 - Reordered latticeTN's two-site effective-Hamiltonian action into four bounded

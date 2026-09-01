@@ -81,3 +81,12 @@ called FEMPS. Phase 20 therefore returns to the unresolved novelty boundary: a
 restricted exterior correlation structure that is both genuinely beyond
 finite LC-AGP/Gaussian families and exactly polynomially contractible, or a
 documented negative classification.
+
+The first Phase 20 candidate supplies such a negative classification. Matrix-
+pair coefficients in the noncommutative `2 x 2` upper-triangular algebra have
+a square-zero radical, but every arbitrary-boundary N=2M state admits an exact
+LC-AGP expansion of length at most `binom(M+2,2)+2`. Its tractability therefore
+comes from a polynomial-size organization already covered by LC-AGP prior art,
+not a new exterior contraction class. The result is retained as a theorem and
+as the base case for a possible bounded-radical collapse, not as an affirmative
+method claim.

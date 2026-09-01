@@ -150,3 +150,11 @@ independent verifier are documented in
 `docs/experiments/phase28_e4_closure_report.md`. The next numerical gate is a
 nonquadratic soft-Coulomb transferability test; it must not weaken the current
 truth, variance, symmetry, memory, or comparator requirements.
+
+That transferability test now passes for three blind `D=6,K=4` runs, three
+truth-free `D=6 -> 8,K=4` continuations, and an independent `K=1,2,4` axis.
+The direct dense-quadrature CI comparator, factorization error, variance,
+symmetry, time, memory, and zero-path-enumeration requirements are independently
+verified in `docs/experiments/phase28_soft_coulomb_transferability_report.md`.
+The next bounded point is a single `D=8 -> 10 -> 12` lineage with dense-CI
+audits; larger `N` or truth-free dimensions remain deferred.

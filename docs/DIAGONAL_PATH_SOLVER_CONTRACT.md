@@ -1,6 +1,6 @@
 # Diagonal-path FEMPS solver and reproduction contract
 
-Contract version: 3 (Phase 36 compatible adaptive extension, 2026-09-01)
+Contract version: 4 (Phase 37 clean Slater-source command, 2026-09-01)
 
 ## Scientific scope
 
@@ -48,6 +48,37 @@ Phase 36 adds a public bounded adaptive orchestration layer:
 - `ADAPTIVE_DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION` and
   `ADAPTIVE_DIAGONAL_PATH_RESULT_SCHEMA_VERSION` version those records.
 
+Phase 37 adds an end-to-end clean-source layer:
+
+- `SlaterSourceOptimizerConfig` and `SlaterSourceSolverConfig` hold explicit
+  model, source, optimizer, seed, validation-cap, and finite-K inputs;
+- `canonical_lowest_slater` constructs the K1 determinant occupying the lowest
+  N functional-basis orbitals;
+- `run_slater_source_adaptive_solver` optimizes that K1 source and then invokes
+  the bounded adaptive API without loading a historical FEMPS state;
+- `load_slater_source_command_config` parses a versioned machine-readable
+  command record;
+- `load_slater_source_checkpoint`, `validate_slater_source_checkpoint`, and
+  `validate_slater_source_result` enforce command-level resume identities and
+  no-enumeration/symmetry records; and
+- `SLATER_SOURCE_CHECKPOINT_SCHEMA_VERSION` and
+  `SLATER_SOURCE_RESULT_SCHEMA_VERSION` version the command records.
+
+The user-facing invocation requires an explicit configuration, finite maximum
+K, checkpoint path, and output path:
+
+```powershell
+python scripts/run_femps_slater_source_solver.py `
+  --config docs/experiments/configs/phase37_n4_d6_k4.json `
+  --max-k 4 `
+  --checkpoint checkpoints/phase37_slater_source_solver/resumed.pt `
+  --output docs/experiments/results/phase37_slater_source_solver.json
+```
+
+`--resume` reuses only checkpoints created by this command under an exactly
+matching configuration, canonical initial-source identity, and operator
+identity. It never accepts an expert-provided or historical correlated source.
+
 The adaptive layer does not infer a stopping K. `max_terms` must be strictly
 larger than the source K, and the caller must supply candidate and optimizer
 seeds for every intermediate K. Automatic stopping remains `not_admitted`.
@@ -92,6 +123,12 @@ Adaptive outer checkpoints are loaded only through
 orbitals and all completed stage records; per-K optimizer checkpoints retain
 the existing single-K schema.
 
+Clean-source command checkpoints are loaded only through
+`load_slater_source_checkpoint`. They atomically record whether K1 source
+optimization is complete, the accepted source orbitals, any bounded-adaptive
+result, the current K, and the full configuration/source/operator identities.
+Separate child checkpoints retain source-optimizer and adaptive-stage state.
+
 Checkpoints are ignored runtime artifacts. A committed result must include the
 commands and lineage needed to regenerate them. Bitwise equality across
 different Torch/CUDA stacks is not promised; registered numerical tolerances
@@ -117,6 +154,14 @@ Every solver call reports at least:
 `validate_diagonal_path_result` enforces the stable required fields, evidence
 label, method identity, materialization rule, memory record, and zero-path
 condition before the public solver returns.
+
+The Phase 37 clean-source result schema is independently versioned at 1. It
+contains the canonical construction record, initial and optimized source
+identities, operator factorization metadata, the full K1 solver result, every
+adaptive stage, per-stage norm/energy/variance/antisymmetry/resource records,
+command-level elapsed time and sampled RSS, explicit external maximum K, and
+the statement `automatic_stopping_rule = not_admitted`. The validator requires
+consecutive K1--Kmax records and zero production path or `D^N` enumeration.
 
 ## Complexity and forbidden work
 

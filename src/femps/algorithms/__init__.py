@@ -52,6 +52,22 @@ from .adaptive_diagonal_path_training import (
     AdaptiveDiagonalPathStageConfig,
     run_bounded_adaptive_diagonal_path,
 )
+from .slater_source_contract import (
+    SLATER_SOURCE_CHECKPOINT_SCHEMA_VERSION,
+    SLATER_SOURCE_METHOD,
+    SLATER_SOURCE_RESULT_SCHEMA_VERSION,
+    load_slater_source_checkpoint,
+    validate_slater_source_checkpoint,
+    validate_slater_source_result,
+)
+from .slater_source_training import (
+    SlaterSourceOptimizerConfig,
+    SlaterSourceSolverConfig,
+    canonical_lowest_slater,
+    load_slater_source_command_config,
+    run_slater_source_adaptive_solver,
+    slater_source_config_from_record,
+)
 
 __all__ = [
     "GeneralizedEigenResult",
@@ -90,4 +106,16 @@ __all__ = [
     "AdaptiveDiagonalPathConfig",
     "AdaptiveDiagonalPathStageConfig",
     "run_bounded_adaptive_diagonal_path",
+    "SLATER_SOURCE_CHECKPOINT_SCHEMA_VERSION",
+    "SLATER_SOURCE_METHOD",
+    "SLATER_SOURCE_RESULT_SCHEMA_VERSION",
+    "SlaterSourceOptimizerConfig",
+    "SlaterSourceSolverConfig",
+    "canonical_lowest_slater",
+    "load_slater_source_checkpoint",
+    "load_slater_source_command_config",
+    "run_slater_source_adaptive_solver",
+    "slater_source_config_from_record",
+    "validate_slater_source_checkpoint",
+    "validate_slater_source_result",
 ]

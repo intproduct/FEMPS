@@ -189,7 +189,8 @@ considered only after an independently reproduced non-NOCI explicit-
 correlation `D`-convergence advantage or a matched Li--Waintal/same-basis-DMRG
 comparison with a genuine measured tradeoff.
 
-See [the active execution plan](docs/exec-plans/active/phase39_n4_d8_addendum.md),
+See [the active execution plan](docs/exec-plans/active/phase41_manuscript_a_theory_closure.md),
+[the restored D8 internal report](docs/experiments/phase39_n4_d8_internal_report.md),
 [the completed single-manuscript audit](docs/exec-plans/completed/phase39.md),
 [the explicit-correlation audit](docs/experiments/phase39_distinctiveness_audit.md),
 [the single-manuscript scope](docs/paper/SINGLE_MANUSCRIPT_SCOPE.md),

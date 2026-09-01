@@ -12,6 +12,10 @@
 - Parked the Phase 40 explicit-correlation experiment. After the single D8
   artifact is independently verified, no additional small numerical point is
   admitted and the main line returns to manuscript-A theory closure.
+- Ran the sole registered D8 schedule. Clean/resume energies and candidates
+  agree exactly and all structural/resource gates pass, but the final CI error
+  `3.6469e-5` and variance `3.2252e-4` fail their `1e-6`/`1e-5` gates. The
+  independently reconstructed failure is preserved without a rescue run.
 
 ## 2026-09-02 - Phase 39 closure and no-paper-before-result rule
 

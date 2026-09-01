@@ -173,6 +173,13 @@ NOCI-equivalent evidence; no further small points are admitted. No second
 manuscript exists: algorithm experiments must first produce and independently
 reproduce a genuine differentiator.
 
+The restored clean-source `N=4,D=8,K=4` point is closed as failed internal
+**numerical evidence**. Clean/resume runs agree exactly and all symmetry,
+resource, no-enumeration, and optimizer gates pass, but the same-basis CI error
+`3.6469e-5` and variance `3.2252e-4` exceed the frozen `1e-6` and `1e-5`
+limits. No rescue or further small NOCI-equivalent point is admitted;
+manuscript-A theory closure is active.
+
 ADR 0004 historically made ordered-sector/interparticle-distance functional TN
 the primary numerical route; ADR 0017 supersedes that priority while retaining
 it as a first-quantized control. Phase 15 and ADR 0005 replace its dense comparator by

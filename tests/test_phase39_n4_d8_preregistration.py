@@ -40,13 +40,13 @@ def test_restored_phase39_n4_d8_configuration_is_frozen() -> None:
 
 def test_restored_phase39_documents_internal_only_boundary() -> None:
     active = (
-        ROOT / "docs" / "exec-plans" / "active" / "phase39_n4_d8_addendum.md"
+        ROOT / "docs" / "exec-plans" / "completed" / "phase39_n4_d8_addendum.md"
     ).read_text(encoding="utf-8")
     adr = (
         ROOT / "docs" / "decisions" / "0031-preregister-restored-phase39-n4-d8.md"
     ).read_text(encoding="utf-8")
-    assert "internal\n**numerical evidence**" in active
-    assert "no more small NOCI-equivalent" in active
+    assert "internal **numerical evidence**" in active
+    assert "No additional small numerical point" in active
     assert "outcome is retained" in adr
     assert "method-paper claim" in adr
 

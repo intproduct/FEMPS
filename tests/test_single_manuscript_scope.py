@@ -38,7 +38,7 @@ def test_publication_scope_gates_any_future_method_paper() -> None:
         / "docs"
         / "exec-plans"
         / "active"
-        / "phase39_n4_d8_addendum.md"
+        / "phase41_manuscript_a_theory_closure.md"
     ).read_text(encoding="utf-8")
     completed = (
         ROOT / "docs" / "exec-plans" / "completed" / "phase39.md"
@@ -58,7 +58,7 @@ def test_publication_scope_gates_any_future_method_paper() -> None:
     assert "Maintain one combined structural/no-go manuscript" in adr
     assert "algorithm experiment, not Paper B" in phase
     assert "No title, abstract" in phase
-    assert "does not establish a new ansatz" in active
-    assert "no more small NOCI-equivalent" in active
+    assert "Keep one manuscript; do not create Paper B" in active
+    assert "no further small" in active
     assert "Phase 39 closed the two-paper drift" in completed
     assert "does not authorize a second manuscript" in preregistration

@@ -76,11 +76,18 @@ is gated by an explicit contraction-complexity audit.
   A genuinely beyond-LC-AGP exact family must therefore introduce growing
   semisimple blocks or growing radical memory together with new contractible
   structure.
+- Phase 21's first growing-memory candidate also collapses. For
+  `C[z]/(z^d)`, arbitrary boundaries need at most `M(d-1)+1` scalar AGPs, with
+  all boundary basis functionals certified exactly for `1<=M,d<=4`. A single
+  commuting path coordinate is therefore insufficient even when its memory
+  depth grows; the next exact candidate must be genuinely multibranch and
+  noncommutative.
 
 See [the active execution plan](docs/exec-plans/active/phase21.md),
-[the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md), and
-[the Gate G report](docs/experiments/phase19_n8_refinement_gate_report.md), and
-[the Phase 20 negative-classification report](docs/experiments/phase20_bounded_wedderburn_report.md).
+[the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md),
+[the Gate G report](docs/experiments/phase19_n8_refinement_gate_report.md),
+[the Phase 20 negative-classification report](docs/experiments/phase20_bounded_wedderburn_report.md), and
+[the Phase 21 growing-memory report](docs/experiments/phase21_truncated_polynomial_collapse_report.md).
 
 ## Development setup
 

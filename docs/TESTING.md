@@ -30,6 +30,17 @@ neither PyTorch nor `femps`. The numerical tests independently compare exterior
 states, genuinely noncommuting samples, and reverse-mode gradients restricted
 to the admitted skew/upper-triangular parameter manifold.
 
+The Phase 21 one-generator growing-radical certificate is checked by:
+
+```powershell
+python math/certificates/verify_truncated_polynomial_pair_collapse.py --verify math/certificates/truncated_polynomial_pair_lc_agp_certificate.json
+python -m pytest -q tests/test_exact_certificates.py
+```
+
+The verifier covers every boundary basis functional for all 16 cases with
+`1<=M,d<=4`, so arbitrary boundaries follow by exact linearity rather than a
+selected numerical sample.
+
 The current CPU/Blackwell forward-and-gradient parity smoke is:
 
 ```powershell

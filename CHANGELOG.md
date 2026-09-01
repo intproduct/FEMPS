@@ -1,5 +1,19 @@
 # Research changelog
 
+## 2026-09-01 - Phase 21 one-generator growing-radical checkpoint
+
+- Proved that arbitrary boundaries of `C[z]/(z^d)` matrix-pair powers collapse
+  exactly to at most `M(d-1)+1` scalar AGPs, jointly polynomial even for growing
+  radical depth.
+- Added an implementation-independent exact-rational certificate covering all
+  boundary basis functionals for every `1<=M,d<=4`.
+- Separated exact Waring rank from border/cactus rank and audited the result
+  against monomial Waring, Veronese osculation, curvilinear schemes, moment
+  tensors, and border-rank-motivated AGP-CI.
+- Rejected the one-generator commutative path algebra without numerical solver
+  development; the next candidate must use controlled multibranch
+  noncommutative growing memory.
+
 ## 2026-09-01 - Phase 20 bounded coefficient-algebra classification
 
 - Re-audited the Phase 13 tagged Cayley obstruction against the original

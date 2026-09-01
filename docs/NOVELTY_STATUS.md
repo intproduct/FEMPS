@@ -93,3 +93,12 @@ bounded radical memory creates a new exterior contraction class; Gate H closes
 negatively for this candidate class. The necessary escape boundary is a
 growing simple block or growing radical depth with additional structure, or an
 explicitly approximate contraction. This is not an affirmative method claim.
+
+Phase 21 closes the weakest growing-memory escape negatively. For the local
+algebra `C[z]/(z^d)`, arbitrary-boundary pair powers admit an exact LC-AGP
+expansion with at most `M(d-1)+1` terms even when `d` grows. This is a
+coefficient-extraction/Veronese-jet identity squarely inside established Waring,
+osculating, and nonorthogonal AGP territory. Exact and border rank are kept
+separate: the first jet has exact rank M but border rank two. The result narrows
+the next candidate to genuinely multibranch noncommutative growing memory; it
+does not create a new method claim.

@@ -24,15 +24,17 @@ The radical `(z)` has nilpotency index `d`, so this family lies outside Phase
 
 ## Checkpoints
 
-- [ ] Derive an exact coefficient-extraction/LC-AGP formula and a term bound
+- [x] Derive an exact coefficient-extraction/LC-AGP formula and a term bound
   polynomial jointly in `M,d,D`, or exhibit an obstruction.
-- [ ] Prove arbitrary-boundary coverage and distinguish exact Waring rank from
+- [x] Prove arbitrary-boundary coverage and distinguish exact Waring rank from
   border-rank/derivative limits.
-- [ ] Build an implementation-independent exact-rational certificate for
+- [x] Build an implementation-independent exact-rational certificate for
   bounded `(M,d)` cases; do not rely on floating-point root-of-unity cancellation.
-- [ ] Cross-check small exterior states and admitted-parameter gradients only
-  if the symbolic identity needs a numerical implementation oracle.
-- [ ] Audit the result against AGP-CI, binary-form Waring decomposition, jet/
+- [x] Cross-check small exterior states and admitted-parameter gradients only
+  if the symbolic identity needs a numerical implementation oracle. Not
+  required: the verifier compares the full exterior-even polynomial identity
+  for every boundary basis element without a floating-point implementation.
+- [x] Audit the result against AGP-CI, binary-form Waring decomposition, jet/
   confluent interpolation, and commutative-algebra moment-state literature.
 - [ ] If I1 collapses, formulate the smallest two-generator or quiver/path
   candidate whose memory depth grows but whose graph width remains controlled.

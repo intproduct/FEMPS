@@ -31,3 +31,9 @@ reconstructs the resulting pair powers by exact rational simplex interpolation.
 The committed certificate covers M=1 through 4 and imports neither PyTorch nor
 `femps`; arbitrary-boundary coverage follows separately from homogeneous-power
 spanning.
+
+`certificates/verify_truncated_polynomial_pair_collapse.py` checks the Phase 21
+growing-radical candidate `Q[z]/(z^d)`. For every `1<=M,d<=4`, it constructs
+exact rational coefficient-extraction weights, expands both sides in all pair-
+form coordinates, and verifies every boundary basis functional. This proves
+arbitrary-boundary coverage by linearity for the certified cases.

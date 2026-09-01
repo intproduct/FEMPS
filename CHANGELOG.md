@@ -1,5 +1,29 @@
 # Research changelog
 
+## 2026-09-01 - Phase 24 controlled approximate exterior Gate K
+
+- Separated exact permanent hardness from approximation complexity; the 0--1
+  Phase 22 reduction is compatible with the established FPRAS for entrywise-
+  nonnegative matrices.
+- Proved a direct real-PSD transfer: a relative sparse-path squared-norm PRAS
+  would yield a PRAS for real-PSD permanents and therefore imply `RP=NP`.
+- Classified Gurvits-type additive estimates as conditionally useful only when
+  a positive norm lower bound keeps the Rayleigh denominator certified.
+- Derived a simultaneous norm/numerator energy-error bound and endpoint
+  confidence interval, explicitly separating estimator unbiasedness from ratio
+  bias and tail control.
+- Added exact positive, cancelling, precision-ill-conditioned, signed-PSD, and
+  energy-bound controls with certificate hash
+  `c15e7ff268a962e2790004c7f63d47bedb53be0c887ab0241e671b7fe4ff3b16`.
+- Audited APG selection, PSD/nonnegative permanent approximation, stochastic
+  TN contraction, and sign-problem literature; no prior-art component is
+  claimed as new.
+- Compiled the expanded six-page theorem draft without layout/reference
+  warnings and passed the complete `204`-test suite with one unchanged
+  latticeTN report-path warning.
+- Closed Gate K and advanced to a canonical statistics-carrier/correlation-
+  multiplicity Gate L; no post-failure GPU/AD solver was admitted.
+
 ## 2026-09-01 - Phase 23 exact exterior no-go synthesis
 
 - Separated ordinary particle-TT exchange rank from compact exterior

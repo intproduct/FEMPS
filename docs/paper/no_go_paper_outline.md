@@ -57,7 +57,11 @@ short physics/method paper and a longer mathematical appendix.
 ## 7. What remains algorithmically viable
 
 - Polynomial Pfaffian/finite-LC-AGP controls and their direct prior art.
-- Controlled approximate exterior contraction as an open route.
+- Split approximate exterior contraction into the entrywise-nonnegative FPRAS
+  cone, additive estimators with a certified norm lower bound, and the generic
+  relative-norm obstruction inherited from real-PSD permanents.
+- Give the simultaneous norm/numerator confidence interval required for a
+  certified Rayleigh quotient.
 - Statistics-carrier/correlation-multiplicity factorization as an open theorem.
 - Ordered COM/gap functional MPS as the independently validated control,
   including its Hong/Li--Waintal parentage and finite-scope evidence.
@@ -73,8 +77,8 @@ short physics/method paper and a longer mathematical appendix.
 
 - Two independent costs: exchange representation versus exterior contraction.
 - Why fermionic signs/Grassmann bookkeeping alone do not create closure.
-- Scope limitations: exact arithmetic, even hard subsequence, selected
-  coefficient-memory corridor, and no approximation-hardness theorem.
+- Scope limitations: even hard subsequence, selected coefficient-memory
+  corridor, and no obstruction for every additive or promised approximation.
 - Concrete criteria for any future affirmative FEMPS family.
 
 ## Appendices
@@ -85,3 +89,4 @@ short physics/method paper and a longer mathematical appendix.
 - D: Wedderburn/graded interpolation proofs.
 - E: sparse-path APG permanent proof.
 - F: certificate schemas and independent verifier descriptions.
+- G: real-PSD approximation transfer and Rayleigh-quotient error propagation.

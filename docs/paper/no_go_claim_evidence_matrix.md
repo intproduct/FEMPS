@@ -15,6 +15,7 @@ shortcuts that would overstate scope or novelty.
 | Bounded coefficient algebra | theorem draft; `T_2`/`Mat_2` exact certificates | Wedderburn--Malcev, polarization, existing LC-AGP | fixed largest simple block and radical depth imply a polynomial exact LC-AGP expansion | every bounded algebra gives a novel efficient FEMPS |
 | One-counter/fixed-state growing memory | theorem draft plus all-boundary certificates | interpolation, Waring/Veronese, weighted automata | these admitted graded memories remain polynomial LC-AGP | every growing radical collapses |
 | Sparse growing-width path | elementary proof plus exact M<=6 certificate | APG/APIG, Fischer decomposition, Valiant permanent | the generic fixed-bandwidth class contains a bandwidth-one APG instance with #P-hard exact squared norm | APG is new; APG has proved exponential minimal AGP rank; every sparse instance is hard |
+| Approximate sparse-path norm | transfer proof plus exact rational conditioning controls | Jerrum--Sinclair--Vigoda; Meiburg; Gurvits/Aaronson--Hance | entrywise-nonnegative coefficients admit an FPRAS, but a generic relative squared-norm PRAS would imply a PRAS for real-PSD permanents and hence `RP=NP`; additive estimates need a certified norm lower bound to control energy | exact permanent hardness by itself rules out approximation; every signed instance has a sign problem; unbiased estimates certify the Rayleigh quotient |
 | Finite LC-AGP implementation | exact contraction/AD tests and continuum benchmarks | Uemura et al.; Dutta et al.; Kawasaki et al. | validated baseline/control integrated with the 2201 functional layer | a new AGP-CI ansatz |
 | Ordered continuous route | controlled Gates D--G | Hong et al.; Li--Waintal | a reproducible integration/control route with separated continuum errors | first ordered-coordinate or first first-quantized MPS method |
 
@@ -26,8 +27,11 @@ shortcuts that would overstate scope or novelty.
 - Phase 13 is a Turing reduction using boundary and interference queries.
 - Phase 22 is a one-query exact-value reduction followed by polynomial-time
   exact arithmetic and a nonnegative integer square root.
-- No current theorem addresses additive- or relative-error approximation of the
-  hard instances.
+- Phase 24 addresses relative squared-norm approximation on a real-PSD
+  specialization. It does not rule out additive approximation, the entrywise-
+  nonnegative FPRAS cone, or promised structured families.
+- A norm/numerator confidence event certifies energy only when its denominator
+  interval stays strictly positive; unbiasedness alone is insufficient.
 
 ## Novelty language
 

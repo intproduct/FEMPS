@@ -1,17 +1,19 @@
-# FEMPS representation and exact-contraction no-go hierarchy
+# FEMPS representation and contraction no-go hierarchy
 
 ## Evidence status
 
-This document is the Phase 23 synthesis draft. It separates proved elementary
+This document began as the Phase 23 synthesis draft. It separates proved elementary
 linear/exterior identities, theorem drafts awaiting external review, bounded
 exact certificates, numerical tests, and complexity consequences based on
-published #P-hardness results. It is not a universal impossibility theorem for
+published permanent results. Phase 24 additionally classifies one relative-
+approximation corridor. It is not a universal impossibility theorem for
 fermionic tensor networks or for every structured/approximate FEMPS.
 
 Throughout, “squared norm” means the unnormalized inner product
 `<Psi|Psi>`. Some older project files use “norm contraction” for this same
-quantity. Complexity statements concern exact rational/integer arithmetic and
-do not by themselves imply hardness of a specified approximation tolerance.
+quantity. Exact complexity statements concern rational/integer arithmetic.
+The separate approximation statement below uses a real-PSD permanent theorem
+and must not be inferred from exact #P-hardness alone.
 
 ## Two logically independent obstructions
 
@@ -51,9 +53,10 @@ flowchart TD
     L1 --> S
     L2 --> S
     H2 --> S
-    S --> R1[controlled approximation]
+    S --> R1[promised approximation]
     S --> R2[proved statistics/correlation factorization]
     S --> R3[ordered continuous control route]
+    H2 --> H3[real PSD relative-approximation obstruction]
 ```
 
 ## Theorem hierarchy
@@ -164,6 +167,31 @@ one-form matrix-wedge ansatz, C4 by itself is also a simpler proof of the C1
 generic consequence. C1 retains an independent mechanism and certificate, not
 a logically necessary dependency of the main no-go.
 
+### C5. Generic relative approximation remains obstructed
+
+The C4 formula holds for arbitrary real coefficient arrays, so choose `A` to
+be real positive semidefinite. If a randomized polynomial scheme returned
+`n_tilde` with relative error `epsilon` for every sparse-path squared norm,
+then
+
+```text
+M! sqrt(n_tilde)
+```
+
+would approximate the nonnegative `perm(A)` between factors
+`sqrt(1-epsilon)` and `sqrt(1+epsilon)`. This would be a PRAS for real-PSD
+permanents. Meiburg proves that no such PRAS exists unless `RP=NP`, including
+for purely real PSD inputs [@Meiburg2023PSDPermanent]. Thus a generic relative
+squared-norm approximation scheme would imply `RP=NP`.
+
+This does not contradict the Jerrum--Sinclair--Vigoda FPRAS for **entrywise
+nonnegative** matrices [@JerrumSinclairVigoda2004PermanentFPRAS]. PSD and
+entrywise nonnegative are different promises. Nor does it reject Gurvits-type
+polynomial additive estimators for arbitrary complex matrices
+[@AaronsonHance2014Gurvits]. Additive error controls a Rayleigh quotient only
+under a denominator certificate `n_tilde>Delta_n`; cancelling inputs can make
+the true exterior norm exponentially small in input precision.
+
 ## Claim-to-evidence map
 
 | ID | Field and scope | Proof artifact | Independent exact evidence | External dependency |
@@ -173,6 +201,7 @@ a logically necessary dependency of the main no-go.
 | C2 | complex characteristic zero, fixed `(p,d)` | `bounded_radical_pair_collapse.md` | `T_2` M=1--6 hash `f671c2c10376c39cfb8c223edafba370570b9c417e8b12bcaaeb2f0f66cf078c`; `Mat_2` M=1--4 hash `74d2de4a2cedcbaf548cd4c9895d0ea4af48e6bb485b72966562e46277a6d20d` | Wedderburn--Malcev and polarization |
 | C3 | complex characteristic zero, fixed `(w,g)` graded representation | growing/fixed-state collapse notes | all `C[z]/z^d` boundaries hash `07a222de3f44ced1b3fe155638299fdb8443a54f3d9f36479b994f32f9f0fd55`; alternating words hash `082238ff6e6783b7533b3b2a59f3664beb1820794bcae573add98baf43370030` | Vandermonde interpolation; Waring/automata prior art |
 | C4 | nonnegative integer/rational, even `N` | `sparse_path_apg_obstruction.md` | three routes, M=1--6, hash `dd72c1aaeb0bc2a6b9206992cde9099f2f568b7ff6c8ed8eb7e38d958f78e790` | Valiant 0--1 permanent #P-completeness; APG prior art |
+| C5 | real PSD rational input; randomized relative squared norm | `approximate_exterior_contraction_gate.md` | exact positive/cancelling/conditioned/PSD and energy controls, hash `c15e7ff268a962e2790004c7f63d47bedb53be0c887ab0241e671b7fe4ff3b16` | Meiburg PSD-permanent inapproximability; JSV and Gurvits positive boundaries |
 
 ## Coverage boundary
 
@@ -183,7 +212,8 @@ The hierarchy establishes neither of the following universal statements:
 
 It classifies the tested design corridor. Specifically, it does not cover:
 
-- approximation algorithms with a declared norm/observable error tolerance;
+- additive approximation with a certified polynomial norm lower bound, or the
+  entrywise-nonnegative FPRAS cone;
 - physically constrained growing matrices that provably exclude the permanent
   specializations;
 - a growing number of counters with additional low-treewidth or integrable
@@ -208,9 +238,12 @@ The manuscript-safe conclusion is:
 > Along the tested matrix-pair corridor, exactly tractable bounded/fixed-state
 > memories collapse to established LC-AGP structure, whereas unrestricted and
 > even sparse growing-width families already contain permanent-hard exact
-> squared-norm instances.
+> squared-norm instances. On the same sparse path, a generic relative squared-
+> norm scheme would also approximate real-PSD permanents; additive and promised
+> positive approximations remain separate possibilities.
 
-The next affirmative exterior method must therefore be explicitly approximate
-with controlled error, or prove a stronger carrier/multiplicity factorization.
+The next affirmative exterior method must therefore use an explicit promise
+that excludes the PSD embedding and carry a norm/numerator error certificate,
+or prove a stronger carrier/multiplicity factorization.
 The ordered continuous MPS branch remains the validated first-quantized control
 route, with its Hong/Li--Waintal parentage stated directly.

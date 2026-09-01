@@ -6,7 +6,7 @@
 \newcommand{\Mat}{\operatorname{Mat}}
 \newcommand{\CayleyDet}{\operatorname{CDet}}
 
-\title{Conditional Exact Squared-Norm Obstructions for Generic Matrix-Wedge FEMPS}
+\title{Exact and Relative-Approximation Squared-Norm Obstructions for Generic Matrix-Wedge FEMPS}
 \author{Working theorem draft}
 \date{2026-09-01}
 
@@ -21,8 +21,9 @@ is Theorem~3.5 of Chien--Harsha--Sinclair--Srinivasan
 determinant over $\Mat_2(\mathbb F)$ is \#P-hard when $\mathbb F$ has
 characteristic zero. The later bandwidth-one theorem uses Valiant's
 \#P-completeness of the zero--one permanent and has an independent exact
-integer/rational certificate through pair order six. External proof review is
-still required.
+integer/rational certificate through pair order six. A separate exact-rational
+certificate checks the approximation conditioning and Rayleigh-quotient bounds
+below. External proof review is still required.
 
 \section{Matrix-valued pair powers}
 
@@ -198,13 +199,88 @@ output lies in the one-dimensional top exterior sector. The row-order theorem
 above remains an independent demonstration of a different hard resource,
 namely growing noncommutative order memory.
 
+\section{Relative approximation on the same sparse path}
+
+Exact hardness does not by itself imply approximation hardness. In fact,
+Jerrum--Sinclair--Vigoda give an FPRAS for the permanent of an entrywise
+nonnegative matrix \cite{JerrumSinclairVigoda2004}. The sparse-path identity,
+however, also admits a different promise class.
+
+\begin{theorem}[Real-PSD relative-norm transfer]
+Unless $\mathrm{RP}=\mathrm{NP}$, there is no randomized polynomial-time
+relative approximation scheme for the squared norm of every rational real
+upper-bidiagonal matrix-pair input, polynomial jointly in the state dimensions,
+coefficient bit length, inverse relative tolerance, and logarithmic inverse
+failure probability.
+\end{theorem}
+
+\begin{proof}
+Let $A\in\mathbb Q^{n\times n}$ be real positive semidefinite and apply the
+sparse-path construction. Its squared norm is
+\[
+ s_A=\frac{\operatorname{perm}(A)^2}{(n!)^2}.
+\]
+The permanent of a real PSD matrix is nonnegative. If, with the prescribed
+success probability,
+\[
+ (1-\epsilon)s_A\le \widetilde s_A\le(1+\epsilon)s_A,
+\]
+then $n!\sqrt{\widetilde s_A}$ estimates $\operatorname{perm}(A)$ between
+factors $\sqrt{1-\epsilon}$ and $\sqrt{1+\epsilon}$. Choosing $\epsilon$
+polynomially from a requested permanent tolerance gives a PRAS. Meiburg proves
+that no PRAS exists for real PSD permanents unless
+$\mathrm{RP}=\mathrm{NP}$ \cite{Meiburg2023}. The construction and the bit
+length of $n!$ are polynomial, giving the claim.
+\end{proof}
+
+This theorem does not exclude additive estimates. Gurvits's estimator applies
+to arbitrary complex matrices with additive scale
+$\epsilon\lVert A\rVert^n$ \cite{AaronsonHance2014}. There is no uniform
+conversion to relative exterior norm: for
+\[
+ A_\tau=\begin{pmatrix}1&1\\1&-1+\tau\end{pmatrix},
+ \qquad \operatorname{perm}(A_\tau)=\tau,
+\]
+the coefficient scale remains of order one while the normalized exterior
+squared norm is $\tau^2/4$. With $\tau=2^{-L}$, the required additive
+tolerance is exponential in the input precision $L$.
+
+\begin{lemma}[Rayleigh-quotient error certificate]
+Let $n>0$, $h\in\mathbb R$, $E=h/n$, and suppose estimates satisfy
+\[
+ |n-\widetilde n|\le\Delta_n,\qquad
+ |h-\widetilde h|\le\Delta_h,\qquad
+ \widetilde n>\Delta_n.
+\]
+Writing $\widetilde E=\widetilde h/\widetilde n$, one has
+\[
+ |E-\widetilde E|
+ \le
+ \frac{\Delta_h+|\widetilde E|\Delta_n}
+      {\widetilde n-\Delta_n}.
+\]
+For probabilistic bounds, the same statement holds on their simultaneous
+success event and therefore with the union-bound confidence.
+\end{lemma}
+
+\begin{proof}
+Use
+\[
+ E-\widetilde E
+ =\frac{(h-\widetilde h)-\widetilde E(n-\widetilde n)}{n}
+\]
+and $n\ge\widetilde n-\Delta_n>0$.
+\end{proof}
+
 \paragraph{Scope.}
-The theorems concern exact arithmetic. The sparse theorem rules out a generic
+The first two theorems concern exact arithmetic. The PSD transfer separately
+rules out a generic relative scheme under its stated complexity assumption.
+The sparse exact theorem rules out a generic
 algorithm for a family that contains the upper-bidiagonal specialization; it
 does not make every sparse instance hard. Neither result excludes other
-structured restrictions, approximate contractions, or ordered-sector
-first-quantized representations. Neither asserts an unconditional separation
-of complexity classes.
+structured restrictions, entrywise-nonnegative or additive promised
+contractions, or ordered-sector first-quantized representations. None asserts
+an unconditional separation of complexity classes.
 
 \begin{thebibliography}{9}
 
@@ -229,6 +305,24 @@ wavefunctions,''
 A.~Kawasaki and N.~Nakatani,
 ``Low-rank decomposition on the antisymmetric product of geminals for strongly
 correlated electrons,'' arXiv:2410.06666 (2024).
+
+\bibitem{JerrumSinclairVigoda2004}
+M.~Jerrum, A.~Sinclair, and E.~Vigoda,
+``A polynomial-time approximation algorithm for the permanent of a matrix
+with nonnegative entries,''
+\emph{Journal of the ACM} \textbf{51}, 671--697 (2004).
+
+\bibitem{Meiburg2023}
+A.~Meiburg,
+``Inapproximability of positive semidefinite permanents and quantum state
+tomography,''
+\emph{Algorithmica} \textbf{85}, 3828--3854 (2023).
+
+\bibitem{AaronsonHance2014}
+S.~Aaronson and T.~Hance,
+``Generalizing and derandomizing Gurvits's approximation algorithm for the
+permanent,''
+\emph{Quantum Information and Computation} \textbf{14}, 541--559 (2014).
 
 \end{thebibliography}
 

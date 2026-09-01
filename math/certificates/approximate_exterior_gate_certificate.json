@@ -1,0 +1,132 @@
+{
+  "arithmetic": "exact rational",
+  "certificate_sha256": "c15e7ff268a962e2790004c7f63d47bedb53be0c887ab0241e671b7fe4ff3b16",
+  "energy_bound": "|E-E_tilde| <= (Delta_h+|E_tilde|Delta_n)/(n_tilde-Delta_n)",
+  "energy_cases": [
+    {
+      "absolute_error": "8/93",
+      "certified_bound": "160/899",
+      "energy": "5/3",
+      "energy_estimate": "49/31",
+      "label": "positive_energy",
+      "norm": "3/1",
+      "norm_estimate": "31/10",
+      "norm_radius": "1/5",
+      "numerator": "5/1",
+      "numerator_estimate": "49/10",
+      "numerator_radius": "1/5"
+    },
+    {
+      "absolute_error": "11/38",
+      "certified_bound": "201/323",
+      "energy": "-7/2",
+      "energy_estimate": "-72/19",
+      "label": "negative_energy",
+      "norm": "2/1",
+      "norm_estimate": "19/10",
+      "norm_radius": "1/5",
+      "numerator": "-7/1",
+      "numerator_estimate": "-36/5",
+      "numerator_radius": "3/10"
+    },
+    {
+      "absolute_error": "1/20",
+      "certified_bound": "1/9",
+      "energy": "1/20",
+      "energy_estimate": "0/1",
+      "label": "numerator_interval_crosses_zero",
+      "norm": "1/1",
+      "norm_estimate": "11/10",
+      "norm_radius": "1/5",
+      "numerator": "1/20",
+      "numerator_estimate": "0/1",
+      "numerator_radius": "1/10"
+    }
+  ],
+  "matrix_cases": [
+    {
+      "label": "entrywise_nonnegative",
+      "matrix": [
+        [
+          "1/1",
+          "2/1"
+        ],
+        [
+          "3/1",
+          "4/1"
+        ]
+      ],
+      "normalized_exterior_norm_squared": "25/1",
+      "permanent": "10/1",
+      "promise": "entrywise nonnegative"
+    },
+    {
+      "label": "exact_cancellation",
+      "matrix": [
+        [
+          "1/1",
+          "1/1"
+        ],
+        [
+          "1/1",
+          "-1/1"
+        ]
+      ],
+      "normalized_exterior_norm_squared": "0/1",
+      "permanent": "0/1",
+      "promise": "signed"
+    },
+    {
+      "label": "signed_real_psd",
+      "matrix": [
+        [
+          "1/1",
+          "-1/2"
+        ],
+        [
+          "-1/2",
+          "1/1"
+        ]
+      ],
+      "normalized_exterior_norm_squared": "25/64",
+      "permanent": "5/4",
+      "promise": "real positive definite with a negative off-diagonal"
+    }
+  ],
+  "precision_cases": [
+    {
+      "input_precision_bits": 4,
+      "necessary_additive_permanent_tolerance_below": "1/16",
+      "normalized_exterior_norm_squared": "1/1024",
+      "permanent": "1/16",
+      "tau": "1/16"
+    },
+    {
+      "input_precision_bits": 8,
+      "necessary_additive_permanent_tolerance_below": "1/256",
+      "normalized_exterior_norm_squared": "1/262144",
+      "permanent": "1/256",
+      "tau": "1/256"
+    },
+    {
+      "input_precision_bits": 16,
+      "necessary_additive_permanent_tolerance_below": "1/65536",
+      "normalized_exterior_norm_squared": "1/17179869184",
+      "permanent": "1/65536",
+      "tau": "1/65536"
+    },
+    {
+      "input_precision_bits": 32,
+      "necessary_additive_permanent_tolerance_below": "1/4294967296",
+      "normalized_exterior_norm_squared": "1/73786976294838206464",
+      "permanent": "1/4294967296",
+      "tau": "1/4294967296"
+    }
+  ],
+  "schema": "femps.approximate-exterior-gate.v1",
+  "signed_psd_principal_minors": [
+    "1/1",
+    "3/4"
+  ],
+  "state_convention": "Psi_A=perm(A) P_1...P_M/M!"
+}

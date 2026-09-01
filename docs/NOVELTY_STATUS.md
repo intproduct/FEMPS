@@ -134,3 +134,16 @@ LC-AGP side, correcting a stale Phase 14 analogy. No universal no-go or
 approximation-hardness claim is made. Any approximate exterior method now
 requires a separate error-certified Gate K and a fresh audit against established
 APG selection, low-rank, and stochastic contraction methods.
+
+Phase 24 closes generic relative approximation negatively without making the
+invalid inference from exact hardness. The Jerrum--Sinclair--Vigoda FPRAS for
+entrywise-nonnegative matrices and Gurvits-type additive estimators remain
+prior-art positive boundaries. On the different, admitted class of real-PSD
+coefficient arrays, however, the sparse APG identity transfers Meiburg's
+relative inapproximability directly to the squared norm: a generic PRAS would
+imply `RP=NP`. The project-specific content is this FEMPS/APG transfer and the
+simultaneous Rayleigh denominator certificate, not any permanent algorithm or
+hardness theorem. Gate K therefore closes without a solver. The next novelty
+question is whether a canonical statistics-carrier/correlation-multiplicity
+factorization can satisfy Slater multiplicity one, safe truncation, and
+polynomial contraction without hiding the same permanent or binomial cost.

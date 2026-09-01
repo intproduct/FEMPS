@@ -135,3 +135,27 @@ def test_sparse_path_apg_permanent_exact_certificate() -> None:
         check=True,
         cwd=root,
     )
+
+
+def test_approximate_exterior_gate_exact_certificate() -> None:
+    root = Path(__file__).resolve().parents[1]
+    subprocess.run(
+        [
+            sys.executable,
+            str(
+                root
+                / "math"
+                / "certificates"
+                / "verify_approximate_exterior_gate.py"
+            ),
+            "--verify",
+            str(
+                root
+                / "math"
+                / "certificates"
+                / "approximate_exterior_gate_certificate.json"
+            ),
+        ],
+        check=True,
+        cwd=root,
+    )

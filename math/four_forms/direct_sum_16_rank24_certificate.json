@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "claim_status": "exact certificate",
+  "base_field": {
+    "kind": "Q",
+    "characteristic": 0
+  },
+  "ambient_dimension": 16,
+  "form_degree": 4,
+  "form_terms": [
+    {
+      "indices": [0, 1, 2, 3],
+      "numerator": 1,
+      "denominator": 1
+    },
+    {
+      "indices": [4, 5, 6, 7],
+      "numerator": 1,
+      "denominator": 1
+    },
+    {
+      "indices": [8, 9, 10, 11],
+      "numerator": 1,
+      "denominator": 1
+    },
+    {
+      "indices": [12, 13, 14, 15],
+      "numerator": 1,
+      "denominator": 1
+    }
+  ],
+  "contraction_ranks": [1, 16, 24, 16, 1],
+  "chart_metadata": {
+    "kind": "coordinate direct sum",
+    "block_dimensions": [4, 4, 4, 4]
+  },
+  "orbit_metadata": {
+    "claim": "one explicit GL(16,Q) orbit representative only",
+    "coverage": "no rank-22/23 orbit or chart coverage claimed"
+  },
+  "lifting_argument": "Not applicable: all coefficients and eliminations are over Q.",
+  "payload_sha256": "3e48d8e9e0ed1802805d5446c573cef7daca05146abae45d90679fa5a633edcd"
+}

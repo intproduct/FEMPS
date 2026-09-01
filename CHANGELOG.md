@@ -1,5 +1,25 @@
 # Research changelog
 
+## 2026-09-01 - Phase 27 four-form reconstruction checkpoint
+
+- Reconstructed the working extremal question as the minimum middle
+  contraction rank of a concise four-form, while labeling both the notation
+  `mu_4(m)` and the 16D 22/23 alternatives as conjectural until their missing
+  provenance is recovered.
+- Audited primary contraction-rank, essential-variable/radical, and skew-rank
+  sources, and separated middle catalecticant rank from Grassmann/Slater
+  decomposition rank.
+- Added standard-library-only exact rational and recorded-prime contraction
+  utilities with tests for symmetry, complementary cuts, basis permutations,
+  Hodge duality, support loss in dimension five, the six-dimensional
+  symplectic-dual control, and direct sums.
+- Certified the explicit rational 16D direct sum with rank vector
+  `(1,16,24,16,1)` using an implementation-independent verifier and payload
+  hash `3e48d8e9e0ed1802805d5446c573cef7daca05146abae45d90679fa5a633edcd`.
+- Screened 120,000 seeded coordinate-hypergraph samples over `F_2`; 118,317
+  were concise and none had middle rank below 24. This is recorded only as
+  numerical evidence and supplies no lower bound or orbit/chart coverage.
+
 ## 2026-09-01 - Phase 26 manuscript v1 and fixed-bond proof audit
 
 - Replaced the provisional fixed-small-bond conjecture by a direct theorem:

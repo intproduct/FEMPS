@@ -207,3 +207,22 @@ def test_statistics_carrier_obstruction_exact_certificate() -> None:
         check=True,
         cwd=root,
     )
+
+
+def test_four_form_direct_sum_exact_certificate() -> None:
+    root = Path(__file__).resolve().parents[1]
+    subprocess.run(
+        [
+            sys.executable,
+            str(root / "math" / "four_forms" / "verify_direct_sum_control.py"),
+            "--verify",
+            str(
+                root
+                / "math"
+                / "four_forms"
+                / "direct_sum_16_rank24_certificate.json"
+            ),
+        ],
+        check=True,
+        cwd=root,
+    )

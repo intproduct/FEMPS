@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/intproduct/FEMPS/math/four_forms/certificate.schema.json",
+  "title": "FEMPS exact four-form certificate",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "claim_status",
+    "base_field",
+    "ambient_dimension",
+    "form_degree",
+    "form_terms",
+    "contraction_ranks",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "claim_status": {
+      "enum": ["exact certificate", "numerical evidence", "conjecture"]
+    },
+    "base_field": {
+      "type": "object",
+      "required": ["kind", "characteristic"],
+      "properties": {
+        "kind": {"enum": ["Q", "F_p"]},
+        "characteristic": {"type": "integer", "minimum": 0},
+        "prime": {"type": "integer", "minimum": 2}
+      },
+      "additionalProperties": false
+    },
+    "ambient_dimension": {"type": "integer", "minimum": 4},
+    "form_degree": {"const": 4},
+    "form_terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["indices", "numerator", "denominator"],
+        "properties": {
+          "indices": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {"type": "integer", "minimum": 0}
+          },
+          "numerator": {"type": "integer"},
+          "denominator": {"type": "integer", "minimum": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "contraction_ranks": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {"type": "integer", "minimum": 1}
+    },
+    "chart_metadata": {"type": "object"},
+    "orbit_metadata": {"type": "object"},
+    "lifting_argument": {"type": "string"},
+    "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "additionalProperties": false
+}

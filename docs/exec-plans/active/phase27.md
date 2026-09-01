@@ -10,23 +10,23 @@ provenance before making any extremal claim.
 
 ## Checkpoints
 
-- [ ] Define `mu_4(m)`, the relevant contraction/catalecticant ranks, concise
+- [x] Define `mu_4(m)`, the relevant contraction/catalecticant ranks, concise
   support, orbit equivalence, and “rank 22/23” exactly; record every base field
   and any characteristic exclusions.
 - [ ] Audit the primary literature on alternating four-forms, exterior
   Artinian Gorenstein Hilbert functions, orbit classifications, Lefschetz
   behavior, and Grassmannian secants; update the bibliography and novelty
   matrix without relying on secondary summaries.
-- [ ] Create `math/four_forms/` with a problem statement, convention tests,
+- [x] Create `math/four_forms/` with a problem statement, convention tests,
   exact-arithmetic utilities, certificate schema, and clean-environment
   reproduction commands separated from production FEMPS code.
 - [ ] Reconstruct all known low-dimensional values/bounds and test Hodge dual,
   complementary-cut, support-reduction, and direct-sum consistency identities.
-- [ ] Locate or regenerate the 16D rank-22/23 candidate data; if no provenance
+- [x] Locate or regenerate the 16D rank-22/23 candidate data; if no provenance
   exists, label it a conjectural target rather than inherited evidence.
 - [ ] Choose exact rational and/or recorded finite-field charts and specify how
   rank, orbit/chart coverage, and cross-field lifting will be certified.
-- [ ] Build an independent verifier that checks certificate hashes and imports
+- [x] Build an independent verifier that checks certificate hashes and imports
   neither PyTorch nor `femps`.
 - [ ] Resolve the 16D branch or state the sharpest certified interval together
   with the exact unresolved obstruction; do not substitute floating-point rank

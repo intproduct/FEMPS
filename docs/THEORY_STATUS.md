@@ -4,6 +4,7 @@
 |---|---|---|
 | A decomposable normalized Slater state has a flat particle-cut Schmidt spectrum | proved in draft and numerically verified | External proof review and literature cross-check |
 | Ordinary particle TT must pay the exchange-statistics Schmidt multiplicity | proved in draft and numerically verified | Stronger concise/full-support bounds remain open |
+| The 16D concise four-form minimum middle rank is 22 or 23 | **conjecture** with missing provenance; neither alternative is currently admitted. An **exact certificate** gives only the explicit rational upper bound `mu_4^Q(16)<=24`; a 120,000-sample finite-field screen found no lower coordinate-hypergraph candidate | Recover a primary definition/candidate or construct one from scratch; certify rank and complete orbit/chart coverage over an explicit field before claiming sharpness |
 | Matrix-wedge FEMPS is associative and strictly antisymmetric | proved from exterior associativity; small-N verified | External algebra review |
 | Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed already at fixed maximum bond three: site-indexed one-form bond-two cores encode the `Mat_2` row-ordered Cayley determinant, and a scalar-reference direct sum recovers signed amplitudes from exact squared norms; the Phase 13 tagged pair-power and Phase 22 bandwidth-one APG reductions remain independent mechanisms | External proof review; only separately gated restrictions or controlled approximation remain open |
 | Generic sparse-path FEMPS has a relative squared-norm PRAS | conditionally obstructed: on real-PSD paired coefficients, `M! sqrt(n_tilde)` would be a PRAS for the PSD permanent, which Meiburg excludes unless `RP=NP`; an exact-rational conditioning/energy certificate passes | External proof review; entrywise-nonnegative FPRAS, additive estimates with a certified norm lower bound, and separately promised structures remain open |
@@ -46,6 +47,14 @@ compact cores. Phase 26 consolidates the full result package in a single
 proof-audited manuscript and advances the research program to an independent
 four-form/exterior-geometry phase rather than another generic matrix-wedge
 optimizer branch.
+
+Phase 27 has now reconstructed a source-backed contraction-rank convention and
+an explicitly provisional definition of `mu_4^K(m)`. Repository and Git-history
+search found no inherited 16D candidate or certificate. The exact rational
+direct-sum control has Hilbert/rank vector `(1,16,24,16,1)` and is independently
+verified, but it is only an upper bound. The first seeded sparse screen is
+**numerical evidence** and cannot exclude non-coordinate, special-coefficient,
+or unsampled characteristic-zero orbits.
 
 ADR 0004 makes ordered-sector/interparticle-distance functional TN the primary
 numerical research route. Phase 15 and ADR 0005 replace its dense comparator by

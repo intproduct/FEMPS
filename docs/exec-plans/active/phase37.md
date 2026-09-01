@@ -55,3 +55,11 @@ sequence without hidden benchmark state, report the public API as requiring an
 expert-provided correlated source and do not call it an end-to-end solver.
 Failure does not authorize threshold relaxation, seed replacement, N/D
 expansion, or pure-mathematics work.
+
+## Preregistration checkpoint
+
+ADR 0026 and `docs/experiments/configs/phase37_n4_d6_k4.json` freeze the
+N4,D6,Q128,K1--K4 production configuration before implementation or production.
+The seed-selection audit is disclosed as bounded exploratory numerical
+evidence and is not an admitted benchmark artifact.  Formal production must
+use the frozen configuration without rescue changes.

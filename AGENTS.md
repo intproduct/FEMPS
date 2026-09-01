@@ -14,7 +14,9 @@
 - Architecture: `docs/ARCHITECTURE.md`
 - Evidence status: `docs/THEORY_STATUS.md`
 - Testing: `docs/TESTING.md`
-- Active execution plan: `docs/exec-plans/active/phase41_manuscript_a_theory_closure.md`
+- Active execution plan: `docs/exec-plans/active/phase46_external_review_handoff.md`
+- Active-plan index and immutable evidence exception:
+  `docs/exec-plans/active/README.md`
 - Research log: `CHANGELOG.md`
 
 ## Standard validation

@@ -17,6 +17,19 @@ The validation hierarchy follows the Master Plan.
 Default tests are deterministic, CPU-only, and use float64 or complex128.
 GPU benchmarks are opt-in and are never hidden inside pytest.
 
+The sole combined submission manuscript is built without a `latexmk`/Perl
+dependency by:
+
+```powershell
+python scripts/build_combined_manuscript.py
+```
+
+The driver performs a clean `pdflatex`, `bibtex`, `pdflatex`, `pdflatex`
+sequence and fails if the final log contains undefined citations/references,
+multiply defined labels, package/LaTeX warnings, or overfull/underfull boxes.
+Its default PDF and auxiliary files are ignored under
+`output/pdf/combined-manuscript/`.
+
 The Phase 20 `T2` and `Mat2` pair-collapse base cases are checked by:
 
 ```powershell

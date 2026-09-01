@@ -1,5 +1,32 @@
 # Research changelog
 
+## 2026-09-02 - Combined-manuscript submission state audited
+
+- Reaudited the sole submission source against the revised scope. Structural
+  results I--III, the bond-two CHSS reduction, scalar versus row-ordered Cayley
+  determinant distinction, two-Slater carrier counterexample, unnormalized
+  rational-Legendre conjecture boundary, NOCI citations, D10-to-D12
+  initialization disclosure, and AI-use statement are all present. No visible
+  Phase/Gate/internal-evidence label or placeholder figure remains.
+- Archived the completed repository-internal Phase 41 plan and made Phase 46
+  the sole operational plan. The byte-frozen Phase 40 preregistration remains
+  under `active/` only because its normalized path/hash is embedded in Phase 40
+  and 42 result artifacts; a new index and completion record make clear that it
+  is not active research and admits no rescue point or Paper B.
+- Added a combined-manuscript build driver that directly performs a clean
+  `pdflatex`, `bibtex`, `pdflatex`, `pdflatex` sequence without `latexmk` or
+  Perl, then rejects unresolved citations/references, duplicate labels, TeX
+  warnings, and overfull/underfull boxes.
+- The clean scripted build produces a 15-page PDF with 33 references, no final-
+  pass warning, and no undefined reference. All 15 rendered pages were visually
+  checked for clipping, overlap, broken glyphs, table layout, and placeholders.
+- The standard suite passes `312` tests in 658.50 s with the one known latticeTN
+  report-path scalar-conversion warning. The required CPU 2201 baseline also
+  passes: final energy `1.8788029184435575`, absolute error
+  `1.0805366005195438e-4`, 500 steps, and 10.32 s elapsed.
+- No manuscript theorem status, Legendre conjecture status, numerical evidence
+  level, sample set, manuscript split, or Paper B authorization changed.
+
 ## 2026-09-02 - Phase 46 external reproduction comparison closed locally
 
 - Added a clean-rerun comparison tool that authenticates the primary Phase 44

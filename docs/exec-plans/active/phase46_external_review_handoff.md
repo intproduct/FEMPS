@@ -41,6 +41,10 @@ new theorem claims, FEMPS physics points, or manuscript splits:
 - A repository self-check exercises that external-artifact path and passes all
   numerical checks while deliberately retaining
   `external_independent_replication_complete = false`.
+- Phase 41's repository-internal manuscript closure is archived as completed,
+  and the active-plan index now identifies this Phase 46 file as the sole
+  operational plan. The unchanged Phase 40 preregistration path is retained
+  only to preserve hashes embedded in frozen evidence.
 
 The repository side of the handoff, including machine-readable result
 comparison, is ready. Completion now requires actual external human input;

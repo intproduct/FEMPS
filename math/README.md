@@ -17,6 +17,12 @@ interacting FEMPS control in one submission-oriented source. Visible internal
 claim/evidence labels are removed; floating calculations remain identified as
 numerical evidence.
 
+Build that sole submission source from the repository root with
+`python scripts/build_combined_manuscript.py`. The driver invokes `pdflatex`
+and `bibtex` directly, so Windows builds do not require the Perl dependency of
+`latexmk`, and it rejects unresolved references or layout warnings in the final
+log.
+
 `generic_femps_contraction_obstruction.tex` now begins with the direct
 site-indexed one-form Cayley identity and the conditional #P-hardness theorem
 for exact squared norms at maximum bond three. It retains the Phase 13/14

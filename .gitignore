@@ -13,6 +13,7 @@ artifacts/
 checkpoints/
 outputs/
 tmp/
+output/pdf/combined-manuscript/
 *.log
 *_checkpoint.pt
 *.pt

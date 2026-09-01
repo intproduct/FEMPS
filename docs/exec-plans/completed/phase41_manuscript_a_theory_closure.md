@@ -1,4 +1,4 @@
-# Active execution plan: Phase 41 Manuscript-A theory closure
+# Completed execution plan: Phase 41 Manuscript-A theory closure
 
 ## Objective
 
@@ -79,7 +79,8 @@ unsuitable for QMC.
   six, focused manuscript-scope tests, and the full repository suite (287
   passed with one known latticeTN report-path warning).
 
-The next publication milestone is external human algebraic-complexity review
-of Structural result II and the rational-Legendre pointwise reduction. Until
-that review is received and any resulting corrections are closed, the latter
-remains a conjecture and this plan remains active.
+The repository-internal theory-closure work is complete. The remaining named-
+human algebraic-complexity review of Structural result II and the rational-
+Legendre pointwise reduction was transferred to Phase 46. Until that review is
+received and any resulting corrections are closed, the latter remains a
+conjecture; this completed plan does not itself certify external review.

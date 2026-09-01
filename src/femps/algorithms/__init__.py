@@ -28,6 +28,11 @@ from .diagonal_path_training import (
     extend_diagonal_path_terms,
     run_diagonal_path_variable_projection,
 )
+from .diagonal_path_growth import (
+    AdaptiveTermCandidate,
+    AdaptiveTermGrowth,
+    select_adaptive_diagonal_path_term,
+)
 from .diagonal_path_contract import (
     DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
     DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
@@ -57,6 +62,9 @@ __all__ = [
     "embed_diagonal_path_orbitals",
     "extend_diagonal_path_terms",
     "run_diagonal_path_variable_projection",
+    "AdaptiveTermCandidate",
+    "AdaptiveTermGrowth",
+    "select_adaptive_diagonal_path_term",
     "DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION",
     "DIAGONAL_PATH_RESULT_SCHEMA_VERSION",
     "load_diagonal_path_checkpoint",

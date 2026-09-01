@@ -1,6 +1,6 @@
 # Diagonal-path FEMPS solver and reproduction contract
 
-Contract version: 1 (Phase 28 freeze, 2026-09-01)
+Contract version: 2 (Phase 34 compatible extension, 2026-09-01)
 
 ## Scientific scope
 
@@ -25,6 +25,8 @@ reproduction line:
 - `canonical_slater_orbitals`;
 - `embed_diagonal_path_orbitals` for exact nested `D` growth;
 - `extend_diagonal_path_terms` for exact blind nested `K` growth;
+- `select_adaptive_diagonal_path_term` for seeded, truth-free, one-term greedy
+  growth through fixed-span determinant-transition energies;
 - `run_diagonal_path_variable_projection`;
 - `load_diagonal_path_checkpoint`;
 - `validate_diagonal_path_checkpoint` and `validate_diagonal_path_result`;
@@ -49,6 +51,15 @@ orbital tensor order is always `(K,D,N)`.
   changed configuration, schema, or operator identity.
 - Seeds, optimizer step counts, learning rates, truth/materialization caps,
   dtype, device, and checkpoint lineage are part of reproduction evidence.
+
+Adaptive growth may rank a fixed seeded Slater pool using only the current
+state's factorized determinant-transition Hamiltonian, overlap matrix,
+generalized-eigenvalue energy, and balanced conditioning. It may not read a CI
+energy, CI vector, dense exterior Hamiltonian, or materialized particle tensor.
+The selected `K+1` span contains the source K-term span exactly, and every
+candidate decision records the predicted energy, improvement, retained rank,
+condition number, and rejection reason. Dense CI is permitted only after term
+selection and nonlinear optimization as a final truth audit.
 
 ## Checkpoint schema v1
 

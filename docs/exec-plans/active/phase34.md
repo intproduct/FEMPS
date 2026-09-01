@@ -37,6 +37,11 @@ CI initialization, virtual-path enumeration, or loss of exact antisymmetry.
 
 ## Acceptance gates
 
+The production registration is fixed by ADR 0023: a 32-candidate pool with
+growth seeds 3451/3452, cold K6 seed 3460, 160 Adam plus 80 L-BFGS steps, and
+the existing Phase 32 D12,K4 checkpoint. Dense CI is constructed only after all
+optimizations are frozen.
+
 - Growth/pruning value and reverse-mode gradients match explicit exterior truth
   on bounded small systems to `1e-10` and `1e-8`, respectively.
 - Every admitted N6 point has norm error at most `1e-10`, structural

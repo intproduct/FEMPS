@@ -11,6 +11,8 @@ from femps.algorithms import (
     ADAPTIVE_DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
     DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
     DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
+    SLATER_SOURCE_CHECKPOINT_SCHEMA_VERSION,
+    SLATER_SOURCE_RESULT_SCHEMA_VERSION,
 )
 
 
@@ -159,6 +161,16 @@ ENTRIES = (
         "verify_command": "python scripts/verify_phase36_public_adaptive_solver.py",
         "seeds": [3511, 3512],
     },
+    {
+        "id": "n4_clean_slater_source_solver",
+        "claim": "The public command constructs and optimizes a canonical N4,D6 Slater source, then exactly reproduces a bounded K1-to-K4 adaptive lineage across interruption/resume.",
+        "artifact": "docs/experiments/results/phase37_slater_source_solver.json",
+        "verifier_module": "scripts.verify_phase37_slater_source_solver",
+        "verifier_argument": "path",
+        "benchmark_command": "python scripts/benchmark_phase37_slater_source_solver.py",
+        "verify_command": "python scripts/verify_phase37_slater_source_solver.py",
+        "seeds": [3701, 3711, 3712, 3721, 3722, 3731, 3732],
+    },
 )
 
 
@@ -204,6 +216,12 @@ def main() -> None:
             ),
             "adaptive_checkpoint_schema_version": (
                 ADAPTIVE_DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION
+            ),
+            "slater_source_result_schema_version": (
+                SLATER_SOURCE_RESULT_SCHEMA_VERSION
+            ),
+            "slater_source_checkpoint_schema_version": (
+                SLATER_SOURCE_CHECKPOINT_SCHEMA_VERSION
             ),
         },
         "global_boundaries": [

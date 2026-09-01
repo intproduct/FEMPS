@@ -44,6 +44,7 @@ def verify_manuscript(path: Path) -> dict:
         "truth-free $D=12$ adaptive continuation",
         "three fresh candidate-pool lineages",
         "bounded public adaptive API",
+        "clean single-Slater-source command",
         "no $N=8$",
     )
     for phrase in required_scope:

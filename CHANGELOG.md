@@ -1,5 +1,24 @@
 # Research changelog
 
+## 2026-09-01 - Phase 37 clean Slater-source solver closure
+
+- Added a public command that constructs the registered N4,D6,Q128
+  soft-Coulomb model and canonical lowest-orbital Slater from explicit inputs,
+  optimizes K1, and enters the bounded adaptive K2--K4 solver without a
+  historical FEMPS checkpoint or CI initialization.
+- Added versioned command/result checkpoints with full configuration,
+  source/operator identity, atomic stage writes, and strict resume validation.
+  A forced K2 interruption followed by resume agrees exactly with a clean run
+  at every K.
+- Independently reconstructed the final exterior state at
+  `E=11.023837713691632`, same-basis CI error `4.883e-10`, variance
+  `2.863e-9`, norm error `3.33e-16`, and zero structural antisymmetry residual,
+  with no virtual-path or production `D^N` materialization.
+- Expanded the restricted-method reproduction manifest to 14 independently
+  verified numerical artifacts, closed Phase 37, and opened Phase 38 for two
+  preregistered clean-source seed schedules at the same physical point before
+  any N/D expansion.
+
 ## 2026-09-01 - Phase 36 public adaptive solver closure
 
 - Promoted the bounded adaptive diagonal-path solver to a public API with an

@@ -54,7 +54,10 @@ maximum CI error $3.76\times10^{-5}$, and maximum variance
 $4.54\times10^{-4}$; all continue decisions agree, but no automatic stopping
 rule is admitted because no stop event occurs.  A bounded public adaptive API
 exactly reproduces the first lineage across an explicit $K=5$ interruption and
-resume boundary.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
+resume boundary.  A clean single-Slater-source command then constructs the
+$N=4,D=6$ model from explicit inputs and reaches $K=4$ without a historical
+FEMPS checkpoint; clean and resumed energies agree exactly, with final CI error
+$4.88\times10^{-10}$.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
 $N=6$, while the \FEMPS{} correlation control remains $K=4$; matched kernel
 measurements expose the corresponding polynomial cost.  The method is a
 restricted nonorthogonal multideterminant algorithm, not an efficient generic
@@ -270,7 +273,7 @@ than relabeled as \FEMPS{}.
 \section{Numerical evidence}
 
 All floating-point results in this section are numerical evidence.  The full
-manifest contains thirteen independently verified artifacts.
+manifest contains fourteen independently verified artifacts.
 
 \subsection{\texorpdfstring{$N=2$}{N=2}: analytic and finite-basis checks}
 
@@ -314,6 +317,17 @@ $K$ & Energy & Error versus CI & Variance \\
 \par\smallskip{\scriptsize Evidence:
 \claimid{n4_soft_coulomb_transferability}.}
 \end{table}
+
+The clean single-Slater-source command independently constructs the same
+$N=4,D=6$ continuous model and canonical lowest-orbital determinant, optimizes
+$K=1$, and uses seeded bounded growth through an external $K=4$ cap.  Its
+energies are 11.025279022118207, 11.023864516114418,
+11.023837719660035, and 11.023837713691630 for $K=1,2,3,4$; the final
+same-basis CI error is $4.883\times10^{-10}$ and variance is
+$2.863\times10^{-9}$.  A forced $K=2$ interruption and resume agrees exactly
+with a clean run at every K.  Structural antisymmetry and production path/
+particle-tensor enumeration residuals are zero (claim
+\claimid{n4_clean_slater_source_solver}).
 
 At fixed $K=4$, the absolute energy difference from a pre-existing $D=14$
 finite-basis numerical reference decreases from $7.549\times10^{-4}$ at $D=6$
@@ -622,10 +636,10 @@ calculation is admitted.  DMRG has been deferred
 because it would be weaker than exact CI in the present finite spaces; no
 FEMPS--DMRG performance inference follows.
 
-The public adaptive reproduction still starts from the preoptimized $K=4$
-checkpoint used by the frozen lineage.  A clean end-to-end command beginning
-from a single Slater source, with no historical checkpoint dependency, remains
-the next solver milestone.
+The N6 public adaptive reproduction still starts from the preoptimized $K=4$
+checkpoint used by its frozen lineage.  The N4 clean-source command removes
+that dependency at one small physical point, but it has only one registered
+candidate schedule.  Clean-source seed robustness remains unestablished.
 
 The implementation uses exact deterministic contraction for the restricted
 class.  A future truncation or stochastic estimator for generic cores would
@@ -650,7 +664,9 @@ correlation control into a measurable solver improvement; three fresh pools
 retain that gain within a $4.877\times10^{-6}$ K6 energy spread.  Automatic
 stopping remains unadmitted and the schedule is externally capped.  The
 bounded public adaptive API reproduces the frozen lineage across a checkpoint
-boundary while reporting explicit schema, hashes, seeds, and residuals.  The ordinary particle-TT comparison makes the intended
+boundary while reporting explicit schema, hashes, seeds, and residuals.  The
+clean N4 command further closes the path from a canonical Slater to a bounded
+interacting K4 state without historical FEMPS input.  The ordinary particle-TT comparison makes the intended
 separation visible: exchange support grows while $K$ remains the chosen
 correlation multiplicity.  At the same time, current CI references are faster
 and the method is close to established nonorthogonal determinant expansions.
@@ -695,6 +711,7 @@ Identifier & Scope \\
 \claimid{n6_adaptive_correlation_growth} & Truth-free N6,D12 K4-to-K6 growth and cold K6 control \\
 \claimid{n6_adaptive_pool_stability} & Three fresh N6,D12 K5/K6 pools and stop calibration \\
 \claimid{n6_public_adaptive_solver} & Public bounded N6,D12 adaptive API and interruption/resume reproduction \\
+\claimid{n4_clean_slater_source_solver} & Clean canonical-Slater N4,D6 K1-to-K4 command and resume reproduction \\
 \bottomrule
 \end{tabularx}
 \end{table}

@@ -1,13 +1,13 @@
 {
   "artifact": "docs\\paper\\femps_method_manuscript.pdf",
-  "artifact_sha256": "b77266741d93236950d255ba4421da904de928e65f20565f2219c32670077e96",
+  "artifact_sha256": "9a1ba882975594d2b1316cad5c37c49d72a7785b13ea6f9fe7392db801804cee",
   "build_command": "python scripts/build_phase31_method_manuscript.py",
   "figure_provenance": "docs\\paper\\figures\\phase30-method-figure-provenance.json",
-  "figure_provenance_sha256": "e1fe11c4abb8f65f3a4f9756475118b10796278dfa8add3e3bb9efee4825c293",
+  "figure_provenance_sha256": "e2ceadea3703f59acdf2ecb822af3ac90feb35d3c92113c2b203ef89d0b23f17",
   "manifest": "docs\\experiments\\results\\phase30_reproduction_manifest.json",
-  "manifest_sha256": "b0142fab15d14d9432d2aca648793bb0ef2ded7ee24d8e6288890a7548cabc51",
+  "manifest_sha256": "d15a71e69aaabdfe7c1727cd897d3f13a2402c5889dda2824592d8f9cfb1b3aa",
   "schema_version": 1,
   "scientific_boundary": "restricted nonbranching FEMPS method manuscript; all floating-point benchmark claims remain numerical evidence",
   "source": "docs\\paper\\femps_method_manuscript.tex",
-  "source_sha256": "a98773ee0bfa0f79d75bcf5e4b437889917b0124fb0d5857769b49c67f44bcce"
+  "source_sha256": "15ee9b7d19fb886086a6f19aa39a2f4d10eaa94c94e6ea44fdddb6ef178fe673"
 }

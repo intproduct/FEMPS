@@ -14,6 +14,8 @@ from femps.algorithms import (
     ADAPTIVE_DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
     DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
     DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
+    SLATER_SOURCE_CHECKPOINT_SCHEMA_VERSION,
+    SLATER_SOURCE_RESULT_SCHEMA_VERSION,
 )
 
 
@@ -54,6 +56,18 @@ def verify_manifest(path: Path) -> dict:
         raise AssertionError(
             "adaptive checkpoint schema disagrees with the public solver"
         )
+    if (
+        contract["slater_source_result_schema_version"]
+        != SLATER_SOURCE_RESULT_SCHEMA_VERSION
+    ):
+        raise AssertionError("Slater-source result schema disagrees with the solver")
+    if (
+        contract["slater_source_checkpoint_schema_version"]
+        != SLATER_SOURCE_CHECKPOINT_SCHEMA_VERSION
+    ):
+        raise AssertionError(
+            "Slater-source checkpoint schema disagrees with the solver"
+        )
     if not Path(contract["document"]).is_file():
         raise AssertionError("solver contract document is missing")
 
@@ -85,9 +99,9 @@ def verify_manifest(path: Path) -> dict:
         results.append({"id": entry["id"], "verified": True})
     if len(ids) != len(set(ids)):
         raise AssertionError("manifest claim identifiers must be unique")
-    if len(ids) != 13:
+    if len(ids) != 14:
         raise AssertionError(
-            "restricted-method manifest must contain the thirteen admitted artifacts"
+            "restricted-method manifest must contain the fourteen admitted artifacts"
         )
     return {"verified": True, "entries": len(ids), "results": results}
 

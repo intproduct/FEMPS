@@ -157,8 +157,16 @@ is gated by an explicit contraction-complexity audit.
   lineage-1 candidates and energies. Independent reconstruction gives final
   CI error `3.27575e-5`, variance `3.89800e-4`, and zero structural
   antisymmetry residual. Automatic stopping remains unadmitted.
+- Phase 37 removes the historical correlated-source dependency. A public
+  command constructs the N4,D6 continuous-basis soft-Coulomb problem and the
+  canonical lowest-orbital Slater, optimizes K1, and grows through an explicit
+  K4 cap. Interrupted/resumed and clean runs agree exactly at every K; the
+  final same-basis CI error is `4.88285e-10`, variance is `2.86287e-9`, and all
+  structural antisymmetry and production-enumeration residuals are zero. This
+  is one bounded end-to-end solver point, not an automatic-stop, scaling, or
+  superiority claim.
 
-See [the active execution plan](docs/exec-plans/active/phase37.md),
+See [the active execution plan](docs/exec-plans/active/phase38.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
 [the diagonal-path solver contract](docs/DIAGONAL_PATH_SOLVER_CONTRACT.md),
@@ -168,6 +176,7 @@ See [the active execution plan](docs/exec-plans/active/phase37.md),
 [the adaptive K-growth report](docs/experiments/phase34_adaptive_k_growth_report.md),
 [the adaptive-pool stability report](docs/experiments/phase35_adaptive_pool_stability_report.md),
 [the public adaptive-solver report](docs/experiments/phase36_public_adaptive_solver_report.md),
+[the clean Slater-source solver report](docs/experiments/phase37_slater_source_solver_report.md),
 [the method claim/evidence matrix](docs/METHOD_CLAIM_EVIDENCE_MATRIX.md),
 [the Phase 30 reproduction manifest](docs/experiments/results/phase30_reproduction_manifest.json),
 [the exact four-form workspace](math/four_forms/README.md),

@@ -367,9 +367,10 @@ Grassmann algebra、determinant identities、Pfaffian、JW/parity 或其他 ferm
 
 论文组织以一个合并主稿为准：`math/femps_no_go_manuscript.tex` 同时承载
 结构/no-go 结果和当前受限求解器的数值演算。原工作稿中的定理 1--3 必须
-保持显式可见；固定键维边界必须区分“点值振幅在 \(\chi=2\) 已困难”与
-“现有平方范数困难性证明使用最大键维 3”，后者的 \(\chi=2\) 强化只能
-标为 conjecture。
+保持显式可见。重新逐条核对 CHSS 的结构化输出后，固定键维边界修正为：
+点值振幅和精确平方范数在最大内部键维 \(\chi=2\) 已有条件
+\(\#\mathrm P\)-hardness 定理；最大键维 3 的标量参考极化仅用于恢复一般
+有符号 Cayley 输出，不再作为最强边界。
 
 ### A4. 重新激活条件与论文归属
 
@@ -705,7 +706,7 @@ references/
 
 受限 diagonal-path 路线已经完成其算法审计，但被严格识别为有限 NOCI，因而不再是差异化主路线。当前只选择一个候选：以对称显式相关因子乘 exterior carrier，在保持一阶量子化、连续坐标和精确反对称性的前提下独立控制 functional-basis 维数 \(D\)、相关特征数 \(P\) 与 carrier multiplicity \(\chi\)。小系统用确定性积分作 materialization/AD 真值检查；更大系统只有通过误差、方差、自相关和反对称残差审计后才可进入 VMC。
 
-Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。最新 N4,D6 三组最终能量展宽为 2.035e-9，最大同基组 CI 误差为 2.523e-9，优化失败及反对称/枚举残差均为零；这些结果的精确数据和边界保存在各 completed plan、实验报告和 reproduction manifest 中。ADR 0028 明确该路线等价于有限 NOCI，只作为单篇结构/no-go 论文的数值演算章节。稿件范围审计恢复了原定理 1--3。ADR 0031 要求的原 Phase 39 唯一 N4,D8 clean-source 内部数值点已经闭合：clean/resume 完全一致且结构/资源门槛通过，但 K4 的同基 CI 误差 3.6469e-5 和方差 3.2252e-4 未通过预注册门槛，失败结果被原样保留，不再扩展小规模 NOCI 点。当前唯一 active 主线是合并稿 A 的理论闭环，包括重新逐条核对 CHSS 后确定准确的 \(\chi\) 边界。显式相关 Phase 40 已 parked；恢复后仍只允许检验非 NOCI 的 \(D\)-收敛优势或 Li--Waintal/同基 DMRG 匹配比较，在真实结果出现前不得创建第二篇论文。
+Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。最新 N4,D6 三组最终能量展宽为 2.035e-9，最大同基组 CI 误差为 2.523e-9，优化失败及反对称/枚举残差均为零；这些结果的精确数据和边界保存在各 completed plan、实验报告和 reproduction manifest 中。ADR 0028 明确该路线等价于有限 NOCI，只作为单篇结构/no-go 论文的数值演算章节。稿件范围审计恢复了原定理 1--3。ADR 0031 要求的原 Phase 39 唯一 N4,D8 clean-source 内部数值点已经闭合：clean/resume 完全一致且结构/资源门槛通过，但 K4 的同基 CI 误差 3.6469e-5 和方差 3.2252e-4 未通过预注册门槛，失败结果被原样保留，不再扩展小规模 NOCI 点。当前唯一 active 主线是合并稿 A 的理论闭环。逐条核对 CHSS Theorems 3.5/3.9 已把精确平方范数困难性修正到最大内部键维 \(\chi=2\)；最大键维 3 只保留为一般有符号 Cayley 输出的极化恢复。未归一化有理 Legendre 基的逐点困难性已有内部完整证明草案和精确小规模检查，但在外部人类代数复杂度核阅前仍标为 conjecture，且不得外推为所有 \(\chi\ge2\) FEMPS 不适合 QMC。显式相关 Phase 40 已 parked；恢复后仍只允许检验非 NOCI 的 \(D\)-收敛优势或 Li--Waintal/同基 DMRG 匹配比较，在真实结果出现前不得创建第二篇论文。
 
 旧 Phase 0--7 条目保留为历史设计与已完成工作的索引；若与本 recovery stage 冲突，以当前阶段和最新 ADR 为准。
 
@@ -854,7 +855,7 @@ generic exponential，但有物理上有意义、systematically improvable 的 p
 ### 当前唯一主稿：结构/no-go + 受限数值演算
 
 `math/femps_no_go_manuscript.tex` 是唯一投稿候选。它必须保留完整 no-go
-定理链、\(\chi=2\) / \(\chi\le3\) 边界、2201 动机和受限算法的诚实数值
+定理链、\(\chi=2\) 精确范数边界、2201 动机和受限算法的诚实数值
 后果。现有 diagonal-path 结果属于 NOCI 等价的数值演算，不能独立成文。
 
 ### 未来方法论文的开启条件

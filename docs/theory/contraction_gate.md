@@ -4,8 +4,8 @@
 > identities below remain valid, but the original `OPEN` decision was replaced
 > by ADR 0003 after Phase 13 proved a conditional #P-hardness obstruction for
 > the unrestricted family. Phases 20--22 then classified several restricted
-> algebras and sparse growing-memory candidates; Phase 26 strengthened the
-> obstruction to fixed maximum one-form bond three. See
+> algebras and sparse growing-memory candidates; a subsequent theorem-by-theorem
+> CHSS audit sharpened the obstruction to fixed maximum one-form bond two. See
 > `exterior_no_go_hierarchy.md` for the current boundary.
 
 ## Current exact routes
@@ -104,9 +104,11 @@ permanent-complexity assumption.** The two direct exact routes remain:
 - combinatorial exterior-space dimension.
 
 Phase 26 directly embeds a row-ordered Cayley determinant over `Mat_2` into
-site-indexed one-form cores of bond two; scalar-reference polarization raises
-the maximum bond only to three. Exact squared-norm evaluation for this fixed
-class would therefore solve a #P-hard source problem. Phase 13's tagged
+site-indexed one-form cores of bond two. CHSS's structured output and the fixed
+boundary `u=e_1`, `v=e_1+e_2` make the coefficient nonnegative, so one exact
+squared-norm query already solves a #P-hard source problem at bond two.
+Scalar-reference polarization at bond three remains a general signed-output
+recovery. Phase 13's tagged
 matrix-pair construction and Phase 22's upper-bidiagonal unique-path APG state
 remain independent mechanisms.
 

@@ -4,6 +4,14 @@
 
 Accepted on 2026-09-02.
 
+### Current-status annotation
+
+The one-manuscript and future-paper decisions remain active. The bond-boundary
+sentence below is superseded by the later theorem-by-theorem CHSS audit: exact
+squared-norm hardness is now proved conditionally at maximum bond `chi=2` using
+the CHSS structured nonnegative output. Maximum bond three is needed only for
+polarization of an arbitrary signed Cayley entry.
+
 ## Context
 
 The structural/no-go manuscript establishes exchange-rank and contraction

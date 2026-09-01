@@ -12,13 +12,16 @@ def test_combined_manuscript_keeps_structural_results_and_chi2_boundary() -> Non
         "Structural result I: exact particle-TT ranks",
         "Structural result II: universal exchange floor",
         "Structural result III: known flat Slater particle spectrum",
-        "Bond-two exact squared-norm boundary",
-        "maximum bond $\\chi=2$",
-        "established norm theorem has maximum bond three",
+        "Fixed-bond squared-norm hardness",
+        "internal bond is at most two",
+        "The structured CHSS boundary is what sharpens the bond from three to two",
+        "not needed for the CHSS reduction",
         "No separate \\FEMPS{} method paper is claimed",
         "NOCI-equivalent numerical control",
     ):
         assert phrase in source
+    assert "Bond-two exact squared-norm boundary" not in source
+    assert "established norm theorem has maximum bond three" not in source
 
 
 def test_publication_scope_gates_any_future_method_paper() -> None:

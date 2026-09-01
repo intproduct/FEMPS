@@ -1,5 +1,36 @@
 # Research changelog
 
+## 2026-09-02 - Manuscript-A theory recovery and CHSS bond-two correction
+
+- Kept the restored preregistered `N=4,D=8` result as internal numerical
+  evidence only. It failed the registered final CI-error and variance
+  thresholds, so no rescue or additional small NOCI-equivalent point was run.
+- Audited CHSS Theorems 3.5 and 3.9 against the primary paper. Their structured
+  output `a I_2+b J_2`, `a+b=4^(3m)#SAT`, sharpens exact rational FEMPS
+  squared-norm hardness from maximum bond three to maximum bond two by the
+  fixed boundary `u=e_1`, `v=e_1+e_2`. Bond-three polarization is retained only
+  for arbitrary signed Cayley outputs.
+- Restored a self-contained exact-TT rank proof, expanded the matrix-pair
+  collapse proofs with rational construction and bit-complexity conditions,
+  and made the direct-product carrier counterexample and scalar/noncommutative
+  determinant distinction explicit in the single combined manuscript.
+- Replaced the submission-facing restricted-solver survey by one selected
+  `N=6,D=12,K=4` result in the 924-dimensional exterior space, explicitly
+  disclosing its zero-padded preoptimized `D=10,K=4` initialization and its
+  NOCI-equivalent status.
+- Added an internally complete proof draft for exact unnormalized pointwise
+  `#P`-hardness in the standard unnormalized rational Legendre basis, including
+  an inverse-evaluation-matrix bit bound and one-query metric reduction. The
+  submission claim remains a conjecture pending external human
+  algebraic-complexity review.
+- Added a primary-source CHSS audit, an independent AI audit clearly labeled
+  as non-human, an external-review packet, a small exact Legendre verifier,
+  and a primary NOCI reference.
+- Built and visually inspected the 15-page combined v5 PDF with no undefined
+  references, LaTeX warnings, clipping, overlap, or placeholder figures. The
+  final standard suite passes `287` tests with one known latticeTN report-path
+  warning; the exact-certificate subset passes `10` tests.
+
 ## 2026-09-02 - Restored Phase 39 N4,D8 preregistration
 
 - Restored the original clean-source Phase 39 obligation as exactly one

@@ -58,3 +58,28 @@ unsuitable for QMC.
   researcher; external human sign-off remains pending until actually received.
 - Build the PDF without undefined references, internal labels, placeholder
   figures, or unsupported claims; run exact certificates and standard tests.
+
+## Progress checkpoint (2026-09-02)
+
+- completed the CHSS primary-source audit and corrected the exact norm boundary
+  from maximum bond three to maximum bond two;
+- completed the independent AI proof audit, explicitly labeled non-human;
+- restored the self-contained TT-rank and exchange-minor arguments;
+- expanded the bounded-algebra and fixed-state graded proofs with rational
+  construction and bit-complexity hypotheses;
+- completed the rational-Legendre conjecture proof draft, inverse-matrix bit
+  bound, one-query reduction, and exact checks for orders two through six;
+- selected the sole submission numerical point and disclosed its preoptimized
+  initialization and NOCI equivalence;
+- prepared the external human review packet; sign-off remains pending;
+- rebuilt and visually inspected the 15-page combined PDF with no undefined
+  references, layout warnings, internal Phase/Gate labels, or placeholder
+  figures;
+- passed the exact-certificate subset, rational-Legendre checks through order
+  six, focused manuscript-scope tests, and the full repository suite (287
+  passed with one known latticeTN report-path warning).
+
+The next publication milestone is external human algebraic-complexity review
+of Structural result II and the rational-Legendre pointwise reduction. Until
+that review is received and any resulting corrections are closed, the latter
+remains a conjecture and this plan remains active.

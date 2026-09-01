@@ -35,13 +35,11 @@ a separate method paper is not opened without a non-NOCI differentiator.
 - Define site-indexed matrix-valued one-form cores.
 - Prove that the top exterior coefficient is the row-ordered `Mat_2` Cayley
   determinant with no order tags and maximum hard-state bond two.
-- Recover signed amplitudes from two exact squared norms by adjoining a scalar
-  reference block, raising the maximum bond only to three.
-- State the fixed-parameter conditional #P-hardness theorem and its N=2--6
-  exact certificate.
-- State the sharp boundary: hard pointwise amplitude is already at `chi=2`,
-  while the proved signed squared-norm reduction has maximum bond three;
-  `chi=2` exact-norm hardness remains a conjecture.
+- Use the CHSS structured output `a I_2+b J_2`, `a+b=4^(3m)#SAT`, and the
+  boundary `u=e_1`, `v=e_1+e_2` to prove exact squared-norm hardness already at
+  maximum bond two.
+- Retain scalar-reference polarization at maximum bond three only as a general
+  signed-output recovery and state what the existing N=2--6 certificate checks.
 - Explain why site-labelled row order does not contradict the homogeneous
   fixed-`Mat_2` pair-power collapse.
 

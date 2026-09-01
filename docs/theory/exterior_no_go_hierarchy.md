@@ -6,8 +6,8 @@ This document began as the Phase 23 synthesis draft. It separates proved element
 linear/exterior identities, theorem drafts awaiting external review, bounded
 exact certificates, numerical tests, and complexity consequences based on
 published permanent results. Phase 24 additionally classifies one relative-
-approximation corridor, and Phase 26 strengthens the exact obstruction to
-fixed maximum one-form bond three. It is not a universal impossibility theorem for
+approximation corridor, and a theorem-by-theorem CHSS audit strengthens the exact obstruction to
+fixed maximum one-form bond two. It is not a universal impossibility theorem for
 fermionic tensor networks or for every structured/approximate FEMPS.
 
 Throughout, “squared norm” means the unnormalized inner product
@@ -107,10 +107,13 @@ calA^[i] = sum_j A_ij e_j.
 The coefficient of the increasing top form in
 `u^T calA^[1] wedge ... wedge calA^[N] v` is exactly the row-ordered Cayley
 determinant entry `u^T CDet(A) v`. After absorbing the boundaries, this is a
-one-form FEMPS with `D=N` and maximum bond two. Adjoining a scalar reference
-top form by a virtual direct sum gives maximum bond three and squared norm
-`(x+1)^2`; together with the hard-state norm `x^2`, polarization recovers the
-signed rational amplitude `x`.
+one-form FEMPS with `D=N` and maximum bond two. For the structured CHSS output
+`a I_2+b J_2`, the fixed boundaries `u=e_1`, `v=e_1+e_2` extract the
+nonnegative value `a+b=4^(3m)#SAT`; one exact norm query and an exact integer
+square root therefore recover `#SAT` without increasing the bond. Adjoining a
+scalar reference top form by virtual direct sum still gives maximum bond three
+and recovers an arbitrary signed rational amplitude by polarization, but that
+is no longer the sharp hardness boundary.
 
 Chien--Harsha--Sinclair--Srinivasan prove that the source determinant is as hard
 as the permanent [@ChienHarshaSinclairSrinivasan2011NoncommDet]. Therefore a
@@ -250,7 +253,7 @@ compile compact cores into a norm algorithm.
 | ID | Field and scope | Proof artifact | Independent exact evidence | External dependency |
 |---|---|---|---|---|
 | R1--R2 | real/complex, `D>=N`, ordinary particle TT | `math/no_go_theorems.tex`; `docs/theory/no_go.md` | Slater materialization/rank/spectrum tests | standard TT rank and Eckart--Young theory |
-| C1 | rational, all `N>=2`, one-form matrix-wedge with maximum bond three | `math/generic_femps_contraction_obstruction.tex`; `math/femps_no_go_manuscript.tex` | direct Cayley identity, four boundaries, bond-three polarization, and exact antisymmetry for N=2--6, hash `1d2208d3e5cb14f5c8e6c875f7fddf51c47ce9a3e61be6cedb8246d662b3a016`; independent tagged orders 1--4, hash `893077be401414cd810fa1154e618d37d83b58e077732801f2482b3716b2c0c0` | Chien et al. `Mat_2` Cayley-determinant hardness |
+| C1 | rational, one-form matrix-wedge with maximum bond two on the polynomial-size CHSS family | `math/femps_no_go_manuscript.tex`; structured-output audit in `docs/theory/chss_reduction_audit.md` | direct Cayley identity, four boundaries, bond-three general polarization, and exact antisymmetry for N=2--6, hash `1d2208d3e5cb14f5c8e6c875f7fddf51c47ce9a3e61be6cedb8246d662b3a016`; the existing certificate does not instantiate the CHSS gadgets | CHSS Theorems 3.5 and 3.9 over `Mat_2(Q)`; external algebraic-complexity review pending |
 | C2 | complex characteristic zero, fixed `(p,d)` | `bounded_radical_pair_collapse.md` | `T_2` M=1--6 hash `f671c2c10376c39cfb8c223edafba370570b9c417e8b12bcaaeb2f0f66cf078c`; `Mat_2` M=1--4 hash `74d2de4a2cedcbaf548cd4c9895d0ea4af48e6bb485b72966562e46277a6d20d` | Wedderburn--Malcev and polarization |
 | C3 | complex characteristic zero, fixed `(w,g)` graded representation | growing/fixed-state collapse notes | all `C[z]/z^d` boundaries hash `07a222de3f44ced1b3fe155638299fdb8443a54f3d9f36479b994f32f9f0fd55`; alternating words hash `082238ff6e6783b7533b3b2a59f3664beb1820794bcae573add98baf43370030` | Vandermonde interpolation; Waring/automata prior art |
 | C4 | nonnegative integer/rational, even `N` | `sparse_path_apg_obstruction.md` | three routes, M=1--6, hash `dd72c1aaeb0bc2a6b9206992cde9099f2f568b7ff6c8ed8eb7e38d958f78e790` | Valiant 0--1 permanent #P-completeness; APG prior art |

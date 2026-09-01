@@ -3,6 +3,17 @@
 - Status: accepted
 - Date: 2026-09-01
 
+## Current-status annotation (2026-09-02)
+
+The publication-scope decision remains historical, but its bond-three boundary
+has been superseded by a direct audit of CHSS Theorems 3.5 and 3.9. Their
+structured output `a I_2+b J_2`, with `a+b=4^(3m)#SAT`, and the fixed boundary
+`u=e_1`, `v=e_1+e_2` prove the exact squared-norm obstruction at maximum
+internal bond two. The bond-three polarization below remains valid only for
+general signed Cayley outputs. The instruction to open an independent
+four-form phase is also superseded by ADR 0017 and the algorithm/physics
+recovery priority.
+
 ## Context
 
 Phases 1--25 produced two representation theorems, several exact-contraction

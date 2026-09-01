@@ -180,10 +180,11 @@ theorems and the present restricted-solver numerics as one bounded numerical
 section. The diagonal-path implementation is a finite NOCI-equivalent Slater
 expansion and is not an independent method-paper contribution.
 
-The original structural Theorems 1--3 remain explicit. The hard pointwise
-amplitude is already represented at `chi=2`, whereas the proved signed exact
-squared-norm reduction has maximum bond three; exact norm hardness restricted
-to `chi=2` remains a conjecture. No second manuscript is currently in
+The original structural Theorems 1--3 remain explicit. A direct audit of the
+structured CHSS output sharpens the exact squared-norm obstruction to maximum
+internal bond `chi=2`: one fixed boundary extracts the nonnegative
+`4^(3m) #SAT` coefficient. The older maximum-bond-three scalar-reference
+polarization remains only a general signed-output recovery. No second manuscript is currently in
 development. Algorithm experiments may continue, but a new paper may be
 considered only after an independently reproduced non-NOCI explicit-
 correlation `D`-convergence advantage or a matched Li--Waintal/same-basis-DMRG

@@ -5,7 +5,7 @@
 The project currently has one publication manuscript:
 
 - authoritative source: `math/femps_no_go_manuscript.tex`;
-- generated review PDF: `output/pdf/femps_combined_manuscript_v4.pdf`.
+- generated review PDF: `output/pdf/femps_combined_manuscript_v5.pdf`.
 
 The structural/no-go results and all presently admitted restricted-solver
 numerics belong to this manuscript. The existing
@@ -31,14 +31,15 @@ their scientific content is unchanged.
 ## The chi=2 boundary
 
 The direct Cayley construction gives a hard pointwise amplitude already with
-maximum one-form bond `chi=2`. The proved exact squared-norm Turing reduction
-adds a bond-one scalar reference by direct sum, so its maximum bond is three.
-Therefore:
+maximum one-form bond `chi=2`. CHSS Theorem 3.9 supplies the structured output
+`a I_2+b J_2`, `a+b=4^(3m)#SAT`; the fixed boundary `u=e_1`, `v=e_1+e_2`
+therefore gives a nonnegative top-form coefficient at the same bond. Therefore:
 
 - hard pointwise amplitude at `chi=2`: proved;
-- exact squared-norm hardness for fixed `chi<=3`: proved conditionally on the
-  cited Cayley-determinant hardness result;
-- exact squared-norm hardness restricted to `chi=2`: conjecture, not theorem.
+- exact squared-norm hardness at `chi=2`: proved conditionally on the cited
+  CHSS structured Cayley-determinant reduction;
+- maximum-bond-three scalar-reference polarization: retained only for general
+  signed Cayley outputs.
 
 The combined manuscript states this boundary explicitly.
 
@@ -63,7 +64,7 @@ at least one genuinely differentiating question:
    a clear accuracy, stability, memory, or complexity tradeoff not already
    explained by an ordinary NOCI expansion.
 
-Until then, additional NOCI-equivalent convergence or seed studies may support
-the combined paper's numerical audit, and non-NOCI algorithm experiments may
-test the gate, but neither may create a title, abstract, outline, or submission
-source for a second paper.
+Until then, no additional small NOCI-equivalent convergence or seed points are
+admitted. A future non-NOCI algorithm experiment may test the differentiator,
+but it may not create a title, abstract, outline, or submission source for a
+second paper before a reproducible result exists.

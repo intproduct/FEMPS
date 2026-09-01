@@ -44,7 +44,7 @@ particle spectrum of a single Slater determinant.  Second, moving
 antisymmetry into exterior algebra
 removes that representation floor but does not make compact inputs easy to
 contract: exact squared-norm evaluation is \#P-hard already at fixed one-form
-bond three under a polynomial-time Turing reduction.  Along a matrix-pair
+bond two under a polynomial-time metric reduction.  Along a matrix-pair
 subfamily, bounded and selected fixed-state memories collapse to polynomial
 linear combinations of established antisymmetrized geminal powers, while a
 bandwidth-one unique path already encodes a permanent.  A generic relative
@@ -52,8 +52,8 @@ squared-norm scheme would also approximate real positive-semidefinite
 permanents, whereas entrywise-nonnegative and additive promised cases remain
 open.  Finally, cut-rank divisibility rejects the proposed universal direct
 tensor product of a statistics carrier and a Slater-normalized correlation
-multiplicity.  Exact certificates and controlled ordered-coordinate
-calculations support the proof audit.  A nonbranching exterior subclass is also
+multiplicity.  Exact certificates support the proof audit.  A nonbranching exterior subclass is
+also
 evaluated as a numerical consequence of these constraints.  Because that
 subclass is algebraically a finite nonorthogonal Slater expansion, the data are
 not claimed as a method distinct from nonorthogonal configuration interaction
@@ -128,9 +128,16 @@ For $1\le k<N$, the minimal exact ordinary-TT bond is
 \end{theorem}
 
 \begin{proof}
-Any TT cut factors $C_{(k)}$ through its bond space, and successive exact
-singular-value decompositions attain all unfolding ranks
-\cite{Oseledets2011TT}.
+Write an arbitrary TT coefficient at the $k\mid N-k$ cut as
+$C_{(k)}=L_kR_k$, where the columns of $L_k$ and rows of $R_k$ are indexed by
+the cut bond.  Thus every exact TT has bond at least $\rank C_{(k)}$.  For the
+converse, choose a basis of the column space of the first unfolding and express
+every remaining slice in that basis.  Repeat on the residual coefficient array
+from left to right.  At step $k$ the number of retained basis vectors is
+exactly $\rank C_{(k)}$, and after the final step their contracted product is
+$C$.  This elementary rank-factorization construction is the exact TT-SVD
+argument \cite{Oseledets2011TT}; it proves simultaneous attainability at every
+cut and not merely separate lower bounds.
 \end{proof}
 
 \begin{theorem}[Structural result II: universal exchange floor]
@@ -245,6 +252,14 @@ $\Mat_2(\mathbb F)$ in characteristic zero
 for the noncommutative determinant are given by Arvind--Srinivasan
 \cite{ArvindSrinivasan2018NoncommDet}.
 
+The distinction from exchange is essential.  For scalar entries ($\chi=1$),
+the factors commute, so the same alternating permutation sum is the ordinary
+determinant and is computable by Gaussian elimination; in \FEMPS{} it is just
+the Slater exchange carrier.  At $\chi=2$, the entries lie in the fixed
+four-dimensional algebra $\Mat_2(\mathbb Q)$ and the product must remain in row
+order.  The final physical wavefunction is still scalar and exactly
+antisymmetric: the noncommutativity lives only in the virtual computation.
+
 \begin{lemma}[direct Cayley coefficient]
 Let $M_{ij}\in\Mat_d(\mathbb F)$ and set
 $\mathcal A^{[i]}=\sum_jM_{ij}e_j$.  For $u,v\in\mathbb F^d$,
@@ -267,42 +282,49 @@ matrix product remains in increasing site order.  Their sum is $\CDet(M)$.
 
 \begin{theorem}[Fixed-bond squared-norm hardness]
 Over $\mathbb Q$, exact squared-norm evaluation for rational one-form FEMPS is
-\#P-hard under polynomial-time Turing reductions even when $D=N$ and all
-internal bonds are at most three.  A generic exact contraction algorithm for
-fixed $\chi\le3$ would imply $\mathrm{FP}=\#\mathrm P$.
+\#P-hard under a polynomial-time metric reduction even when $D=N$ and every
+internal bond is at most two.  A generic exact contraction algorithm for fixed
+$\chi=2$ would imply $\mathrm{FP}=\#\mathrm P$.
 \label{thm:c1}
 \end{theorem}
 
 \begin{proof}
-Take a Cayley-determinant instance over $\Mat_2(\mathbb Q)$.  Standard boundary
-vectors select an entry $x$ in Eq.~\eqref{eq:direct-cayley}; the resulting
-bond-two top-form state has squared norm $x^2$.  The bond-one state
-$\Theta=e_1\wedge\cdots\wedge e_n$ has coefficient one.  A block-diagonal
-virtual direct sum represents $\Phi_x+\Theta$ with maximum bond three and norm
-$(x+1)^2$.  Two norm queries recover the sign and value through
+Let $\varphi$ be a 3CNF instance with $m$ clauses and $S$ satisfying
+assignments.  Theorems 3.5 and 3.9 of
+Chien--Harsha--Sinclair--Srinivasan (CHSS) construct in polynomial time a
+polynomial-size matrix $H_\varphi$ over $\Mat_2(\mathbb Q)$, with constant-bit
+integer gadget weights, such that
 \[
- x=\frac{(x+1)^2-x^2-1}{2}.
+ \CDet(H_\varphi)=aI_2+bJ_2,\qquad
+ J_2=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+ a+b=4^{3m}S.
 \]
-Four boundary pairs recover the $2\times2$ matrix output.  Core construction,
-query count, and rational bit lengths are polynomial in the source input.
+CHSS label the graph vertices, and their determinant is the row-ordered Cayley
+determinant in that vertex order.  Apply Eq.~\eqref{eq:direct-cayley} with
+$u=e_1$ and $v=e_1+e_2$.  The sole top-form coefficient is
+\[
+ u^{\mathsf T}(aI_2+bJ_2)v=a+b=4^{3m}S\ge0,
+\]
+so one exact squared-norm query returns $16^{3m}S^2$.  Exact nonnegative
+integer square root followed by division by $4^{3m}$ recovers $S$.  The CHSS
+graph size is polynomial in $|\varphi|$; all FEMPS cores have polynomial
+encoding length; and the queried norm and its square root have polynomial bit
+length because $S\le2^{n_{\rm var}}$.  Construction and postprocessing are
+therefore polynomial-time, and the maximum internal bond remains two.
 \end{proof}
 
-The sharp bond boundary must be stated carefully.  The Cayley amplitude state
-in the proof already has maximum bond $\chi=2$ and its norm is $x^2$.  The
-proved signed-amplitude recovery, however, adjoins the scalar reference
-$\Theta$ and therefore uses maximum bond three.  Consequently the theorem
-above proves exact squared-norm hardness for fixed $\chi\le3$; it does
-\emph{not} prove the corresponding statement with the promise $\chi=2$.
+The structured CHSS boundary is what sharpens the bond from three to two.  For
+an arbitrary signed Cayley entry $x$, one may still adjoin the bond-one
+reference $\Theta=e_1\wedge\cdots\wedge e_n$ by a block direct sum.  The two
+norms $x^2$ and $(x+1)^2$ recover
+$x=((x+1)^2-x^2-1)/2$ at maximum bond three.  That polarization observation is
+useful for general outputs, but it is not needed for the CHSS reduction.
 
-\begin{conjecture}[Bond-two exact squared-norm boundary]
-Exact squared-norm evaluation remains \#P-hard for rational one-form
-\FEMPS{} whose maximum internal bond is two.
-\label{conj:chi2-norm}
-\end{conjecture}
-
-Conjecture~\ref{conj:chi2-norm} is a precise open sharpening, not a theorem or
-an exact certificate.  The established $\chi=2$ fact is the pointwise hard
-amplitude encoding; the established norm theorem has maximum bond three.
+CHSS work over any field of characteristic $p\ne2$: their characteristic-zero
+statement is \#P-hard and their positive odd-characteristic statement is
+$\mathrm{Mod}_p\mathrm P$-hard.  We specialize to $\mathbb Q$ so that the
+input, output, square root, and bit-complexity model are explicit; no statement
+is made in characteristic two.
 
 An independent integer verifier checks the site/physical permutation sum,
 all four boundary entries, the explicit bond-three direct sum, polarization,
@@ -317,11 +339,13 @@ symmetrizes factor order.
 
 The direct coefficient identity is pointwise algebraic and therefore also
 holds when the entries of $M$ are one-particle functions evaluated at a
-coordinate.  We do not infer a functional-input complexity theorem from that
-observation alone.  Such a theorem additionally needs a polynomial-bit model
-for representing, evaluating, and interpolating the chosen functional basis.
-Absent those hypotheses, that complexity transfer remains a conjectural
-extension rather than a corollary of the finite rational theorem.
+coordinate.  A separate conjecture asks whether this transfer is a
+polynomial-time Turing reduction for the standard \emph{unnormalized} rational
+Legendre basis.  It is not used here: a proof must exhibit rational nodes,
+bound the inverse evaluation matrix and output bit lengths, and exclude hidden
+algebraic-number oracles.  In particular, neither this conjecture nor
+Theorem~\ref{thm:c1} says that every $\chi\ge2$ \FEMPS{} is unsuitable for
+Monte Carlo or controlled approximation.
 
 \subsection{Why parity is only part of the mechanism}
 
@@ -371,6 +395,11 @@ $\lambda$, $\lambda(\Omega^M)/M!$ is an exact LC--AGP with
  \label{eq:bounded-collapse}
 \]
 For fixed $p$ and $d$, this is polynomial in the explicit input dimensions.
+If all data, the displayed decomposition, and the boundary are supplied over
+$\mathbb Q$ with polynomial-bit structure constants, the LC--AGP coefficients
+can be constructed in deterministic polynomial Turing time and have
+polynomial bit length.  No algorithm for discovering a rational
+Wedderburn--Malcev decomposition is asserted here.
 \end{theorem}
 
 \begin{proof}
@@ -409,7 +438,9 @@ exact LC--AGP with
  \label{eq:graded-collapse}
 \]
 In particular, the one-generator algebra $\mathbb C[z]/z^d$ requires at most
-$M(d-1)+1$ AGPs.
+$M(d-1)+1$ AGPs.  For rational inputs with the embedding and quotient basis
+supplied explicitly, fixed $w,g$ also gives a deterministic polynomial-time
+exact construction with polynomial-bit coefficients.
 \end{theorem}
 
 \begin{proof}
@@ -419,7 +450,9 @@ extracts all retained coefficients using the first product in
 Eq.~\eqref{eq:graded-collapse}.  At one grid point, a boundary of a $w\times w$
 matrix power is a homogeneous degree-$M$ polynomial in $w^2$ commuting
 two-forms; polarization supplies the second factor.  Rational nodes give an
-exact rational construction for rational inputs.
+exact rational construction for rational inputs; the quotient lift,
+interpolation matrices, reduction, and bit bounds are detailed in
+Appendix~\ref{app:graded-proof}.
 \end{proof}
 
 The theorem includes a noncommutative alternating-word algebra of dimension
@@ -436,7 +469,8 @@ $F_i=\sum_jA_{ij}P_j$ on the unique endpoint path of an upper-bidiagonal
 $(M+1)\times(M+1)$ pair matrix.
 
 \begin{theorem}[Sparse APG permanent obstruction]
-The endpoint state and its squared norm are
+Over $\mathbb Q$ (or $\mathbb R$ with its positive inner product), for a
+zero--one matrix $A$ the endpoint state and its squared norm are
 \[
  \Psi_A=\frac{F_1\wedge\cdots\wedge F_M}{M!}
  =\frac{\perm(A)}{M!}P_1\wedge\cdots\wedge P_M,
@@ -444,7 +478,9 @@ The endpoint state and its squared norm are
  \langle\Psi_A,\Psi_A\rangle=\frac{\perm(A)^2}{(M!)^2}.
 \]
 Exact squared-norm evaluation is therefore \#P-hard for a family with pair
-bandwidth one, one virtual path, $D=2M$, and $O(M^2)$ binary data.
+bandwidth one, one virtual path, $D=2M$, and $O(M^2)$ binary data.  Over
+$\mathbb C$, the norm formula is $|\perm(A)|^2/(M!)^2$ and the same zero--one
+reduction applies.
 \end{theorem}
 
 \begin{proof}
@@ -628,57 +664,30 @@ special closure used by the lemma.
 
 \section{Numerical validation and algorithm-design consequences}
 
-The 2201 mechanism was first reproduced on four coupled harmonic oscillators
-with $(D,\chi)=(8,16)$, complex128 arithmetic, and automatic differentiation
-on an NVIDIA RTX PRO 4000 Blackwell GPU.  At coupling $\gamma=-0.5$, the
-variational energy $1.8787064643$ lies $1.160\times10^{-5}$ above the exact
-continuum value.  Independent scans vary $D$, $\chi$, and four random seeds;
-CPU/GPU energy and gradient parity pass.  This reproduces the functional-
-basis/operator/MPS/AD mechanism, not every plotted point in the original
-paper and not a fermionic result.
-
-After generic exterior contraction failed, an independent ordered-coordinate
-control was retained.  In the chamber $x_1<\cdots<x_N$, use the center of mass
-$R$ and positive gaps $r_i=x_{i+1}-x_i$.  The map has unit Jacobian; collision
-faces are Dirichlet, and a normalized antisymmetric state is recovered by sign
-extension with the $\sqrt{N!}$ chamber factor.  Full-line and half-line
-orthonormal functional bases preserve the 2201 operator calculus, while the
-coordinate reorganization follows Li--Waintal.  This route is therefore not
-called \FEMPS{} and carries no priority claim.
-
-At the controlled $N=8,D=12$ point, a staged local action keeps the measured
-local-solver peak below $1.1$ GB.  The production energy is $44.4528442233$;
-its difference from a finite exterior $D=14$ numerical reference is
-$7.174\times10^{-3}$.  Fourier, quadrature, MPO-bond, optimizer, and basis
-controls are recorded separately.  The $D=14$ value is not a continuum bound,
-the $N=2,4,6,8$ sequence is not an asymptotic fit, and no electron--electron
-cusp claim follows from the softened Coulomb interaction.  A future real-
-Coulomb study must compare basis dimension versus error against quantum-
-chemistry DMRG in the same orbital basis and a matched first-quantized
-comparator.
-
 The structural results were subsequently used to choose, rather than reject,
-a restricted numerical control.  A nonbranching diagonal-path subclass represents a sum
-of $K$ Slater paths and evaluates determinant transition quantities in
-$O(K^2)$ path pairs without enumerating all virtual histories or materializing
-the alternating coefficient tensor.  As numerical evidence, for four
-interacting one-dimensional harmonic fermions with a finite-rank separable
-interaction, blind optimizations at $(D,K)=(6,4)$ agree with finite-basis FCI
-to $1.9\times10^{-12}$ in energy over three seeds, while a truth-free
-$D=6\to7$ continuation has maximum finite-basis error
-$8.1\times10^{-5}$ and variance $1.1\times10^{-3}$.  At $D=6$, the error falls
-from $5.3\times10^{-3}$ at $K=1$ to $2.3\times10^{-11}$ at $K=2$; at $K=4$,
-the continuum error decreases monotonically over $D=5,6,7$.  Norm errors are
-below $5\times10^{-16}$ and structural and materialized antisymmetry residuals
-are zero.  Two additional clean-source schedules select different determinant
-paths but give a combined final-energy spread of $2.035\times10^{-9}$, maximum
-same-basis CI error $2.523\times10^{-9}$, maximum variance
-$1.462\times10^{-8}$, and no optimization failures.  These data are retained
-in this manuscript as a bounded numerical exercise.  The subclass is exactly
-a finite nonorthogonal Slater sum, so the calculation does not establish an
-ansatz beyond NOCI, an explicit-correlation advantage, improved functional-
-basis $D$ convergence, asymptotic scalability, or superiority over FCI,
-particle TT, Li--Waintal, or same-basis DMRG.
+a restricted numerical control.  A nonbranching diagonal-path subclass is
+exactly a $K$-term nonorthogonal Slater expansion and evaluates determinant
+transition quantities in $O(K^2)$ path pairs without enumerating virtual
+histories or materializing the alternating coefficient tensor.  This places it
+within established NOCI methodology rather than defining a new correlated
+ansatz \cite{ThomHeadGordon2009NOCI,BeylkinMohlenkampPerez2008SlaterSums}.
+
+We retain one representative interacting result.  For six one-dimensional
+fermions with harmonic confinement and softened Coulomb repulsion, the
+$D=12$, $K=4$ calculation occupies the $\binom{12}{6}=924$ dimensional exterior
+space and gives energy $25.0494711446$, compared with same-basis CI
+$25.0493664161$.  The error is $1.0473\times10^{-4}$, the energy variance is
+$1.1223\times10^{-3}$, the norm error is $1.55\times10^{-15}$, and the
+structural antisymmetry residual is exactly zero.  The run took $107.7$ s on
+CPU and its sampled peak resident memory was $0.975$ GB.  The $D=12$, $K=4$
+orbitals were \emph{not} initialized from a clean $D=12$ Slater: they were
+obtained by exact zero-padding of a preoptimized $D=10$, $K=4$ state before the
+$D=12$ optimization.  Direct CI was used only as an independent reference.
+
+These floating-point data are a bounded NOCI-equivalent numerical exercise.
+They do not establish an ansatz beyond NOCI, an explicit-correlation advantage,
+improved functional-basis $D$ convergence, asymptotic scalability, or
+superiority over FCI, particle TT, Li--Waintal, or same-basis DMRG.
 
 \section{Logical boundaries of the results}
 
@@ -718,7 +727,7 @@ proof for arbitrary size.
 \toprule
 Claim & Range & What the verifier checks \\
 \midrule
-Fixed-bond norm & $2\le N\le6$ & Direct Cayley coefficient, four boundaries, explicit bond-three sum, norm polarization, exact antisymmetry. \\
+Fixed-bond norm & $2\le N\le6$ & Direct Cayley coefficient, four generic boundaries, explicit bond-three polarization, and exact antisymmetry; the bond-two hardness step uses the published CHSS structured output. \\
 Tagged pair power & orders $1$--$4$ & Perfect matchings and every pair-factor order against the tagged row-ordered determinant. \\
 Bounded algebra & $T_2$: $M\le6$; $\Mat_2$: $M\le4$ & Exact polynomial powers versus simplex interpolation and LC--AGP coefficients. \\
 Graded algebra & $M,d\le4$; alternating words $M\le3,d\le4$ & Every boundary coefficient, Vandermonde extraction, and nested matrix-power interpolation. \\
@@ -876,17 +885,29 @@ increase the number of powers needed below.
 
 \paragraph{Polarization into AGPs.}
 Let $z_1,\ldots,z_v$ be formal commuting variables.  Over characteristic zero,
-the Veronese powers
-$(t_1z_1+\cdots+t_vz_v)^M$ span
-$\operatorname{Sym}^M(\mathbb C^v)$.  One direct proof differentiates
-$(t\cdot z)^M$ at $t=0$: every monomial $z^\alpha$, $|\alpha|=M$, is a linear
-combination of evaluations at finitely many rational points by multivariate
-finite differences.  Equivalently, choose
-$\binom{M+v-1}{v-1}$ generic rational points; the resulting Veronese
-evaluation matrix is nonsingular because its determinant is a nonzero
-polynomial.  Therefore any homogeneous degree-$M$ polynomial in $v$ variables
-is a linear combination of at most
-$\binom{M+v-1}{v-1}$ $M$th powers.
+put $T_M=\{t\in\mathbb Z_{\ge0}^{v-1}:|t|\le M\}$.  The integer simplex is
+unisolvent for polynomials of total degree at most $M$: ordered by total degree,
+the falling-factorial polynomials
+$\prod_{i=2}^v\binom{x_i}{\alpha_i}$ give a triangular evaluation matrix on
+$T_M$ with diagonal one.  Hence the square matrix relating the
+$|T_M|=\binom{M+v-1}{v-1}$ powers
+\[
+ (z_1+t_2z_2+\cdots+t_vz_v)^M,\qquad t\in T_M,
+\]
+to the degree-$M$ monomial basis is nonsingular (the multinomial factors are
+nonzero in characteristic zero).  Therefore every homogeneous degree-$M$
+polynomial in $v$ variables is a linear combination of at most $|T_M|$ such
+powers.
+
+For rational data this is also a Turing construction.  The evaluation entries
+are integers of bit length $O(M\log(M+1))$; for fixed $v$ the matrix order is
+$O(M^{v-1})$.  Hadamard's inequality and Cramer's rule bound every numerator
+and denominator in its inverse by a polynomial number of bits.  Exact Gaussian
+elimination therefore computes the power coefficients in polynomial time.  In
+the theorem, $v\le v_k$ is fixed when $p,d$ are fixed; the supplied rational
+block decomposition and radical basis have polynomial-bit entries, and the
+number of structural choices is polynomial.  Multiplication, application of
+$\lambda$, and division by $M!$ increase bit lengths only polynomially.
 
 Substitute the scalar two-forms for the $z_i$ and apply the algebra homomorphism
 from the symmetric algebra to $E$.  Every resulting term $L^M/M!$ is an AGP.
@@ -896,6 +917,41 @@ $0\le k\le\min(d-1,M)$ gives Eq.~\eqref{eq:bounded-collapse}.  All steps use
 only the fixed Wedderburn decomposition, radical basis, matrix multiplication,
 and exact linear algebra.  For fixed $p$ and $d$, the displayed count is
 polynomial in $M,q,$ and $\rho$, hence in the explicit algebraic input size.
+
+\section{Detailed fixed-state graded collapse proof}
+\label{app:graded-proof}
+
+Let
+$R_{\boldsymbol d}=\mathbb Q[z_1,\ldots,z_g]/
+(z_1^{d_1},\ldots,z_g^{d_g})$ and suppose the embedding into
+$\Mat_w(R_{\boldsymbol d})$ is part of the input.  Represent every residue by
+its canonical polynomial lift with $0\le\deg_{z_j}<d_j$.  An entry of the
+unreduced product $\Omega^M$ then has
+$\deg_{z_j}\le L_j=M(d_j-1)$.  For each counter use the rational grid
+$0,1,\ldots,L_j$.  The univariate Vandermonde matrix is nonsingular, and the
+tensor product of these matrices recovers every coefficient of the lifted
+product.  Reducing modulo $z_j^{d_j}$ simply discards coefficients whose
+$z_j$ exponent is at least $d_j$; it cannot create additional terms.
+
+At one grid point, $\Omega$ is a $w\times w$ matrix whose $w^2$ entries are
+commuting physical two-forms.  After the fixed boundary is applied,
+$\Omega^M$ is a homogeneous degree-$M$ polynomial in at most $w^2$ such forms.
+The integer-simplex polarization construction in
+Appendix~\ref{app:wm-proof} expresses it as at most
+$\binom{M+w^2-1}{w^2-1}$ powers.  Recombining the at most
+$\prod_j(L_j+1)$ grid contributions gives Eq.~\eqref{eq:graded-collapse}.
+
+For the bit model, every Vandermonde entry has polynomial bit length in $L_j$;
+Hadamard's inequality and Cramer's rule give polynomial bit length for its
+inverse.  Because $g$ is fixed and the quotient basis of dimension
+$\prod_jd_j$ is explicit, $\prod_j(L_j+1)$ is polynomial in the stated input
+and $M$.  The polarization dimension $w^2$ is fixed.  Exact rational matrix
+multiplication, tensor-product interpolation, quotient reduction, boundary
+application, and division by $M!$ therefore use polynomially many bit
+operations and produce polynomial-bit LC--AGP coefficients.  This conclusion
+requires the rational embedding and quotient representation as input; it does
+not claim an algorithm for discovering such an embedding from arbitrary
+structure constants.
 
 \begingroup
 \small

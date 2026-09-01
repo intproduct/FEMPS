@@ -20,8 +20,8 @@ whether a strictly scoped FEMPS solver can pass controlled continuous-physics
 benchmarks under those no-go constraints.
 
 Phase 13 first ruled out the generic exact branch at growing bond by an
-explicit tagged Cayley-determinant reduction; Phase 26 strengthens this to
-fixed maximum bond three. Thus “generic matrix-wedge FEMPS with polynomial exact contraction”
+explicit tagged Cayley-determinant reduction; the direct construction plus the
+structured CHSS boundary strengthens this to fixed maximum bond two. Thus “generic matrix-wedge FEMPS with polynomial exact contraction”
 is no longer an admissible novelty claim. A future method claim must instead
 identify a systematically improvable restricted algebra with a surviving
 novelty boundary, use a controlled approximate estimator, or adopt an
@@ -179,9 +179,12 @@ method invention to a manuscript-level proof and novelty audit.
 
 Phase 26 resolves the reviewer-requested fixed-small-bond checkpoint more
 strongly than the earlier tagged construction. Site-indexed one-form cores of
-bond two preserve the row order of a `Mat_2` Cayley determinant directly; a
-bond-one scalar reference raises the maximum bond only to three and recovers
-the signed coefficient from two exact squared norms. Conditional on the
+bond two preserve the row order of a `Mat_2` Cayley determinant directly. A
+subsequent CHSS audit uses its structured `a I_2+b J_2` output to extract the
+nonnegative `a+b=4^(3m)#SAT` coefficient with fixed boundaries, proving the
+exact squared-norm obstruction already at bond two. A bond-one scalar reference
+raises the maximum bond to three only when a general signed output must be
+recovered by polarization. Conditional on the
 published noncommutative-determinant hardness theorem, generic exact
 one-form-FEMPS contraction is therefore already #P-hard at fixed `chi<=3`.
 This is a project-specific representation transfer, not a new complexity

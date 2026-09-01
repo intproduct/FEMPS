@@ -5,8 +5,8 @@
 The third-draft structural checkpoint was completed on 2026-09-01. ADR 0028
 supersedes the later two-paper split on 2026-09-02. The authoritative source is
 `math/femps_no_go_manuscript.tex`; the current combined review artifact is
-`output/pdf/femps_combined_manuscript_v4.pdf`. The previous v3 PDF is retained
-as a historical checkpoint.
+`output/pdf/femps_combined_manuscript_v5.pdf`. Previous PDFs are retained as
+historical checkpoints.
 
 The restricted diagonal-path method draft is now an internal working note, not
 a second publication manuscript. Its admitted numerical evidence is summarized
@@ -21,9 +21,9 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
   algorithm-design constraint, not a claim against all restricted,
   approximate, stochastic, Pfaffian, or ordered-coordinate methods.
 - The earlier Theorems 1--3 are again displayed as three explicit structural
-  results. The hard pointwise amplitude at `chi=2` is separated from the proved
-  exact squared-norm result at maximum bond three; the `chi=2` norm sharpening
-  is explicitly labeled a conjecture.
+  results. A theorem-by-theorem CHSS audit sharpens the exact squared-norm
+  obstruction to maximum bond `chi=2`; the maximum-bond-three polarization is
+  retained only for arbitrary signed outputs.
 - The finite functional-basis space is stated to be exactly
   `Lambda^N V_D`, shared with same-orbital FCI and quantum-chemistry DMRG; no
   larger variational space or efficiency advantage is claimed.
@@ -33,14 +33,17 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
   matrix-valued pair core is kept separate.
 - The odd/even discussion now distinguishes parity from site dependence,
   homogeneity, virtual width, and coefficient-algebra closure.
-- Pointwise functional identities are separated from any unproved
-  polynomial-bit functional-input complexity transfer.
+- The unnormalized rational-Legendre functional-input transfer now has an
+  internally complete interpolation/bit-complexity proof draft and exact
+  small-order checks, but remains a conjecture in submission-facing text until
+  external human algebraic-complexity review.
 - Exact hardness is separated from relative and additive approximation, and
   energy certification retains the positive denominator-interval condition.
 - The bounded Wedderburn--radical collapse now has a detailed appendix proof.
-- The interacting diagonal-path FEMPS result is included only as numerical
-  evidence for a restricted route, with errors, variance, convergence, and
-  antisymmetry residuals; no generic scalability or superiority claim is made.
+- The numerical section now selects only the interacting `N=6,D=12,K=4`
+  result in the 924-dimensional exterior space. It reports energy, CI error,
+  variance, norm, antisymmetry, time, and memory and discloses its zero-padded
+  preoptimized `D=10,K=4` initialization; no beyond-NOCI claim is made.
 - Higher-dimensional four-form classification is explicitly parked unless it
   controls an algorithmic or physical decision.
 - The diagonal-path solver is identified as NOCI-equivalent numerical evidence,
@@ -63,20 +66,22 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
 
 ## Validation
 
-- PDFLaTeX and BibTeX completed successfully for the combined v4 source.
-- Current PDF: 14 A4 pages, 368,760 bytes.
+- PDFLaTeX and BibTeX completed successfully for the combined v5 source.
+- Current PDF: 15 A4 pages, 387,182 bytes.
 - Current PDF SHA-256:
-  `C6C1F5F9DE65C47E9AFCFB6A90CC2A5DEAE47AD1A7C01C0A43CC07BE3A9EDECE`.
+  `00B2211664B55471BB093A25CF5C5F0A28A607FFF6774EBFC05F4F3494368EBC`.
 - Build log: no undefined citation/reference, overfull/underfull box, package,
   LaTeX, or font warnings.
-- All 14 pages were rendered to PNG and inspected for clipping, overlap,
+- All 15 pages were rendered to PNG and inspected for clipping, overlap,
   table legibility, formula placement, section transitions, and pagination.
-- Standard repository suite: `277 passed, 1 known latticeTN report-path
-  warning` in 688.51 s, using a workspace-local pytest temporary directory.
+- Standard repository suite: `287 passed, 1 known latticeTN report-path
+  warning` in 624.56 s, using the isolated worktree source and a workspace-local
+  pytest temporary directory. The exact-certificate subset separately reports
+  `10 passed`, and the rational-Legendre verifier passes orders two through six.
 
-The next numerical obligation is the single restored Phase 39 clean-source
-`N=4,D=8` point, retained internally and followed by no further small
-NOCI-equivalent points. The publication priority immediately afterward is the
-combined manuscript's theorem/proof/citation closure. The preregistered Phase
-40 explicit-correlation differentiator is parked and remains algorithm
-research, not a second-paper project.
+The single restored `N=4,D=8` point is complete and retained internally. It
+failed the registered final CI-error and variance thresholds; no rescue or
+further small NOCI-equivalent point is admitted. The active publication
+priority is the combined manuscript's theorem/proof/citation closure. The
+explicit-correlation differentiator remains parked and is algorithm research,
+not a second-paper project.

@@ -1,0 +1,32 @@
+# Combined manuscript A: theorem, evidence, and citation audit
+
+| Manuscript result | Domain and reduction | Evidence level | External dependency / citation | Remaining review |
+|---|---|---|---|---|
+| Exact particle-TT bond equals unfolding rank | real/complex finite tensors | theorem | exact TT-SVD; Oseledets (2011) | attribution/priority only |
+| Universal alternating exchange floor | real/complex, nonzero `N`-forms | theorem | self-contained diagonal-minor proof | exterior-algebra priority search |
+| Flat Slater particle spectrum and truncation floor | orthonormal Slater orbitals | theorem (known result) | Coleman (1963), Eckart--Young | none beyond citation check |
+| Direct Cayley coefficient identity | arbitrary field, matrix-valued one-forms | theorem | self-contained exterior/permutation proof | endpoint convention check complete |
+| Exact rational squared-norm hardness at maximum bond two | `Q`, CHSS structured family, metric reduction | theorem conditional on published source theorem | CHSS Theorems 3.5 and 3.9 | external human algebraic-complexity sign-off pending |
+| General signed Cayley recovery at maximum bond three | `Q`, two norm queries | theorem/remark | self-contained polarization | existing exact certificate covers small generic cases |
+| Rational Legendre exact point-value transfer | unnormalized rational `P_n`, `Q`, metric reduction | conjecture with internally complete proof draft | CHSS plus rational interpolation | external human review required before promotion |
+| Bounded Wedderburn--radical LC--AGP collapse | complex algebraic term bound; rational Turing construction only with decomposition supplied | theorem | Wedderburn--Malcev; Veronese/polarization | verify input-model wording and rational decomposition boundary |
+| Fixed-state graded LC--AGP collapse | fixed `w,g`; rational construction with embedding supplied | theorem | Vandermonde interpolation; weighted-automata context | verify inverse bit bounds and quotient lift |
+| Sparse bandwidth-one APG norm hardness | zero--one matrices over `Q/R`; complex absolute-square variant | theorem | Valiant permanent theorem; APG prior art | external normalization review |
+| Real-PSD relative-norm transfer | stated approximation promise | theorem | PSD permanent hardness source | external approximation-complexity review |
+| Energy interval certificate | deterministic inequalities with positive lower norm bound | theorem | self-contained interval arithmetic | none |
+| Universal direct carrier tensor product fails | all `N>=3` | theorem | explicit two-Slater `N+2` cut-rank counterexample | representation-theory framing review |
+| Diagonal-path numerical illustration | `N=6,D=12,K=4`, 924-dimensional exterior space | numerical evidence | same-basis CI; NOCI literature | no beyond-NOCI claim; initialization disclosed |
+
+## Global claim boundaries
+
+- Exact hardness does not exclude additive, randomized, Monte Carlo, or
+  separately promised algorithms.
+- The Legendre conjecture does not imply that all `chi>=2` FEMPS are unsuitable
+  for QMC.
+- Occupation-number MPS and second-quantized DMRG remain comparators, not
+  FEMPS aliases.
+- The selected numerical state is a finite NOCI expansion and supplies no
+  independent method novelty.
+- The old bond-three theorem remains a correct general polarization statement,
+  but is not the sharp structured CHSS norm boundary.
+

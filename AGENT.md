@@ -705,7 +705,7 @@ references/
 
 受限 diagonal-path 路线已经完成其算法审计，但被严格识别为有限 NOCI，因而不再是差异化主路线。当前只选择一个候选：以对称显式相关因子乘 exterior carrier，在保持一阶量子化、连续坐标和精确反对称性的前提下独立控制 functional-basis 维数 \(D\)、相关特征数 \(P\) 与 carrier multiplicity \(\chi\)。小系统用确定性积分作 materialization/AD 真值检查；更大系统只有通过误差、方差、自相关和反对称残差审计后才可进入 VMC。
 
-Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。最新 N4,D6 三组最终能量展宽为 2.035e-9，最大同基组 CI 误差为 2.523e-9，优化失败及反对称/枚举残差均为零；这些结果的精确数据和边界保存在各 completed plan、实验报告和 reproduction manifest 中。ADR 0028 明确该路线等价于有限 NOCI，只作为单篇结构/no-go 论文的数值演算章节。Phase 39 已恢复原定理 1--3、澄清 \(\chi=2\) 点值困难性与最大键维 3 的平方范数定理边界，并完成差异化路线审计。当前 Phase 40 只执行预注册的 N=2 显式相关 \(D/P/K\) 实验；在独立复现真正的非 NOCI 优势前，不得创建第二篇论文的标题、摘要、提纲或投稿源。
+Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。最新 N4,D6 三组最终能量展宽为 2.035e-9，最大同基组 CI 误差为 2.523e-9，优化失败及反对称/枚举残差均为零；这些结果的精确数据和边界保存在各 completed plan、实验报告和 reproduction manifest 中。ADR 0028 明确该路线等价于有限 NOCI，只作为单篇结构/no-go 论文的数值演算章节。稿件范围审计恢复了原定理 1--3，并澄清 \(\chi=2\) 点值困难性与最大键维 3 的平方范数定理边界。当前先按 ADR 0031 补做原 Phase 39 唯一的 N4,D8 clean-source 内部数值点，完成后停止扩展小规模 NOCI 点并立即转入合并稿 A 的理论闭环。显式相关 Phase 40 已 parked；恢复后仍只允许检验非 NOCI 的 \(D\)-收敛优势或 Li--Waintal/同基 DMRG 匹配比较，在真实结果出现前不得创建第二篇论文。
 
 旧 Phase 0--7 条目保留为历史设计与已完成工作的索引；若与本 recovery stage 冲突，以当前阶段和最新 ADR 为准。
 

@@ -166,9 +166,12 @@ evidence** that a symmetric Gaussian correlator preserves antisymmetry and can
 produce finite-basis projections whose Slater rank grows with projection
 dimension. It is a `Q^2` materialization oracle at `N=2`, not a contraction
 theorem, production solver, or `D`-convergence advantage. ADR 0029 selects this
-as the sole candidate route, and ADR 0030 preregisters Phase 40 against
-optimized fixed-`K` NOCI. No second manuscript exists: algorithm experiments
-must first produce and independently reproduce a genuine differentiator.
+as the sole candidate route, and ADR 0030 preregisters it against optimized
+fixed-`K` NOCI, but that experiment is now parked. ADR 0031 first restores the
+single clean-source `N=4,D=8` point from the original Phase 39 plan as internal
+NOCI-equivalent evidence; no further small points are admitted. No second
+manuscript exists: algorithm experiments must first produce and independently
+reproduce a genuine differentiator.
 
 ADR 0004 historically made ordered-sector/interparticle-distance functional TN
 the primary numerical route; ADR 0017 supersedes that priority while retaining

@@ -28,9 +28,18 @@ def test_publication_scope_gates_any_future_method_paper() -> None:
     adr = (
         ROOT / "docs" / "decisions" / "0028-single-manuscript-until-distinctiveness.md"
     ).read_text(encoding="utf-8")
-    phase = (ROOT / "docs" / "exec-plans" / "active" / "phase40.md").read_text(
+    phase = (
+        ROOT / "docs" / "exec-plans" / "parked" / "phase40.md"
+    ).read_text(
         encoding="utf-8"
     )
+    active = (
+        ROOT
+        / "docs"
+        / "exec-plans"
+        / "active"
+        / "phase39_n4_d8_addendum.md"
+    ).read_text(encoding="utf-8")
     completed = (
         ROOT / "docs" / "exec-plans" / "completed" / "phase39.md"
     ).read_text(encoding="utf-8")
@@ -48,7 +57,8 @@ def test_publication_scope_gates_any_future_method_paper() -> None:
     assert "same-orbital-basis DMRG" in scope
     assert "Maintain one combined structural/no-go manuscript" in adr
     assert "algorithm experiment, not Paper B" in phase
-    assert "No title, abstract, outline, or" in phase
-    assert "Only after an independently reproduced gate" in phase
+    assert "No title, abstract" in phase
+    assert "does not establish a new ansatz" in active
+    assert "no more small NOCI-equivalent" in active
     assert "Phase 39 closed the two-paper drift" in completed
     assert "does not authorize a second manuscript" in preregistration

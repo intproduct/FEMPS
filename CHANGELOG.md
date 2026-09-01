@@ -1,5 +1,18 @@
 # Research changelog
 
+## 2026-09-02 - Restored Phase 39 N4,D8 preregistration
+
+- Restored the original clean-source Phase 39 obligation as exactly one
+  `N=4,D=8,Q=128,K1--K4` internal NOCI-equivalent calculation, without
+  deleting the later manuscript-scope audit that reused the phase number.
+- Accepted ADR 0031 and froze source seed `4001`, candidate/optimizer pairs
+  `4011/4012`, `4021/4022`, `4031/4032`, inherited D6 optimizer budgets,
+  accuracy/resource gates, forced K2 interruption/resume, and clean repeat
+  before any D8 production result.
+- Parked the Phase 40 explicit-correlation experiment. After the single D8
+  artifact is independently verified, no additional small numerical point is
+  admitted and the main line returns to manuscript-A theory closure.
+
 ## 2026-09-02 - Phase 39 closure and no-paper-before-result rule
 
 - Closed Phase 39 with one authoritative combined manuscript. The former

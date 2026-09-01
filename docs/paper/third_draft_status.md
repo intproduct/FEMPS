@@ -74,7 +74,9 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
 - Standard repository suite: `277 passed, 1 known latticeTN report-path
   warning` in 688.51 s, using a workspace-local pytest temporary directory.
 
-The next project milestone is the preregistered Phase 40 `N=2` soft-Coulomb
-explicit-correlation differentiator experiment. It is algorithm research, not
-a second-paper project, and must preserve the established truth, variance,
-symmetry, memory, independent-axis, and comparator requirements.
+The next numerical obligation is the single restored Phase 39 clean-source
+`N=4,D=8` point, retained internally and followed by no further small
+NOCI-equivalent points. The publication priority immediately afterward is the
+combined manuscript's theorem/proof/citation closure. The preregistered Phase
+40 explicit-correlation differentiator is parked and remains algorithm
+research, not a second-paper project.

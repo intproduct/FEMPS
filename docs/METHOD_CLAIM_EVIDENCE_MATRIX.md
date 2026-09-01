@@ -39,4 +39,6 @@ are in `docs/experiments/results/phase30_reproduction_manifest.json`.
 - The nonbranching diagonal-path subclass is explicitly NOCI-equivalent.
 - `math/femps_no_go_manuscript.tex` is the sole submission source; the existing
   restricted-method draft is an internal working note.
-- Phase 40 is an algorithm experiment, not a second-paper project.
+- The restored Phase 39 `N=4,D=8` run is internal NOCI-equivalent evidence
+  only. Phase 40 explicit-correlation work is parked until manuscript-A theory
+  closure and remains an algorithm experiment, not a second-paper project.

@@ -1,5 +1,32 @@
 # Research changelog
 
+## 2026-09-02 - Phase 40 explicit-correlation differentiator and clean reproduction
+
+- Resumed only the preregistered non-NOCI differentiator after manuscript-A's
+  internal theory closure; no additional standalone NOCI point or second-paper
+  source was created.
+- Added a deterministic `N=2` optimizer for a symmetric Gaussian correlator
+  times a `chi=1` continuous exterior carrier. Carrier orbitals and correlator
+  amplitudes are both differentiated, QR gauged, checkpointed, and audited by
+  materialization and central finite differences.
+- Ran the frozen Cartesian axes: 72 correlated `D/P/seed` points and 54
+  fixed-`K` NOCI controls. All antisymmetry, correlator symmetry, norm,
+  quadrature, gradient, exact finite-basis contraction, and no-virtual-path
+  checks pass.
+- Under the frozen `P=5` versus `K=4` rule, `D=2,4,6,8` pass and `D=10,12`
+  fail. The consecutive passing pairs are `(2,4)`, `(4,6)`, `(6,8)`; the
+  high-`D` failures and seed spread are retained rather than rescued.
+- Independently reconstructed all 126 serialized states. Correlated
+  observables reproduce exactly, NOCI observables within `4.441e-15`, and the
+  maximum AD/finite-difference discrepancy is `7.585e-11`.
+- Repeated every optimization from a new clean checkpoint tree. All compared
+  energies, variances, norms, residuals, uncertainties, and gate decisions
+  agree exactly with the primary run. This is repository-level deterministic
+  reproduction, not external scientific replication or a scalable
+  many-particle contraction result; Paper B remains closed.
+- The full repository suite passes `292` tests in 654.47 s with the one known
+  latticeTN report-path scalar-conversion warning.
+
 ## 2026-09-02 - Manuscript-A theory recovery and CHSS bond-two correction
 
 - Kept the restored preregistered `N=4,D=8` result as internal numerical

@@ -69,12 +69,16 @@ from .slater_source_training import (
     slater_source_config_from_record,
 )
 from .correlated_exterior import (
+    CorrelatedExteriorConfig,
     CorrelatedTwoFermionResult,
+    canonical_two_orbital_carrier,
     correlated_two_fermion_observables,
     gauss_hermite_rule,
     harmonic_function_values,
     harmonic_function_values_and_derivatives,
+    initial_two_orbital_carrier,
     project_correlated_two_fermion_coefficients,
+    run_correlated_exterior_optimization,
 )
 
 __all__ = [
@@ -126,10 +130,14 @@ __all__ = [
     "slater_source_config_from_record",
     "validate_slater_source_checkpoint",
     "validate_slater_source_result",
+    "CorrelatedExteriorConfig",
     "CorrelatedTwoFermionResult",
+    "canonical_two_orbital_carrier",
     "correlated_two_fermion_observables",
     "gauss_hermite_rule",
     "harmonic_function_values",
     "harmonic_function_values_and_derivatives",
+    "initial_two_orbital_carrier",
     "project_correlated_two_fermion_coefficients",
+    "run_correlated_exterior_optimization",
 ]

@@ -42,13 +42,16 @@ to ordered coordinates or distance-variable MPS.
 
 ADR 0028 withdraws the later two-paper split. The diagonal-path solver is
 finite NOCI and now appears only as a numerical section of the single combined
-structural/no-go manuscript. Phase 39 selects a symmetric explicit correlator
+structural/no-go manuscript. Phase 39 selected a symmetric explicit correlator
 times an exterior carrier only as a candidate experiment: Jastrow factors,
 backflow, determinant carriers, tensorized backflow, and VMC are prior art, so
-the ansatz form alone is not a novelty claim. Phase 40 must demonstrate an
-independently reproduced `D`-convergence or matched-cost advantage beyond
-optimized fixed-`K` NOCI before any new publication decision. No second-paper
-drafting occurs while that gate is closed.
+the ansatz form alone is not a novelty claim. Phase 40 now supplies internally
+reconstructed and clean-source-repeated `N=2` evidence for a low-`D` basis-
+efficiency tradeoff against optimized fixed-`K` NOCI: the frozen point rule
+passes at `D=2,4,6,8` and fails at `D=10,12`. This is not external scientific
+replication or a scalable contraction result. No second-paper drafting occurs
+until an independent replication and a controlled `N>2` contraction/comparator
+result identify a contribution beyond established explicit-correlation work.
 
 Phase 15 closes only the finite-grid contraction gate: the exact hard-charge
 gap MPS, `O(N^2(L-N))` raw operator bond, and native AD optimizer are an

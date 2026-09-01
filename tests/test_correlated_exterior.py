@@ -1,9 +1,12 @@
 import torch
 
 from femps.algorithms.correlated_exterior import (
+    CorrelatedExteriorConfig,
+    canonical_two_orbital_carrier,
     correlated_two_fermion_observables,
     harmonic_function_values_and_derivatives,
     project_correlated_two_fermion_coefficients,
+    run_correlated_exterior_optimization,
 )
 
 
@@ -97,6 +100,69 @@ def test_nontrivial_correlator_exceeds_single_slater_rank_in_projection() -> Non
     ) / torch.linalg.vector_norm(coefficients)
     assert relative_skew_residual < 1e-13
     assert torch.linalg.matrix_rank(coefficients, tol=1e-10) >= 6
+
+
+def test_uncorrelated_projection_materializes_the_exterior_carrier() -> None:
+    coefficients = project_correlated_two_fermion_coefficients(
+        _canonical_two_fermion_carrier(order=2),
+        torch.empty(0, dtype=torch.float64),
+        torch.empty(0, dtype=torch.float64),
+        projection_order=2,
+        quadrature_order=48,
+    )
+    expected = torch.tensor(
+        [[0.0, 2.0**-0.5], [-2.0**-0.5, 0.0]], dtype=torch.float64
+    )
+    torch.testing.assert_close(coefficients, expected, atol=3e-14, rtol=3e-14)
+
+
+def test_carrier_qr_gradient_matches_central_difference() -> None:
+    raw = _canonical_two_fermion_carrier().clone()
+    raw[2, 0] = 0.07
+    raw.requires_grad_(True)
+    amplitudes = torch.tensor([-0.1], dtype=torch.float64)
+    exponents = torch.tensor([1.0], dtype=torch.float64)
+
+    def energy(value: torch.Tensor) -> torch.Tensor:
+        return correlated_two_fermion_observables(
+            canonical_two_orbital_carrier(value),
+            amplitudes,
+            exponents,
+            quadrature_order=48,
+        ).energy
+
+    gradient = torch.autograd.grad(energy(raw), raw)[0]
+    step = 1e-5
+    plus = raw.detach().clone()
+    minus = raw.detach().clone()
+    plus[2, 0] += step
+    minus[2, 0] -= step
+    finite_difference = (energy(plus) - energy(minus)) / (2.0 * step)
+    torch.testing.assert_close(
+        gradient[2, 0], finite_difference, atol=3e-9, rtol=3e-8
+    )
+
+
+def test_bounded_correlated_optimizer_is_seeded_and_nonworsening(tmp_path) -> None:
+    config = CorrelatedExteriorConfig(
+        basis_order=3,
+        exponents=(1.0,),
+        seed=40001,
+        quadrature_order=32,
+        adam_steps=3,
+        lbfgs_steps=2,
+        record_points=2,
+    )
+    checkpoint = tmp_path / "correlated.pt"
+    first = run_correlated_exterior_optimization(config, checkpoint_path=checkpoint)
+    second = run_correlated_exterior_optimization(config)
+    assert checkpoint.exists()
+    assert first["energy"] <= first["trace"][0]["energy"] + 1e-12
+    assert first["antisymmetry_residual"] <= 1e-13
+    assert first["correlator_symmetry_residual"] <= 1e-13
+    torch.testing.assert_close(first["raw_carrier"], second["raw_carrier"])
+    torch.testing.assert_close(first["amplitudes"], second["amplitudes"])
+    assert first["optimized_real_parameter_count"] == 7
 
 
 def test_correlated_carrier_rejects_nonsymmetric_parameter_shapes() -> None:

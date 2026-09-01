@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "experiment": "phase42_clean_source_reproduction_of_phase40",
+  "evidence_level": "clean-source deterministic numerical reproduction",
+  "scientific_boundary": "same repository implementation and frozen seeds; not external scientific replication, many-particle scalability, or Paper B",
+  "primary_artifact": "docs\\experiments\\results\\phase40_explicit_correlation_gate.json",
+  "reproduction_artifact": "docs\\experiments\\results\\phase42_phase40_clean_reproduction_full.json",
+  "primary_sha256": "34c2269fb2ba558023f28c1aad54cdf4f5fbc52fdf31d0a5f4775b43ca866f58",
+  "reproduction_sha256": "ed4920e740d8fc0f0010c23025fff91c02468d8e8d640479ac002c9417c456d6",
+  "checkpoint_reuse": false,
+  "correlated_points_compared": 72,
+  "noci_points_compared": 54,
+  "maximum_correlated_observable_difference": 0.0,
+  "maximum_noci_observable_difference": 0.0,
+  "tolerance": 2e-10,
+  "primary_consecutive_advantage_pairs": [
+    [
+      2,
+      4
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      6,
+      8
+    ]
+  ],
+  "reproduced_consecutive_advantage_pairs": [
+    [
+      2,
+      4
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      6,
+      8
+    ]
+  ],
+  "decisions_identical": true,
+  "reconstruction": {
+    "verified": true,
+    "phase40_differentiator_pass": true,
+    "correlated_points_reconstructed": 72,
+    "noci_points_reconstructed": 54,
+    "maximum_correlated_observable_difference": 0.0,
+    "maximum_noci_observable_difference": 4.440892098500626e-15,
+    "maximum_gradient_absolute_difference": 7.58432163037793e-11,
+    "consecutive_advantage_pairs": [
+      [
+        2,
+        4
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        6,
+        8
+      ]
+    ],
+    "independent_reproduction_still_required": true
+  },
+  "clean_source_reproduction_pass": true,
+  "publication_consequence": "no Paper B; external independent replication and many-particle controlled-contraction evidence remain required"
+}

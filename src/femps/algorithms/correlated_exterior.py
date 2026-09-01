@@ -14,11 +14,15 @@ antisymmetry, and automatic-differentiation checks before any VMC backend.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 import math
+from pathlib import Path
+import time
 
 import numpy as np
 import torch
+
+from femps.benchmarks import ProcessRSSMonitor
 
 
 @dataclass(frozen=True, slots=True)
@@ -35,6 +39,51 @@ class CorrelatedTwoFermionResult:
     correlator_symmetry_residual: torch.Tensor
     quadrature_order: int
     materialized_coordinate_values: int
+
+
+@dataclass(frozen=True, slots=True)
+class CorrelatedExteriorConfig:
+    """Frozen optimizer settings for the bounded two-fermion differentiator.
+
+    ``basis_order`` controls the exterior carrier, whereas ``exponents``
+    controls the independent symmetric pair-feature basis.  The optimizer is
+    intentionally restricted to real orbitals for the real one-dimensional
+    benchmark.
+    """
+
+    basis_order: int
+    exponents: tuple[float, ...]
+    seed: int
+    quadrature_order: int = 96
+    adam_steps: int = 200
+    adam_learning_rate: float = 3e-2
+    lbfgs_steps: int = 80
+    lbfgs_learning_rate: float = 5e-1
+    record_points: int = 10
+    orbital_noise_scale: float = 1e-3
+    omega: float = 1.0
+    coupling: float = 1.0
+    softening: float = 1.0
+
+    def validate(self) -> None:
+        if self.basis_order < 2:
+            raise ValueError("the two-fermion carrier requires D >= 2")
+        if self.quadrature_order < 4:
+            raise ValueError("quadrature_order must be at least four")
+        if min(self.adam_steps, self.lbfgs_steps, self.record_points) < 1:
+            raise ValueError("optimizer step and record counts must be positive")
+        if self.adam_learning_rate <= 0 or self.lbfgs_learning_rate <= 0:
+            raise ValueError("optimizer learning rates must be positive")
+        if self.orbital_noise_scale < 0:
+            raise ValueError("orbital_noise_scale must be nonnegative")
+        if any(not math.isfinite(value) or value <= 0 for value in self.exponents):
+            raise ValueError("all correlator exponents must be finite and positive")
+        if not math.isfinite(self.omega) or self.omega <= 0:
+            raise ValueError("omega must be finite and positive")
+        if not math.isfinite(self.coupling) or self.coupling < 0:
+            raise ValueError("coupling must be finite and nonnegative")
+        if not math.isfinite(self.softening) or self.softening <= 0:
+            raise ValueError("softening must be finite and positive")
 
 
 def _validate_carrier(
@@ -308,3 +357,158 @@ def project_correlated_two_fermion_coefficients(
     return torch.einsum(
         "pi,ij,qj->pq", weighted_basis, wavefunction, weighted_basis
     )
+
+
+def canonical_two_orbital_carrier(raw: torch.Tensor) -> torch.Tensor:
+    """Return a deterministic Stiefel-gauged real two-orbital carrier."""
+
+    if raw.ndim != 2 or raw.shape[1] != 2 or raw.shape[0] < 2:
+        raise ValueError("raw carrier must have shape (D,2) with D >= 2")
+    if raw.dtype != torch.float64:
+        raise TypeError("the bounded carrier optimizer requires float64")
+    q, r = torch.linalg.qr(raw, mode="reduced")
+    diagonal = torch.diagonal(r)
+    if bool(torch.any(torch.abs(diagonal) <= torch.finfo(raw.dtype).tiny)):
+        raise ValueError("raw carrier is rank deficient")
+    signs = torch.where(diagonal < 0, -torch.ones_like(diagonal), torch.ones_like(diagonal))
+    return q * signs[None, :]
+
+
+def initial_two_orbital_carrier(config: CorrelatedExteriorConfig) -> torch.Tensor:
+    """Construct the frozen canonical-plus-virtual-noise initialization."""
+
+    config.validate()
+    raw = torch.zeros((config.basis_order, 2), dtype=torch.float64)
+    raw[:2] = torch.eye(2, dtype=torch.float64)
+    if config.basis_order > 2 and config.orbital_noise_scale:
+        generator = torch.Generator().manual_seed(config.seed)
+        raw[2:] = config.orbital_noise_scale * torch.randn(
+            (config.basis_order - 2, 2), generator=generator, dtype=torch.float64
+        )
+    return canonical_two_orbital_carrier(raw)
+
+
+def run_correlated_exterior_optimization(
+    config: CorrelatedExteriorConfig,
+    *,
+    checkpoint_path: Path | None = None,
+) -> dict[str, object]:
+    """Optimize one bounded explicit-correlator exterior state.
+
+    This is a deterministic ``N=2`` truth/gradient solver.  It deliberately
+    materializes the product quadrature grid and therefore is not advertised
+    as the eventual many-particle contraction backend.
+    """
+
+    config.validate()
+    torch.manual_seed(config.seed)
+    raw = initial_two_orbital_carrier(config).contiguous().requires_grad_(True)
+    amplitudes = torch.zeros(
+        len(config.exponents), dtype=torch.float64, requires_grad=True
+    )
+    # QR adjoints can return a transposed/non-contiguous view, whereas the
+    # PyTorch LBFGS implementation flattens gradients with ``view``.
+    raw.register_hook(lambda gradient: gradient.contiguous())
+    amplitudes.register_hook(lambda gradient: gradient.contiguous())
+    exponents = torch.tensor(config.exponents, dtype=torch.float64)
+    parameters = [raw] + ([amplitudes] if amplitudes.numel() else [])
+
+    def evaluate() -> CorrelatedTwoFermionResult:
+        return correlated_two_fermion_observables(
+            canonical_two_orbital_carrier(raw),
+            amplitudes,
+            exponents,
+            quadrature_order=config.quadrature_order,
+            omega=config.omega,
+            coupling=config.coupling,
+            softening=config.softening,
+        )
+
+    trace: list[dict[str, float | int | str]] = []
+    best_energy = math.inf
+    best_raw = raw.detach().clone()
+    best_amplitudes = amplitudes.detach().clone()
+    record_interval = max(1, config.adam_steps // config.record_points)
+    started = time.perf_counter()
+    with ProcessRSSMonitor() as monitor:
+        optimizer = torch.optim.Adam(parameters, lr=config.adam_learning_rate)
+        for step in range(config.adam_steps):
+            optimizer.zero_grad(set_to_none=True)
+            result = evaluate()
+            value = float(result.energy.detach())
+            if value < best_energy:
+                best_energy = value
+                best_raw = raw.detach().clone()
+                best_amplitudes = amplitudes.detach().clone()
+            result.energy.backward()
+            optimizer.step()
+            with torch.no_grad():
+                raw.copy_(canonical_two_orbital_carrier(raw))
+            if step % record_interval == 0 or step == config.adam_steps - 1:
+                trace.append({"optimizer": "adam", "step": step, "energy": value})
+
+        with torch.no_grad():
+            raw.copy_(best_raw)
+            amplitudes.copy_(best_amplitudes)
+        lbfgs = torch.optim.LBFGS(
+            parameters,
+            lr=config.lbfgs_learning_rate,
+            max_iter=config.lbfgs_steps,
+            line_search_fn="strong_wolfe",
+        )
+        closure_calls = 0
+
+        def closure() -> torch.Tensor:
+            nonlocal closure_calls
+            lbfgs.zero_grad(set_to_none=True)
+            value = evaluate().energy
+            value.backward()
+            closure_calls += 1
+            return value
+
+        lbfgs.step(closure)
+        with torch.no_grad():
+            refined = evaluate()
+            refined_energy = float(refined.energy)
+            if refined_energy < best_energy:
+                best_energy = refined_energy
+                best_raw = raw.detach().clone()
+                best_amplitudes = amplitudes.detach().clone()
+            raw.copy_(best_raw)
+            amplitudes.copy_(best_amplitudes)
+            final_orbitals = canonical_two_orbital_carrier(raw).detach().clone()
+            final = evaluate()
+        trace.append(
+            {
+                "optimizer": "lbfgs",
+                "step": config.lbfgs_steps,
+                "energy": float(final.energy),
+            }
+        )
+    elapsed = time.perf_counter() - started
+    memory = monitor.record()
+    payload: dict[str, object] = {
+        "schema_version": 1,
+        "method": "bounded_explicit_correlator_exterior",
+        "evidence_level": "numerical evidence",
+        "config": asdict(config),
+        "raw_carrier": best_raw,
+        "orbitals": final_orbitals,
+        "amplitudes": best_amplitudes,
+        "energy": float(final.energy),
+        "norm": float(final.norm),
+        "energy_variance": float(final.energy_variance),
+        "antisymmetry_residual": float(final.antisymmetry_residual),
+        "correlator_symmetry_residual": float(final.correlator_symmetry_residual),
+        "trace": trace,
+        "lbfgs_closure_calls": closure_calls,
+        "optimized_real_parameter_count": int(raw.numel() + amplitudes.numel()),
+        "elapsed_seconds": elapsed,
+        "cpu_memory": memory.as_dict(),
+        "peak_cpu_rss_bytes": memory.peak_rss_bytes,
+        "materialized_coordinate_values": final.materialized_coordinate_values,
+    }
+    if checkpoint_path is not None:
+        checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
+        torch.save(payload, checkpoint_path)
+    return payload

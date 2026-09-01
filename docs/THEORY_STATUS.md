@@ -10,6 +10,7 @@
 | Matrix-wedge FEMPS is associative and strictly antisymmetric | proved from exterior associativity; small-N verified | External algebra review |
 | Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed at fixed maximum bond two: CHSS Theorem 3.9 gives `CDet(H_phi)=a I_2+b J_2` with `a+b=4^(3m)#SAT`; the fixed boundary `u=e_1`, `v=e_1+e_2` makes the one-form FEMPS norm `16^(3m)#SAT^2`, so one exact norm query and a nonnegative integer square root recover `#SAT`; the bond-three scalar-reference polarization remains valid only as a general signed-output recovery; the Phase 13 tagged pair-power and Phase 22 bandwidth-one APG reductions remain independent mechanisms | External algebraic-complexity review; only separately promised restrictions or controlled approximation remain open |
 | Nonbranching diagonal-path FEMPS has polynomial exact contraction | **implemented NOCI-equivalent restricted algorithm / numerical physics evidence**: a conserved global path label gives a `K`-term nonorthogonal Slater sum inside matrix-wedge FEMPS, eliminating `K^(N-1)` branching; E1--E4, N4 convergence, N6 stability and independent D/K convergence pass; Phase 33 batches transitions; Phase 34 truth-free adaptive D12 growth lowers the K4 CI error from `1.047e-4` to `3.202e-5` at K6 and beats a same-budget cold K6 control; Phase 35 passes three fresh K5/K6 candidate-pool lineages with K6 energy spread `4.877e-6`; Phase 36 exposes the externally capped schedule as a versioned public API; Phase 37 starts from a canonical Slater with no historical FEMPS state and reaches N4,D6,K4 CI error `4.883e-10`; Phase 38 passes two fresh clean-source schedules with distinct candidate paths, combined final-energy spread `2.035e-9`, maximum CI error `2.523e-9`, and zero failures | Retain as a numerical chapter in the combined paper. It cannot support a separate method paper without a non-NOCI explicit-correlation D-convergence advantage or a matched Li--Waintal/same-basis-DMRG tradeoff; automatic stopping, novelty, scaling, and superiority remain unadmitted |
+| Symmetric explicit correlator times a `chi=1` exterior carrier separates continuous correlation control `P` from carrier basis `D` | **bounded preregistered numerical evidence with clean-source reproduction**: all 72 correlated and 54 fixed-`K` NOCI controls pass symmetry/gradient/quadrature/reconstruction checks; the frozen `P=5`/`K=4` rule passes for `D=2,4,6,8` and fails for `D=10,12`; clean rerun differences are zero | This is an explicitly materialized `N=2` `Q^2` basis-efficiency result, not a new Jastrow ansatz or scalable solver. Require external replication and a controlled `N>2` stochastic/hybrid contraction with Li--Waintal or same-basis DMRG comparison before any method-paper claim |
 | Generic sparse-path FEMPS has a relative squared-norm PRAS | conditionally obstructed: on real-PSD paired coefficients, `M! sqrt(n_tilde)` would be a PRAS for the PSD permanent, which Meiburg excludes unless `RP=NP`; an exact-rational conditioning/energy certificate passes | External proof review; entrywise-nonnegative FPRAS, additive estimates with a certified norm lower bound, and separately promised structures remain open |
 | Every exterior cut support factors as fixed statistics carrier times canonical correlation multiplicity, with Slater multiplicity one | disproved for the direct tensor product: Slater `r_1=N` forces carrier dimension `N`, but a full-support two-Slater family has stable `r_1=N+2`; exact all-cut controls pass for `3<=N<=8` | External proof review; Hamiltonian-specific symmetry sectors and genuinely different categorical structures are not ruled out |
 | Uniformly bounded coefficient algebras define a distinct tractable matrix-pair family beyond finite LC-AGP | disproved in theorem draft: if the largest semisimple matrix block `p` and radical nilpotency index `d` are fixed, arbitrary-boundary pair powers collapse to polynomial-size LC-AGP; exact-rational `T2` M=1--6 and `Mat2` M=1--4 base cases pass | External proof review; search only growing-`p`/growing-`d` exact structures or controlled approximate contractions |
@@ -162,24 +163,23 @@ maximum bond two. The older direct-sum reference reaches maximum bond three
 and is retained only for arbitrary signed Cayley outputs. The diagonal-path data are retained
 only as an NOCI-equivalent numerical exercise.
 
-The bounded Phase 39 explicit-correlation prototype supplies **numerical
-evidence** that a symmetric Gaussian correlator preserves antisymmetry and can
-produce finite-basis projections whose Slater rank grows with projection
-dimension. It is a `Q^2` materialization oracle at `N=2`, not a contraction
-theorem, production solver, or `D`-convergence advantage. ADR 0029 selects this
-as the sole candidate route, and ADR 0030 preregisters it against optimized
-fixed-`K` NOCI, but that experiment is now parked. ADR 0031 first restores the
-single clean-source `N=4,D=8` point from the original Phase 39 plan as internal
-NOCI-equivalent evidence; no further small points are admitted. No second
-manuscript exists: algorithm experiments must first produce and independently
-reproduce a genuine differentiator.
+The bounded Phase 39 prototype established materialization and gradient truth
+for a symmetric Gaussian correlator. Phase 40 then executed the frozen
+`D/P/K` comparison: its low-`D` explicit-correlation differentiator passes
+internally at `D=2,4,6,8` and fails at `D=10,12`. An independent state
+reconstructor checks all 126 states, and a new checkpoint tree reproduces every
+compared observable and decision exactly. This remains a `Q^2` materialization
+oracle at `N=2`, not a scalable contraction theorem or external scientific
+replication. No second manuscript exists; controlled `N>2` contraction and a
+matched Li--Waintal/same-basis-DMRG comparison remain required.
 
 The restored clean-source `N=4,D=8,K=4` point is closed as failed internal
 **numerical evidence**. Clean/resume runs agree exactly and all symmetry,
 resource, no-enumeration, and optimizer gates pass, but the same-basis CI error
 `3.6469e-5` and variance `3.2252e-4` exceed the frozen `1e-6` and `1e-5`
 limits. No rescue or further small NOCI-equivalent point is admitted;
-manuscript-A theory closure is active.
+manuscript-A internal theory closure is complete and external human review is
+pending.
 
 ADR 0004 historically made ordered-sector/interparticle-distance functional TN
 the primary numerical route; ADR 0017 supersedes that priority while retaining

@@ -190,10 +190,22 @@ considered only after an independently reproduced non-NOCI explicit-
 correlation `D`-convergence advantage or a matched Li--Waintal/same-basis-DMRG
 comparison with a genuine measured tradeoff.
 
+The preregistered Phase 40 bounded differentiator has now passed internally
+and has been repeated from a clean checkpoint tree. A symmetric explicit
+correlator times one exterior Slater carrier reaches roughly `4e-6` reference
+error for `D=2--8`, while the frozen optimized `K=4` NOCI control approaches
+that scale only as `D` grows. The frozen point rule passes at `D=2,4,6,8` and
+fails at `D=10,12`; both the favorable interval and the high-`D` failure are
+retained. All 126 optimization results reproduce exactly in the clean rerun.
+This is a bounded `N=2`, explicitly materialized `Q^2` basis-efficiency result,
+not an external replication, scalable contraction claim, new Jastrow ansatz,
+or authorization for Paper B.
+
 See [the active execution plan](docs/exec-plans/active/phase41_manuscript_a_theory_closure.md),
 [the restored D8 internal report](docs/experiments/phase39_n4_d8_internal_report.md),
 [the completed single-manuscript audit](docs/exec-plans/completed/phase39.md),
 [the explicit-correlation audit](docs/experiments/phase39_distinctiveness_audit.md),
+[the Phase 40 differentiator report](docs/experiments/phase40_explicit_correlation_gate_report.md),
 [the single-manuscript scope](docs/paper/SINGLE_MANUSCRIPT_SCOPE.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),

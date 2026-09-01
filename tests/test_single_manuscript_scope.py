@@ -32,7 +32,7 @@ def test_publication_scope_gates_any_future_method_paper() -> None:
         ROOT / "docs" / "decisions" / "0028-single-manuscript-until-distinctiveness.md"
     ).read_text(encoding="utf-8")
     phase = (
-        ROOT / "docs" / "exec-plans" / "parked" / "phase40.md"
+        ROOT / "docs" / "exec-plans" / "active" / "phase40.md"
     ).read_text(
         encoding="utf-8"
     )
@@ -61,6 +61,9 @@ def test_publication_scope_gates_any_future_method_paper() -> None:
     assert "Maintain one combined structural/no-go manuscript" in adr
     assert "algorithm experiment, not Paper B" in phase
     assert "No title, abstract" in phase
+    normalized_phase = " ".join(phase.lower().split())
+    assert "external human review" in normalized_phase
+    assert "does not create a second manuscript" in normalized_phase
     assert "Keep one manuscript; do not create Paper B" in active
     assert "no further small" in active
     assert "Phase 39 closed the two-paper drift" in completed

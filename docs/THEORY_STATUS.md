@@ -9,7 +9,7 @@
 | The 16D concise four-form minimum middle rank is 22 or 23 | **conjecture** with missing provenance; neither alternative is currently admitted. An **exact certificate** gives only the explicit rational upper bound `mu_4^Q(16)<=24`; a 120,000-sample finite-field screen found no lower coordinate-hypergraph candidate | Recover a primary definition/candidate or construct one from scratch; certify rank and complete orbit/chart coverage over an explicit field before claiming sharpness |
 | Matrix-wedge FEMPS is associative and strictly antisymmetric | proved from exterior associativity; small-N verified | External algebra review |
 | Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed already at fixed maximum bond three: site-indexed one-form bond-two cores encode the `Mat_2` row-ordered Cayley determinant, and a scalar-reference direct sum recovers signed amplitudes from exact squared norms; the Phase 13 tagged pair-power and Phase 22 bandwidth-one APG reductions remain independent mechanisms | External proof review; only separately gated restrictions or controlled approximation remain open |
-| Nonbranching diagonal-path FEMPS has polynomial exact contraction | **implemented restricted algorithm / numerical physics evidence**: a conserved global path label gives a `K`-term nonorthogonal Slater sum inside matrix-wedge FEMPS, eliminating `K^(N-1)` branching; E1--E4, N4 convergence, N6 stability and independent D/K convergence pass; Phase 33 batches transitions; Phase 34 truth-free adaptive D12 growth lowers the K4 CI error from `1.047e-4` to `3.202e-5` at K6 and beats a same-budget cold K6 control; Phase 35 passes three fresh K5/K6 candidate-pool lineages with K6 energy spread `4.877e-6` | Keep N/D expansion stopped; package the externally capped adaptive schedule as a reproducible solver API. Automatic stopping is not admitted because no stop event occurred; no generic FEMPS, novelty, asymptotic scaling, GPU acceleration, or superiority claim is admitted |
+| Nonbranching diagonal-path FEMPS has polynomial exact contraction | **implemented restricted algorithm / numerical physics evidence**: a conserved global path label gives a `K`-term nonorthogonal Slater sum inside matrix-wedge FEMPS, eliminating `K^(N-1)` branching; E1--E4, N4 convergence, N6 stability and independent D/K convergence pass; Phase 33 batches transitions; Phase 34 truth-free adaptive D12 growth lowers the K4 CI error from `1.047e-4` to `3.202e-5` at K6 and beats a same-budget cold K6 control; Phase 35 passes three fresh K5/K6 candidate-pool lineages with K6 energy spread `4.877e-6`; Phase 36 exposes the externally capped schedule as a versioned public API and exactly reproduces one frozen physical lineage across checkpoint/resume | Keep N/D expansion stopped; close an end-to-end command from a canonical Slater source without a historical checkpoint. Automatic stopping is not admitted because no stop event occurred; no generic FEMPS, novelty, asymptotic scaling, GPU acceleration, or superiority claim is admitted |
 | Generic sparse-path FEMPS has a relative squared-norm PRAS | conditionally obstructed: on real-PSD paired coefficients, `M! sqrt(n_tilde)` would be a PRAS for the PSD permanent, which Meiburg excludes unless `RP=NP`; an exact-rational conditioning/energy certificate passes | External proof review; entrywise-nonnegative FPRAS, additive estimates with a certified norm lower bound, and separately promised structures remain open |
 | Every exterior cut support factors as fixed statistics carrier times canonical correlation multiplicity, with Slater multiplicity one | disproved for the direct tensor product: Slater `r_1=N` forces carrier dimension `N`, but a full-support two-Slater family has stable `r_1=N+2`; exact all-cut controls pass for `3<=N<=8` | External proof review; Hamiltonian-specific symmetry sectors and genuinely different categorical structures are not ruled out |
 | Uniformly bounded coefficient algebras define a distinct tractable matrix-pair family beyond finite LC-AGP | disproved in theorem draft: if the largest semisimple matrix block `p` and radical nilpotency index `d` are fixed, arbitrary-boundary pair powers collapse to polynomial-size LC-AGP; exact-rational `T2` M=1--6 and `Mat2` M=1--4 base cases pass | External proof review; search only growing-`p`/growing-`d` exact structures or controlled approximate contractions |
@@ -113,6 +113,20 @@ particle-tensor enumeration. All predicted and realized decisions say
 does not validate automatic termination: production growth remains explicitly
 bounded by an external maximum K. This is multiseed stability evidence at one
 fixed physical point, not particle-number, basis, or asymptotic scaling.
+
+Phase 36 moves this workflow out of benchmark scripts. A versioned public API
+now requires a finite external `max_terms`, a complete consecutive candidate/
+optimizer seed schedule, source and operator identities, and a checkpoint path.
+It writes an atomic outer checkpoint after each K and rejects changed identities
+on resume. Small-system tests verify materialized exterior energy, exact
+antisymmetry, AD gradients, invalid schedules, and interrupted/uninterrupted
+equivalence. The preregistered N6,D12 call stops after K5 and resumes K6,
+reproducing Phase 35 lineage-1 selected candidates `12/3` and stored energies
+exactly. Independent reconstruction gives final CI error `3.27575e-5` and
+variance `3.89800e-4`. A first extra-QR wrapper attempt missed the frozen K6
+energy by `3.60423e-11` and is retained as failed numerical evidence; the
+`1e-11` gate was not changed. Phase 36 establishes reusable bounded solver
+orchestration, not automatic stopping or new asymptotic evidence.
 
 ADR 0004 historically made ordered-sector/interparticle-distance functional TN
 the primary numerical route; ADR 0017 supersedes that priority while retaining

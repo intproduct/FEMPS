@@ -7,6 +7,8 @@ import json
 from pathlib import Path
 
 from femps.algorithms import (
+    ADAPTIVE_DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
+    ADAPTIVE_DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
     DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
     DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
 )
@@ -147,6 +149,16 @@ ENTRIES = (
         "verify_command": "python scripts/verify_phase35_adaptive_pool_stability.py",
         "seeds": [3511, 3512, 3521, 3522, 3531, 3532],
     },
+    {
+        "id": "n6_public_adaptive_solver",
+        "claim": "The public bounded adaptive API exactly reproduces frozen N6,D12 lineage-1 selections and energies across an explicit K5 interruption/resume boundary.",
+        "artifact": "docs/experiments/results/phase36_public_adaptive_solver.json",
+        "verifier_module": "scripts.verify_phase36_public_adaptive_solver",
+        "verifier_argument": "path",
+        "benchmark_command": "python scripts/benchmark_phase36_public_adaptive_solver.py",
+        "verify_command": "python scripts/verify_phase36_public_adaptive_solver.py",
+        "seeds": [3511, 3512],
+    },
 )
 
 
@@ -187,6 +199,12 @@ def main() -> None:
             "document": "docs/DIAGONAL_PATH_SOLVER_CONTRACT.md",
             "result_schema_version": DIAGONAL_PATH_RESULT_SCHEMA_VERSION,
             "checkpoint_schema_version": DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION,
+            "adaptive_result_schema_version": (
+                ADAPTIVE_DIAGONAL_PATH_RESULT_SCHEMA_VERSION
+            ),
+            "adaptive_checkpoint_schema_version": (
+                ADAPTIVE_DIAGONAL_PATH_CHECKPOINT_SCHEMA_VERSION
+            ),
         },
         "global_boundaries": [
             "restricted nonbranching diagonal-path FEMPS only",

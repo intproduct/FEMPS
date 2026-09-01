@@ -14,7 +14,7 @@
 - Architecture: `docs/ARCHITECTURE.md`
 - Evidence status: `docs/THEORY_STATUS.md`
 - Testing: `docs/TESTING.md`
-- Active execution plan: `docs/exec-plans/active/phase36.md`
+- Active execution plan: `docs/exec-plans/active/phase37.md`
 - Research log: `CHANGELOG.md`
 
 ## Standard validation

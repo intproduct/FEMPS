@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "evidence_level": "numerical",
-  "scientific_boundary": "paper figures from twelve manifest-hashed artifacts; no asymptotic or superiority claim",
+  "scientific_boundary": "paper figures from thirteen manifest-hashed artifacts; no asymptotic or superiority claim",
   "manifest": "docs\\experiments\\results\\phase30_reproduction_manifest.json",
-  "manifest_sha256": "264d36759c40c11fb31d17843ff6d939f83ca84987001f2c210e08803b2499cf",
+  "manifest_sha256": "b0142fab15d14d9432d2aca648793bb0ef2ded7ee24d8e6288890a7548cabc51",
   "source_artifact_sha256": {
     "n2_harmonic_ladder": "fbfb76b592f849f5acd9ce5359c9efa67a01f103a9316b3f07ff5368933dcf55",
     "n4_harmonic_e4_closure": "15c9198db60783e5c62843485e5701ee129807bc2ff943cd73b866c09c8c481a",
@@ -16,7 +16,8 @@
     "n6_independent_dk_convergence": "a9d2d6618443746e84591c637084c17a582b42e9cc7ce1bca415a14505c46b82",
     "n6_vectorized_transition_backend": "5ec5f054b86d59ac10ce3918b89419074436e518833f383a3a2767000f1ed047",
     "n6_adaptive_correlation_growth": "f58bede879a27863f4c72a9a651d7c418afa9556560ef397a247ca14fbba1b3b",
-    "n6_adaptive_pool_stability": "8b1ad9688185177bf0cd546dac0fe02069c8a716533f481ff80ffc92b11c6bcc"
+    "n6_adaptive_pool_stability": "8b1ad9688185177bf0cd546dac0fe02069c8a716533f481ff80ffc92b11c6bcc",
+    "n6_public_adaptive_solver": "1c85c15d126e020953e243f59dc96a187c2078c82e68c16b81f285b3677a6bb4"
   },
   "figures": {
     "docs\\paper\\figures\\femps-convergence-summary.png": "e6d97080719196f44ba0a937a33df6d86f64e82fea6c3c9028d16a1c66afb4be",

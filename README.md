@@ -150,8 +150,15 @@ is gated by an explicit contraction-complexity audit.
   `4.54299e-4`. All six predicted and realized decisions say `continue`, so
   pool stability is admitted but automatic stopping is not: adaptive solves
   retain a mandatory external `max_K`.
+- Phase 36 promotes that workflow into a public bounded adaptive API with
+  explicit candidate/optimizer seed schedules, source/operator hashes,
+  stage-level checkpoint/resume, and mandatory `max_terms`. A preregistered
+  K5 interruption followed by K6 resume exactly reproduces frozen Phase 35
+  lineage-1 candidates and energies. Independent reconstruction gives final
+  CI error `3.27575e-5`, variance `3.89800e-4`, and zero structural
+  antisymmetry residual. Automatic stopping remains unadmitted.
 
-See [the active execution plan](docs/exec-plans/active/phase36.md),
+See [the active execution plan](docs/exec-plans/active/phase37.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
 [the diagonal-path solver contract](docs/DIAGONAL_PATH_SOLVER_CONTRACT.md),
@@ -160,6 +167,7 @@ See [the active execution plan](docs/exec-plans/active/phase36.md),
 [the vectorized transition report](docs/experiments/phase33_vectorized_transitions_report.md),
 [the adaptive K-growth report](docs/experiments/phase34_adaptive_k_growth_report.md),
 [the adaptive-pool stability report](docs/experiments/phase35_adaptive_pool_stability_report.md),
+[the public adaptive-solver report](docs/experiments/phase36_public_adaptive_solver_report.md),
 [the method claim/evidence matrix](docs/METHOD_CLAIM_EVIDENCE_MATRIX.md),
 [the Phase 30 reproduction manifest](docs/experiments/results/phase30_reproduction_manifest.json),
 [the exact four-form workspace](math/four_forms/README.md),

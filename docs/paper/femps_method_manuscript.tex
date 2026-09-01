@@ -52,7 +52,9 @@ $3.73\times10^{-4}$, while beating a same-budget cold $K=6$ control.  Three
 fresh candidate-pool lineages give $K=6$ energy spread $4.88\times10^{-6}$,
 maximum CI error $3.76\times10^{-5}$, and maximum variance
 $4.54\times10^{-4}$; all continue decisions agree, but no automatic stopping
-rule is admitted because no stop event occurs.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
+rule is admitted because no stop event occurs.  A bounded public adaptive API
+exactly reproduces the first lineage across an explicit $K=5$ interruption and
+resume boundary.  At fixed $D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
 $N=6$, while the \FEMPS{} correlation control remains $K=4$; matched kernel
 measurements expose the corresponding polynomial cost.  The method is a
 restricted nonorthogonal multideterminant algorithm, not an efficient generic
@@ -268,7 +270,7 @@ than relabeled as \FEMPS{}.
 \section{Numerical evidence}
 
 All floating-point results in this section are numerical evidence.  The full
-manifest contains twelve independently verified artifacts.
+manifest contains thirteen independently verified artifacts.
 
 \subsection{\texorpdfstring{$N=2$}{N=2}: analytic and finite-basis checks}
 
@@ -464,7 +466,8 @@ Seeds K5/K6 & Energy & Error versus CI & Variance & Condition \\
 3531/3532 & 25.049404050601 & $3.763\times10^{-5}$ & $4.543\times10^{-4}$ & 3.072 \\
 \bottomrule
 \end{tabular}
-\par\smallskip{\scriptsize Evidence: \claimid{n6_adaptive_pool_stability}.}
+\par\smallskip{\scriptsize Evidence: \claimid{n6_adaptive_pool_stability};
+\claimid{n6_public_adaptive_solver}.}
 \end{table}
 
 The K6 energy spread is $4.877\times10^{-6}$ and the minimum K4-to-K6
@@ -476,6 +479,19 @@ threshold.  Thus all six predicted and realized decisions agree as
 \emph{continue}.  Since no stop event is observed, this evidence admits
 candidate-pool stability but not automatic termination; $K$ remains externally
 capped (claim \claimid{n6_adaptive_pool_stability}).
+
+The same first fresh-pool lineage was then run through the bounded public
+adaptive API with explicit candidate and optimizer seed schedules, atomic
+stage checkpoints, and a forced interruption after $K=5$.  Resume selected the
+same candidates and reproduced the frozen $K=5$ and $K=6$ energies exactly at
+the serialized-artifact level.  Independent exterior reconstruction gives
+$K=6$ energy $25.049399173589$, CI error $3.276\times10^{-5}$, variance
+$3.898\times10^{-4}$, norm error below $1.12\times10^{-16}$, and zero
+structural antisymmetry residual.  A preserved first attempt exposed duplicate
+source gauge projection through a $3.60\times10^{-11}$ energy mismatch; the
+corrected public path canonicalizes exactly once.  This verifies a reproducible
+bounded API and interruption semantics, not automatic stopping (claim
+\claimid{n6_public_adaptive_solver}).
 
 \section{Exchange carrier, correlation multiplicity, and cost}
 
@@ -606,6 +622,11 @@ calculation is admitted.  DMRG has been deferred
 because it would be weaker than exact CI in the present finite spaces; no
 FEMPS--DMRG performance inference follows.
 
+The public adaptive reproduction still starts from the preoptimized $K=4$
+checkpoint used by the frozen lineage.  A clean end-to-end command beginning
+from a single Slater source, with no historical checkpoint dependency, remains
+the next solver milestone.
+
 The implementation uses exact deterministic contraction for the restricted
 class.  A future truncation or stochastic estimator for generic cores would
 require a separate error, variance, failure-probability, and antisymmetry gate.
@@ -627,7 +648,9 @@ interacting runs are stable, and every accepted approximation/error/resource
 quantity is explicit.  Truth-free fixed-pool growth at N6,D12 converts the
 correlation control into a measurable solver improvement; three fresh pools
 retain that gain within a $4.877\times10^{-6}$ K6 energy spread.  Automatic
-stopping remains unadmitted and the schedule is externally capped.  The ordinary particle-TT comparison makes the intended
+stopping remains unadmitted and the schedule is externally capped.  The
+bounded public adaptive API reproduces the frozen lineage across a checkpoint
+boundary while reporting explicit schema, hashes, seeds, and residuals.  The ordinary particle-TT comparison makes the intended
 separation visible: exchange support grows while $K$ remains the chosen
 correlation multiplicity.  At the same time, current CI references are faster
 and the method is close to established nonorthogonal determinant expansions.
@@ -671,6 +694,7 @@ Identifier & Scope \\
 \claimid{n6_vectorized_transition_backend} & Batched CPU/Blackwell parity and matched solve \\
 \claimid{n6_adaptive_correlation_growth} & Truth-free N6,D12 K4-to-K6 growth and cold K6 control \\
 \claimid{n6_adaptive_pool_stability} & Three fresh N6,D12 K5/K6 pools and stop calibration \\
+\claimid{n6_public_adaptive_solver} & Public bounded N6,D12 adaptive API and interruption/resume reproduction \\
 \bottomrule
 \end{tabularx}
 \end{table}

@@ -110,11 +110,17 @@ is gated by an explicit contraction-complexity audit.
   paths contract through `K^2` determinant transitions. The first E1/E2
   artifact verifies energies and gradients against full exterior truth and
   shows numerical `K=1,2,4` convergence for an interacting two-fermion model.
-  This route is close to nonorthogonal selected CI and carries no novelty or
-  scalability claim before the full physics ladder and comparator audit pass.
+  The E4 closure now passes three blind `D=6` seeds and three truth-free
+  `D=6 -> D=7` continuations, independent `D`/`K` convergence, sampled CPU
+  memory, and CI/Slater/AGP/ordinary-TT comparisons. A condition-gated inverse
+  path agrees with singular-safe minors within `1.421e-14` and accelerates the
+  tested `N=4` forward/backward kernels by roughly `2--4x`. This route remains
+  close to nonorthogonal selected CI and carries no generic-contraction,
+  novelty, asymptotic-scalability, or superiority claim.
 
 See [the active execution plan](docs/exec-plans/active/phase28.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
+[the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
 [the exact four-form workspace](math/four_forms/README.md),
 [the no-go hierarchy](docs/theory/exterior_no_go_hierarchy.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md),

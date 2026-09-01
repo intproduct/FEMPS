@@ -1,5 +1,21 @@
 # Research changelog
 
+## 2026-09-01 - Phase 28 interacting algorithm gate passed
+
+- Closed E4 for the restricted diagonal-path FEMPS with three blind `D=6,K=4`
+  seeds and three truth-free nested-basis `D=7,K=4` continuations; all six pass
+  registered energy, variance, norm, antisymmetry, and no-enumeration criteria.
+- Added independent `K=1,2,4` and `D=5,6,7` convergence, sampled whole-process
+  CPU RSS, and exact-CI, Slater, single-AGP, and ordinary particle-TT
+  comparators. The standalone verifier recomputes the raw acceptance decision.
+- Added a condition-gated determinant/inverse transition path with automatic
+  singular-safe minor fallback. Ten `(N,D,K,L)` points agree within `1.421e-14`;
+  the tested `N=4` forward/backward kernels improve by roughly `2--4x`.
+- Recorded the narrow decision: the subclass is a successful exact restricted
+  baseline with systematic correlation control, but the tiny benchmarks show
+  no CI runtime/parameter advantage and admit no generic, novelty, asymptotic,
+  or superiority claim.
+
 ## 2026-09-01 - FEMPS algorithm and physics recovery pivot
 
 - Parked Phase 27 after the exact seven- and eight-dimensional four-form

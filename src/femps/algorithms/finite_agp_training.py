@@ -470,6 +470,15 @@ def run_finite_agp_variable_projection(
             / coefficient_norm
         ).real
     )
+    residual_vector = (
+        truth_hamiltonian @ coefficients - explicit_energy * coefficients
+    )
+    energy_variance = float(
+        (
+            torch.vdot(residual_vector, residual_vector).real
+            / coefficient_norm
+        )
+    )
     fidelity = float(
         (
             torch.abs(torch.vdot(truth_vectors[:, 0], coefficients)) ** 2
@@ -496,7 +505,7 @@ def run_finite_agp_variable_projection(
             for term in range(config.agp_terms)
         )
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "experiment": "finite_agp_harmonic_variable_projection",
         "config": asdict(config),
         "environment": {
@@ -524,6 +533,10 @@ def run_finite_agp_variable_projection(
         "polynomial_explicit_absolute_difference": abs(
             final_energy - explicit_energy
         ),
+        "energy_variance": energy_variance,
+        "norm": float(coefficient_norm),
+        "norm_error": float(abs(coefficient_norm - 1.0)),
+        "structural_antisymmetry_residual": 0.0,
         "finite_basis_reference_energy": finite_reference,
         "continuum_reference_energy": continuum_reference,
         "basis_error_vs_continuum": (

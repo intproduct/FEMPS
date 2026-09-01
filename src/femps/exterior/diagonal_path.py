@@ -78,11 +78,30 @@ def _replace_column(
     )
 
 
+def _use_well_conditioned_path(overlap: torch.Tensor) -> bool:
+    """Return whether inverse-based determinant derivatives are numerically safe."""
+
+    with torch.no_grad():
+        singular_values = torch.linalg.svdvals(overlap)
+        real_dtype = singular_values.dtype
+        condition_limit = torch.finfo(real_dtype).eps ** -0.5
+        return bool(
+            singular_values[-1] > 0
+            and singular_values[0] / singular_values[-1] <= condition_limit
+        )
+
+
 def _one_body_transition_from_projected(
-    overlap: torch.Tensor, insertion: torch.Tensor
+    overlap: torch.Tensor,
+    insertion: torch.Tensor,
+    *,
+    allow_inverse: bool = True,
 ) -> torch.Tensor:
     """Return the coefficient linear in ``t`` of ``det(S + t H)``."""
 
+    if allow_inverse and _use_well_conditioned_path(overlap):
+        logarithmic_derivative = torch.linalg.solve(overlap, insertion)
+        return torch.linalg.det(overlap) * torch.trace(logarithmic_derivative)
     total = torch.zeros((), dtype=overlap.dtype, device=overlap.device)
     for column in range(overlap.shape[0]):
         total = total + torch.linalg.det(
@@ -95,9 +114,18 @@ def _mixed_transition_from_projected(
     overlap: torch.Tensor,
     left_insertion: torch.Tensor,
     right_insertion: torch.Tensor,
+    *,
+    allow_inverse: bool = True,
 ) -> torch.Tensor:
     """Return the ``t*u`` coefficient of ``det(S + t A + u B)``."""
 
+    if allow_inverse and _use_well_conditioned_path(overlap):
+        left_logarithmic = torch.linalg.solve(overlap, left_insertion)
+        right_logarithmic = torch.linalg.solve(overlap, right_insertion)
+        return torch.linalg.det(overlap) * (
+            torch.trace(left_logarithmic) * torch.trace(right_logarithmic)
+            - torch.trace(left_logarithmic @ right_logarithmic)
+        )
     total = torch.zeros((), dtype=overlap.dtype, device=overlap.device)
     particles = overlap.shape[0]
     for left_column in range(particles):
@@ -132,11 +160,16 @@ def diagonal_path_overlap_matrix(orbitals: torch.Tensor) -> torch.Tensor:
 
 
 def diagonal_path_one_body_transition_matrix(
-    orbitals: torch.Tensor, operator: torch.Tensor
+    orbitals: torch.Tensor,
+    operator: torch.Tensor,
+    *,
+    transition_algorithm: str = "auto",
 ) -> torch.Tensor:
     """Return all ``<Phi_a|sum_i h(i)|Phi_b>`` transitions."""
 
     _validate_one_body(orbitals, operator)
+    if transition_algorithm not in {"auto", "minor"}:
+        raise ValueError("transition_algorithm must be auto or minor")
     terms, _, _ = orbitals.shape
     result = torch.empty(
         (terms, terms), dtype=orbitals.dtype, device=orbitals.device
@@ -148,7 +181,9 @@ def diagonal_path_one_body_transition_matrix(
             overlap = bra_orbitals @ orbitals[ket]
             insertion = bra_orbitals @ acted[ket]
             result[bra, ket] = _one_body_transition_from_projected(
-                overlap, insertion
+                overlap,
+                insertion,
+                allow_inverse=transition_algorithm == "auto",
             )
     return result
 
@@ -158,6 +193,8 @@ def diagonal_path_two_body_transition_matrix_factorized(
     left: torch.Tensor,
     right: torch.Tensor,
     weights: torch.Tensor,
+    *,
+    transition_algorithm: str = "auto",
 ) -> torch.Tensor:
     """Return transitions for a factorized symmetric pair Hamiltonian.
 
@@ -167,6 +204,8 @@ def diagonal_path_two_body_transition_matrix_factorized(
     """
 
     _validate_two_body_factors(orbitals, left, right, weights)
+    if transition_algorithm not in {"auto", "minor"}:
+        raise ValueError("transition_algorithm must be auto or minor")
     terms, _, particles = orbitals.shape
     result = torch.zeros(
         (terms, terms), dtype=orbitals.dtype, device=orbitals.device
@@ -186,7 +225,10 @@ def diagonal_path_two_body_transition_matrix_factorized(
                 right_insertion = bra_orbitals @ right_acted[factor, ket]
                 value = value + 0.5 * weights[factor] * (
                     _mixed_transition_from_projected(
-                        overlap, left_insertion, right_insertion
+                        overlap,
+                        left_insertion,
+                        right_insertion,
+                        allow_inverse=transition_algorithm == "auto",
                     )
                 )
             result[bra, ket] = value
@@ -200,11 +242,14 @@ def diagonal_path_hamiltonian_matrices(
     two_body_left: torch.Tensor | None = None,
     two_body_right: torch.Tensor | None = None,
     two_body_weights: torch.Tensor | None = None,
+    transition_algorithm: str = "auto",
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """Return overlap and Hamiltonian transition matrices."""
 
     overlap = diagonal_path_overlap_matrix(orbitals)
-    hamiltonian = diagonal_path_one_body_transition_matrix(orbitals, one_body)
+    hamiltonian = diagonal_path_one_body_transition_matrix(
+        orbitals, one_body, transition_algorithm=transition_algorithm
+    )
     supplied = (
         two_body_left is not None,
         two_body_right is not None,
@@ -222,6 +267,7 @@ def diagonal_path_hamiltonian_matrices(
                 two_body_left,
                 two_body_right,
                 two_body_weights,
+                transition_algorithm=transition_algorithm,
             )
         )
     return overlap, hamiltonian
@@ -245,6 +291,7 @@ def diagonal_path_energy(
     two_body_left: torch.Tensor | None = None,
     two_body_right: torch.Tensor | None = None,
     two_body_weights: torch.Tensor | None = None,
+    transition_algorithm: str = "auto",
 ) -> torch.Tensor:
     """Return the normalized exact energy of a diagonal-path FEMPS."""
 
@@ -255,6 +302,7 @@ def diagonal_path_energy(
         two_body_left=two_body_left,
         two_body_right=two_body_right,
         two_body_weights=two_body_weights,
+        transition_algorithm=transition_algorithm,
     )
     norm = torch.vdot(amplitudes, overlap @ amplitudes).real
     if norm <= torch.finfo(norm.dtype).tiny:
@@ -296,4 +344,25 @@ def diagonal_path_structural_counts(
         ),
         "enumerated_virtual_paths": 0,
         "materialized_particle_coefficients": 0,
+    }
+
+
+def diagonal_path_transition_diagnostics(orbitals: torch.Tensor) -> dict[str, int]:
+    """Count inverse-fast and singular-safe transition pairs for a state."""
+
+    terms, _, _ = _validate_orbitals(orbitals)
+    fast_pairs = 0
+    fallback_pairs = 0
+    for bra in range(terms):
+        bra_orbitals = orbitals[bra].conj().transpose(0, 1)
+        for ket in range(terms):
+            overlap = bra_orbitals @ orbitals[ket]
+            if _use_well_conditioned_path(overlap):
+                fast_pairs += 1
+            else:
+                fallback_pairs += 1
+    return {
+        "transition_pairs": terms * terms,
+        "well_conditioned_inverse_pairs": fast_pairs,
+        "singular_safe_minor_pairs": fallback_pairs,
     }

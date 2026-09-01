@@ -68,3 +68,12 @@ algorithm/physics closure.
   not by renaming established determinant technology.
 - Failure of the primary and gated backup routes must be reported plainly; it
   cannot be masked by new mathematical classifications.
+
+## Validation update (2026-09-01)
+
+The primary route passed E1--E4 at its registered restricted-algorithm scope.
+Three blind `D=6,K=4` starts and three truth-free `D=6 -> D=7` continuations
+pass energy, variance, norm, antisymmetry, memory, and no-enumeration criteria.
+An independent verifier recomputes the decision from the raw artifact. The
+result accepts the route as a useful exact baseline and does not upgrade it to
+a generic FEMPS contraction, novelty, scalability, or superiority claim.

@@ -84,3 +84,8 @@ optimization stability, CPU peak-memory instrumentation, and the required
 CI/ordinary-TT/AGP comparator table. In parallel, the diagonal transition path
 still needs a faster well-conditioned implementation; the singular-safe
 determinant-minor route remains the correctness reference.
+
+This pilot decision is superseded by the independently verified closure in
+`phase28_e4_closure_report.md`: all three missing items now pass, the guarded
+inverse path retains automatic minor fallback, and E4 is accepted at the
+registered restricted-algorithm evidence level.

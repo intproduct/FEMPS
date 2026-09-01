@@ -5,6 +5,7 @@ import torch
 from femps.algorithms import (
     DiagonalPathConfig,
     canonical_slater_orbitals,
+    embed_diagonal_path_orbitals,
     run_diagonal_path_variable_projection,
 )
 
@@ -19,6 +20,19 @@ def test_canonical_slater_orbitals_are_orthonormal() -> None:
         torch.eye(2, dtype=torch.float64).expand(3, 2, 2),
         atol=3e-14,
         rtol=3e-14,
+    )
+
+
+def test_nested_basis_embedding_preserves_orbitals_and_orthonormality() -> None:
+    source = canonical_slater_orbitals(
+        torch.randn((2, 5, 3), generator=torch.Generator().manual_seed(28))
+    )
+    embedded = embed_diagonal_path_orbitals(source, 8)
+    torch.testing.assert_close(embedded[:, :5, :], source)
+    assert torch.count_nonzero(embedded[:, 5:, :]) == 0
+    torch.testing.assert_close(
+        embedded.transpose(1, 2) @ embedded,
+        torch.eye(3).expand(2, 3, 3),
     )
 
 
@@ -45,6 +59,30 @@ def test_k_one_noninteracting_training_is_exact_and_audited() -> None:
     assert result["structural_antisymmetry_residual"] == 0.0
     assert result["materialized_antisymmetry_residual"] < 1e-14
     assert result["structural_counts"]["enumerated_virtual_paths"] == 0
+    assert result["peak_cpu_rss_bytes"] > 0
+    assert result["cpu_memory"]["samples"] >= 2
+    assert result["total_elapsed_seconds_this_call"] >= 0
+
+
+def test_optional_lbfgs_refinement_is_audited_and_nonworsening() -> None:
+    config = DiagonalPathConfig(
+        basis_order=4,
+        particles=2,
+        terms=2,
+        kappa=0.2,
+        steps=2,
+        learning_rate=2e-3,
+        final_learning_rate=2e-4,
+        seed=9,
+        record_points=2,
+        checkpoint_every=2,
+        lbfgs_refinement_steps=5,
+    )
+    result = run_diagonal_path_variable_projection(config)
+    refinement = result["refinement"]
+    assert refinement["closure_calls"] >= 1
+    assert result["energy"] <= refinement["initial_energy"] + 1e-12
+    assert result["structural_antisymmetry_residual"] == 0.0
 
 
 def test_checkpoint_resume_matches_uninterrupted_run(tmp_path: Path) -> None:

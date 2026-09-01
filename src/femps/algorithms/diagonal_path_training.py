@@ -16,12 +16,14 @@ import time
 
 import torch
 
+from femps.benchmarks import ProcessRSSMonitor
 from femps.devices import resolve_device
 from femps.exterior import (
     antisymmetry_residual,
     diagonal_path_exterior_coefficients,
     diagonal_path_hamiltonian_matrices,
     diagonal_path_structural_counts,
+    diagonal_path_transition_diagnostics,
     exterior_coefficients_to_tensor,
     particle_tt_ranks,
 )
@@ -60,6 +62,8 @@ class DiagonalPathConfig:
     soft_coulomb_softening: float = 1.0
     soft_coulomb_quadrature_order: int = 64
     soft_coulomb_relative_threshold: float = 1e-13
+    lbfgs_refinement_steps: int = 0
+    lbfgs_learning_rate: float = 0.5
 
     def validate(self) -> None:
         if self.particles < 1 or self.basis_order < self.particles:
@@ -77,6 +81,8 @@ class DiagonalPathConfig:
             raise ValueError("require 0 < final_learning_rate <= learning_rate")
         if self.overlap_relative_threshold < 0:
             raise ValueError("overlap_relative_threshold must be nonnegative")
+        if self.lbfgs_refinement_steps < 0 or self.lbfgs_learning_rate <= 0:
+            raise ValueError("invalid LBFGS refinement configuration")
         if self.interaction_model == "harmonic":
             exact_interacting_harmonic_fermion_energy(
                 self.particles, kappa=self.kappa, omega=self.omega
@@ -104,6 +110,22 @@ def canonical_slater_orbitals(raw: torch.Tensor) -> torch.Tensor:
         raise ValueError("raw orbital matrix is rank deficient")
     phase = diagonal / magnitude
     return q * phase.conj()[:, None, :]
+
+
+def embed_diagonal_path_orbitals(
+    orbitals: torch.Tensor, target_basis_order: int
+) -> torch.Tensor:
+    """Embed a state exactly in a larger nested functional basis by zero padding."""
+
+    if orbitals.ndim != 3:
+        raise ValueError("orbitals must have shape (K,D,N)")
+    if target_basis_order < orbitals.shape[1]:
+        raise ValueError("target basis cannot be smaller than the source basis")
+    embedded = orbitals.new_zeros(
+        (orbitals.shape[0], target_basis_order, orbitals.shape[2])
+    )
+    embedded[:, : orbitals.shape[1], :] = orbitals
+    return embedded
 
 
 def _random_initial_orbitals(config: DiagonalPathConfig, device: torch.device) -> torch.Tensor:
@@ -213,10 +235,15 @@ def _solve_state(
 
 
 def _history_entry(
-    step: int, result: GeneralizedEigenResult, learning_rate: float
+    step: int,
+    result: GeneralizedEigenResult,
+    learning_rate: float,
+    *,
+    optimizer_name: str = "adam",
 ) -> dict:
     return {
         "step": step,
+        "optimizer": optimizer_name,
         "energy": float(result.energy.detach().cpu()),
         "learning_rate": learning_rate,
         "retained_rank": result.retained_rank,
@@ -258,7 +285,7 @@ def _save_checkpoint(
     )
 
 
-def run_diagonal_path_variable_projection(
+def _run_diagonal_path_variable_projection_impl(
     config: DiagonalPathConfig,
     *,
     checkpoint_path: Path | None = None,
@@ -400,8 +427,75 @@ def run_diagonal_path_variable_projection(
                 history=history,
             )
 
-    elapsed = time.perf_counter() - started
     completed = stop_step == config.steps
+    refinement = {
+        "optimizer": "lbfgs",
+        "requested_steps": config.lbfgs_refinement_steps,
+        "closure_calls": 0,
+        "initial_energy": best_energy,
+        "final_energy": best_energy,
+        "accepted": False,
+    }
+    if completed and config.lbfgs_refinement_steps:
+        with torch.no_grad():
+            raw.copy_(best_raw)
+        lbfgs = torch.optim.LBFGS(
+            [raw],
+            lr=config.lbfgs_learning_rate,
+            max_iter=config.lbfgs_refinement_steps,
+            tolerance_grad=1e-10,
+            tolerance_change=1e-13,
+            line_search_fn="strong_wolfe",
+        )
+
+        def closure() -> torch.Tensor:
+            lbfgs.zero_grad(set_to_none=True)
+            solved = _solve_state(
+                raw,
+                one_body,
+                interaction,
+                config.overlap_relative_threshold,
+            )[3]
+            solved.energy.backward()
+            refinement["closure_calls"] += 1
+            return solved.energy
+
+        lbfgs.step(closure)
+        with torch.no_grad():
+            evaluated = _solve_state(
+                raw,
+                one_body,
+                interaction,
+                config.overlap_relative_threshold,
+            )[3]
+            refined_energy = float(evaluated.energy.detach().cpu())
+            refinement["final_energy"] = refined_energy
+            if refined_energy < best_energy:
+                best_energy = refined_energy
+                best_raw = raw.detach().clone()
+                refinement["accepted"] = True
+            history.append(
+                _history_entry(
+                    stop_step,
+                    evaluated,
+                    config.lbfgs_learning_rate,
+                    optimizer_name="lbfgs",
+                )
+            )
+        if checkpoint_path is not None:
+            _save_checkpoint(
+                checkpoint_path,
+                config=config,
+                operator_id=operator_id,
+                step=stop_step,
+                raw=raw,
+                best_raw=best_raw,
+                best_energy=best_energy,
+                optimizer=optimizer,
+                scheduler=scheduler,
+                history=history,
+            )
+    elapsed = time.perf_counter() - started
     final_raw = best_raw if completed else raw.detach()
     with torch.no_grad():
         orbitals, overlap, hamiltonian, final_result = _solve_state(
@@ -459,7 +553,7 @@ def run_diagonal_path_variable_projection(
         else None
     )
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "method": "diagonal_path_femps",
         "evidence_level": "numerical",
         "config": asdict(config),
@@ -513,7 +607,9 @@ def run_diagonal_path_variable_projection(
         "structural_counts": diagonal_path_structural_counts(
             config.particles, config.basis_order, config.terms, factor_rank
         ),
+        "transition_diagnostics": diagonal_path_transition_diagnostics(orbitals),
         "history": history,
+        "refinement": refinement,
         "elapsed_seconds_this_call": elapsed,
         "peak_cuda_memory_bytes": (
             int(torch.cuda.max_memory_allocated(device))
@@ -521,3 +617,37 @@ def run_diagonal_path_variable_projection(
             else None
         ),
     }
+
+
+def run_diagonal_path_variable_projection(
+    config: DiagonalPathConfig,
+    *,
+    checkpoint_path: Path | None = None,
+    resume: bool = False,
+    max_steps_this_call: int | None = None,
+    initial_orbitals: torch.Tensor | None = None,
+    operators: tuple[torch.Tensor, FactorizedTwoBodyOperator | None] | None = None,
+    operator_id: str | None = None,
+) -> dict:
+    """Run the solver while measuring total wall time and sampled process RSS."""
+
+    total_started = time.perf_counter()
+    with ProcessRSSMonitor() as memory_monitor:
+        result = _run_diagonal_path_variable_projection_impl(
+            config,
+            checkpoint_path=checkpoint_path,
+            resume=resume,
+            max_steps_this_call=max_steps_this_call,
+            initial_orbitals=initial_orbitals,
+            operators=operators,
+            operator_id=operator_id,
+        )
+    memory_record = memory_monitor.record()
+    result["optimization_elapsed_seconds_this_call"] = result[
+        "elapsed_seconds_this_call"
+    ]
+    result["total_elapsed_seconds_this_call"] = time.perf_counter() - total_started
+    result["cpu_memory"] = memory_record.as_dict()
+    result["peak_cpu_rss_bytes"] = memory_record.peak_rss_bytes
+    result["peak_cpu_rss_delta_bytes"] = memory_record.peak_delta_rss_bytes
+    return result

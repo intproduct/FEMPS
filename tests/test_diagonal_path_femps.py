@@ -10,6 +10,7 @@ from femps.exterior import (
     diagonal_path_hamiltonian_matrices,
     diagonal_path_norm,
     diagonal_path_structural_counts,
+    diagonal_path_transition_diagnostics,
     exterior_coefficients_to_tensor,
     materialize_femps_matrix,
     slater_sum_cores,
@@ -100,6 +101,16 @@ def test_diagonal_path_transitions_match_full_exterior_hamiltonian() -> None:
         two_body_weights=two_body.weights,
     )
     torch.testing.assert_close(observed_energy, expected_energy, atol=3e-10, rtol=3e-10)
+    minor_energy = diagonal_path_energy(
+        orbitals,
+        amplitudes,
+        one_body,
+        two_body_left=two_body.left,
+        two_body_right=two_body.right,
+        two_body_weights=two_body.weights,
+        transition_algorithm="minor",
+    )
+    torch.testing.assert_close(observed_energy, minor_energy, atol=3e-10, rtol=3e-10)
 
 
 def test_diagonal_path_gradients_match_exterior_truth() -> None:
@@ -139,6 +150,47 @@ def test_diagonal_path_gradients_match_exterior_truth() -> None:
         )
 
 
+def test_diagonal_path_orbital_gradient_matches_central_difference() -> None:
+    orbitals, amplitudes, one_body, two_body = _problem()
+    orbitals = orbitals.detach().requires_grad_(True)
+    energy = diagonal_path_energy(
+        orbitals,
+        amplitudes,
+        one_body,
+        two_body_left=two_body.left,
+        two_body_right=two_body.right,
+        two_body_weights=two_body.weights,
+    )
+    gradient = torch.autograd.grad(energy, orbitals)[0]
+    index = (1, 3, 2)
+    epsilon = 1e-6
+    plus = orbitals.detach().clone()
+    minus = orbitals.detach().clone()
+    plus[index] += epsilon
+    minus[index] -= epsilon
+    finite_difference = (
+        diagonal_path_energy(
+            plus,
+            amplitudes,
+            one_body,
+            two_body_left=two_body.left,
+            two_body_right=two_body.right,
+            two_body_weights=two_body.weights,
+        )
+        - diagonal_path_energy(
+            minus,
+            amplitudes,
+            one_body,
+            two_body_left=two_body.left,
+            two_body_right=two_body.right,
+            two_body_weights=two_body.weights,
+        )
+    ) / (2 * epsilon)
+    torch.testing.assert_close(
+        gradient[index].real, finite_difference, atol=2e-7, rtol=2e-6
+    )
+
+
 def test_singular_cross_overlap_remains_exact() -> None:
     orbitals = torch.zeros((2, 4, 2), dtype=torch.float64)
     orbitals[0, 0, 0] = orbitals[0, 1, 1] = 1.0
@@ -153,6 +205,16 @@ def test_singular_cross_overlap_remains_exact() -> None:
         / torch.vdot(coefficients, coefficients)
     ).real
     torch.testing.assert_close(observed, expected, atol=1e-13, rtol=1e-13)
+    diagnostics = diagonal_path_transition_diagnostics(orbitals)
+    assert diagnostics["well_conditioned_inverse_pairs"] == 2
+    assert diagnostics["singular_safe_minor_pairs"] == 2
+
+
+def test_well_conditioned_transition_pairs_use_inverse_path() -> None:
+    orbitals, _, _, _ = _problem()
+    diagnostics = diagonal_path_transition_diagnostics(orbitals)
+    assert diagnostics["well_conditioned_inverse_pairs"] == 4
+    assert diagnostics["singular_safe_minor_pairs"] == 0
 
 
 def test_noninteracting_harmonic_slater_has_k_one_and_exact_energy() -> None:

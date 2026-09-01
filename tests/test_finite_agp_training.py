@@ -96,6 +96,9 @@ def test_finite_agp_soft_coulomb_uses_explicit_truth() -> None:
         soft_coulomb_relative_threshold=0.0,
     )
     result = run_finite_agp_variable_projection(config)
+    assert result["energy_variance"] >= 0
+    assert result["norm_error"] < 1e-10
+    assert result["structural_antisymmetry_residual"] == 0.0
     assert result["continuum_reference_energy"] is None
     assert result["basis_error_vs_continuum"] is None
     assert result["error_vs_continuum"] is None

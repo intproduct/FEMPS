@@ -2,9 +2,10 @@
 
 ## Status and objective
 
-**Status:** active from 2026-09-01. This plan supersedes Phase 27 for project
-priority without weakening any established no-go theorem or changing the
-first-quantized continuous functional-basis definition of FEMPS.
+**Status:** algorithm-recovery gate passed on 2026-09-01; the paper-third-draft
+track remains active. This plan supersedes Phase 27 for project priority
+without weakening any established no-go theorem or changing the first-
+quantized continuous functional-basis definition of FEMPS.
 
 Deliver a minimal FEMPS solver that is runnable, independently verifiable, and
 able to optimize at least one nontrivial interacting continuous fermion model.
@@ -43,25 +44,26 @@ named controls/backends; neither is relabeled as the primary FEMPS method.
 - [x] Record the generic exact squared-norm obstruction and the boundary it
   leaves for restricted structure or controlled approximation.
 - [x] Select one primary route and one inactive backup in ADR 0017.
-- [ ] Implement robust overlap, one-body, and factorized two-body transition
-  matrices for diagonal-path FEMPS. The singular-overlap-safe polynomial path
-  and independent value/gradient tests are complete; the optimized
-  well-conditioned path remains.
-- [ ] Measure time and peak memory against the declared `(N,D,K,L)` cost model,
+- [x] Implement robust overlap, one-body, and factorized two-body transition
+  matrices for diagonal-path FEMPS. A condition-number-gated determinant/
+  solve path automatically falls back to singular-safe minors, and both paths
+  pass independent value, reverse-mode, and finite-difference checks.
+- [x] Measure time and peak memory against the declared `(N,D,K,L)` cost model,
   where `L` is the two-body operator factorization rank.
-- [ ] Decide after E1--E4 whether the restricted route is scientifically useful
-  or should be reported only as a baseline/negative result.
+- [x] Decide after E1--E4 that the route is a useful exact restricted baseline
+  with systematic correlation control, but not yet a demonstrated scalable or
+  novel alternative to nonorthogonal selected CI.
 
 ## B. Minimal usable solver
 
 - [x] Continuous functional basis and one-/two-body operator assembly.
 - [x] Deterministic `K=1` Slater and known `K>1` multideterminant embedding.
-- [ ] Norm, energy, and energy-variance calculation or controlled estimate.
+- [x] Norm, energy, and energy-variance calculation or controlled estimate.
 - [x] Reverse-mode gradients checked against full exterior materialization;
   finite-difference auditing remains part of the performance gate.
 - [x] Variational optimization with deterministic seed, checkpoint/resume,
   best-state restoration, and stable overlap conditioning.
-- [ ] Every record includes structural and, when feasible, materialized
+- [x] Every record includes structural and, when feasible, materialized
   antisymmetry residuals; approximate calculations additionally include error,
   variance, and failure-probability fields.
 - [x] Independent `D` and `K=chi` convergence driver for E1/E2; no coupled sweep may
@@ -77,9 +79,10 @@ named controls/backends; neither is relabeled as the primary FEMPS method.
    independently converged reference.
 3. [x] `N=4` noninteracting system, including the `K=1` FEMPS versus ordinary
    particle-TT exchange-rank comparison.
-4. [ ] `N=4` interacting continuous fermions. A first `D=5,6,7` and
-   `K=1,2,4` pilot is reproducible with exact same-basis checks, but uniform
-   optimization stability, CPU peak memory, and comparator closure remain.
+4. [x] `N=4` interacting continuous fermions. Three blind `D=6,K=4` runs and
+   three truth-free nested-basis `D=7,K=4` continuations pass the registered
+   error/variance/symmetry criteria; CPU RSS and CI/Slater/AGP/ordinary-TT
+   comparators are complete.
 5. [ ] Larger `N` or more realistic interactions only after gates 1--3 pass.
 
 Each point reports energy and reference error, variance/uncertainty, norm
@@ -136,3 +139,9 @@ does not postpone this decision.
    and gradient tests.
 3. Reproduce E1 and E2 in one stable result schema with checkpoints.
 4. Pass E3, then run the first controlled E4 `(D,K)` grid.
+
+All four immediate milestones are complete. The accepted E4 result and its
+independent verifier are documented in
+`docs/experiments/phase28_e4_closure_report.md`. The next numerical gate is a
+nonquadratic soft-Coulomb transferability test; it must not weaken the current
+truth, variance, symmetry, memory, or comparator requirements.

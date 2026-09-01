@@ -57,3 +57,7 @@ sign-off must be recorded here or in a linked immutable report before
 submission. Until then, the Legendre transfer remains a conjecture in the
 submission manuscript.
 
+Use `docs/reviews/external_human_signoff_template.md` for the named reviewer
+record. The separate Phase 44 numerical handoff is in
+`docs/reviews/phase44_external_reproduction_packet.md`; neither packet has yet
+received external sign-off.

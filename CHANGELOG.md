@@ -1,5 +1,23 @@
 # Research changelog
 
+## 2026-09-02 - Phase 45 declines an unmatched comparator table
+
+- Reapplied ADR 0020 to Phase 44: at D4/D6/D8 the same-basis exterior spaces
+  have dimensions 1/15/70 and are already exactly diagonalized, so
+  second-quantized DMRG would only approximate a stronger existing CI truth.
+- Audited the controlled Li--Waintal-style ordered-coordinate N4 point. Its
+  COM/gap sine basis, box, interaction polynomial, MPS bond, 6,600 parameters,
+  and `~4.4e-3` basis-dominated error are not matched to Phase 44's harmonic
+  carrier D axis, five-feature correlator, or VMC uncertainty contract.
+- Accepted ADR 0034 and declined both immediate calculations rather than
+  creating a misleading table. No new FEMPS sample, NOCI point, larger size,
+  DMRG run, or ordered-coordinate run was started.
+- Closed Phase 45 and opened Phase 46 solely for human algebraic-complexity
+  review and external Phase 44 reproduction handoff. Paper B remains closed.
+- Added the Phase 44 clean external-run packet with frozen commits, commands,
+  hashes, resource expectations, and mandatory failed-gate wording, plus a
+  shared named-human sign-off template. No external sign-off is claimed.
+
 ## 2026-09-02 - Phase 44 interacting N4 gate retained as failed
 
 - Ran exactly the ADR-0033 `N=4,D={4,6,8},P=5,chi=1` experiment from the

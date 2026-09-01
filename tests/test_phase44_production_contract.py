@@ -1,4 +1,5 @@
 import sys
+import subprocess
 
 import torch
 
@@ -6,8 +7,16 @@ import scripts.benchmark_phase44_n4_explicit_correlation_d_gate as phase44
 
 
 def test_phase44_import_does_not_cross_reference_firewall() -> None:
-    assert "scripts.phase44_reference_comparators" not in sys.modules
-    assert "phase44_reference_comparators" not in sys.modules
+    command = (
+        "import sys; "
+        "import scripts.benchmark_phase44_n4_explicit_correlation_d_gate; "
+        "assert 'scripts.phase44_reference_comparators' not in sys.modules; "
+        "assert 'phase44_reference_comparators' not in sys.modules"
+    )
+    completed = subprocess.run(
+        [sys.executable, "-c", command], check=False, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 def test_phase44_frozen_initialization_and_configs() -> None:
@@ -56,9 +65,17 @@ def test_phase44_ledger_selection_uses_energy_without_reference(tmp_path) -> Non
     ]
     fixture = tmp_path / "fixture.json"
     fixture.write_text("{}\n", encoding="utf-8")
+    comparator_modules_before = {
+        name: name in sys.modules
+        for name in (
+            "scripts.phase44_reference_comparators",
+            "phase44_reference_comparators",
+        )
+    }
     ledger = phase44._selection_ledger(
         fixture, optimizer_records, selection_records
     )
     assert [choice["selected_lineage"] for choice in ledger["choices"]] == [1, 1, 1]
-    assert "scripts.phase44_reference_comparators" not in sys.modules
-    assert "phase44_reference_comparators" not in sys.modules
+    assert comparator_modules_before == {
+        name: name in sys.modules for name in comparator_modules_before
+    }

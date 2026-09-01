@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment": "phase44_immutable_optimizer_checkpoint_manifest",
+  "phase44_artifact": "docs/experiments/results/phase44_n4_explicit_correlation_d_gate.json",
+  "phase44_artifact_normalized_sha256": "cd1b83f324466ed177aaba1a699b822d84726f3cd5a73fe9c0e5437e7c150786",
+  "checkpoints": [
+    {
+      "D": 4,
+      "lineage": 1,
+      "role": "production",
+      "path": "docs/experiments/results/phase44_optimizer_checkpoints/d4_lineage1.pt",
+      "bytes": 24175,
+      "sha256": "711292dd29cb7e53bdc55be8228422cf66a0370dd4e811187f95658c9ce1ed0d"
+    },
+    {
+      "D": 4,
+      "lineage": 2,
+      "role": "production",
+      "path": "docs/experiments/results/phase44_optimizer_checkpoints/d4_lineage2.pt",
+      "bytes": 24175,
+      "sha256": "c6adbb3b84463084a37d5b0cb7233218434798c850d612ec773846135518f0ac"
+    },
+    {
+      "D": 6,
+      "lineage": 1,
+      "role": "forced_resume",
+      "path": "docs/experiments/results/phase44_optimizer_checkpoints/d6_lineage1.pt",
+      "bytes": 24623,
+      "sha256": "8332db9ea2e7734abded9b133c268823c707ab74baaa96e66577f49b64d6e4be"
+    },
+    {
+      "D": 6,
+      "lineage": 1,
+      "role": "clean_control",
+      "path": "docs/experiments/results/phase44_optimizer_checkpoints/d6_lineage1_clean.pt",
+      "bytes": 24451,
+      "sha256": "8ee25ed72959995564c2599c16e2dd0b60650056e032dcf2c05155766cb149a0"
+    },
+    {
+      "D": 6,
+      "lineage": 2,
+      "role": "production",
+      "path": "docs/experiments/results/phase44_optimizer_checkpoints/d6_lineage2.pt",
+      "bytes": 24367,
+      "sha256": "e807ffe9b1c886d756578469e7ad479698158f8a1b3ce1f1d2d8659f02d5a4b0"
+    },
+    {
+      "D": 8,
+      "lineage": 1,
+      "role": "production",
+      "path": "docs/experiments/results/phase44_optimizer_checkpoints/d8_lineage1.pt",
+      "bytes": 24559,
+      "sha256": "4dfdcef27970e7be50c505bc2d2336b65eeab2d148e59448ad9f4b2f7fd5e7f4"
+    },
+    {
+      "D": 8,
+      "lineage": 2,
+      "role": "production",
+      "path": "docs/experiments/results/phase44_optimizer_checkpoints/d8_lineage2.pt",
+      "bytes": 24559,
+      "sha256": "7b5a4e84c0c50a56d25fba8009f2013b332c2714ab96f267ca96c28bf9fe6dd0"
+    }
+  ],
+  "scientific_boundary": "optimizer trajectory provenance only; evaluation coordinates are stored separately and all Phase 44 pass/fail decisions remain in the primary artifact"
+}

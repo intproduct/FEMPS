@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "experiment": "phase44_pre_reference_lineage_selection",
+  "reference_firewall": "written before opening D14, CI, or NOCI comparator artifacts",
+  "fixture_path": "docs/experiments/results/phase44_phase37_k1_initialization.json",
+  "fixture_sha256": "42327353c878891682e5d3738a51db34b828e54950d17447fd201d2f95451d9c",
+  "optimizer_state_hashes": [
+    {
+      "D": 4,
+      "lineage": 1,
+      "seed": 44041,
+      "state_sha256": "67ba2d88b5de1ca16d27bf7c98542139b29afae83020e054215e3e1673a06890"
+    },
+    {
+      "D": 4,
+      "lineage": 2,
+      "seed": 44042,
+      "state_sha256": "45ee619ec1b064dff3ddef16dc21b9a8c2be2ce79b90e6fb28bb6db968422882"
+    },
+    {
+      "D": 6,
+      "lineage": 1,
+      "seed": 44061,
+      "state_sha256": "1ad2db502b715136c777963b5f7cf343425db5760ccec59dec87bb616e043189"
+    },
+    {
+      "D": 6,
+      "lineage": 2,
+      "seed": 44062,
+      "state_sha256": "02ba2e251089b441971167d3719412b80cdededffca65b80d1ba7cc5128b51fc"
+    },
+    {
+      "D": 8,
+      "lineage": 1,
+      "seed": 44081,
+      "state_sha256": "de0ee65f9c00ee9bbb234b1775ba7e9588e1d6044c6ae5899715b7b9a8a69f04"
+    },
+    {
+      "D": 8,
+      "lineage": 2,
+      "seed": 44082,
+      "state_sha256": "52a5883b6fb415687ab8cc468d4e4d144f98a810400e603fba9c7f96521e483f"
+    }
+  ],
+  "choices": [
+    {
+      "D": 4,
+      "selected_lineage": 2,
+      "optimizer_seed": 44042,
+      "selection_seed": 45042,
+      "selection_energy": 11.024010224835711,
+      "selection_standard_error": 0.0005010878897693127,
+      "state_sha256": "45ee619ec1b064dff3ddef16dc21b9a8c2be2ce79b90e6fb28bb6db968422882"
+    },
+    {
+      "D": 6,
+      "selected_lineage": 1,
+      "optimizer_seed": 44061,
+      "selection_seed": 45061,
+      "selection_energy": 11.023031143916805,
+      "selection_standard_error": 0.0001232072341858486,
+      "state_sha256": "1ad2db502b715136c777963b5f7cf343425db5760ccec59dec87bb616e043189"
+    },
+    {
+      "D": 8,
+      "selected_lineage": 2,
+      "optimizer_seed": 44082,
+      "selection_seed": 45082,
+      "selection_energy": 11.023064101117622,
+      "selection_standard_error": 9.243364432482546e-05,
+      "state_sha256": "52a5883b6fb415687ab8cc468d4e4d144f98a810400e603fba9c7f96521e483f"
+    }
+  ]
+}

@@ -1,5 +1,31 @@
 # Research changelog
 
+## 2026-09-02 - Phase 44 interacting N4 gate retained as failed
+
+- Ran exactly the ADR-0033 `N=4,D={4,6,8},P=5,chi=1` experiment from the
+  disclosed Phase 37 K1 carrier. Six optimizer lineages and six blind
+  selection evaluations completed before the comparator module was imported;
+  selected lineages are `(2,1,2)`.
+- The overall preregistered gate fails. Both D4 selection evaluations exceed
+  the `2.5e-4` SE limit; all four D6/D8 selection evaluations have ESS
+  `47,445--49,733`, slightly below the frozen 50,000 minimum. No rescue sample,
+  threshold change, replacement seed, or additional point was run.
+- All six held-out confirmations pass. Combined energies are
+  `11.0243089336`, `11.0231801947`, and `11.0231265435`; conservative fixed-K4
+  error ratios are `0.0320`, `0.3783`, and `0.8676`. The physical advantage
+  subgate therefore passes at consecutive D4/D6 and fails at D8.
+- Confirmed ESS is `2.67e5--2.89e5`, all R-hat values are within `3.1e-5` of
+  one, maximum recorded antisymmetry residual is `1.041e-15`, and the forced
+  D6 interruption/resume is bitwise identical to its clean trajectory.
+- Added three hashed raw-coordinate archives, seven immutable optimizer
+  checkpoints, a provenance manifest, and an independent verifier. It
+  recomputes all 12 evaluations and every decision with zero current-
+  environment observable difference.
+- Closed Phase 44 without authorizing Paper B and opened Phase 45 only for a
+  no-rescue matched-comparator feasibility decision.
+- The standard repository suite passes `305` tests in 669.86 s with the one
+  known latticeTN report-path scalar-conversion warning.
+
 ## 2026-09-02 - Preregistered interacting N4 explicit-correlation D gate
 
 - Added a checkpointed CPU/float64 stochastic Adam/QR optimizer for the

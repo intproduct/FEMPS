@@ -42,6 +42,13 @@ single-Slater preoptimization source, not a clean canonical initialization and
 not an FCI/NOCI multideterminant initialization. No state is initialized from
 the `K=2,3,4` Phase 37 stages or from the `D=14` reference.
 
+Before production, the exact real K1 carrier is copied into the verified,
+reference-free fixture
+`docs/experiments/results/phase44_phase37_k1_initialization.json`. The
+production runner may load only that fixture before state selection. It may
+not open the full Phase 37 artifact, which also contains later K values, until
+all three lineage choices are serialized and hashed.
+
 ## Frozen stochastic optimizer
 
 At each `D`, run two independent lineages with seeds:

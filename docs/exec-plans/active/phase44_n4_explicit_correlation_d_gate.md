@@ -12,7 +12,9 @@ gate, not a Paper B drafting phase.
 1. Finalize the checkpointed Adam/QR stochastic optimizer and keep its state,
    RNG, proposal counts, histories, and source identities exactly resumable.
 2. Implement a production runner that extracts only the disclosed historical
-   Phase 37 `K=1` carrier and enforces the reference firewall.
+   Phase 37 `K=1` carrier from the committed reference-free fixture and
+   enforces the reference firewall. The full Phase 37 artifact remains closed
+   until the lineage-choice hash exists.
 3. Run the six frozen `D/seed` optimizations, including the forced D6 resume
    and clean-trajectory comparison.
 4. Perform frozen selection evaluations, serialize/hash the three choices,

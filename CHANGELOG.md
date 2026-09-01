@@ -17,6 +17,10 @@
 - Reused already-computed D4/D6/D8 CI and fixed-K4 NOCI comparators; no new
   ordinary NOCI point is authorized. Phase 44 must retain a failed outcome
   without changing axes, thresholds, states, or budgets.
+- Added an exact reference-free initialization fixture containing only the
+  Phase 37 K1 real carrier. Its verifier checks the full source hash and exact
+  tensor equality; production is forbidden from opening the comparator-bearing
+  Phase 37 artifact until lineage choices have been serialized and hashed.
 - Closed Phase 43 at fixed-state estimator validation and opened Phase 44 for
   the one interacting differentiator experiment. Paper B remains closed.
 - The standard repository suite passes `300` tests in 655.30 s with the one

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "fixture": "phase44_phase37_k1_single_slater_initialization",
+  "evidence_level": "exact derived initialization fixture",
+  "source_artifact": "docs/experiments/results/phase37_slater_source_solver.json",
+  "source_normalized_sha256": "6a2c2b91f9f4314fdd524c8f58573926eca038cdea6f6b2e53667e50429fb741",
+  "source_selector": "stage_orbitals[terms=1].values[0].real",
+  "particles": 4,
+  "basis_order": 6,
+  "source_terms": 1,
+  "source_seed": 3701,
+  "carrier": [
+    [0.9992548795463407, -0.03770916685436929, -0.006755917041479354, -0.0027220277296889687],
+    [0.037682034798742145, 0.9992820313565883, -0.003323217236649304, -0.002088312711480222],
+    [0.007337853853075921, 0.003014977094316761, 0.9903206923685184, -0.0008279515009136158],
+    [0.002790086027024277, 0.002005666645038678, 0.0008046708561586062, 0.9944573195632366],
+    [-0.0028355963906169586, 0.0005676365620547097, 0.1385914326177676, -0.00010560218095546814],
+    [0.0002840249230059174, -0.00007447256370267568, 0.00008595716026852606, 0.10508174164264562]
+  ],
+  "disclosure": "historical Phase 37 optimized K=1 single Slater; not canonical, not clean-source, and not initialized from K>1, CI, or the D14 reference",
+  "production_boundary": "the Phase 44 production runner loads this fixture only; it must not open the full Phase 37 artifact before lineage choices are serialized and hashed"
+}

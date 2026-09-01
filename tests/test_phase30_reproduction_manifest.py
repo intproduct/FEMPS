@@ -8,4 +8,4 @@ def test_phase30_reproduction_manifest_verifies_all_admitted_artifacts() -> None
         Path("docs/experiments/results/phase30_reproduction_manifest.json")
     )
     assert result["verified"]
-    assert result["entries"] == 7
+    assert result["entries"] == 8

@@ -14,6 +14,21 @@ from femps.algorithms import (
 
 ENTRIES = (
     {
+        "id": "n2_harmonic_ladder",
+        "claim": "N2 harmonic E1/E2 and noninteracting N4 E3 pass exact invariants and registered D/K trends.",
+        "artifact": "docs/experiments/results/phase28_diagonal_path_ladder.json",
+        "verifier_module": "scripts.verify_phase28_diagonal_path_ladder",
+        "verifier_argument": "path",
+        "benchmark_command": "python scripts/reproduce_phase28_diagonal_path_ladder.py",
+        "verify_command": "python scripts/verify_phase28_diagonal_path_ladder.py",
+        "seeds": [17],
+        "registered_tolerances": {
+            "norm_error": 1e-10,
+            "antisymmetry_residual": 1e-12,
+            "polynomial_materialized_energy_difference": 1e-10,
+        },
+    },
+    {
         "id": "n4_harmonic_e4_closure",
         "claim": "N4 interacting harmonic diagonal-path FEMPS passes blind stability, D/K convergence, and exact comparator gates.",
         "artifact": "docs/experiments/results/phase28_e4_closure.json",

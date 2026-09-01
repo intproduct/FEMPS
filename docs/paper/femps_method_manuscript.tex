@@ -1,0 +1,531 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\graphicspath{{docs/paper/figures/}}
+\newcommand{\FEMPS}{\textnormal{\textsc{femps}}}
+\newcommand{\claimid}[1]{\nolinkurl{#1}}
+\DeclareMathOperator{\Tr}{Tr}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\title{Restricted Nonbranching Functional Exterior Matrix Product States\\
+for Continuous Interacting Fermions}
+\author{Author information withheld for review}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Functional tensor networks expand each continuous particle coordinate in an
+orthonormal basis, contract the resulting operator matrices, and optimize a
+finite coefficient representation by automatic differentiation.  Extending
+this construction to identical fermions is difficult: an ordinary
+particle-site tensor train carries exchange-statistics ranks, whereas generic
+compact exterior cores do not admit an assumed efficient exact contraction.
+We therefore study a restricted functional exterior matrix product state
+(\FEMPS) with one globally conserved, nonbranching virtual path.  The state is
+exactly a sum of $K$ nonorthogonal Slater determinants in a continuous
+functional basis, embedded in the matrix-wedge definition.  Norms, one-body
+and factorized two-body energies, and reverse-mode gradients are evaluated
+through $K^2$ determinant transitions, with inverse-based fast formulas and a
+singular-safe minor fallback.  A conditioned generalized eigenproblem removes
+the linear determinant amplitudes during orbital optimization.
+
+Numerical evidence is reported for harmonic and soft-Coulomb fermions.  At
+$N=4$, independent $D$ and $K$ axes, three-seed stability, and a
+$D=8\to12$ continuation pass direct finite-basis configuration-interaction
+(CI), variance, norm, antisymmetry, time, and memory checks.  At
+$N=6,D=10,K=4$, three blind runs have CI errors
+$2.49\times10^{-4}$--$4.03\times10^{-4}$, maximum variance
+$3.09\times10^{-3}$, and zero structural antisymmetry residual.  At fixed
+$D=10,K=4$ the ordinary particle-TT center rank is 24 for $N=4$ and 80 for
+$N=6$, while the \FEMPS{} correlation control remains $K=4$; matched kernel
+measurements expose the corresponding polynomial cost.  The method is a
+restricted nonorthogonal multideterminant algorithm, not an efficient generic
+\FEMPS{} contraction.  Direct CI remains faster in the present small truth
+spaces, and no $N=8$, asymptotic-scaling, DMRG-superiority, or categorical
+novelty claim is made.
+\end{abstract}
+
+\section{Introduction}
+
+Hong et al. introduced a functional tensor-network route to continuous
+many-body Schr\"odinger equations \cite{Hong2022FunctionalTN}.  For an
+orthonormal basis $\{\phi_p\}_{p=1}^{D}$, one writes
+\begin{equation}
+ \Psi(x_1,\ldots,x_N)=
+ \sum_{p_1,\ldots,p_N=1}^{D} C_{p_1\cdots p_N}
+ \prod_{i=1}^{N}\phi_{p_i}(x_i).
+ \label{eq:functional-expansion}
+\end{equation}
+Orthonormality converts continuum norms and local differential or
+multiplicative operators into finite tensor contractions.  Hong et al.
+represented $C$ by an MPS and optimized the Rayleigh quotient by automatic
+differentiation, leaving fermionic tensor networks as an open extension.
+
+For identical fermions, $C$ lies in $\Lambda^N V_D$ rather than a generic
+$V_D^{\otimes N}$.  An ordinary particle-site TT can represent this alternating
+tensor, but its exact bonds include exchange multiplicities even for a single
+Slater determinant.  Occupation-number MPS/DMRG, Hilbert-space MPS
+\cite{ChanSharma2011DMRG,LiChan2016HSMPS}, ordered first-quantized MPS
+\cite{LiWaintal2026FirstQuantization}, and an exterior particle-coordinate
+network are distinct factorizations and must retain their own names.
+
+Exterior algebra enforces antisymmetry structurally, but compact exterior
+inputs do not by themselves imply tractable exact contraction.  A companion
+structural analysis conditionally obstructs generic exact squared-norm
+contraction already at fixed small bond.  Here that result is treated as an
+algorithm-design constraint: we impose a nonbranching global virtual label and
+test the resulting restricted class as a continuous variational solver.
+
+The contribution is deliberately bounded:
+\begin{enumerate}
+ \item an exact matrix-wedge embedding of a $K$-term nonorthogonal Slater sum;
+ \item polynomial value and reverse-mode determinant-transition contractions,
+       including singular-safe validation;
+ \item a conditioned variable-projection optimizer with versioned checkpoints,
+       residuals, and reproducibility records;
+ \item controlled $N=2,4,6$ harmonic and soft-Coulomb benchmarks; and
+ \item a measured separation between the exterior exchange carrier and the
+       correlation multiplicity $K$, together with its cost.
+\end{enumerate}
+Finite sums of nonorthogonal Slaters and geminal states have substantial prior
+art \cite{BeylkinMohlenkampPerez2008SlaterSums,UemuraKasamatsuSugino2015AGPCI}.
+Accordingly, we do not claim a new determinant state class.  The method-level
+content is the restricted exterior/functional integration, its contraction and
+AD implementation, and its controlled continuum-basis audit.
+
+\section{Functional exterior representation}
+
+\subsection{Finite functional basis}
+
+Let $V_D=\operatorname{span}\{\phi_1,\ldots,\phi_D\}$ with
+$\langle\phi_p,\phi_q\rangle=\delta_{pq}$.  A normalized decomposable state is
+\begin{equation}
+ \Phi[U]=u_1\wedge\cdots\wedge u_N,\qquad
+ U=(u_1,\ldots,u_N)\in\mathbb C^{D\times N},\quad U^\dagger U=I_N.
+ \label{eq:slater}
+\end{equation}
+The normalized alternating embedding into labelled particle coordinates is
+\begin{equation}
+ \mathcal J_N(u_1\wedge\cdots\wedge u_N)
+ =\frac{1}{\sqrt{N!}}\sum_{\pi\in S_N}\operatorname{sgn}(\pi)
+ u_{\pi(1)}\otimes\cdots\otimes u_{\pi(N)}.
+ \label{eq:alternating-embedding}
+\end{equation}
+Antisymmetry is therefore exact before any numerical contraction.
+
+\subsection{Nonbranching diagonal-path \FEMPS}
+
+A matrix-wedge \FEMPS{} propagates virtual matrix indices while multiplying
+physical entries by exterior product.  We restrict every core to be diagonal
+in one global path label $a=1,\ldots,K$.  With boundary amplitudes $c_a$, the
+state becomes
+\begin{equation}
+ \Psi_{K,D,N}=\sum_{a=1}^{K}c_a\,
+ u_{a1}\wedge\cdots\wedge u_{aN}
+ =\sum_{a=1}^{K}c_a\Phi_a.
+ \label{eq:diagonal-path}
+\end{equation}
+No core can change $a$, hence there are $K$ physical paths rather than
+$K^{N-1}$ branching virtual histories.  Equation~\eqref{eq:diagonal-path} is an
+exact subclass of the original matrix-wedge definition and remains first
+quantized in the continuous coordinates of Eq.~\eqref{eq:functional-expansion}.
+
+$K=1$ is a single Slater.  Increasing $K$ enlarges a nonorthogonal secant span
+and can recover correlation.  We call $K$ the \emph{correlation multiplicity}
+of this restricted parametrization; it is not a canonical entanglement
+spectrum.  The stored nonlinear state has $KDN$ complex orbital scalars before
+gauge removal.
+
+\section{Exact restricted contractions}
+
+Let $U_a\in\mathbb C^{D\times N}$ collect the orbitals of $\Phi_a$ and define
+the transition overlap
+\begin{equation}
+ S_{ab}=U_a^\dagger U_b,\qquad
+ \langle\Phi_a|\Phi_b\rangle=\det S_{ab}.
+ \label{eq:overlap}
+\end{equation}
+All norm and Hamiltonian matrices therefore have only $K^2$ transition pairs.
+
+\subsection{One-body transitions}
+
+For $\hat H_1=\sum_i h(i)$, let $X_{ab}=U_a^\dagger hU_b$.  If $S_{ab}$ is
+well conditioned,
+\begin{equation}
+ \langle\Phi_a|\hat H_1|\Phi_b\rangle
+ =\det(S_{ab})\Tr(S_{ab}^{-1}X_{ab}).
+ \label{eq:one-body-transition}
+\end{equation}
+Near singularity, the implementation replaces one column of $S_{ab}$ at a
+time and sums the resulting determinants.  This cofactor formula is valid even
+when $S_{ab}$ is singular and is also an independent value/gradient reference.
+
+\subsection{Factorized two-body transitions}
+
+The admitted pair operator is written
+\begin{equation}
+ \hat V=\frac12\sum_{\ell=1}^{L}w_\ell\sum_{i<j}
+ \left[L_\ell(i)R_\ell(j)+R_\ell(i)L_\ell(j)\right].
+ \label{eq:factorized-pair}
+\end{equation}
+For projected insertions
+$A_{ab}^{\ell}=U_a^\dagger L_\ell U_b$ and
+$B_{ab}^{\ell}=U_a^\dagger R_\ell U_b$, the well-conditioned mixed transition is
+\begin{equation}
+ \det(S_{ab})\left[
+ \Tr(S_{ab}^{-1}A_{ab}^{\ell})\Tr(S_{ab}^{-1}B_{ab}^{\ell})
+ -\Tr(S_{ab}^{-1}A_{ab}^{\ell}S_{ab}^{-1}B_{ab}^{\ell})
+ \right].
+ \label{eq:two-body-transition}
+\end{equation}
+The singular-safe route replaces two distinct columns and evaluates
+$K^2LN(N-1)$ determinants.  The auto path selects inverse formulas only after a
+conditioning gate; both branches remain differentiable under PyTorch AD.
+
+\subsection{Energy and complexity}
+
+With overlap and Hamiltonian matrices $S,H\in\mathbb C^{K\times K}$,
+\begin{equation}
+ E(c,U)=\frac{c^\dagger H(U)c}{c^\dagger S(U)c}.
+ \label{eq:rayleigh}
+\end{equation}
+The stored orbitals require $O(KDN)$ memory.  Dense one-body and factor actions
+cost $O(KD^2N)$ and $O(KLD^2N)$, followed by $K^2$ transition algebra.  A
+conservative well-conditioned bound is polynomial in
+$K^2L(D^2N+N^3)$.  The validation fallback performs
+$K^2LN(N-1)$ size-$N$ determinants and is slower but still polynomial.  Neither
+route enumerates all virtual paths or materializes $D^N$ coefficients.
+
+\section{Variable-projection solver and scientific contract}
+
+Each $U_a$ is kept in a Stiefel gauge by reduced QR, with the diagonal phase of
+$R$ fixed deterministically.  At every nonlinear orbital step, amplitudes are
+eliminated by the conditioned generalized Hermitian problem
+\begin{equation}
+ H(U)c=E\,S(U)c.
+ \label{eq:generalized-eigenproblem}
+\end{equation}
+Overlap directions below a relative threshold are discarded and the retained
+rank, raw/retained condition number, and generalized residual are reported.
+Adam with a cosine learning-rate schedule is followed by optional L-BFGS
+refinement.  Reverse-mode derivatives propagate through QR, transitions, and
+the generalized eigenvalue.
+
+The public result schema is version 2 and the checkpoint schema is version 1.
+Resume rejects a changed configuration, operator identity, or schema.  Every
+call reports the structural antisymmetry residual, norm error, energy variance
+when exterior truth is enabled, elapsed time, sampled process RSS, conditioning,
+and exact operation counts.  If $D^N$ lies below a declared cap, a validation-
+only particle tensor is built and its adjacent-transposition residual is also
+reported.  A null materialized residual means that the registered exponential
+validator was disabled; it never replaces the structural residual.
+
+The machine-readable reproduction manifest records SHA-256 hashes, commands,
+seeds, tolerances, evidence labels, and independent verifiers.  Claim
+identifiers used below refer to that manifest.
+
+\section{Models and reference calculations}
+
+We use harmonic-oscillator functions as the continuous basis.  The first model
+is an analytically separable harmonically interacting fermion system, used for
+$N=2$ validation and the initial $N=4$ ladder.  The nonquadratic model is
+\begin{equation}
+ \hat H=\sum_{i=1}^{N}\left(-\frac12\partial_{x_i}^2+\frac12x_i^2\right)
+ +\sum_{i<j}\frac{1}{\sqrt{(x_i-x_j)^2+1}}.
+ \label{eq:soft-coulomb}
+\end{equation}
+Soft-Coulomb integrals are projected by $Q=128$ Gauss--Hermite quadrature.  The
+production operator uses a physical $(p,r)\mid(q,s)$ SVD of the dense pair
+tensor; $D=10$ and 12 retain ranks 19 and 23 with relative reconstruction
+errors $1.34\times10^{-15}$ and $3.85\times10^{-15}$.
+
+Direct references use the unfactorized four-index quadrature tensor and the
+Slater--Condon Hamiltonian in $\Lambda^N V_D$.  CI is validation-only and never
+initializes a \FEMPS{} run.  At $N=6,D=10$ the exterior dimension is
+$\binom{10}{6}=210$, so exact diagonalization remains stronger than an
+approximate second-quantized DMRG control.  DMRG is therefore deferred rather
+than relabeled as \FEMPS{}.
+
+\section{Numerical evidence}
+
+All floating-point results in this section are numerical evidence.  The full
+manifest contains eight independently verified artifacts.
+
+\subsection{\texorpdfstring{$N=2$}{N=2}: analytic and finite-basis checks}
+
+The noninteracting $N=2,D=6,K=1$ state gives $E=2$ and zero variance exactly
+within complex128 arithmetic.  For harmonic coupling $\kappa=0.35$, increasing
+$K=1,2,4$ at $D=6$ lowers the energy, while $D=4,6,8$ at $K=4$ decreases the
+continuum-reference error.  The final $D=8,K=4$ energy is
+$2.4557706074300585$, with continuum-reference error
+$9.886\times10^{-6}$, same-basis error $9.797\times10^{-6}$, variance
+$8.423\times10^{-5}$, and zero antisymmetry residual
+(claim \claimid{n2_harmonic_ladder}).
+
+The same registered ladder embeds the noninteracting $N=4$ Slater at
+$D=6,K=1$, yielding $E=8$ with zero variance and zero materialized
+antisymmetry residual.  For the interacting harmonic model at $\kappa=0.35$,
+three blind $N=4,D=6,K=4$ runs agree within $1.782\times10^{-12}$ and have
+maximum same-basis error $1.835\times10^{-12}$ and maximum variance
+$2.272\times10^{-11}$.  The $K=1,2,4$ energy is nonincreasing at $D=6$ and
+the continuum-reference error decreases over $D=5,6,7$ at $K=4$ (claim
+\claimid{n4_harmonic_e4_closure}).
+
+\subsection{\texorpdfstring{$N=4$}{N=4}: nonquadratic $D$ and $K$ control}
+
+For Eq.~\eqref{eq:soft-coulomb}, Table~\ref{tab:n4-k} shows the independent
+$D=6$ correlation axis.  Increasing $K$ reduces the same-basis CI error by
+more than four orders of magnitude.
+
+\begin{table}[t]
+\centering
+\caption{\texorpdfstring{$N=4,D=6$}{N=4,D=6} soft-Coulomb correlation axis.}
+\label{tab:n4-k}
+\begin{tabular}{rrrr}
+\toprule
+$K$ & Energy & Error versus CI & Variance \\
+\midrule
+1 & 11.025279022118180 & $1.441\times10^{-3}$ & $6.360\times10^{-3}$ \\
+2 & 11.023866678350620 & $2.897\times10^{-5}$ & $2.009\times10^{-4}$ \\
+4 & 11.023837776253766 & $6.305\times10^{-8}$ & $3.147\times10^{-7}$ \\
+\bottomrule
+\end{tabular}
+\par\smallskip{\scriptsize Evidence:
+\claimid{n4_soft_coulomb_transferability}.}
+\end{table}
+
+At fixed $K=4$, the absolute energy difference from a pre-existing $D=14$
+finite-basis numerical reference decreases from $7.549\times10^{-4}$ at $D=6$
+to $9.494\times10^{-5}$ at $D=12$.  This is not a continuum bound.  Direct
+same-basis CI errors are $1.042\times10^{-4}$ and $8.314\times10^{-5}$ at
+$D=10,12$, with variances below $10^{-3}$ and zero structural/materialized
+antisymmetry residuals (claim
+\claimid{n4_soft_coulomb_basis_extension}).
+
+Blind growth from $D=12,K=4$ to $K=5$ lowers the same-basis CI error by 44.35\%
+to $4.627\times10^{-5}$ and the variance to $5.291\times10^{-4}$, while the
+measured time grows from 92.77 to 141.91 seconds (claim
+\claimid{n4_soft_coulomb_high_basis_correlation}).  Three blind $D=6$ starts
+and three truth-free $D=6\to8$ continuations independently pass the registered
+stability gates.
+
+\begin{figure}[t]
+ \centering
+ \includegraphics[width=\textwidth]{femps-convergence-summary.pdf}
+ \caption{Restricted \FEMPS{} convergence from manifest-hashed artifacts.
+ Panel (a) is the N4 same-basis correlation error, panel (b) is the N4
+ functional-basis trend relative to a finite $D=14$ numerical reference, and
+ panel (c) separates N6 K1, K1-to-K4 continuation, and blind K4 starts.  All
+ values are numerical evidence.}
+ \label{fig:convergence}
+ \par\smallskip{\scriptsize Evidence:
+ \claimid{n4_soft_coulomb_transferability},
+ \claimid{n4_soft_coulomb_basis_extension},
+ \claimid{n4_soft_coulomb_high_basis_correlation},
+ \claimid{n6_soft_coulomb_pilot}, and
+ \claimid{n6_soft_coulomb_multiseed}.}
+\end{figure}
+
+\subsection{\texorpdfstring{$N=6$}{N=6}: feasibility and blind stability}
+
+The resource-capped $N=6,D=10$ pilot first optimizes a blind $K=1$ Slater and
+then preserves it while adding three seeded blind determinants.  The CI energy
+is $25.049639839832263$.  The $K=1$ error is $2.603\times10^{-3}$; $K=4$
+reduces it to $1.382\times10^{-4}$ with variance $1.197\times10^{-3}$, zero
+materialized antisymmetry residual, 85.59-second runtime, and 798 MB sampled
+peak RSS (claim \claimid{n6_soft_coulomb_pilot}).
+
+Three additional, genuinely blind K4 starts use identical 160-step Adam and
+80-step L-BFGS budgets.  Table~\ref{tab:n6-seeds} reports all runs rather than
+selecting the best initialization.
+
+\begin{table}[t]
+\centering
+\caption{Blind \texorpdfstring{$N=6,D=10,K=4$}{N=6,D=10,K=4} stability.}
+\label{tab:n6-seeds}
+\begin{tabular}{rrrrr}
+\toprule
+Seed & CI error & Variance & Condition number & Time (s) \\
+\midrule
+31 & $2.494\times10^{-4}$ & $2.169\times10^{-3}$ & 3.394 & 112.14 \\
+37 & $2.932\times10^{-4}$ & $2.334\times10^{-3}$ & 3.209 & 105.06 \\
+43 & $4.031\times10^{-4}$ & $3.094\times10^{-3}$ & 4.424 & 105.92 \\
+\bottomrule
+\end{tabular}
+\par\smallskip{\scriptsize Evidence: \claimid{n6_soft_coulomb_multiseed}.}
+\end{table}
+
+The energy spread is $1.537\times10^{-4}$; all four overlap directions are
+retained, norm and structural antisymmetry residuals are zero, and every point
+stays below 883 MB sampled peak RSS.  Seed 31 additionally materializes the
+one-million-coefficient tensor and gives zero antisymmetry residual.
+
+\section{Exchange carrier, correlation multiplicity, and cost}
+
+At fixed $D=10,K=4,L=19$, the exact structural counts grow as shown in
+Table~\ref{tab:cost-counts}.  The $N=6/N=4$ ratio is 1.5 for stored orbitals and
+one-body determinants and 2.5 for two-body minors.
+
+\begin{table}[t]
+\centering
+\caption{Matched production structure.}
+\label{tab:cost-counts}
+\begin{tabular}{lrrr}
+\toprule
+Quantity & $N=4$ & $N=6$ & Ratio \\
+\midrule
+Stored orbital scalars & 160 & 240 & 1.5 \\
+Transition pairs & 16 & 16 & 1.0 \\
+One-body determinants & 64 & 96 & 1.5 \\
+Two-body determinants & 3,648 & 9,120 & 2.5 \\
+Enumerated virtual paths & 0 & 0 & -- \\
+\bottomrule
+\end{tabular}
+\par\smallskip{\scriptsize Evidence: \claimid{matched_n4_n6_transition_cost}.}
+\end{table}
+
+The singular-safe minor value/gradient timings grow by factors 2.115/2.232,
+close to the structural count after fixed overhead.  The inverse-fast path
+grows by 1.239/1.024 over these two small points and accelerates the N6 minor
+path by 7.27/8.93.  These are two-point CPU measurements, not asymptotic fits.
+Auto and minor transition matrices agree within $1.07\times10^{-14}$.
+
+\begin{figure}[htbp]
+ \centering
+ \includegraphics[width=0.90\textwidth]{femps-structure-cost-summary.pdf}
+ \caption{Matched N4/N6 kernel timings and ordinary particle-TT center ranks
+ at fixed \FEMPS{} $K=4$.  The exterior representation keeps the correlation
+ multiplicity fixed while the labelled-particle exchange carrier grows.  The
+ plot does not imply runtime superiority over CI.}
+ \label{fig:structure-cost}
+ \par\smallskip{\scriptsize Evidence:
+ \claimid{matched_n4_n6_transition_cost}.}
+\end{figure}
+
+\enlargethispage{\baselineskip}
+For $N=4$ the ordinary particle-TT ranks are $(10,24,10)$ for the K4 state and
+$(10,45,10)$ for dense CI.  At $N=6$ they are
+$(10,45,80,45,10)$ and $(10,45,120,45,10)$.  The \FEMPS{} nonlinear
+correlation multiplicity remains $K=4$ even though the ordinary center rank
+increases from 24 to 80.  Exterior algebra does not remove exchange support;
+it prevents that support from being conflated with the adjustable correlation
+count.
+
+\FloatBarrier
+
+\section{Relation to other representations}
+
+The diagonal-path state is a nonorthogonal selected-CI-like Slater expansion,
+and determinant sums are established variational objects
+\cite{BeylkinMohlenkampPerez2008SlaterSums}.  Finite AGP/AGP-CI methods likewise
+use polynomial pair-state transitions \cite{UemuraKasamatsuSugino2015AGPCI}.
+The present implementation differs in its explicit derivation as a restricted
+matrix-wedge \FEMPS{}, direct use of the Hong et al. continuous
+functional-operator layer, and mandatory $D/K$/symmetry/cost audit.  These
+differences do not establish categorical novelty of the underlying state
+family.
+
+An ordinary particle TT \cite{Oseledets2011TT} is an exact comparator in the
+labelled coordinate tensor product.  Its ranks include the flat exchange
+spectrum of a Slater determinant, a standard fermionic reduced-density
+structure \cite{Coleman1963FermionRDM}.  Occupation-space quantum-chemistry
+DMRG \cite{ChanSharma2011DMRG} and Hilbert-space MPS
+\cite{LiChan2016HSMPS} operate in a different factorization.  The ordered
+first-quantized route of Li--Waintal \cite{LiWaintal2026FirstQuantization}
+removes labelled-particle redundancy by restricting to an ordered sector; it
+is an external first-quantized comparator, not a \FEMPS{} backend.
+
+\section{Limitations and failure conditions}
+
+The strongest limitation is scope.  Equation~\eqref{eq:diagonal-path} forbids
+virtual branching and therefore does not solve generic matrix-wedge
+contraction.  Expressivity is that of a $K$-Slater secant expansion; difficult
+states may require rapidly growing $K$.  The measured cost is explicitly
+quadratic in $K$ and linear in the two-body factor rank $L$ before orbital and
+determinant costs.
+
+Direct CI is faster at the current $\binom{10}{4}=\binom{10}{6}=210$ truth
+dimensions.  The evidence demonstrates correctness, optimization stability,
+and a structural tradeoff, not a speed or memory advantage.  N6 basis
+convergence has not been independently scanned, N8 is not admitted, and two
+particle counts cannot establish asymptotic scaling.  DMRG has been deferred
+because it would be weaker than exact CI in the present finite spaces; no
+FEMPS--DMRG performance inference follows.
+
+The implementation uses exact deterministic contraction for the restricted
+class.  A future truncation or stochastic estimator for generic cores would
+require a separate error, variance, failure-probability, and antisymmetry gate.
+No floating-point experiment in this paper is a theorem.
+
+\section{Conclusion}
+
+A globally conserved nonbranching path turns a matrix-wedge functional
+exterior network into a $K$-term nonorthogonal Slater sum.  This restriction is
+strong enough to avoid known generic contraction obstructions while preserving
+first quantization, continuous functional bases, exact antisymmetry, and an
+adjustable multideterminant correlation span.  Determinant transitions provide
+exact norms, one- and two-body energies, and AD gradients without virtual-path
+or particle-tensor enumeration in production.
+
+Controlled N2/N4/N6 calculations establish a functioning restricted solver:
+energies improve systematically in $D$ and $K$ on registered axes, blind
+interacting runs are stable, and every accepted approximation/error/resource
+quantity is explicit.  The ordinary particle-TT comparison makes the intended
+separation visible: exchange support grows while $K$ remains the chosen
+correlation multiplicity.  At the same time, current CI references are faster
+and the method is close to established nonorthogonal determinant expansions.
+The result is therefore a bounded algorithmic recovery of \FEMPS{}, not a
+generic scalability claim.
+
+\appendix
+\section{Reproduction and evidence mapping}
+
+The canonical short audit is
+\begin{verbatim}
+python scripts/build_phase30_reproduction_manifest.py
+python scripts/verify_phase30_reproduction_manifest.py
+python scripts/build_phase30_method_figures.py
+python scripts/verify_phase30_method_figures.py
+python scripts/verify_phase31_method_manuscript.py
+python scripts/build_phase31_method_manuscript.py
+python -m pytest -q
+\end{verbatim}
+Long benchmark commands, seeds, tolerances, scientific boundaries, artifact
+hashes, and verifier modules are stored in
+\texttt{docs/experiments/results/phase30\_reproduction\_manifest.json}.
+Checkpoints are ignored regeneration artifacts and are not committed evidence.
+
+\begin{table}[h]
+\centering
+\caption{Manuscript numerical claims and manifest identifiers.}
+\begin{tabularx}{\textwidth}{lY}
+\toprule
+Identifier & Scope \\
+\midrule
+\claimid{n2_harmonic_ladder} & N2 E1/E2 and noninteracting N4 E3 \\
+\claimid{n4_harmonic_e4_closure} & Interacting harmonic N4 closure \\
+\claimid{n4_soft_coulomb_transferability} & N4 nonquadratic multiseed and D/K axes \\
+\claimid{n4_soft_coulomb_basis_extension} & N4 D8-to-D12 continuation \\
+\claimid{n4_soft_coulomb_high_basis_correlation} & N4 D12 K4-to-K5 growth \\
+\claimid{n6_soft_coulomb_pilot} & N6 K1-to-K4 resource-capped pilot \\
+\claimid{n6_soft_coulomb_multiseed} & N6 three-blind-seed stability \\
+\claimid{matched_n4_n6_transition_cost} & Fixed-D/K/L N4-to-N6 cost audit \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begingroup
+\small
+\bibliographystyle{unsrt}
+\bibliography{references/references}
+\endgroup
+
+\end{document}

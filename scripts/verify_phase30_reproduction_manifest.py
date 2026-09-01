@@ -71,8 +71,8 @@ def verify_manifest(path: Path) -> dict:
         results.append({"id": entry["id"], "verified": True})
     if len(ids) != len(set(ids)):
         raise AssertionError("manifest claim identifiers must be unique")
-    if len(ids) != 7:
-        raise AssertionError("Phase 30 manifest must contain the seven admitted artifacts")
+    if len(ids) != 8:
+        raise AssertionError("Phase 31 manifest must contain the eight admitted artifacts")
     return {"verified": True, "entries": len(ids), "results": results}
 
 

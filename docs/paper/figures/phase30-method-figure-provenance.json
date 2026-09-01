@@ -1,10 +1,11 @@
 {
   "schema_version": 1,
   "evidence_level": "numerical",
-  "scientific_boundary": "paper figures from seven manifest-hashed artifacts; no asymptotic or superiority claim",
+  "scientific_boundary": "paper figures from eight manifest-hashed artifacts; no asymptotic or superiority claim",
   "manifest": "docs\\experiments\\results\\phase30_reproduction_manifest.json",
-  "manifest_sha256": "1fc219d31ef8ff5d3c2d7e87786cb0ac2df25b62e358696d144e04f8edc122c1",
+  "manifest_sha256": "e372012815c18dc4f3f62e7d8aeca7f35e2f761c768b5581901a90ce7f6d0e49",
   "source_artifact_sha256": {
+    "n2_harmonic_ladder": "fbfb76b592f849f5acd9ce5359c9efa67a01f103a9316b3f07ff5368933dcf55",
     "n4_harmonic_e4_closure": "15c9198db60783e5c62843485e5701ee129807bc2ff943cd73b866c09c8c481a",
     "n4_soft_coulomb_transferability": "6b16ed8076dccb909f98896dd475149530a9618ad2065ce730c68e99c5ee5658",
     "n4_soft_coulomb_basis_extension": "dc0602d1a2740244f4f07691b5d5c7875dcba4b15e0788f8c100e8ff955279ff",

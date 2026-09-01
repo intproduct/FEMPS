@@ -1,4 +1,4 @@
-# Active execution plan: Phase 31 Restricted FEMPS Method Manuscript and Release
+# Completed execution plan: Phase 31 Restricted FEMPS Method Manuscript and Release
 
 ## Objective
 
@@ -40,3 +40,19 @@ not claimed efficiently contractible.
 This method manuscript is separate from the structural/no-go paper. They may
 cross-reference constraints, but numerical and exact mathematical claims retain
 separate evidence labels.
+
+## Completion record (2026-09-01)
+
+- [x] Eight-artifact reproduction manifest, including an independent verifier
+  for the admitted N2/N4 harmonic ladder.
+- [x] Two provenance-hashed paper figures with automated source/output checks.
+- [x] Complete restricted-method manuscript source and 8-page visually checked
+  PDF with explicit scope, equations, complexity, solver contract, N2/N4/N6
+  evidence, comparators, limitations, and reproduction mapping.
+- [x] Manuscript evidence lint requiring all manifest identifiers and mappings
+  for every numerical table and figure.
+- [x] Source/manifest/figure/PDF SHA-256 provenance and a reproducible build
+  script that does not depend on latexmk/Perl.
+- [x] Full repository test suite: 252 passed; the sole warning is the known
+  latticeTN report-path tensor-to-scalar warning.
+- [x] Release-candidate commit prepared for push to `main`.

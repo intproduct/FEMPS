@@ -12,6 +12,7 @@ from .reference import (
     one_body_expectation_exterior_coefficients,
     particle_schmidt_spectrum,
     particle_tt_ranks,
+    particle_tt_ranks_exterior_coefficients,
     particle_unfolding,
     slater_flat_spectrum,
 )
@@ -111,6 +112,7 @@ __all__ = [
     "one_body_expectation_exterior_coefficients",
     "particle_schmidt_spectrum",
     "particle_tt_ranks",
+    "particle_tt_ranks_exterior_coefficients",
     "particle_unfolding",
     "slater_flat_spectrum",
     "bivector_decomposition_length",

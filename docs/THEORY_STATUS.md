@@ -9,7 +9,7 @@
 | The 16D concise four-form minimum middle rank is 22 or 23 | **conjecture** with missing provenance; neither alternative is currently admitted. An **exact certificate** gives only the explicit rational upper bound `mu_4^Q(16)<=24`; a 120,000-sample finite-field screen found no lower coordinate-hypergraph candidate | Recover a primary definition/candidate or construct one from scratch; certify rank and complete orbit/chart coverage over an explicit field before claiming sharpness |
 | Matrix-wedge FEMPS is associative and strictly antisymmetric | proved from exterior associativity; small-N verified | External algebra review |
 | Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed already at fixed maximum bond three: site-indexed one-form bond-two cores encode the `Mat_2` row-ordered Cayley determinant, and a scalar-reference direct sum recovers signed amplitudes from exact squared norms; the Phase 13 tagged pair-power and Phase 22 bandwidth-one APG reductions remain independent mechanisms | External proof review; only separately gated restrictions or controlled approximation remain open |
-| Nonbranching diagonal-path FEMPS has polynomial exact contraction | **implemented restricted algorithm / numerical physics evidence**: a conserved global path label gives a `K`-term nonorthogonal Slater sum inside matrix-wedge FEMPS, eliminating `K^(N-1)` branching; the versioned solver/checkpoint contract passes; E1--E4, N4 soft-Coulomb `D`/`K` convergence, and truth-controlled `N=6,D=10,K=4` three-seed stability with CI/operator/materialization/symmetry/cost audits pass | Stop N expansion; complete a matched N4-to-N6 structural/cost audit at fixed `D,K,L`; no generic FEMPS, novelty, asymptotic scaling, or superiority claim is admitted |
+| Nonbranching diagonal-path FEMPS has polynomial exact contraction | **implemented restricted algorithm / numerical physics evidence**: a conserved global path label gives a `K`-term nonorthogonal Slater sum inside matrix-wedge FEMPS, eliminating `K^(N-1)` branching; the versioned solver/checkpoint contract passes; E1--E4, N4 soft-Coulomb convergence, N6 three-seed stability, and independent N6 `K=1,2,4` / `D=8,10,12` convergence with CI/operator/quadrature/symmetry/resource audits pass | Keep N expansion stopped; integrate the bounded N6 evidence and vectorize the transition/factor axes under value/gradient parity gates; no generic FEMPS, novelty, asymptotic scaling, GPU acceleration, or superiority claim is admitted |
 | Generic sparse-path FEMPS has a relative squared-norm PRAS | conditionally obstructed: on real-PSD paired coefficients, `M! sqrt(n_tilde)` would be a PRAS for the PSD permanent, which Meiburg excludes unless `RP=NP`; an exact-rational conditioning/energy certificate passes | External proof review; entrywise-nonnegative FPRAS, additive estimates with a certified norm lower bound, and separately promised structures remain open |
 | Every exterior cut support factors as fixed statistics carrier times canonical correlation multiplicity, with Slater multiplicity one | disproved for the direct tensor product: Slater `r_1=N` forces carrier dimension `N`, but a full-support two-Slater family has stable `r_1=N+2`; exact all-cut controls pass for `3<=N<=8` | External proof review; Hamiltonian-specific symmetry sectors and genuinely different categorical structures are not ruled out |
 | Uniformly bounded coefficient algebras define a distinct tractable matrix-pair family beyond finite LC-AGP | disproved in theorem draft: if the largest semisimple matrix block `p` and radical nilpotency index `d` are fixed, arbitrary-boundary pair powers collapse to polynomial-size LC-AGP; exact-rational `T2` M=1--6 and `Mat2` M=1--4 base cases pass | External proof review; search only growing-`p`/growing-`d` exact structures or controlled approximate contractions |
@@ -86,6 +86,18 @@ algorithm success and a measured tradeoff, not a novelty, asymptotic-
 scalability, or superiority result. A generic stochastic route is only a
 registered backup and must pass an explicit error/variance/failure-probability
 gate before work begins.
+
+Phase 32 extends that evidence to the interacting `N=6` soft-Coulomb model with
+independent axes. At fixed `D=10`, `K=1,2,4` energies decrease from
+`25.052242782725` to `25.049825287522`; at fixed `K=4`, `D=8,10,12` energies
+decrease from `25.051264850894` to `25.049471144618`. The D12 error against
+same-basis direct CI is `1.04729e-4`, with variance `1.12233e-3`. Raw exterior
+coefficients independently reproduce every table without a `D^N` tensor, and
+all admitted antisymmetry residuals are zero. A Blackwell complex128 probe
+passes, but the unvectorized K4 GPU workload exceeds the 600 s gate; CPU is the
+only admitted production backend until Phase 33 proves matched value/gradient
+parity and performance. These are three-point numerical convergence data, not
+an asymptotic fit or a generic-efficiency result.
 
 ADR 0004 historically made ordered-sector/interparticle-distance functional TN
 the primary numerical route; ADR 0017 supersedes that priority while retaining

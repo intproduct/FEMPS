@@ -125,12 +125,20 @@ is gated by an explicit contraction-complexity audit.
   sampled peak RSS. Three additional blind K4 seeds all pass with maximum CI
   error `4.031e-4`, variance `3.094e-3`, and energy spread `1.537e-4`. This is
   same-point stability evidence, not particle-number or asymptotic scaling.
+- Phase 32 adds independent interacting N6 convergence axes. At fixed D10,
+  K=1/2/4 energies decrease to `25.049825287522`; at fixed K4, D=8/10/12
+  energies decrease to `25.049471144618`, whose same-basis CI error is
+  `1.04729e-4`. All structural and admitted materialized antisymmetry residuals
+  are zero. Compact exterior-sector matrices report ordinary particle-TT ranks
+  without a `D^N` tensor. The current Python-loop GPU backend exceeds its 600 s
+  gate, so CPU remains production until matched vectorization tests pass.
 
-See [the active execution plan](docs/exec-plans/active/phase28.md),
+See [the active execution plan](docs/exec-plans/active/phase33.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),
 [the Phase 28 E4 closure report](docs/experiments/phase28_e4_closure_report.md),
 [the diagonal-path solver contract](docs/DIAGONAL_PATH_SOLVER_CONTRACT.md),
 [the N6 soft-Coulomb pilot](docs/experiments/phase29_n6_soft_coulomb_pilot_report.md),
+[the N6 independent convergence report](docs/experiments/phase32_n6_convergence_report.md),
 [the method claim/evidence matrix](docs/METHOD_CLAIM_EVIDENCE_MATRIX.md),
 [the Phase 30 reproduction manifest](docs/experiments/results/phase30_reproduction_manifest.json),
 [the exact four-form workspace](math/four_forms/README.md),

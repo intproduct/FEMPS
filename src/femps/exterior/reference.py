@@ -265,6 +265,52 @@ def particle_tt_ranks(tensor: torch.Tensor) -> tuple[int, ...]:
     return tuple(ranks)
 
 
+def particle_tt_ranks_exterior_coefficients(
+    coefficients: torch.Tensor, dimension: int, particles: int
+) -> tuple[int, ...]:
+    """Return ordinary particle-TT ranks without materializing ``D**N``.
+
+    At a ``p | N-p`` particle cut, an alternating tensor is supported on
+    ``wedge^p(V) tensor wedge^(N-p)(V)``.  Its compact unfolding is indexed by
+    increasing subsets on both sides.  Ordered particle unfoldings only repeat
+    these rows and columns with permutation signs, so both unfoldings have the
+    same matrix rank.
+    """
+
+    if coefficients.ndim != 1:
+        raise ValueError("coefficients must be a vector")
+    if particles < 1 or dimension < particles:
+        raise ValueError("require dimension >= particles >= 1")
+    supports = list(itertools.combinations(range(dimension), particles))
+    if coefficients.numel() != len(supports):
+        raise ValueError("coefficient count must equal binom(dimension, particles)")
+    lookup = {support: position for position, support in enumerate(supports)}
+    ranks = []
+    for cut in range(1, particles):
+        left_supports = list(itertools.combinations(range(dimension), cut))
+        right_supports = list(
+            itertools.combinations(range(dimension), particles - cut)
+        )
+        compact = torch.zeros(
+            (len(left_supports), len(right_supports)),
+            dtype=coefficients.dtype,
+            device=coefficients.device,
+        )
+        for left_position, left in enumerate(left_supports):
+            left_set = set(left)
+            for right_position, right in enumerate(right_supports):
+                if left_set.isdisjoint(right):
+                    inversions = sum(i > j for i in left for j in right)
+                    support = tuple(sorted(left + right))
+                    sign = -1 if inversions % 2 else 1
+                    compact[left_position, right_position] = (
+                        sign * coefficients[lookup[support]]
+                    )
+        singular_values = torch.linalg.svdvals(compact)
+        ranks.append(_numerical_rank(singular_values, *compact.shape))
+    return tuple(ranks)
+
+
 def best_rank_error(
     singular_values: torch.Tensor,
     rank: int,

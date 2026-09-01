@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment": "phase32_N6_D8_D10_D12_operator_and_resource_preflight",
+  "evidence_level": "numerical",
+  "scientific_boundary": "local preflight from one D=10 empirical anchor; not an asymptotic fit",
+  "model": {
+    "N": 6,
+    "K": 4,
+    "dimensions": [
+      8,
+      10,
+      12
+    ],
+    "Q": 128,
+    "coupling": 1.0,
+    "softening": 1.0
+  },
+  "production_contract": {
+    "route": "exact determinant-transition diagonal-path FEMPS",
+    "device": "cpu",
+    "adam_steps": 160,
+    "lbfgs_steps": 80,
+    "truth_state_initialization": false,
+    "enumerate_virtual_paths": false,
+    "materialize_particle_tensor": false
+  },
+  "backend_audit": {
+    "blackwell_probe_device": "cuda:2",
+    "blackwell_device_name": "NVIDIA RTX PRO 4000 Blackwell",
+    "blackwell_total_memory_bytes": 25655050240,
+    "complex128_autograd_probe_pass": true,
+    "complex128_autograd_probe_peak_bytes": 17063424,
+    "N6_D10_K4_registered_runtime_gate": {
+      "status": "stopped_after_600_second_limit",
+      "completed_scientific_point": false,
+      "diagnosis": "Python-level transition/factor loops launch many small kernels"
+    },
+    "decision": "use the Phase-29-validated CPU backend for registered Phase 32 production; retain Blackwell only for future vectorized kernels"
+  },
+  "operator_audit": [
+    {
+      "D": 8,
+      "Q": 128,
+      "physical_operator_svd_rank": 15,
+      "dense_relative_factorization_error": 1.2634404814716863e-15,
+      "exterior_ci_dimension": 28,
+      "forbidden_particle_tensor_coefficients": 262144,
+      "structural_counts": {
+        "stored_orbital_scalars": 192,
+        "stored_amplitude_scalars": 4,
+        "transition_pairs": 16,
+        "one_body_determinants": 96,
+        "two_body_determinants": 7200,
+        "enumerated_virtual_paths": 0,
+        "materialized_particle_coefficients": 0
+      }
+    },
+    {
+      "D": 10,
+      "Q": 128,
+      "physical_operator_svd_rank": 19,
+      "dense_relative_factorization_error": 1.3397381449992594e-15,
+      "exterior_ci_dimension": 210,
+      "forbidden_particle_tensor_coefficients": 1000000,
+      "structural_counts": {
+        "stored_orbital_scalars": 240,
+        "stored_amplitude_scalars": 4,
+        "transition_pairs": 16,
+        "one_body_determinants": 96,
+        "two_body_determinants": 9120,
+        "enumerated_virtual_paths": 0,
+        "materialized_particle_coefficients": 0
+      }
+    },
+    {
+      "D": 12,
+      "Q": 128,
+      "physical_operator_svd_rank": 23,
+      "dense_relative_factorization_error": 3.8469276716702315e-15,
+      "exterior_ci_dimension": 924,
+      "forbidden_particle_tensor_coefficients": 2985984,
+      "structural_counts": {
+        "stored_orbital_scalars": 288,
+        "stored_amplitude_scalars": 4,
+        "transition_pairs": 16,
+        "one_body_determinants": 96,
+        "two_body_determinants": 11040,
+        "enumerated_virtual_paths": 0,
+        "materialized_particle_coefficients": 0
+      }
+    }
+  ],
+  "empirical_anchor": {
+    "artifact": "docs/experiments/results/phase29_n6_multiseed_stability.json",
+    "sha256": "867fcf27b6dd68f74ae2f45431deb45e49ef5e6b6b1731801a8363dd3da54976",
+    "D": 10,
+    "K": 4,
+    "runs": 3,
+    "maximum_elapsed_seconds": 112.14178700000048,
+    "maximum_peak_cpu_rss_bytes": 882962432
+  },
+  "D12_estimate": {
+    "model": "D_squared_times_physical_SVD_rank",
+    "work_ratio_vs_D10": 1.743157894736842,
+    "multiplicative_margin": 1.25,
+    "estimated_wall_time_seconds": 244.35105167368522,
+    "estimated_peak_cpu_rss_bytes": 1923928668,
+    "registered_wall_time_cap_seconds": 600.0,
+    "registered_peak_cpu_rss_cap_bytes": 2147483648,
+    "admitted_before_production": true
+  },
+  "acceptance": {
+    "factorization_pass": true,
+    "blackwell_probe_pass": true,
+    "D12_resource_gate_pass": true
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128"
+  }
+}

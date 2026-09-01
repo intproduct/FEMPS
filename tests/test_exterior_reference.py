@@ -7,10 +7,12 @@ from femps.exterior import (
     alternating_projection,
     antisymmetry_residual,
     best_rank_error,
+    exterior_coefficients_to_tensor,
     normalized_slater_from_antisymmetrizer,
     normalized_slater_from_minors,
     particle_schmidt_spectrum,
     particle_tt_ranks,
+    particle_tt_ranks_exterior_coefficients,
     particle_unfolding,
     slater_flat_spectrum,
 )
@@ -67,6 +69,22 @@ def test_nonzero_alternating_tensor_obeys_particle_rank_floor() -> None:
     assert torch.linalg.vector_norm(alternating) > 0
     assert particle_tt_ranks(alternating) == (5, 5)
     assert all(rank >= math.comb(3, cut) for cut, rank in enumerate((5, 5), start=1))
+
+
+@pytest.mark.parametrize("dimension,particles", [(5, 2), (5, 3), (6, 4)])
+def test_exterior_tt_ranks_match_materialized_particle_tensor(
+    dimension: int, particles: int
+) -> None:
+    generator = torch.Generator().manual_seed(3200 + dimension + particles)
+    coefficients = torch.randn(
+        math.comb(dimension, particles),
+        generator=generator,
+        dtype=torch.float64,
+    )
+    tensor = exterior_coefficients_to_tensor(coefficients, dimension, particles)
+    assert particle_tt_ranks_exterior_coefficients(
+        coefficients, dimension, particles
+    ) == particle_tt_ranks(tensor)
 
 
 def test_ordinary_low_rank_truncation_breaks_full_antisymmetry() -> None:

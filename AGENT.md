@@ -694,6 +694,8 @@ references/
 
 当前首选是可精确收缩的受限 matrix-wedge FEMPS：用一个全局守恒 virtual label 表示 (K=\chi\) 个非分支 Slater paths，按 (K^2\) 个 determinant/Slater–Condon transition 计算 observable。它严格包含单 Slater，并随 (K\) 系统扩展到非正交多行列式。备用路线仅为带非渐近误差/方差和反对称残差的 VMC；在主路线没有完成 E1--E4 之前，不启动通用 FEMPS VMC 的大规模开发。
 
+Phase 32 已完成相互作用 N=6 soft-Coulomb 的独立 \(D\) 与 \(K\) 收敛：固定 D=10 的 K=1,2,4 与固定 K=4 的 D=8,10,12 均给出变分能量非增，D12 相对同基组 CI 误差为 1.04729e-4，所有结构性及允许 materialization 的反对称残差为零。当前 Python 循环实现的 Blackwell K4 分支超过 600 秒门限，因此 ADR 0021 暂定 CPU 为生产后端。唯一 active 数值任务转为 Phase 33：结果入稿，并在严格 value/gradient parity 后向量化 transition/factor 轴；不得以扩大 N 或重启高维形式秩搜索替代该闭环。
+
 旧 Phase 0--7 条目保留为历史设计与已完成工作的索引；若与本 recovery stage 冲突，以当前阶段和最新 ADR 为准。
 
 ## Phase 0 — 项目固化与基线复现

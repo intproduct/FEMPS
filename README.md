@@ -122,8 +122,9 @@ is gated by an explicit contraction-complexity audit.
   admits one `N=6,D=10` pilot: blind `K=1 -> 4` growth reduces the same-basis
   CI error from `2.603e-3` to `1.382e-4`, with variance `1.197e-3`, zero
   structural/materialized antisymmetry residual, 85.6 s runtime, and 798 MB
-  sampled peak RSS. This is single-seed feasibility evidence, not scaling or
-  stability evidence.
+  sampled peak RSS. Three additional blind K4 seeds all pass with maximum CI
+  error `4.031e-4`, variance `3.094e-3`, and energy spread `1.537e-4`. This is
+  same-point stability evidence, not particle-number or asymptotic scaling.
 
 See [the active execution plan](docs/exec-plans/active/phase28.md),
 [the Phase 28 physics-ladder report](docs/experiments/phase28_diagonal_path_ladder_report.md),

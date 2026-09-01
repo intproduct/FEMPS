@@ -133,6 +133,8 @@ validated by:
 python -m pytest tests/test_diagonal_path_training.py -q
 python scripts/benchmark_phase29_n6_soft_coulomb_pilot.py
 python scripts/verify_phase29_n6_soft_coulomb_pilot.py
+python scripts/benchmark_phase29_n6_multiseed_stability.py
+python scripts/verify_phase29_n6_multiseed_stability.py
 ```
 
 The benchmark uses direct exterior CI because `binom(10,6)=210` and performs

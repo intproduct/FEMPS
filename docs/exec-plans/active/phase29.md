@@ -63,3 +63,17 @@ and treat N6 as a single-seed feasibility point. Do not add seeds or tune each
 seed separately after seeing the result. The allowed next study would be a
 clearly named restricted-subclass optimization/stabilization task, not pure
 mathematical classification.
+
+## Stability-gate result and current milestone
+
+ADR 0019 admits and fixes seeds 31, 37, and 43 before execution. All three
+blind K4 points pass with maximum same-basis CI error `4.031e-4`, maximum
+variance `3.094e-3`, energy spread `1.537e-4`, maximum condition number 4.424,
+maximum runtime 112.14 s, and maximum sampled RSS 882,962,432 bytes. Structural
+antisymmetry residuals are zero for all points; the registered seed-31
+million-coefficient residual is also zero.
+
+The active milestone is now a matched N4-to-N6 structural and contraction-cost
+audit at fixed `D=10,K=4,L=19`. It must separate operation-count scaling from
+different optimizer budgets and report that direct CI remains faster in the
+current truth region. No N8 diagonal-path calculation is authorized.

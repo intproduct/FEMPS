@@ -52,6 +52,19 @@ It compares direct word-algebra multiplication with nested exact z-coefficient
 and `Mat2` power interpolation for every boundary word in all 12 cases with
 `1<=M<=3` and `1<=d<=4`.
 
+The Phase 22 sparse-path permanent certificate is checked by:
+
+```powershell
+python math/certificates/verify_sparse_path_apg_permanent.py --verify math/certificates/sparse_path_apg_permanent_certificate.json
+python -m pytest -q tests/test_exact_certificates.py
+```
+
+It compares exact upper-bidiagonal virtual-path propagation, square-zero
+commuting exterior subset propagation, and permutation enumeration for three
+matrix families at every `1<=M<=6`. The certificate validates the normalized
+state and squared-norm convention; the symbolic all-size permanent proof is in
+`docs/theory/sparse_path_apg_obstruction.md`.
+
 The current CPU/Blackwell forward-and-gradient parity smoke is:
 
 ```powershell

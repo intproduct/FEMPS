@@ -86,15 +86,19 @@ is gated by an explicit contraction-complexity audit.
   its fixed-state graded generalization. The `2d-1` dimensional algebra embeds
   in `Mat2(C[z]/z^d)` and needs at most
   `[M(d-1)+1] binom(M+3,3)` AGPs; every boundary word is certified exactly for
-  `1<=M<=3,1<=d<=4`. Gate I closes negatively. The next gate targets sparse
-  growing-width path memory, where both LC-AGP rank and contraction hardness
-  must be resolved before implementation.
+  `1<=M<=3,1<=d<=4`. Gate I closes negatively.
+- Phase 22 closes the sparse growing-width path gate. The weakest upper-
+  bidiagonal endpoint state is exactly APG/APIG. With paired edge forms it
+  encodes an arbitrary 0--1 permanent in a unique-path top coefficient and
+  `perm(A)^2/(M!)^2` in the normalized exact norm, despite bandwidth one and
+  only `O(M^2)` input. Gate J therefore fails on both direct-prior-art and
+  exact-contraction grounds. The result is not an LC-AGP rank lower bound.
 
-See [the active execution plan](docs/exec-plans/active/phase22.md),
+See [the active execution plan](docs/exec-plans/active/phase23.md),
 [the continuous ordered formulation](docs/theory/continuous_ordered_functional_basis.md),
 [the Gate G report](docs/experiments/phase19_n8_refinement_gate_report.md),
 [the Phase 20 negative-classification report](docs/experiments/phase20_bounded_wedderburn_report.md), and
-[the Phase 21 fixed-state report](docs/experiments/phase21_alternating_word_collapse_report.md).
+[the Phase 22 sparse-path report](docs/experiments/phase22_sparse_path_gate_report.md).
 
 ## Development setup
 

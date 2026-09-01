@@ -1,5 +1,22 @@
 # Research changelog
 
+## 2026-09-01 - Phase 22 sparse growing-width path gate
+
+- Identified the upper-bidiagonal endpoint pair-matrix state exactly as an
+  antisymmetrized product of geminals rather than a new exterior ansatz.
+- Corrected the proposed formal-monomial Waring argument: ordinary Waring rank
+  does not descend automatically through exterior multiplication to a physical
+  LC-AGP lower bound.
+- Proved that paired-orbital edge forms encode an arbitrary matrix permanent in
+  the unique-path top coefficient and its square in the normalized exact norm.
+- Added an independent exact certificate covering three matrix families for
+  every `1<=M<=6`; path, exterior-subset, and permutation routes agree with hash
+  `dd72c1aaeb0bc2a6b9206992cde9099f2f568b7ff6c8ed8eb7e38d958f78e790`.
+- Audited APG/APIG, Fischer AGP expansions, geminal RDM contraction, and
+  permanent prior art; no priority claim is made for these structures.
+- Closed Gate J negatively for generic tridiagonal/fixed-bandwidth growing
+  virtual width and advanced to a consolidated exterior no-go theorem package.
+
 ## 2026-09-01 - Phase 21 one-generator growing-radical checkpoint
 
 - Proved that arbitrary boundaries of `C[z]/(z^d)` matrix-pair powers collapse

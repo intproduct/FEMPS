@@ -1,0 +1,31 @@
+{
+  "arithmetic": "exact integers and rationals",
+  "cases": [
+    {"matrix_family": "identity", "matrix_sha256": "043f347c2cdc0d8ce70c38775d24e556c0290acf6d0c87a3a52aa85471cb8d02", "normalized_norm_squared": "1/1", "pairs": 1, "path_virtual_width": 2, "permanent": 1, "physical_one_particle_dimension": 2, "top_pair_mask": 1},
+    {"matrix_family": "all_ones", "matrix_sha256": "043f347c2cdc0d8ce70c38775d24e556c0290acf6d0c87a3a52aa85471cb8d02", "normalized_norm_squared": "1/1", "pairs": 1, "path_virtual_width": 2, "permanent": 1, "physical_one_particle_dimension": 2, "top_pair_mask": 1},
+    {"matrix_family": "deterministic_binary", "matrix_sha256": "db407f11d7ede59abaab0e98e097ff2dae10a048207b801745d7199ef19c2387", "normalized_norm_squared": "0/1", "pairs": 1, "path_virtual_width": 2, "permanent": 0, "physical_one_particle_dimension": 2, "top_pair_mask": 1},
+    {"matrix_family": "identity", "matrix_sha256": "be555edbfc39d6a4327eb8ec81b88dbceedfec1812445ad8f0b7dfb80ea39d11", "normalized_norm_squared": "1/4", "pairs": 2, "path_virtual_width": 3, "permanent": 1, "physical_one_particle_dimension": 4, "top_pair_mask": 3},
+    {"matrix_family": "all_ones", "matrix_sha256": "3613c3e1f49a7dd2bc2468afcc33f58c4f0ee9716dbc99d06f25251d3b832735", "normalized_norm_squared": "1/1", "pairs": 2, "path_virtual_width": 3, "permanent": 2, "physical_one_particle_dimension": 4, "top_pair_mask": 3},
+    {"matrix_family": "deterministic_binary", "matrix_sha256": "fa99b1ac5b3d7708879bb44ad74a07864bb398ef057ba1ae726a8d398caa3dfa", "normalized_norm_squared": "0/1", "pairs": 2, "path_virtual_width": 3, "permanent": 0, "physical_one_particle_dimension": 4, "top_pair_mask": 3},
+    {"matrix_family": "identity", "matrix_sha256": "109bbb0d098bdafc39cf6a1bd168f764524693e0397d50d120c246ac1ea69b38", "normalized_norm_squared": "1/36", "pairs": 3, "path_virtual_width": 4, "permanent": 1, "physical_one_particle_dimension": 6, "top_pair_mask": 7},
+    {"matrix_family": "all_ones", "matrix_sha256": "8521d89afab0b73a5bee79e11969c8ad64378de702a79799107d3c56a98593be", "normalized_norm_squared": "1/1", "pairs": 3, "path_virtual_width": 4, "permanent": 6, "physical_one_particle_dimension": 6, "top_pair_mask": 7},
+    {"matrix_family": "deterministic_binary", "matrix_sha256": "5df0ee65c62df2addee59dc59da3db7e5dc3ca92e0fae4ab232fa4fb641a68f6", "normalized_norm_squared": "1/36", "pairs": 3, "path_virtual_width": 4, "permanent": 1, "physical_one_particle_dimension": 6, "top_pair_mask": 7},
+    {"matrix_family": "identity", "matrix_sha256": "473e020da9f9843de6a7226b8ba362432e2b536e31e5407c91c01524c0f12a2a", "normalized_norm_squared": "1/576", "pairs": 4, "path_virtual_width": 5, "permanent": 1, "physical_one_particle_dimension": 8, "top_pair_mask": 15},
+    {"matrix_family": "all_ones", "matrix_sha256": "7b34487c255cd008127c4743ece0213d58d028971ec9b8374bee5c40bdc4bfad", "normalized_norm_squared": "1/1", "pairs": 4, "path_virtual_width": 5, "permanent": 24, "physical_one_particle_dimension": 8, "top_pair_mask": 15},
+    {"matrix_family": "deterministic_binary", "matrix_sha256": "51b78482a4a0108afb9cc58be8cdc27812685cc2e6a1f80262ea04f1c8fb5e54", "normalized_norm_squared": "0/1", "pairs": 4, "path_virtual_width": 5, "permanent": 0, "physical_one_particle_dimension": 8, "top_pair_mask": 15},
+    {"matrix_family": "identity", "matrix_sha256": "cdfd52d60c7ccb111c65f84eb310ce292e29dbbb751517199c1e1391a58ec376", "normalized_norm_squared": "1/14400", "pairs": 5, "path_virtual_width": 6, "permanent": 1, "physical_one_particle_dimension": 10, "top_pair_mask": 31},
+    {"matrix_family": "all_ones", "matrix_sha256": "5dad625f15a0727aabaa292ad21c7aba99541f9613f7501bc326cf5dca39dbda", "normalized_norm_squared": "1/1", "pairs": 5, "path_virtual_width": 6, "permanent": 120, "physical_one_particle_dimension": 10, "top_pair_mask": 31},
+    {"matrix_family": "deterministic_binary", "matrix_sha256": "303d292900240e7d0d4ee7947ad02b81296d23d865797766297d76616df4fde1", "normalized_norm_squared": "1/900", "pairs": 5, "path_virtual_width": 6, "permanent": 4, "physical_one_particle_dimension": 10, "top_pair_mask": 31},
+    {"matrix_family": "identity", "matrix_sha256": "2b409f046a322801272d87a822f47d3e27ff1a7dc96203a1f4e63b64434c2579", "normalized_norm_squared": "1/518400", "pairs": 6, "path_virtual_width": 7, "permanent": 1, "physical_one_particle_dimension": 12, "top_pair_mask": 63},
+    {"matrix_family": "all_ones", "matrix_sha256": "7f786b277d7c48eccc1bcadd90598a895d96186ffbaef87754922b378b7798d7", "normalized_norm_squared": "1/1", "pairs": 6, "path_virtual_width": 7, "permanent": 720, "physical_one_particle_dimension": 12, "top_pair_mask": 63},
+    {"matrix_family": "deterministic_binary", "matrix_sha256": "23e95c877f2322ca60b3ab0ccb88706a835d56014489e4913a5aa28a717abfc3", "normalized_norm_squared": "0/1", "pairs": 6, "path_virtual_width": 7, "permanent": 0, "physical_one_particle_dimension": 12, "top_pair_mask": 63}
+  ],
+  "certificate_sha256": "dd72c1aaeb0bc2a6b9206992cde9099f2f568b7ff6c8ed8eb7e38d958f78e790",
+  "independent_routes": ["upper-bidiagonal virtual-path propagation", "square-zero commuting exterior subset propagation", "permutation enumeration"],
+  "max_pairs": 6,
+  "pair_algebra": "P_j P_k=P_k P_j and P_j^2=0",
+  "schema": "femps.sparse-path-apg-permanent.v1",
+  "state_convention": "e_0^T Omega^M e_M / M!",
+  "verified_identity": "state=perm(A) P_1...P_M/M!, norm2=perm(A)^2/(M!)^2",
+  "virtual_generator": "upper bidiagonal, Omega_(i,i+1)=sum_j A_(i,j) P_j"
+}

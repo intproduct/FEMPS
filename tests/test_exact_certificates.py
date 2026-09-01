@@ -111,3 +111,27 @@ def test_alternating_word_pair_lc_agp_exact_certificate() -> None:
         check=True,
         cwd=root,
     )
+
+
+def test_sparse_path_apg_permanent_exact_certificate() -> None:
+    root = Path(__file__).resolve().parents[1]
+    subprocess.run(
+        [
+            sys.executable,
+            str(
+                root
+                / "math"
+                / "certificates"
+                / "verify_sparse_path_apg_permanent.py"
+            ),
+            "--verify",
+            str(
+                root
+                / "math"
+                / "certificates"
+                / "sparse_path_apg_permanent_certificate.json"
+            ),
+        ],
+        check=True,
+        cwd=root,
+    )

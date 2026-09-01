@@ -112,3 +112,16 @@ automata/rational-series machinery. Gate I therefore closes negatively for
 fixed-state graded memory; the next exact boundary requires growing state width
 or growing independent noncommutative counters and remains subject to the Phase
 13 hardness obstruction.
+
+Phase 22 closes the weakest growing-width boundary negatively. An upper-
+bidiagonal endpoint pair matrix has a unique virtual path, but its state is
+exactly the established antisymmetrized product of geminals (APG). APG-to-AGP
+Fischer decompositions and permanent-valued APG/APIG determinant coefficients
+are direct prior art. In a paired-orbital specialization, the path coefficient
+is an arbitrary 0--1 permanent and its normalized squared norm is
+`perm(A)^2/(M!)^2`; hence even bandwidth one is generically #P-hard to contract
+exactly. This is a project-specific gate embedding, not a claim to have
+introduced APG, its Waring decomposition, or its permanent structure. Ordinary
+polynomial Waring rank is also not asserted as a physical LC-AGP lower bound
+after exterior quotienting. Phase 23 therefore consolidates a no-go theorem
+package rather than opening another exact solver branch.

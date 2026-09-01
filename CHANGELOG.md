@@ -1,5 +1,23 @@
 # Research changelog
 
+## 2026-09-01 - Phase 36 public adaptive solver closure
+
+- Promoted the bounded adaptive diagonal-path solver to a public API with an
+  externally required maximum `K`, complete candidate/optimizer seed schedules,
+  versioned atomic stage checkpoints, interruption/resume, and strict
+  source/operator identity checks.
+- Reproduced the frozen first `N=6,D=12` candidate-pool lineage exactly across
+  a forced `K=5` interruption. The accepted serialized `K=5` and `K=6`
+  energies match Phase 35 exactly; the preserved first attempt records a
+  `3.60e-11` mismatch caused by duplicate source gauge projection.
+- Independently reconstructed the final exterior state at
+  `E=25.049399173588696`, CI error `3.276e-5`, variance `3.898e-4`, norm error
+  `1.11e-16`, and zero structural antisymmetry residual, with no virtual-path
+  or production `D^N` materialization.
+- Expanded the restricted-method reproduction manifest to 13 independently
+  verified numerical artifacts, closed Phase 36, and opened Phase 37 for a
+  clean end-to-end single-Slater-source command without historical checkpoints.
+
 ## 2026-09-01 - Phase 28 interacting algorithm gate passed
 
 - Closed E4 for the restricted diagonal-path FEMPS with three blind `D=6,K=4`

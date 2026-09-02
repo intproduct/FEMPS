@@ -4,13 +4,23 @@
 
 The project currently has one publication manuscript:
 
-- authoritative source: `math/femps_no_go_manuscript.tex`;
-- canonical frozen review PDF: `output/pdf/femps_paper_a_frozen.pdf`.
+- PRA submission source: `paper/femps_pra_manuscript.tex`;
+- PRA review PDF: `output/pdf/femps_pra_manuscript.pdf`;
+- archival pre-PRA checkpoint: `math/femps_no_go_manuscript.tex` and
+  `output/pdf/femps_paper_a_frozen.pdf`;
+- non-submission human audit companion:
+  `paper/femps_pra_evidence_audit.tex` and
+  `output/pdf/femps_pra_human_evidence_audit.pdf`.
 
 The structural/no-go results and all presently admitted restricted-solver
 numerics belong to this manuscript. The existing
 `docs/paper/femps_method_manuscript.tex` is a frozen internal working note and
 reproduction aid, not a second submission candidate.
+
+The evidence companion is not Paper B. It restates the proof dependencies and
+the selected numerical procedure in a format designed for named human
+reviewers, with blank sign-off fields. It adds no claim and cannot itself
+supply independent approval.
 
 ## Structural theorem continuity
 

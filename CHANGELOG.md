@@ -1,5 +1,31 @@
 # Research changelog
 
+## 2026-09-02 - Paper A rewritten in PRA format with a human evidence companion
+
+- Converted the single combined manuscript to an APS PRA two-column REVTeX
+  source without altering the frozen theorem set or admitted numerical point.
+- Removed checksums, certificate inventories, repository commands, and other
+  machine-facing scaffolding from the publication text; replaced the internal
+  logical-boundary table with a conventional scientific discussion.
+- Preserved Structural results I--III, the maximum-bond-two CHSS norm theorem,
+  the rational shifted-Legendre point theorem, the complete matrix-pair
+  reductions, and the selected `N=6,D=12,K=4` NOCI-equivalent result with its
+  zero-padded `D=10,K=4` initialization and zero structural antisymmetry
+  residual.
+- Added a separate non-submission human audit companion. It presents E1--E9 as
+  claim/dependency/proof-or-algorithm/review-question units and fully expands
+  the numerical Hamiltonian construction, determinant transitions, optimizer,
+  reference CI, metrics, resource account, and blank reviewer sign-off.
+- Added a REVTeX-specific clean build driver and source-hygiene tests. Both
+  final PDFs compile without undefined references or overfull layout, and all
+  21 pages were visually inspected.
+- Standard validation passes: `316 passed` with one known latticeTN
+  report-path warning. The 2201 CPU baseline finishes at energy
+  `1.8788029184435575` with absolute error `1.0805366005195438e-4`.
+- The archival frozen source/PDF remain unchanged. Paper A is frozen again;
+  Phase 46 still requires actual named-human algebraic review and external
+  reproduction, and no Paper B has been opened.
+
 ## 2026-09-02 - Paper A final antisymmetrization framework frozen
 
 - Added a Discussion-level P1 assignment-factorization / P2 commutative-

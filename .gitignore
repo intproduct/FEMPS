@@ -14,6 +14,8 @@ checkpoints/
 outputs/
 tmp/
 output/pdf/combined-manuscript/
+output/pdf/pra-manuscript/
+output/pdf/pra-evidence-audit/
 *.log
 *_checkpoint.pt
 *.pt

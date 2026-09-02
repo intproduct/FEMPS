@@ -2,9 +2,11 @@
 
 The sole operational research plan is
 `phase46_external_review_handoff.md`. Paper A's final framework patch is
-archived under `../completed/paper_a_final_framework_patch.md`; its content is
-frozen and no further manuscript edit is authorized without explicit user
-feedback. Phase 46 waits for two real external inputs:
+archived under `../completed/paper_a_final_framework_patch.md`. Explicit user
+feedback subsequently authorized only a PRA-format rewrite and a separate
+human evidence companion; that bounded task is archived under
+`../completed/paper_a_pra_rewrite_and_human_audit.md`. The resulting PRA
+content is frozen again. Phase 46 waits for two real external inputs:
 named-human algebraic-complexity review and an independent clean reproduction
 of the failed Phase 44 gate. Repository automation may validate supplied
 artifacts but cannot manufacture either external conclusion.

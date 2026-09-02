@@ -1,0 +1,613 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable,enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{reviewquestion}{Reviewer question}
+
+\newcommand{\TT}{\mathrm{TT}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\CDet}{\operatorname{CDet}}
+\newcommand{\perm}{\operatorname{perm}}
+\newcommand{\FEMPS}{\textnormal{\textsc{femps}}}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\reviewline}{\par\smallskip\noindent
+  \textbf{Reviewer decision:} $\square$ verified \quad $\square$ revision
+  needed \quad $\square$ outside expertise\par\medskip}
+
+\title{Evidence Audit Companion to\\
+\emph{Fermionic Extensions of Continuous Functional Tensor Networks}}
+\author{Prepared for independent human review}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This companion reorganizes the evidence behind the associated PRA manuscript
+for line-by-line human review.  It is not a second paper and introduces no
+additional scientific claim.  For every major conclusion it states the input
+domain, the proof dependency, the reduction or calculation, the quantities
+that can be independently recomputed, and the boundary beyond which the
+conclusion does not extend.  The final section gives a complete audit trail for
+the selected interacting calculation, including the state class, Hamiltonian,
+operator construction, optimization schedule, initialization lineage,
+reference calculation, error measures, resource measurements, and
+antisymmetry residual.  Finite-size arithmetic checks can detect transcription
+errors, but only the displayed arguments and the cited source theorems support
+claims at arbitrary size.
+\end{abstract}
+
+\tableofcontents
+
+\section{How to use this companion}
+
+The associated PRA manuscript is the publication text.  This document is a
+review aid.  A reviewer may audit the mathematical claims independently of the
+floating-point calculation and should record any unverified dependency rather
+than infer it from a successful small case.  In particular, the two reductions
+that use Chien--Harsha--Sinclair--Srinivasan (CHSS)
+\cite{ChienHarshaSinclairSrinivasan2011NoncommDet} require independent checking
+of the cited source theorem, its field assumptions, and the row-order
+convention.
+
+The following boundaries apply throughout.
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item Exact worst-case hardness does not exclude Monte Carlo, additive
+  approximation, or an efficiently contractible promised subclass.
+\item The ordinary particle-TT rank statements do not apply automatically to
+  occupation-number MPS, ordered-coordinate methods, or exterior cores.
+\item A floating-point result is numerical evidence, not a theorem.
+\item The selected numerical state is a finite nonorthogonal Slater expansion
+  and is therefore not claimed to be distinct from NOCI.
+\item Antisymmetry is exact in the exterior representation; every numerical
+  summary nevertheless reports the corresponding residual.
+\end{enumerate}
+
+\section{Claim map and dependency structure}
+
+\begin{longtable}{@{}P{15mm}P{45mm}P{50mm}P{30mm}@{}}
+\toprule
+Item & Claim & Principal support & Independent dependency \\
+\midrule
+\endfirsthead
+\toprule
+Item & Claim & Principal support & Independent dependency \\
+\midrule
+\endhead
+E1 & Exact particle-TT bonds equal particle-cut matrix ranks. & Successive
+rank factorizations (TT-SVD). & Oseledets \cite{Oseledets2011TT}. \\
+E2 & Every nonzero alternating $N$-tensor has cut rank at least
+$\binom Nk$. & Explicit diagonal minor selected from one nonzero Pluecker
+coordinate. & None. \\
+E3 & A Slater determinant has a flat particle Schmidt spectrum and the stated
+optimal rank-$r$ error. & Partition of the permutation sum plus
+Eckart--Young. & Coleman \cite{Coleman1963FermionRDM}. \\
+E4 & Exact squared norm is \#P-hard for rational one-form \FEMPS{} at maximum
+bond two. & Direct Cayley-coefficient lemma and one-query metric reduction. &
+CHSS Theorems 3.5 and 3.9. \\
+E5 & Exact point evaluation is \#P-hard in an explicit rational shifted-
+Legendre basis at maximum bond two. & CHSS input, invertible evaluation
+matrix, explicit bit bounds, and one-query postprocessing. & CHSS plus standard
+Vandermonde identities. \\
+E6 & Specified matrix-pair memories collapse to polynomial LC--AGP families. &
+Radical filtration or fixed-counter interpolation followed by polarization. &
+Supplied algebra decomposition or embedding is part of the input. \\
+E7 & A bandwidth-one pair path encodes a permanent; real-PSD relative norm
+inherits the stated obstruction. & Unique path and even-form commutativity. &
+Valiant \cite{Valiant1979Permanent}; Meiburg \cite{Meiburg2023PSDPermanent}. \\
+E8 & A universal direct statistics-carrier tensor product fails. & Explicit
+two-Slater form with one-cut rank $N+2$. & None. \\
+E9 & The selected $N=6,D=12,K=4$ interacting calculation has the reported
+energy, error, variance, norm, cost, and exact antisymmetry. & Determinant
+transition solver and independent same-basis exterior CI. & Numerical
+recomputation; no theorem inference. \\
+\bottomrule
+\end{longtable}
+
+\section{Common definitions and normalization}
+
+Let $V_D$ be a $D$-dimensional real or complex one-particle space with
+orthonormal basis $e_1,\ldots,e_D$.  We use the isometric alternating embedding
+\begin{equation}
+J_N(v_1\wedge\cdots\wedge v_N)=\frac{1}{\sqrt{N!}}
+\sum_{\pi\in S_N}\operatorname{sgn}(\pi)
+v_{\pi(1)}\otimes\cdots\otimes v_{\pi(N)}.
+\label{audit:isometry}
+\end{equation}
+A one-form matrix-wedge state has cores
+$A^{[j]}\in\Mat_{\chi_{j-1}\times\chi_j}(V_D)$,
+$\chi_0=\chi_N=1$, and
+\begin{equation}
+C(A)=\bigl[A^{[1]}\wedge\cdots\wedge A^{[N]}\bigr]_{11}
+\in\Lambda^N V_D.
+\label{audit:femps}
+\end{equation}
+Every virtual path is a wedge of $N$ one-forms.  Thus Eq.~\eqref{audit:femps}
+is alternating without an approximate projection.  The structural
+antisymmetry residual is therefore exactly zero.  Whenever a labelled-particle
+tensor is materialized for a small system, an independent residual is
+\begin{equation}
+\epsilon_{\rm AS}^{\rm mat}
+=\max_{1\le i<N}
+\frac{\|C+\tau_{i,i+1}C\|_2}{\|C\|_2},
+\label{audit:asres}
+\end{equation}
+where $\tau_{i,i+1}$ swaps adjacent particle slots.
+
+\reviewline
+
+\section{E1--E3: exchange rank in particle factorization}
+
+\subsection{E1: exact particle-TT rank}
+
+\begin{theorem}
+For every coefficient tensor $C$ and cut $k\mid N-k$, the smallest exact
+ordinary particle-TT bond is
+\begin{equation}
+r_k^{\TT}(C)=\rank C_{(k)}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Contract the first $k$ cores of any exact TT into a matrix $L_k$ and the
+remaining cores into $R_k$.  Then $C_{(k)}=L_kR_k$, so the bond is at least
+$\rank C_{(k)}$.  Conversely, factor the first unfolding at its exact rank,
+reshape the right factor, and repeat.  At the $k$th step the carried index has
+dimension exactly $\rank C_{(k)}$.  The successive factorizations reconstruct
+$C$, establishing simultaneous attainability at all cuts.
+\end{proof}
+
+\begin{reviewquestion}
+Does the proof establish simultaneous TT ranks, rather than unrelated
+factorizations at individual cuts?  Is the theorem restricted to the
+labelled-particle tensor product?
+\end{reviewquestion}
+\reviewline
+
+\subsection{E2: universal exchange floor}
+
+\begin{theorem}
+If $0\ne C\in\Lambda^N V_D$, then
+$\rank C_{(k)}\ge\binom Nk$ for $1\le k<N$.  Equality is attained by every
+nonzero decomposable $N$-form.
+\end{theorem}
+
+\begin{proof}
+Choose an $N$-element set $I$ whose alternating coefficient $c_I$ is nonzero.
+Restrict the row index of $C_{(k)}$ to the $k$-subsets $A\subset I$ and the
+column index to their complements $I\setminus A$.  The resulting
+$\binom Nk\times\binom Nk$ submatrix is diagonal up to row and column signs:
+the matched entry is $\pm c_I$, while a mismatched row and column repeat at
+least one basis index and hence have zero alternating coefficient.  Its
+determinant is nonzero, proving the lower bound.  If
+$C=u_1\wedge\cdots\wedge u_N$, all contractions lie in
+$\Lambda^{N-k}\operatorname{span}\{u_1,\ldots,u_N\}$, which has dimension
+$\binom Nk$; the preceding lower bound is therefore sharp.
+\end{proof}
+
+The immediate truncation consequence is that a nonzero ordinary particle TT
+with a smaller bond at any cut cannot remain exactly alternating.  This does
+not say that a mode-space MPS needs the same bond.
+
+\reviewline
+
+\subsection{E3: flat Slater spectrum}
+
+\begin{theorem}
+For orthonormal $u_1,\ldots,u_N$, the normalized Slater state $\Phi$ has
+\begin{equation}
+\Phi=\binom Nk^{-1/2}\sum_{|I|=k}(-1)^{\epsilon(I)}
+\Phi_I\otimes\Phi_{I^c}.
+\label{audit:slater-schmidt}
+\end{equation}
+All $\binom Nk$ singular values are $\binom Nk^{-1/2}$, and the best cut-rank
+$r$ approximation has relative squared error
+$1-r/\binom Nk$.
+\end{theorem}
+
+\begin{proof}
+Partition the $N!$ signed permutations in Eq.~\eqref{audit:isometry} by the set
+$I$ of orbitals appearing in the first $k$ slots.  Each class contains
+$k!(N-k)!$ terms and factors into normalized Slater states $\Phi_I$ and
+$\Phi_{I^c}$ with coefficient
+$\sqrt{k!(N-k)!/N!}=\binom Nk^{-1/2}$.  Different subsets are orthogonal on
+both sides.  Equation~\eqref{audit:slater-schmidt} is therefore a Schmidt
+decomposition.  Discarding the smallest singular values is optimal by the
+Eckart--Young theorem; because they are all equal, retaining $r$ leaves the
+stated squared error.
+\end{proof}
+
+\begin{reviewquestion}
+Confirm that the orbitals are orthonormal and that no flat-spectrum statement
+is made for a general correlated alternating tensor.
+\end{reviewquestion}
+\reviewline
+
+\section{E4: fixed-bond exact squared-norm obstruction}
+
+For a matrix $M=(M_{ij})$ over a noncommutative algebra, define the
+row-ordered Cayley determinant
+\begin{equation}
+\CDet(M)=\sum_{\sigma\in S_N}\operatorname{sgn}(\sigma)
+M_{1\sigma(1)}\cdots M_{N\sigma(N)}.
+\label{audit:cayley}
+\end{equation}
+The product order is increasing in the row label.  This is the essential
+difference from the ordinary scalar determinant.
+
+\begin{lemma}[direct coefficient]
+Set $\mathcal A^{[i]}=\sum_jM_{ij}e_j$.  Then for boundary vectors $u,v$,
+\begin{equation}
+u^{\mathsf T}\mathcal A^{[1]}\wedge\cdots\wedge
+\mathcal A^{[N]}v
+=\bigl(u^{\mathsf T}\CDet(M)v\bigr)e_1\wedge\cdots\wedge e_N.
+\label{audit:direct}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+A top-form term must select each $e_j$ exactly once, hence is indexed by a
+permutation.  Reordering its exterior factors contributes the permutation
+sign, while matrix multiplication retains row order.  Summation gives
+Eq.~\eqref{audit:direct}.
+\end{proof}
+
+\begin{theorem}
+Over $\mathbb Q$, exact squared-norm evaluation for rational one-form
+\FEMPS{} is \#P-hard under a polynomial-time metric reduction even when
+$D=N$ and all internal bonds are at most two.
+\end{theorem}
+
+\begin{proof}
+For a 3CNF formula $\varphi$ with $m$ clauses and $S$ satisfying assignments,
+CHSS Theorems 3.5 and 3.9 construct in polynomial time a polynomial-size
+matrix $H_\varphi$ over $\Mat_2(\mathbb Q)$ with constant-bit integer gadget
+weights and
+\begin{equation}
+\CDet(H_\varphi)=aI_2+bJ_2,
+\qquad a+b=4^{3m}S,
+\qquad J_2=\begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\label{audit:chss-output}
+\end{equation}
+Use Eq.~\eqref{audit:direct} with $u=e_1$ and $v=e_1+e_2$.  The state has only
+one top-form coefficient,
+$u^{\mathsf T}(aI_2+bJ_2)v=a+b=4^{3m}S\ge0$, and therefore norm
+$16^{3m}S^2$.  A single exact norm query, exact nonnegative integer square
+root, and division by $4^{3m}$ recover $S$.  The CHSS matrix size and core
+encoding are polynomial in $|\varphi|$; the queried integer has polynomial bit
+length because $S\le2^{n_{\rm var}}$.  Both the construction and
+postprocessing are polynomial-time, and the maximum bond stays two.
+\end{proof}
+
+\paragraph{External dependency to check.}
+The proof uses the structured CHSS output in Eq.~\eqref{audit:chss-output}, not
+merely hardness of an arbitrary signed matrix entry.  The reviewer should
+confirm: (i) CHSS uses the same row-ordered convention; (ii) the construction
+is valid over characteristic zero; (iii) its gadget weights and graph size
+have polynomial encoding; and (iv) the stated boundary indeed selects $a+b$.
+For a generic signed Cayley entry the manuscript retains only the weaker
+bond-three polarization observation.
+
+\reviewline
+
+\section{E5: exact point evaluation in a rational Legendre basis}
+
+Let $\ell_r(t)=P_r(2t-1)$ be the unnormalized shifted Legendre polynomial,
+$P_r(1)=1$.  Its integer expansion is
+\begin{equation}
+\ell_r(t)=\sum_{k=0}^r(-1)^{r-k}\binom rk\binom{r+k}{k}t^k,
+\label{audit:legendre}
+\end{equation}
+with leading coefficient $\binom{2r}{r}$.
+
+\begin{theorem}
+Exact point evaluation of rational one-form \FEMPS{} in
+$\ell_0,\ldots,\ell_{D-1}$ is \#P-hard under a polynomial-time metric
+reduction already at $D=N$ and maximum bond two.  Under the isometry
+Eq.~\eqref{audit:isometry}, the output is represented exactly as
+$q/\sqrt{N!}$ with rational $q$.
+\end{theorem}
+
+\begin{proof}
+Choose rational nodes $t_i=i/(N+1)$ and set
+$B_{ij}=\ell_{j-1}(t_i)$.  Degree grading changes the monomial Vandermonde
+matrix by an upper-triangular coefficient matrix, so
+\begin{equation}
+\det B=\left(\prod_{r=0}^{N-1}\binom{2r}{r}\right)
+\prod_{1\le i<k\le N}(t_k-t_i)\ne0.
+\label{audit:Bdet}
+\end{equation}
+The nodes have $O(\log N)$ bits.  Equation~\eqref{audit:legendre} gives
+polynomial-bit evaluations.  More explicitly,
+$Q=(N+1)^{N-1}$ clears all denominators in $B$.  The integer entries of $QB$
+have polynomial bit length; Hadamard bounds applied to its determinant and
+minors imply polynomial bit length for
+\begin{equation}
+B^{-1}=Q\,\operatorname{adj}(QB)/\det(QB).
+\end{equation}
+Thus the basis evaluation map and its inverse are exactly computable in
+polynomial Turing time.
+
+Take the CHSS matrix $H_\varphi$ from E4 and define
+\begin{equation}
+\mathcal A^{[i]}(t)=\sum_{j=1}^N H_{ij}\ell_{j-1}(t),
+\qquad u=e_1,\quad v=e_1+e_2.
+\end{equation}
+In the alternating point expansion at $(t_1,\ldots,t_N)$, repeated basis
+columns cancel.  Each column permutation contributes its sign times $\det B$
+and leaves the CHSS matrix product in row order.  Hence
+\begin{equation}
+\Psi(t_1,\ldots,t_N)
+=\frac{\det B}{\sqrt{N!}},4^{3m}\#\mathrm{SAT}(\varphi).
+\label{audit:point}
+\end{equation}
+The exact algebraic output is the pair $(q,N)$ representing $q/\sqrt{N!}$;
+$N!$ has $O(N\log N)$ bits.  One query followed by rational division by the
+known nonzero factor $4^{3m}\det B$ recovers $\#\mathrm{SAT}(\varphi)$.
+\end{proof}
+
+\paragraph{Separation from E4.}
+E4 is a norm query on a coefficient state; E5 is a point query in a specified
+functional basis.  They are separate reductions from the same CHSS source.
+Neither implies that all $\chi\ge2$ instances are unsuitable for QMC or VMC.
+
+\reviewline
+
+\section{E6--E7: tractable corridors and a sparse hard path}
+
+\subsection{Bounded coefficient algebra}
+
+Let $\mathcal A=S\oplus R$ be a finite-dimensional complex algebra with
+$R^d=0$ and
+$S=\bigoplus_{a=1}^q\Mat_{p_a}(\mathbb C)$; put
+$p=\max p_a$ and $\rho=\dim R$.  Expanding $\Omega^M$ by the number $k$ of
+radical factors leaves only $k<d$.  Resolving the $k+1$ semisimple runs into
+Wedderburn blocks and the radical insertions in a basis gives at most
+$q^{k+1}\rho^k$ structural choices.  For each choice, even physical two-forms
+commute, and after the boundary functional is applied one obtains a homogeneous
+degree-$M$ polynomial in at most
+\begin{equation}
+v_k=(k+1)p^2+k
+\end{equation}
+commuting two-forms.  Degree-$M$ powers span this polynomial space in
+characteristic zero.  Therefore
+\begin{equation}
+K\le\sum_{k=0}^{\min(d-1,M)}q^{k+1}\rho^k
+\binom{M+v_k-1}{v_k-1}
+\end{equation}
+AGP terms suffice.  For the rational Turing statement, the displayed
+Wedderburn--Malcev decomposition and radical basis must be supplied; the
+theorem does not claim an algorithm that discovers them.
+
+\subsection{Fixed-state graded memory}
+
+If the coefficient algebra is supplied with an embedding in
+\begin{equation}
+\Mat_w\!\left(\mathbb C[z_1,\ldots,z_g]/
+(z_1^{d_1},\ldots,z_g^{d_g})\right)
+\end{equation}
+for fixed $w,g$, lift the quotient entries and note
+$\deg_{z_j}\Omega^M\le M(d_j-1)$.  Tensor-product Vandermonde interpolation
+extracts the counter coefficients.  At each grid point the boundary of the
+matrix power is a homogeneous polynomial in at most $w^2$ commuting
+two-forms, so polarization yields
+\begin{equation}
+K\le\prod_{j=1}^g[M(d_j-1)+1]
+\binom{M+w^2-1}{w^2-1}.
+\end{equation}
+Rational nodes, Hadamard bounds, and exact Gaussian elimination give the
+polynomial bit bound when the embedding is part of the input.
+
+\subsection{Sparse APG permanent path}
+
+For orthonormal pair forms $P_j=e_{2j-1}\wedge e_{2j}$ and a zero--one matrix
+$A$, set $F_i=\sum_jA_{ij}P_j$.  The unique endpoint path of an upper-
+bidiagonal pair matrix produces
+\begin{equation}
+\Psi_A=\frac{F_1\wedge\cdots\wedge F_M}{M!}
+=\frac{\perm(A)}{M!}P_1\wedge\cdots\wedge P_M.
+\end{equation}
+Repeated $P_j$ vanish, and distinct even pair forms commute, so precisely the
+permanent terms survive.  The squared norm is
+$\perm(A)^2/(M!)^2$.  Exact nonnegative square root recovers the zero--one
+permanent.  For real positive-semidefinite rational $A$, a relative squared-
+norm approximation would similarly give a relative approximation to
+$\perm(A)$; the manuscript uses Meiburg's result for the corresponding
+complexity consequence.  Entrywise-nonnegative permanents have an FPRAS
+\cite{JerrumSinclairVigoda2004PermanentFPRAS}, so the promises must not be
+conflated.
+
+\reviewline
+
+\section{E8: failure of a universal direct statistics carrier}
+
+For $C\in\Lambda^N V$, consider the one-cut contraction map
+$c_{C,1}:V^*\to\Lambda^{N-1}V$.  A universal direct factorization with a
+Slater-normalized statistics carrier would force every admitted one-cut rank
+to be divisible by $N$, because a Slater has rank $N$ and multiplicity one.
+
+For $N\ge3$ define in $V=\mathbb F^{N+2}$
+\begin{equation}
+C_N=e_1\wedge(e_2\wedge e_3+e_4\wedge e_5)
+\wedge e_6\wedge\cdots\wedge e_{N+2}.
+\end{equation}
+This is a sum of two Slaters.  Contracting successively by the duals of
+$e_1,\ldots,e_{N+2}$ gives $N+2$ forms with distinct monomial supports, hence
+linearly independent images.  Therefore $\rank c_{C_N,1}=N+2$, while
+$N\nmid N+2$.  The proposed universal direct tensor product cannot hold for
+all nonzero $N$-forms.  The proof does not exclude state-adaptive
+factorizations, Hamiltonian-specific charges, or a different categorical
+carrier with its own reconstruction theorem.
+
+\reviewline
+
+\section{E9: selected interacting numerical calculation}
+
+\subsection{State class and physical model}
+
+The numerical state is the nonbranching diagonal-path subclass
+\begin{equation}
+\Psi=\sum_{a=1}^{K}c_a\Phi_a,
+\qquad
+\Phi_a=u_{a1}\wedge\cdots\wedge u_{aN}.
+\label{audit:noci}
+\end{equation}
+Equation~\eqref{audit:noci} is exactly a $K$-term nonorthogonal Slater
+expansion.  It is a restricted \FEMPS{} realization, but not a state class
+beyond NOCI.  The selected calculation uses $N=6$, $D=12$, and $K=4$ in the
+first twelve one-dimensional harmonic-oscillator functions.  The Hamiltonian
+is
+\begin{equation}
+H=\sum_{i=1}^{N}\left(-\frac12\partial_{x_i}^2+\frac12x_i^2\right)
++\sum_{i<j}\frac{1}{\sqrt{(x_i-x_j)^2+1}}.
+\label{audit:soft}
+\end{equation}
+
+The soft-Coulomb tensor is projected with 128-point Gauss--Hermite quadrature.
+A 160-point calculation changes that tensor relatively by
+$1.3545\times10^{-12}$.  A physical-index SVD retains 23 factors at $D=12$;
+the relative reconstruction error is $3.8469\times10^{-15}$.  The independent
+reference uses the unfactorized four-index quadrature tensor and direct
+Slater--Condon diagonalization in the
+$\binom{12}{6}=924$ dimensional exterior space.
+
+\subsection{Determinant transition algorithm}
+
+Let $U_a\in\mathbb C^{D\times N}$ collect the orbitals in $\Phi_a$.  For each
+of the $K^2$ ordered transition pairs,
+\begin{equation}
+S_{ab}=U_a^\dagger U_b,
+\qquad \langle\Phi_a|\Phi_b\rangle=\det S_{ab}.
+\end{equation}
+For a one-body matrix $h$, with $X_{ab}=U_a^\dagger hU_b$,
+\begin{equation}
+\langle\Phi_a|H_1|\Phi_b\rangle
+=\det(S_{ab})\operatorname{Tr}(S_{ab}^{-1}X_{ab}).
+\label{audit:onebody}
+\end{equation}
+For a factorized two-body term $L_\ell\otimes R_\ell$, set
+$A_{ab}^{\ell}=U_a^\dagger L_\ell U_b$ and
+$B_{ab}^{\ell}=U_a^\dagger R_\ell U_b$.  Its transition value is
+\begin{equation}
+\det(S_{ab})\left[
+\operatorname{Tr}(S_{ab}^{-1}A_{ab}^{\ell})
+\operatorname{Tr}(S_{ab}^{-1}B_{ab}^{\ell})
+-\operatorname{Tr}(S_{ab}^{-1}A_{ab}^{\ell}
+S_{ab}^{-1}B_{ab}^{\ell})\right].
+\label{audit:twobody}
+\end{equation}
+Near a singular overlap, the implementation uses column-replacement cofactors
+instead of an inverse.  In the selected run all 16 transition pairs passed the
+conditioning criterion and used the inverse route.  No virtual path history
+and no $D^N$ labelled-particle coefficient tensor were enumerated.
+
+\subsection{Optimization and initialization lineage}
+
+Each $U_a$ is returned to a Stiefel gauge by reduced QR with deterministic
+diagonal phases.  At every orbital step the amplitudes are eliminated by the
+conditioned generalized Hermitian eigenproblem
+\begin{equation}
+H(U)c=E\,S(U)c.
+\end{equation}
+All four overlap directions were retained in the selected run; the final
+condition number was 2.1111 and the generalized residual norm was
+$1.96\times10^{-14}$.  Automatic differentiation propagates through QR,
+transition contractions, and the generalized eigenvalue.
+
+The nonlinear schedule used 160 Adam steps with a cosine learning-rate change
+from $10^{-3}$ to $10^{-5}$, followed by 80 requested L-BFGS refinement steps
+at learning rate 0.5.  The random seed was 3212.  The starting orbitals were
+not a fresh $D=12$ Slater and were not derived from CI.  They were obtained by
+exact zero-padding of an already optimized $D=10,K=4$ state.  The energy moved
+from 25.0498252875 at the start to 25.0494882497 after Adam and to
+25.0494711446 after L-BFGS.  This lineage must remain visible because it
+precludes a claim of blind-from-scratch $D=12$ optimization.
+
+\subsection{Definitions of the reported checks}
+
+For the normalized exterior coefficient vector $c_{\rm ext}$ and the dense
+same-basis Hamiltonian $H_{\rm CI}$,
+\begin{align}
+n&=\langle c_{\rm ext},c_{\rm ext}\rangle,\\
+E&=\langle c_{\rm ext},H_{\rm CI}c_{\rm ext}\rangle/n,\\
+\sigma_E^2&=\|(H_{\rm CI}-E)c_{\rm ext}\|_2^2/n.
+\end{align}
+The energy error is $E-E_{\rm CI}$, where $E_{\rm CI}$ is the lowest
+eigenvalue of the same 924-dimensional dense exterior Hamiltonian.  The norm
+error is $|n-1|$.  Structural antisymmetry is zero by Eq.~\eqref{audit:noci};
+a full $12^6$ particle tensor was deliberately not built, so no materialized
+residual is substituted for the structural result.
+
+\subsection{Results and resource account}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lr@{}}
+\toprule
+Quantity & Value \\
+\midrule
+Variational energy & 25.0494711446 \\
+Same-basis CI energy & 25.0493664161 \\
+Error relative to CI & $1.0473\times10^{-4}$ \\
+Energy variance & $1.1223\times10^{-3}$ \\
+Norm error & $1.55\times10^{-15}$ \\
+Structural antisymmetry residual & 0 \\
+Factorized/dense energy difference & $2.84\times10^{-14}$ \\
+Wall time & 107.7 s on CPU \\
+Peak sampled process RSS & 974,974,976 bytes \\
+Exterior dimension & 924 \\
+Transition pairs & 16 \\
+Stored orbital and amplitude scalars & 292 \\
+Enumerated virtual paths & 0 \\
+Materialized particle coefficients & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Selected numerical result.  The peak RSS is a sampled whole-process
+measurement, not an asymptotic memory bound.}
+\label{audit:numtable}
+\end{table}
+
+The absolute FEMPS/NOCI and direct-CI energies both decrease along the tested
+$D=8,10,12$ basis sequence, but the error relative to same-basis CI is not
+monotone at fixed $K=4$.  Consequently Table~\ref{audit:numtable} is a
+finite-basis numerical illustration, not evidence for accelerated $D$
+convergence.  It establishes neither a new ansatz beyond NOCI nor superiority
+over Li--Waintal, DMRG, particle TT, or FCI.
+
+\begin{reviewquestion}
+Recompute the dense exterior norm, Rayleigh quotient, residual variance, and
+lowest CI eigenvalue from the final 924 coefficients.  Confirm that the
+factorized and unfactorized Hamiltonian energies agree within the stated
+tolerance and that the zero-padded initialization is disclosed in any summary
+of the result.
+\end{reviewquestion}
+\reviewline
+
+\section{Final human sign-off}
+
+The following sign-off is intentionally not prefilled.
+
+\begin{tabular}{@{}P{45mm}P{95mm}@{}}
+Reviewer name and affiliation: & \\[8mm]
+Area of expertise: & \\[8mm]
+Items reviewed (E1--E9): & \\[8mm]
+Unresolved objections: & \\[16mm]
+Required revisions: & \\[16mm]
+Overall recommendation: & $\square$ accept evidence as stated \quad
+$\square$ revise \quad $\square$ reject \\[8mm]
+Signature/date: & \\
+\end{tabular}
+
+\bibliographystyle{unsrt}
+\bibliography{references/references}
+
+\end{document}

@@ -2,12 +2,16 @@
 
 ## Status
 
-The final Paper A content checkpoint was completed on 2026-09-02. ADR 0028
-supersedes the later two-paper split. The authoritative source is
-`math/femps_no_go_manuscript.tex`; the canonical frozen review artifact is
-`output/pdf/femps_paper_a_frozen.pdf`. Previous PDFs are historical
-checkpoints. Paper A is content-frozen and awaits human scientific and wording
-review; no further edit is authorized without explicit user feedback.
+The final Paper A scientific checkpoint was completed on 2026-09-02. ADR 0028
+supersedes the later two-paper split. Explicit user feedback then authorized a
+presentation-only rewrite into PRA format and a separate human evidence
+companion. The submission source is now `paper/femps_pra_manuscript.tex` and
+the review PDF is `output/pdf/femps_pra_manuscript.pdf`. The pre-PRA source
+`math/femps_no_go_manuscript.tex` and
+`output/pdf/femps_paper_a_frozen.pdf` remain archival checkpoints. The
+non-submission audit companion is
+`output/pdf/femps_pra_human_evidence_audit.pdf`. Paper A is frozen again and
+awaits named human scientific and wording review.
 
 The restricted diagonal-path method draft is now an internal working note, not
 a second publication manuscript. Its admitted numerical evidence is summarized
@@ -58,6 +62,13 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
 
 ## Reviewer and submission hygiene
 
+- Recast the manuscript in APS PRA two-column REVTeX 4.2 format and replaced
+  internal audit tables by ordinary scientific discussion.
+- Removed all checksum strings, repository commands, certificate inventories,
+  and other machine-facing scaffolding from the human publication text.
+- Added a separate one-column evidence companion with E1--E9 proof,
+  algorithm, numerical-process, result, limitation, reviewer-question, and
+  blank sign-off fields. This companion is not a second paper.
 - Added or clarified citations for Coleman, Chan--Sharma, Bertsch--Robledo,
   Arvind--Srinivasan, and Chien--Harsha--Sinclair--Srinivasan; retained the
   established AGP, Pfaffian, and variational Monte Carlo prior-art boundary.
@@ -70,23 +81,21 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
 
 ## Validation
 
-- PDFLaTeX and BibTeX completed successfully for the frozen source.
-- Current PDF: 17 A4 pages, 409,039 bytes.
-- Current PDF SHA-256:
-  `D688D4939A389CA50F7B2F130BD24BFA13F4FD901CC0D026ADEC2C7EDE456FD9`.
-- Build log: no undefined citation/reference, overfull/underfull box, package,
-  LaTeX, or font warnings.
-- All 17 pages were rendered to PNG and inspected for clipping, overlap,
-  table legibility, formula placement, section transitions, and pagination.
-- The four-cell table was separately compiled and inspected in an APS RevTeX
-  two-column full-width sample.
-- Standard repository suite: `313 passed, 1 known latticeTN report-path
-  warning` in 674.52 s, using the isolated source and a workspace-local pytest
-  temporary directory. The exact-certificate subset reports `11 passed`; the
-  shifted-Legendre verifier passes orders two through six.
+- PRA PDF: 11 pages in two-column REVTeX format; human evidence companion:
+  10 A4 pages in one-column review format.
+- Both final PDFs contain no undefined citation/reference, package diagnostic,
+  overfull box, checksum, repository command, Phase/Gate label, or placeholder.
+- All 21 output pages were rendered and inspected for clipping, overlap,
+  equation placement, table legibility, bibliography layout, and sign-off
+  spacing.
+- The archival pre-PRA PDF remains the previously validated 17-page A4
+  checkpoint and was not overwritten.
+- Standard repository suite: `316 passed, 1 known latticeTN report-path
+  warning` in 675.58 s, using the isolated source and a workspace-local pytest
+  temporary directory.
 - The required 2201 CPU baseline completes 500 steps with final energy
   `1.8788029184435575`, absolute error `1.0805366005195438e-4`, and elapsed
-  time 11.12 s.
+  time 10.26 s.
 
 The single restored `N=4,D=8` point is complete and retained internally. It
 failed the registered final CI-error and variance thresholds; no rescue or

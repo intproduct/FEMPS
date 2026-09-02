@@ -1,5 +1,11 @@
 # Combined manuscript A: theorem, evidence, and citation audit
 
+The publication proof bodies have undergone a statement-preserving
+formalization pass.  `PROOF_FORMALIZATION_AUDIT.md` records every replacement
+and the four explicit external-dependency flags; it should be read alongside
+this higher-level status table.  No theorem statement or evidence level was
+changed by that pass.
+
 | Manuscript result | Domain and reduction | Evidence level | External dependency / citation | Remaining review |
 |---|---|---|---|---|
 | Exact particle-TT bond equals unfolding rank | real/complex finite tensors | theorem | exact TT-SVD; Oseledets (2011) | attribution/priority only |

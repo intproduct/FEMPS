@@ -57,6 +57,12 @@ The combined manuscript states this boundary explicitly. Paper A is now
 content-frozen pending human scientific and wording review; no further edit is
 authorized without explicit user feedback.
 
+The later user-authorized proof-formalization pass did not change this boundary
+or any theorem statement.  It expanded the existing proofs and exposed four
+external-dependency `AUDIT FLAG` blocks.  The exact per-result record is in
+`PROOF_FORMALIZATION_AUDIT.md`.  Paper A is frozen again after that bounded
+pass.
+
 ## Status of the restricted solver numerics
 
 The nonbranching diagonal-path implementation is algebraically a finite

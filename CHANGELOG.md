@@ -1,5 +1,28 @@
 # Research changelog
 
+## 2026-09-02 - Paper A proofs formalized for line-by-line audit
+
+- Expanded all fourteen theorem/lemma/corollary proof blocks in the PRA source
+  into explicit indexed constructions and formula chains without changing any
+  statement, numbering, citation, novelty claim, or numerical claim.
+- Added explicit source-instance to FEMPS-instance to oracle-value to source-
+  answer chains for the complexity reductions, including separate size, bond,
+  coefficient-bit-length, and postprocessing audits.
+- Inserted four visible `AUDIT FLAG` blocks instead of silently reconstructing
+  facts imported from CHSS, Valiant, and Meiburg.
+- Added `PROOF_FORMALIZATION_AUDIT.md` and a regression test that fixes the
+  fourteen statement blocks, fourteen proof environments, and four flag
+  locations.
+- Rebuilt the 15-page PRA PDF without undefined references or layout warnings
+  and visually inspected every page.  Targeted manuscript tests pass (`4
+  passed`); the required 2201 CPU baseline again finishes at energy
+  `1.8788029184435575` with absolute error `1.0805366005195438e-4`.
+- Full repository validation passes: `317 passed` in 687.30 s, with the single
+  known latticeTN report-path scalar-conversion warning.
+- The pass introduced no new scientific reasoning or evidence status.  Paper A
+  is frozen again; Phase 46 and its named-human review requirement remain
+  active.
+
 ## 2026-09-02 - Paper A rewritten in PRA format with a human evidence companion
 
 - Converted the single combined manuscript to an APS PRA two-column REVTeX

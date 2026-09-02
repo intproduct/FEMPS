@@ -6,7 +6,10 @@ archived under `../completed/paper_a_final_framework_patch.md`. Explicit user
 feedback subsequently authorized only a PRA-format rewrite and a separate
 human evidence companion; that bounded task is archived under
 `../completed/paper_a_pra_rewrite_and_human_audit.md`. The resulting PRA
-content is frozen again. Phase 46 waits for two real external inputs:
+content was then reopened solely for an explicitly requested proof-
+formalization pass, now archived under
+`../completed/paper_a_proof_formalization.md`. Its statement set and scientific
+claims were unchanged, and Paper A is frozen again. Phase 46 waits for two real external inputs:
 named-human algebraic-complexity review and an independent clean reproduction
 of the failed Phase 44 gate. Repository automation may validate supplied
 artifacts but cannot manufacture either external conclusion.

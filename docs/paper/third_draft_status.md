@@ -13,6 +13,14 @@ non-submission audit companion is
 `output/pdf/femps_pra_human_evidence_audit.pdf`. Paper A is frozen again and
 awaits named human scientific and wording review.
 
+Explicit user feedback subsequently authorized one proof-formalization pass.
+All fourteen theorem/lemma/corollary statements remain byte-identical after
+newline normalization, while their proof bodies now expose the intermediate
+objects and formula chains needed for line-by-line audit.  Four `AUDIT FLAG`
+blocks identify imported CHSS, Valiant, and Meiburg facts that the manuscript
+does not prove.  The companion record is `PROOF_FORMALIZATION_AUDIT.md`; this
+repository-internal pass does not replace named-human review.
+
 The restricted diagonal-path method draft is now an internal working note, not
 a second publication manuscript. Its admitted numerical evidence is summarized
 inside the combined paper subject to the NOCI-equivalence limitation. See
@@ -81,21 +89,23 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
 
 ## Validation
 
-- PRA PDF: 11 pages in two-column REVTeX format; human evidence companion:
+- PRA PDF: 15 pages in two-column REVTeX format; human evidence companion:
   10 A4 pages in one-column review format.
 - Both final PDFs contain no undefined citation/reference, package diagnostic,
   overfull box, checksum, repository command, Phase/Gate label, or placeholder.
-- All 21 output pages were rendered and inspected for clipping, overlap,
+- The revised PRA PDF's 15 pages were rendered and inspected after proof
+  formalization; the previously validated 10-page companion was not changed.
+  Inspection covered clipping, overlap,
   equation placement, table legibility, bibliography layout, and sign-off
   spacing.
 - The archival pre-PRA PDF remains the previously validated 17-page A4
   checkpoint and was not overwritten.
-- Standard repository suite: `316 passed, 1 known latticeTN report-path
-  warning` in 675.58 s, using the isolated source and a workspace-local pytest
+- Standard repository suite after proof formalization: `317 passed, 1 known
+  latticeTN report-path warning` in 687.30 s, using the isolated source and a workspace-local pytest
   temporary directory.
 - The required 2201 CPU baseline completes 500 steps with final energy
   `1.8788029184435575`, absolute error `1.0805366005195438e-4`, and elapsed
-  time 10.26 s.
+  time 9.67 s in the proof-formalization validation run.
 
 The single restored `N=4,D=8` point is complete and retained internally. It
 failed the registered final CI-error and variance thresholds; no rescue or

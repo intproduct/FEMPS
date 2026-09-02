@@ -1,9 +1,12 @@
+import hashlib
 from pathlib import Path
+import re
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PRA_SOURCE = ROOT / "paper" / "femps_pra_manuscript.tex"
 AUDIT_SOURCE = ROOT / "paper" / "femps_pra_evidence_audit.tex"
+FORMALIZATION_AUDIT = ROOT / "PROOF_FORMALIZATION_AUDIT.md"
 
 
 def test_pra_source_uses_revtex_and_preserves_the_scientific_core() -> None:
@@ -57,3 +60,23 @@ def test_human_audit_is_self_contained_and_does_not_fake_signoff() -> None:
         assert phrase in text
     assert "intentionally not prefilled" in text
     assert "SHA-256" not in text
+
+
+def test_proof_formalization_records_flags_and_no_claim_change() -> None:
+    manuscript = PRA_SOURCE.read_text(encoding="utf-8")
+    audit = FORMALIZATION_AUDIT.read_text(encoding="utf-8")
+    statement_pattern = re.compile(
+        r"\\begin\{(theorem|lemma|corollary)\}(.*?)\\end\{\1\}", re.DOTALL
+    )
+    statements = statement_pattern.findall(manuscript)
+    payload = "\n".join(kind + body for kind, body in statements).encode()
+    assert len(statements) == 14
+    assert hashlib.sha256(payload).hexdigest() == (
+        "f570e133b0bb22d306c13915fe296cc8606e7022c2b5b32566649665d09d3e03"
+    )
+    assert manuscript.count(r"\begin{auditflag}") == 4
+    assert manuscript.count(r"\begin{proof}") == 14
+    for dependency in ("CHSS", "Valiant", "Meiburg"):
+        assert dependency in audit
+    assert "Was new reasoning introduced?" in audit
+    assert "byte-for-byte identical" in audit

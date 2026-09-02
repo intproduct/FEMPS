@@ -53,6 +53,13 @@ comparison, is ready. Completion now requires actual external human input;
 until received, this phase remains active and Paper A remains frozen for human
 scientific and wording review.
 
+After this handoff was prepared, explicit user feedback authorized a bounded
+proof-formalization pass.  That pass preserved every theorem/lemma/corollary
+statement and added `PROOF_FORMALIZATION_AUDIT.md` plus visible dependency
+flags.  It is archived under
+`../completed/paper_a_proof_formalization.md`.  It does not discharge either
+external obligation above; the manuscript is frozen again.
+
 ## Stop rules
 
 - Do not impersonate or synthesize human approval.

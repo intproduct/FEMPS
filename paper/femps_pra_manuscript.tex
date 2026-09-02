@@ -9,6 +9,9 @@
 \newtheorem{conjecture}[theorem]{Conjecture}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
+\newenvironment{auditflag}
+  {\par\smallskip\noindent\textbf{AUDIT FLAG.}\ }
+  {\par\smallskip}
 
 \newcommand{\TT}{\mathrm{TT}}
 \newcommand{\rank}{\operatorname{rank}}
@@ -121,16 +124,55 @@ For $1\le k<N$, the minimal exact ordinary-TT bond is
 \end{theorem}
 
 \begin{proof}
-Write an arbitrary TT coefficient at the $k\mid N-k$ cut as
-$C_{(k)}=L_kR_k$, where the columns of $L_k$ and rows of $R_k$ are indexed by
-the cut bond.  Thus every exact TT has bond at least $\rank C_{(k)}$.  For the
-converse, choose a basis of the column space of the first unfolding and express
-every remaining slice in that basis.  Repeat on the residual coefficient array
-from left to right.  At step $k$ the number of retained basis vectors is
-exactly $\rank C_{(k)}$, and after the final step their contracted product is
-$C$.  This elementary rank-factorization construction is the exact TT-SVD
-argument \cite{Oseledets2011TT}; it proves simultaneous attainability at every
-cut and not merely separate lower bounds.
+Fix an orthonormal basis $(e_s)_{s=1}^D$ of $V$ and write
+$C_{s_1\ldots s_N}$ for the coefficients of $C$.  An exact TT with bond
+$\chi_k$ at the $k\mid N-k$ cut has coefficients
+\begin{equation}
+C_{s_1\ldots s_N}=
+\sum_{\alpha_1=1}^{\chi_1}\cdots
+\sum_{\alpha_{N-1}=1}^{\chi_{N-1}}
+G^{[1]}_{s_1\alpha_1}G^{[2]}_{\alpha_1s_2\alpha_2}
+\cdots G^{[N]}_{\alpha_{N-1}s_N}.
+\label{eq:audit-tt-coeff}
+\end{equation}
+Contracting the cores on the two sides of the cut defines
+\begin{align}
+(L_k)_{(s_1,\ldots,s_k),\alpha_k}
+ &=\sum_{\alpha_1,\ldots,\alpha_{k-1}}
+   \prod_{i=1}^{k}G^{[i]}_{\alpha_{i-1}s_i\alpha_i},\nonumber\\
+(R_k)_{\alpha_k,(s_{k+1},\ldots,s_N)}
+ &=\sum_{\alpha_{k+1},\ldots,\alpha_{N-1}}
+   \prod_{i=k+1}^{N}G^{[i]}_{\alpha_{i-1}s_i\alpha_i},
+\end{align}
+where $\alpha_0=\alpha_N=1$.  Equation~\eqref{eq:audit-tt-coeff} gives the
+entrywise identity
+\begin{align}
+C_{(k)}&=L_kR_k,\nonumber\\
+\rank C_{(k)}&\le\min(\rank L_k,\rank R_k)\le\chi_k.
+\label{eq:audit-tt-lower}
+\end{align}
+
+For the converse, perform successive exact rank factorizations.  At the first
+step write $C_{(1)}=L_1Z_1$ with $L_1$ of full column rank
+$r_1=\rank C_{(1)}$.  Inductively, suppose the first $k-1$ cores have been
+chosen so that their contraction $L_{k-1}$ has full column rank and the
+remaining coefficient array is $Z_{k-1}$.  Matricizing $Z_{k-1}$ across its
+first virtual-plus-physical index gives a matrix $Z_{k-1}^{\langle k\rangle}$
+such that
+\begin{equation}
+C_{(k)}=(L_{k-1}\otimes I_D)Z_{k-1}^{\langle k\rangle}.
+\end{equation}
+Because $L_{k-1}\otimes I_D$ has full column rank, left multiplication by it
+is injective on columns, and hence
+\begin{equation}
+\rank Z_{k-1}^{\langle k\rangle}=\rank C_{(k)}=:r_k.
+\end{equation}
+Choose an exact rank factorization
+$Z_{k-1}^{\langle k\rangle}=G^{[k]}Z_k$ of inner dimension $r_k$ and reshape
+$G^{[k]}$ as the $k$th TT core.  Continuing through $k=N-1$ produces one TT
+whose cut bonds are simultaneously $r_k=\rank C_{(k)}$ and whose contracted
+coefficient tensor is $C$.  This is the exact TT-SVD construction
+\cite{Oseledets2011TT}.
 \end{proof}
 
 \begin{theorem}[Structural result II: universal exchange floor]
@@ -143,11 +185,43 @@ The lower bound is attained by every nonzero decomposable $N$-form.
 \end{theorem}
 
 \begin{proof}
-Choose a nonzero coefficient $c_I$ on an $N$-element support $I$.  Restrict rows to
-$k$-subsets $A\subset I$ and columns to $I\setminus A$.  The resulting
-$\binom{N}{k}$ square minor is diagonal up to signs: its diagonal entries are
-$\pm c_I$, while an off-diagonal entry repeats an index and vanishes.
-A decomposable form supported on an $N$-plane has no larger contraction image.
+Expand
+\begin{align}
+C&=\sum_{I\subseteq[D],\,|I|=N}c_I e_I,\nonumber\\
+e_I&=e_{i_1}\wedge\cdots\wedge e_{i_N},
+\qquad i_1<\cdots<i_N.
+\end{align}
+and choose $I$ with $c_I\ne0$.  Index rows of $C_{(k)}$ by ordered
+$k$-tuples and columns by ordered $(N-k)$-tuples.  For each $k$-subset
+$A\subset I$, take the increasing row tuple associated with $A$ and the
+increasing column tuple associated with $I\setminus A$.  Let $M_I$ be the
+resulting $\binom Nk\times\binom Nk$ submatrix, with both its rows and columns
+indexed by $k$-subsets $A,B\subset I$ through
+\begin{equation}
+(M_I)_{A,B}:=(C_{(k)})_{A,I\setminus B}.
+\end{equation}
+If $A=B$, the concatenated indices are exactly $I$, so
+$(M_I)_{A,A}=\varepsilon_Ac_I$ for a sign $\varepsilon_A\in\{\pm1\}$.  If
+$A\ne B$, equal cardinality implies $A\setminus B\ne\varnothing$.  Every
+index in $A\setminus B$ appears both in $A$ and in $I\setminus B$, so
+alternation gives $(M_I)_{A,B}=0$.  Consequently
+\begin{equation}
+\det M_I=\left(\prod_{A\subset I,\,|A|=k}\varepsilon_A\right)
+c_I^{\binom Nk}\ne0,
+\end{equation}
+and therefore
+\begin{equation}
+\rank C_{(k)}\ge\rank M_I=\binom Nk.
+\end{equation}
+
+Now let $C=u_1\wedge\cdots\wedge u_N\ne0$ and put
+$U=\operatorname{span}\{u_1,\ldots,u_N\}$, so $\dim U=N$.  Every contraction
+of $C$ by a $k$-covector lies in $\Lambda^{N-k}U$, whence
+\begin{equation}
+\rank C_{(k)}\le\dim\Lambda^{N-k}U=\binom N{N-k}=\binom Nk.
+\end{equation}
+Together with the lower bound, this proves equality for every nonzero
+decomposable form.
 \end{proof}
 
 \begin{corollary}[strict-antisymmetry truncation floor]
@@ -155,6 +229,13 @@ If $\widetilde C\ne0$ and
 $r_k^{\TT}(\widetilde C)<\binom{N}{k}$ at any cut, then
 $\widetilde C\notin\Lambda^N V$.
 \end{corollary}
+
+\begin{proof}
+If $\widetilde C$ were in $\Lambda^N V$, Structural result II would give
+$\rank\widetilde C_{(k)}\ge\binom Nk$.  Structural result I gives the equality
+$r_k^{\TT}(\widetilde C)=\rank\widetilde C_{(k)}$, contradicting the assumed
+strict inequality.
+\end{proof}
 
 The TT-rank characterization is standard.  The exterior rank-floor proof is
 included for audit, but no priority claim is made pending a dedicated exterior-
@@ -182,12 +263,51 @@ $r_k^{\TT}\ge\lceil(1-\epsilon^2)\binom{N}{k}\rceil$.
 \end{theorem}
 
 \begin{proof}
-Partition the signed permutation sum by the set of orbitals in the first $k$
-slots.  Each class factors into normalized internal Slater sums with coefficient
-$\sqrt{k!(N-k)!/N!}$.  Distinct subsets give orthonormal states on both sides.
-The approximation formula is the Eckart--Young theorem applied to this flat
-singular-value list.  This is the standard particle-reduced-density-matrix
-structure of a Slater determinant \cite{Coleman1963FermionRDM}.
+Let $[N]=\{1,\ldots,N\}$.  For a subset
+$I=\{i_1<\cdots<i_k\}\subset[N]$, define the normalized antisymmetric tensors
+\begin{align}
+\Phi_I&=\frac{1}{\sqrt{k!}}
+\sum_{\sigma\in S_k}\operatorname{sgn}(\sigma)
+u_{i_{\sigma(1)}}\otimes\cdots\otimes u_{i_{\sigma(k)}},\nonumber\\
+\Phi_{I^c}&=\frac{1}{\sqrt{(N-k)!}}
+\sum_{\tau\in S_{N-k}}\operatorname{sgn}(\tau)
+u_{j_{\tau(1)}}\otimes\cdots\otimes u_{j_{\tau(N-k)}},
+\end{align}
+where $I^c=\{j_1<\cdots<j_{N-k}\}$.  Let $\rho_I\in S_N$ be the shuffle that
+places $(i_1,\ldots,i_k)$ in the first $k$ positions and the complementary
+indices in the last $N-k$ positions, both in increasing order, and put
+$(-1)^{\epsilon(I)}=\operatorname{sgn}(\rho_I)$.
+
+Put $m:=\binom Nk$.  Every permutation $\pi\in S_N$ has a unique decomposition into a subset $I$,
+the shuffle $\rho_I$, and internal permutations
+$(\sigma,\tau)\in S_k\times S_{N-k}$.  Substitution in the normalized Slater
+sum therefore gives
+\begin{align}
+\Phi
+&=\frac{1}{\sqrt{N!}}
+\sum_{|I|=k}(-1)^{\epsilon(I)}
+\bigl(\sqrt{k!}\,\Phi_I\bigr)
+\otimes\bigl(\sqrt{(N-k)!}\,\Phi_{I^c}\bigr)\nonumber\\
+&=\sqrt{\frac{k!(N-k)!}{N!}}\nonumber\\[-2pt]
+&\quad\times
+\sum_{|I|=k}(-1)^{\epsilon(I)}\Phi_I\otimes\Phi_{I^c}
+\nonumber\\
+&=m^{-1/2}\nonumber\\[-2pt]
+&\quad\times
+\sum_{|I|=k}(-1)^{\epsilon(I)}\Phi_I\otimes\Phi_{I^c}.
+\end{align}
+Orthonormality of the $u_i$ implies
+$\langle\Phi_I,\Phi_J\rangle=\delta_{IJ}$ and likewise for the complements.
+The displayed expression is therefore a Schmidt decomposition with exactly
+$m$ singular values $s_j=m^{-1/2}$.  By Eckart--Young,
+\begin{equation}
+\min_{\rank X\le r}\frac{\|\Phi-X\|_2^2}{\|\Phi\|_2^2}
+=\sum_{j=r+1}^{m}s_j^2=\frac{m-r}{m}=1-\frac r{\binom Nk}.
+\end{equation}
+Thus squared error at most $\epsilon^2$ requires
+$r\ge(1-\epsilon^2)\binom Nk$, and integrality gives the stated ceiling.  This
+is the standard particle-reduced-density-matrix structure of a Slater
+determinant \cite{Coleman1963FermionRDM}.
 \end{proof}
 
 No flat spectrum is asserted for a general correlated alternating tensor.
@@ -268,9 +388,36 @@ $D=N=n$ and maximum internal bond $d$.
 \end{lemma}
 
 \begin{proof}
-A nonzero top-form term chooses every physical basis vector once.  The choice
-is a permutation, its exterior sign is the permutation sign, and its virtual
-matrix product remains in increasing site order.  Their sum is $\CDet(M)$.
+By distributivity of matrix multiplication and the exterior product,
+\begin{align}
+u^{\mathsf T}\mathcal A^{[1]}\wedge\cdots\wedge
+\mathcal A^{[n]}v
+&=\sum_{j_1,\ldots,j_n=1}^{n}
+u^{\mathsf T}M_{1j_1}\cdots M_{nj_n}v\nonumber\\
+&\quad\times e_{j_1}\wedge\cdots\wedge e_{j_n}.
+\label{eq:audit-direct-expand}
+\end{align}
+If two indices $j_a,j_b$ coincide, the corresponding exterior monomial is
+zero.  Every nonzero summand therefore has
+$(j_1,\ldots,j_n)=(\sigma(1),\ldots,\sigma(n))$ for a unique
+$\sigma\in S_n$, and
+\begin{equation}
+e_{\sigma(1)}\wedge\cdots\wedge e_{\sigma(n)}
+=\operatorname{sgn}(\sigma)e_1\wedge\cdots\wedge e_n.
+\end{equation}
+Substitution into Eq.~\eqref{eq:audit-direct-expand} yields
+\begin{align}
+u^{\mathsf T}\mathcal A^{[1]}\wedge\cdots\wedge
+\mathcal A^{[n]}v
+&=\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)
+u^{\mathsf T}M_{1\sigma(1)}\cdots M_{n\sigma(n)}v\nonumber\\
+&\quad\times e_1\wedge\cdots\wedge e_n\nonumber\\
+&=\bigl(u^{\mathsf T}\CDet(M)v\bigr)
+e_1\wedge\cdots\wedge e_n.
+\end{align}
+Replacing the first matrix core by $u^{\mathsf T}\mathcal A^{[1]}$ and the
+last by $\mathcal A^{[n]}v$ changes the endpoint dimensions to one and leaves
+all internal dimensions at most $d$, proving the final sentence of the lemma.
 \end{proof}
 
 \begin{theorem}[Fixed-bond squared-norm hardness]
@@ -282,28 +429,102 @@ $\chi=2$ would imply $\mathrm{FP}=\#\mathrm P$.
 \end{theorem}
 
 \begin{proof}
-Let $\varphi$ be a 3CNF instance with $m$ clauses and $S$ satisfying
-assignments.  Theorems 3.5 and 3.9 of
-Chien--Harsha--Sinclair--Srinivasan (CHSS) construct in polynomial time a
-polynomial-size matrix $H_\varphi$ over $\Mat_2(\mathbb Q)$, with constant-bit
-integer gadget weights, such that
+\medskip\noindent\textit{Source instance.}\quad
+Let $\varphi$ be a 3CNF formula with $m$ clauses, $n_{\rm var}$ variables, and
+\begin{equation}
+S:=\#\{z\in\{0,1\}^{n_{\rm var}}:\varphi(z)=1\}.
+\end{equation}
+Theorems 3.5 and 3.9 of
+Chien--Harsha--Sinclair--Srinivasan (CHSS) construct from $\varphi$ in
+polynomial time an $n\times n$ matrix
+\begin{equation}
+H_\varphi=(H_{ij})_{i,j\in[n]},
+\qquad H_{ij}\in\Mat_2(\mathbb Q),
+\end{equation}
+where $n=\operatorname{poly}(|\varphi|)$ and the gadget entries are
+constant-bit integers, such that
 \begin{align}
  \CDet(H_\varphi)&=aI_2+bJ_2,
  &J_2&=\begin{pmatrix}0&1\\1&0\end{pmatrix},\nonumber\\
  a+b&=4^{3m}S.&&
 \end{align}
 CHSS label the graph vertices, and their determinant is the row-ordered Cayley
-determinant in that vertex order.  Apply Eq.~\eqref{eq:direct-cayley} with
-$u=e_1$ and $v=e_1+e_2$.  The sole top-form coefficient is
-\[
- u^{\mathsf T}(aI_2+bJ_2)v=a+b=4^{3m}S\ge0,
-\]
-so one exact squared-norm query returns $16^{3m}S^2$.  Exact nonnegative
-integer square root followed by division by $4^{3m}$ recovers $S$.  The CHSS
-graph size is polynomial in $|\varphi|$; all FEMPS cores have polynomial
-encoding length; and the queried norm and its square root have polynomial bit
-length because $S\le2^{n_{\rm var}}$.  Construction and postprocessing are
-therefore polynomial-time, and the maximum internal bond remains two.
+determinant in that vertex order.
+
+\begin{auditflag}
+The structured identity $\CDet(H_\varphi)=aI_2+bJ_2$ with
+$a+b=4^{3m}S$, including the polynomial construction, row ordering, and
+constant-bit gadget claim, is imported from CHSS Theorems 3.5 and 3.9.  It is
+not derived from the preceding FEMPS definitions and requires independent
+source verification.  The standard \#P-completeness of \#SAT is also used as
+the source-problem classification rather than reproved here.
+\end{auditflag}
+
+\noindent\textit{Constructed FEMPS instance.}\quad
+For $i\in[n]$ define the one-form matrix core
+\begin{equation}
+\mathcal A^{[i]}:=\sum_{j=1}^{n}H_{ij}e_j\in\Mat_2(V_n),
+\end{equation}
+and choose $u=e_1^{(2)}=(1,0)^{\mathsf T}$ and
+$v=e_1^{(2)}+e_2^{(2)}=(1,1)^{\mathsf T}$.  Absorb $u^{\mathsf T}$ and $v$
+into the endpoint cores.  The constructed instance has
+\begin{equation}
+N=D=n,\qquad \chi_i=2\quad(1\le i<n).
+\end{equation}
+By the direct Cayley coefficient lemma its state is
+\begin{equation}
+C_\varphi=c_\varphi\,e_1\wedge\cdots\wedge e_n,
+\qquad
+c_\varphi=u^{\mathsf T}\CDet(H_\varphi)v.
+\end{equation}
+The boundary multiplication is explicit:
+\begin{align}
+c_\varphi
+&=(1,0)(aI_2+bJ_2)(1,1)^{\mathsf T}\nonumber\\
+&=(1,0)\begin{pmatrix}a&b\\b&a\end{pmatrix}
+  \begin{pmatrix}1\\1\end{pmatrix}
+=a+b=4^{3m}S\ge0.
+\label{eq:audit-chss-coeff}
+\end{align}
+
+\medskip\noindent\textit{Oracle value.}\quad
+The physical basis is orthonormal, so
+$\|e_1\wedge\cdots\wedge e_n\|_2=1$.  An exact squared-norm oracle therefore
+returns
+\begin{equation}
+y_\varphi:=\|C_\varphi\|_2^2
+=c_\varphi^2=16^{3m}S^2.
+\label{eq:audit-chss-norm}
+\end{equation}
+
+\medskip\noindent\textit{Source answer and postprocessing.}\quad
+Because Eq.~\eqref{eq:audit-chss-coeff} is nonnegative, the integer square
+root is unambiguous and
+\begin{equation}
+S=\frac{\sqrt{y_\varphi}}{4^{3m}}.
+\label{eq:audit-chss-recover}
+\end{equation}
+Exact integer square root and division are polynomial-time in the output bit
+length.
+
+\medskip\noindent\textit{Size and bit audit.}\quad
+There are $n^2$ matrices $H_{ij}$, each with four constant-bit entries, so the
+constructed FEMPS coefficient list has $O(n^2)$ rational scalars and polynomial
+encoding length.  The bond is exactly bounded by two, independently of $n$.
+Moreover $0\le S\le2^{n_{\rm var}}$, hence
+\begin{align}
+\operatorname{bits}(c_\varphi)
+&\le 6m+n_{\rm var}+O(1),\\
+\operatorname{bits}(y_\varphi)
+&\le 12m+2n_{\rm var}+O(1),
+\end{align}
+which are polynomial in $|\varphi|$.  Thus the complete chain
+\begin{equation}
+\varphi\longmapsto (\mathcal A^{[1]},\ldots,\mathcal A^{[n]})
+\longmapsto y_\varphi
+\longmapsto \frac{\sqrt{y_\varphi}}{4^{3m}}=S
+\end{equation}
+is a polynomial-time metric reduction.
 \end{proof}
 
 The structured CHSS boundary is what sharpens the bond from three to two.  For
@@ -385,17 +606,88 @@ Wedderburn--Malcev decomposition is asserted here.
 \end{theorem}
 
 \begin{proof}
-Expand $\Omega=\Omega_S+\Omega_R$ into noncommutative words.  A word with at
-least $d$ radical factors vanishes.  For a surviving number $k$, resolve the
-$k+1$ semisimple runs through the $q$ blocks and each radical insertion in a
-basis of $R$, giving at most $q^{k+1}\rho^k$ structural choices.  For one
-choice, even physical two-forms commute; after applying $\lambda$, the result
-is a homogeneous degree-$M$ scalar polynomial in at most
-$v_k=(k+1)p^2+k$ two-forms.  In characteristic zero, $M$th powers of linear
-forms span $\operatorname{Sym}^M(\mathbb C^{v_k})$.  Each such power divided by
-$M!$ is one AGP, proving Eq.~\eqref{eq:bounded-collapse}.  The radical
-filtration, block expansion, and polarization count are written out in
-Appendix~\ref{app:wm-proof}.
+Let $E=\Lambda^{\mathrm{even}}V_D$ and
+$E_2=\Lambda^2V_D$.  The physical coefficients lie in the commutative algebra
+$E$, and
+\begin{equation}
+\Omega=\Omega_S+\Omega_R,
+\qquad
+\Omega_S\in S\otimes E_2,\quad
+\Omega_R\in R\otimes E_2.
+\end{equation}
+Expand $\Omega^M$ as a sum of length-$M$ words in the two symbols
+$\Omega_S,\Omega_R$.  If a word contains $k$ radical factors, the two-sided
+ideal identities
+\begin{equation}
+SR^j\subseteq R^j,\qquad R^jS\subseteq R^j,\qquad
+R^iR^j\subseteq R^{i+j}
+\end{equation}
+place its virtual coefficient in $R^k$.  It vanishes for $k\ge d$.  Hence
+\begin{equation}
+\lambda(\Omega^M)=
+\sum_{k=0}^{\min(d-1,M)}\lambda(W_{M,k}),
+\label{eq:audit-wm-k}
+\end{equation}
+where $W_{M,k}$ is the sum of words with exactly $k$ radical factors.
+
+Fix such a $k$.  Every word has a unique run-length vector
+$(m_0,\ldots,m_k)\in\mathbb Z_{\ge0}^{k+1}$ with
+$m_0+\cdots+m_k=M-k$ and virtual order
+\begin{equation}
+\Omega_S^{m_0}\Omega_R\Omega_S^{m_1}\cdots
+\Omega_R\Omega_S^{m_k}.
+\end{equation}
+Insert the $q$ central block identities independently in the $k+1$
+semisimple runs and expand each radical occurrence in a fixed basis
+$(r_b)_{b=1}^{\rho}$ of $R$.  A structural label is therefore
+\begin{equation}
+\tau=(a_0,b_1,a_1,\ldots,b_k,a_k)
+\in[q]^{k+1}\times[\rho]^k,
+\end{equation}
+so there are at most $q^{k+1}\rho^k$ labels.
+
+For fixed $\tau$, express every semisimple block in matrix units.  The
+$j$th run uses at most $p_{a_j}^2\le p^2$ scalar two-forms, and the $k$
+selected radical factors contribute at most $k$ additional scalar two-forms.
+Thus, as shown term by term in Appendix~\ref{app:wm-proof}, the boundary value
+is a homogeneous degree-$M$ polynomial
+\begin{equation}
+P_\tau(z_1,\ldots,z_{v(\tau)})\in E_{2M},
+\qquad
+v(\tau)\le(k+1)p^2+k=v_k.
+\label{eq:audit-wm-poly}
+\end{equation}
+The variables commute because they are physical two-forms.  Over
+characteristic zero, the degree-$M$ Veronese powers span the homogeneous
+polynomials in $v_k$ variables.  Appendix~\ref{app:wm-proof} supplies an
+explicit unisolvent integer simplex of cardinality
+\begin{equation}
+s_k=\#\{\alpha\in\mathbb Z_{\ge0}^{v_k}:|\alpha|=M\}
+=\binom{M+v_k-1}{v_k-1},
+\end{equation}
+so $P_\tau$ is a linear combination of at most $s_k$ powers $L^M$.  After
+division by $M!$, every $L^M/M!$ is one AGP.  Multiplying $s_k$ by the number
+of structural labels and summing Eq.~\eqref{eq:audit-wm-k} gives
+\begin{equation}
+K\le\sum_{k=0}^{\min(d-1,M)}q^{k+1}\rho^k
+\binom{M+v_k-1}{v_k-1},
+\end{equation}
+which is Eq.~\eqref{eq:bounded-collapse}.
+
+For the rational Turing statement, $p$ and $d$ are fixed, so each $v_k$ and
+the largest exponent $k$ are fixed.  Consequently
+\begin{equation}
+q^{k+1}\rho^k=\operatorname{poly}(q,\rho),\qquad
+s_k=O(M^{v_k-1}).
+\end{equation}
+With the rational block decomposition, radical basis, and boundary supplied,
+all structure constants entering Eq.~\eqref{eq:audit-wm-poly} have
+polynomial bit length.  The integer-simplex evaluation matrix has polynomial
+order and polynomial-bit entries; the Hadamard and exact-elimination bounds in
+Appendix~\ref{app:wm-proof} give polynomial-bit inverse coefficients.  Thus
+the number of arithmetic operations and every produced coefficient bit length
+are polynomial in the explicit input size.  No step discovers a
+Wedderburn--Malcev decomposition.
 \end{proof}
 
 For full $\Mat_2$, the bound specializes to at most $\binom{M+3}{3}$ AGPs even
@@ -425,15 +717,64 @@ exact construction with polynomial-bit coefficients.
 \end{theorem}
 
 \begin{proof}
-Before quotienting, every entry of the $M$th power has degree at most
-$M(d_j-1)$ in counter $z_j$.  Tensor-product Vandermonde interpolation
-extracts all retained coefficients using the first product in
-Eq.~\eqref{eq:graded-collapse}.  At one grid point, a boundary of a $w\times w$
-matrix power is a homogeneous degree-$M$ polynomial in $w^2$ commuting
-two-forms; polarization supplies the second factor.  Rational nodes give an
-exact rational construction for rational inputs; the quotient lift,
-interpolation matrices, reduction, and bit bounds are detailed in
-Appendix~\ref{app:graded-proof}.
+Write
+\begin{equation}
+R_{\boldsymbol d}=\mathbb C[z_1,\ldots,z_g]/
+(z_1^{d_1},\ldots,z_g^{d_g})
+\end{equation}
+and use the supplied embedding to regard $\Omega$ as a $w\times w$ matrix
+whose entries are two-forms with coefficients in $R_{\boldsymbol d}$.  Choose
+for every residue class its canonical lift with
+$0\le\deg_{z_j}<d_j$.  In an unreduced product of $M$ lifted entries,
+\begin{equation}
+\deg_{z_j}\le L_j:=M(d_j-1)\qquad(1\le j\le g).
+\label{eq:audit-graded-degree}
+\end{equation}
+
+For counter $z_j$, evaluate on the $L_j+1$ distinct nodes
+$T_j=\{0,1,\ldots,L_j\}$.  The associated Vandermonde matrix
+\begin{equation}
+(V_j)_{t,m}=t^m,\qquad t,m\in\{0,\ldots,L_j\},
+\end{equation}
+is nonsingular.  Hence the tensor-product matrix
+$V_1\otimes\cdots\otimes V_g$ recovers every coefficient of every lifted
+matrix entry from
+\begin{equation}
+G:=\prod_{j=1}^g(L_j+1)
+=\prod_{j=1}^g[M(d_j-1)+1]
+\label{eq:audit-graded-grid}
+\end{equation}
+grid evaluations.  Reducing the recovered polynomial modulo
+$z_j^{d_j}$ only discards monomials and cannot increase the number of terms.
+
+At a fixed grid point $t=(t_1,\ldots,t_g)$, denote the $w^2$ scalar two-form
+entries of the evaluated matrix by $x_{ab}(t)$, $a,b\in[w]$.  The boundary
+contraction of its $M$th matrix power is a homogeneous degree-$M$ polynomial
+in those $w^2$ commuting variables.  The same integer-simplex polarization
+used in Appendix~\ref{app:wm-proof} expresses this polynomial using at most
+\begin{equation}
+S=\binom{M+w^2-1}{w^2-1}
+\end{equation}
+powers of scalar two-forms.  Interpolating the $G$ grid values therefore uses
+at most
+\begin{equation}
+K\le GS=prod_{j=1}^g[M(d_j-1)+1]
+\binom{M+w^2-1}{w^2-1},
+\end{equation}
+which is Eq.~\eqref{eq:graded-collapse}.
+
+For rational input, all nodes are integers.  Appendix~\ref{app:graded-proof}
+uses Hadamard bounds and exact Gaussian elimination to show that the inverse
+Vandermonde entries have polynomial bit length.  With fixed $g$,
+\begin{equation}
+G\le M^g\prod_{j=1}^g\max(1,d_j)
+\end{equation}
+up to a fixed $g$-dependent factor, and with fixed $w$,
+$S=O(M^{w^2-1})$.  Because the quotient basis has explicit dimension
+$\prod_jd_j$, the grid, matrix multiplications, interpolation, quotient
+reduction, boundary application, and division by $M!$ all require polynomial
+time and produce polynomial-bit coefficients.  This construction uses the
+supplied embedding and does not discover it.
 \end{proof}
 
 The theorem includes a noncommutative alternating-word algebra of dimension
@@ -465,11 +806,75 @@ reduction applies.
 \end{theorem}
 
 \begin{proof}
-Repeated $P_j$ factors vanish.  Every surviving multilinear term selects a
-permutation, and even pair forms commute, so its coefficient is the permanent.
-For a zero--one matrix, multiply the exact norm by $(M!)^2$ and take the
-nonnegative integer square root; Valiant's permanent theorem applies
-\cite{Valiant1979Permanent}.
+\medskip\noindent\textit{Source instance and constructed state.}\quad
+Let $A=(A_{ij})_{i,j\in[M]}\in\{0,1\}^{M\times M}$ be a permanent instance and
+set
+\begin{equation}
+P_j=e_{2j-1}\wedge e_{2j},\qquad
+F_i=\sum_{j=1}^{M}A_{ij}P_j.
+\end{equation}
+Place $F_i$ in the $(i,i+1)$ entry of an $(M+1)\times(M+1)$ upper-bidiagonal
+pair matrix and set every other entry to zero.  There is exactly one virtual
+path from endpoint $1$ to endpoint $M+1$, so its endpoint pair-power state is
+\begin{equation}
+\Psi_A=\frac{1}{M!}F_1\wedge\cdots\wedge F_M.
+\label{eq:audit-sparse-state}
+\end{equation}
+Expanding the right-hand side gives
+\begin{equation}
+F_1\wedge\cdots\wedge F_M
+=\sum_{j_1,\ldots,j_M\in[M]}
+\left(\prod_{i=1}^{M}A_{i,j_i}\right)
+P_{j_1}\wedge\cdots\wedge P_{j_M}.
+\label{eq:audit-sparse-expand}
+\end{equation}
+Because $P_j\wedge P_j=0$, a summand is nonzero only if
+$i\mapsto j_i$ is injective, hence a permutation $\sigma\in S_M$.  Since
+$\deg P_j=2$, graded commutativity gives
+$P_i\wedge P_j=(-1)^{2\cdot2}P_j\wedge P_i=P_j\wedge P_i$.  Thus every
+surviving term has the same ordered physical factor and
+\begin{align}
+F_1\wedge\cdots\wedge F_M
+&=\sum_{\sigma\in S_M}\left(\prod_{i=1}^{M}A_{i,\sigma(i)}\right)
+P_1\wedge\cdots\wedge P_M\nonumber\\
+&=\perm(A)P_1\wedge\cdots\wedge P_M.
+\end{align}
+Substitution in Eq.~\eqref{eq:audit-sparse-state} proves the state formula.
+
+\medskip\noindent\textit{Oracle value and recovery.}\quad
+The $P_j$ are orthonormal and use disjoint one-particle basis vectors, so
+$\|P_1\wedge\cdots\wedge P_M\|_2=1$.  Hence an exact squared-norm oracle
+returns
+\begin{equation}
+y_A:=\langle\Psi_A,\Psi_A\rangle
+=\frac{\perm(A)^2}{(M!)^2}.
+\end{equation}
+Since $A$ is zero--one, $\perm(A)\in\mathbb Z_{\ge0}$ and
+\begin{equation}
+\perm(A)=\sqrt{(M!)^2y_A}.
+\end{equation}
+
+\medskip\noindent\textit{Size, bond, and postprocessing audit.}\quad
+The physical dimension is $D=2M$, the virtual width is $M+1$, and the
+upper-bidiagonal matrix contains exactly $M$ nonzero two-form entries described
+by the $M^2$ input bits of $A$.  The one-path property does not enumerate
+permutations.  Finally, $\log_2(M!)=O(M\log M)$ and
+$0\le\perm(A)\le M!$, so exact multiplication and nonnegative integer square
+root take polynomial time in the source and oracle-output lengths.  The chain
+\begin{equation}
+A\longmapsto(F_1,\ldots,F_M)\longmapsto y_A
+\longmapsto\sqrt{(M!)^2y_A}=\perm(A)
+\end{equation}
+is therefore a polynomial-time metric reduction, and Valiant's theorem applies
+\cite{Valiant1979Permanent}.  Over $\mathbb C$, the same calculation replaces
+the square by the absolute square; the zero--one source keeps the recovered
+value nonnegative.
+
+\begin{auditflag}
+The final \#P-hardness conclusion imports Valiant's theorem that the permanent
+of a zero--one matrix is \#P-hard.  That source theorem is cited but not
+reproved in this manuscript \cite{Valiant1979Permanent}.
+\end{auditflag}
 \end{proof}
 
 The state is an established antisymmetrized product of geminals, and permanent-
@@ -494,15 +899,62 @@ bit length, inverse tolerance, and logarithmic inverse failure probability.
 \end{theorem}
 
 \begin{proof}
-For rational real positive-semidefinite $A$, the sparse-path construction gives
-\[
-s_A=\frac{\perm(A)^2}{(M!)^2},\qquad \perm(A)\ge0.
-\]
-A relative estimate
-$\widetilde s_A$ would make $M!\sqrt{\widetilde s_A}$ a relative permanent
-estimate after a polynomial tolerance conversion.  Meiburg excludes a PRAS
-for real-PSD permanents unless $\mathrm{RP}=\mathrm{NP}$
-\cite{Meiburg2023PSDPermanent}.
+\medskip\noindent\textit{Source instance and construction.}\quad
+Let $A\in\mathbb Q^{M\times M}$ be real positive semidefinite and let $B$ be
+the maximum bit length of its rational entries.  Apply the sparse-path map from
+the preceding theorem.  It produces $D=2M$, virtual width $M+1$, and $O(M^2)$
+rational coefficients of bit length $O(B)$.  Its exact squared norm is
+\begin{equation}
+s_A=\frac{\perm(A)^2}{(M!)^2},
+\qquad \perm(A)\ge0.
+\label{eq:audit-psd-norm}
+\end{equation}
+
+\medskip\noindent\textit{Oracle value.}\quad
+Assume the squared-norm scheme in the theorem statement exists.  On input
+tolerance $0<\eta<1$ and failure probability $0<\delta<1$, it returns
+$\widetilde s_A$ such that, with probability at least $1-\delta$,
+\begin{equation}
+|\widetilde s_A-s_A|\le\eta s_A.
+\label{eq:audit-relative-event}
+\end{equation}
+On this event, if $s_A>0$ then
+\begin{align}
+\left|\frac{\sqrt{\widetilde s_A}}{\sqrt{s_A}}-1\right|
+&=\frac{|\widetilde s_A/s_A-1|}
+{\sqrt{\widetilde s_A/s_A}+1}
+\le\eta.
+\label{eq:audit-sqrt-relative}
+\end{align}
+If $s_A=0$, Eq.~\eqref{eq:audit-relative-event} forces
+$\widetilde s_A=0$, so the same recovery is exact.
+
+\medskip\noindent\textit{Source answer and complexity.}\quad
+Define
+\begin{equation}
+\widetilde p_A:=M!\sqrt{\widetilde s_A}.
+\end{equation}
+Equations~\eqref{eq:audit-psd-norm} and~\eqref{eq:audit-sqrt-relative} give
+\begin{equation}
+|\widetilde p_A-\perm(A)|\le\eta\perm(A)
+\end{equation}
+on the same success event.  Computing $M!$ and the square root to the requested
+relative precision uses time polynomial in $M$, $B$, and $\log(1/\eta)$; the
+assumed oracle is polynomial in the weaker parameters listed in the theorem,
+so this is a randomized polynomial-time relative approximation for the
+real-PSD permanent.  The reduction chain is
+\begin{equation}
+A\longmapsto(F_1,\ldots,F_M)\longmapsto\widetilde s_A
+\longmapsto M!\sqrt{\widetilde s_A}=\widetilde p_A.
+\end{equation}
+
+\begin{auditflag}
+The final contradiction uses the precise approximation theorem attributed to
+Meiburg: a PRAS for rational real positive-semidefinite permanents would imply
+$\mathrm{RP}=\mathrm{NP}$.  That source theorem, including its input promise
+and approximation convention, is not reproved here and requires independent
+source verification \cite{Meiburg2023PSDPermanent}.
+\end{auditflag}
 \end{proof}
 
 Additive permanent estimators remain possible
@@ -527,9 +979,29 @@ For random bounds this holds on the simultaneous success event.
 \end{lemma}
 
 \begin{proof}
-Use
-$E-\widetilde E=[(h-\widetilde h)-\widetilde E(n-\widetilde n)]/n$
-and $n\ge\widetilde n-\Delta_n>0$.
+The norm estimate gives the explicit lower bound
+\begin{equation}
+n\ge\widetilde n-|n-\widetilde n|
+\ge\widetilde n-\Delta_n>0.
+\label{eq:audit-rayleigh-denom}
+\end{equation}
+Using $h=nE$ and $\widetilde h=\widetilde n\widetilde E$,
+\begin{align}
+n(E-\widetilde E)
+&=h-n\widetilde E\nonumber\\
+&=(h-\widetilde h)+\widetilde h-n\widetilde E\nonumber\\
+&=(h-\widetilde h)-\widetilde E(n-\widetilde n).
+\end{align}
+The triangle inequality and the assumed error bounds therefore imply
+\begin{align}
+|E-\widetilde E|
+&\le\frac{|h-\widetilde h|+|\widetilde E|\,|n-\widetilde n|}{n}\nonumber\\
+&\le\frac{\Delta_h+|\widetilde E|\Delta_n}
+{\widetilde n-\Delta_n},
+\end{align}
+where Eq.~\eqref{eq:audit-rayleigh-denom} was used in the last step.  If the
+bounds are random, the same deterministic derivation holds on their
+simultaneous success event.
 \end{proof}
 
 Thus estimator unbiasedness alone is not an energy certificate; the
@@ -560,15 +1032,58 @@ nonzero $N$-form.
 \end{theorem}
 
 \begin{proof}
-At the $1\mid N-1$ cut, a Slater determinant has rank $N$, forcing
-$\dim\mathcal S^{\rm fermion}_{N,1}=N$.  Hence every admitted rank would be
-divisible by $N$.  In $V=\mathbb F^{N+2}$, let
+Assume Eq.~\eqref{eq:carrier-product} holds for every nonzero $N$-form.  For a
+Slater determinant $S_N$, Structural result II at $k=1$ gives
+\begin{equation}
+\dim\mathcal B_1(S_N)=\rank c_{S_N,1}=\binom N1=N.
+\end{equation}
+Since $\dim\mathcal M_1(S_N)=1$, taking dimensions in the assumed tensor
+product forces
+\begin{equation}
+\dim\mathcal S^{\rm fermion}_{N,1}=N.
+\label{eq:audit-carrier-dim}
+\end{equation}
+Consequently every admitted state $C$ would satisfy
+\begin{equation}
+\rank c_{C,1}=\dim\mathcal B_1(C)
+=N\,\dim\mathcal M_1(C),
+\label{eq:audit-carrier-div}
+\end{equation}
+and its one-cut rank would be divisible by $N$.
+
+Now take $V=\mathbb F^{N+2}$ and let
 \[
  C_N=e_1\wedge(e_2\wedge e_3+e_4\wedge e_5)
  \wedge e_6\wedge\cdots\wedge e_{N+2}.
 \]
-Its $N+2$ one-index contractions have distinct monomial supports and are
-linearly independent, so $\rank c_{C_N,1}=N+2$.  But $N\nmid N+2$.
+Put $w=e_6\wedge\cdots\wedge e_{N+2}$, with $w=1$ when $N=3$.  For the dual
+basis $(e_i^*)$, contraction gives, up to nonzero signs,
+\begin{align}
+\iota_{e_1^*}C_N&=(e_2\wedge e_3+e_4\wedge e_5)\wedge w,\nonumber\\
+\iota_{e_2^*}C_N&=e_1\wedge e_3\wedge w,\nonumber\\
+\iota_{e_3^*}C_N&=e_1\wedge e_2\wedge w,\nonumber\\
+\iota_{e_4^*}C_N&=e_1\wedge e_5\wedge w,\nonumber\\
+\iota_{e_5^*}C_N&=e_1\wedge e_4\wedge w,\nonumber\\
+\iota_{e_i^*}C_N
+&=e_1\wedge(e_2\wedge e_3+e_4\wedge e_5)\nonumber\\[-2pt]
+&\quad\wedge\iota_{e_i^*}w,\qquad 6\le i\le N+2.
+\end{align}
+To prove independence, consider a relation
+$\sum_{i=1}^{N+2}\gamma_i\iota_{e_i^*}C_N=0$.  A monomial without $e_1$
+occurs only in the $i=1$ contraction, so $\gamma_1=0$.  The four monomials
+$e_1\wedge e_3\wedge w$, $e_1\wedge e_2\wedge w$,
+$e_1\wedge e_5\wedge w$, and $e_1\wedge e_4\wedge w$ occur only for
+$i=2,3,4,5$, respectively, so $\gamma_2=\cdots=\gamma_5=0$.  For each
+$i\ge6$, the monomial
+$e_1\wedge e_2\wedge e_3\wedge\iota_{e_i^*}w$ omits a different basis vector
+from $w$ and occurs in no other remaining contraction, so $\gamma_i=0$.
+Therefore
+\begin{equation}
+\rank c_{C_N,1}=\dim\operatorname{span}
+\{\iota_{e_i^*}C_N:1\le i\le N+2\}=N+2.
+\end{equation}
+But $N\nmid N+2$ for every $N\ge3$, contradicting
+Eq.~\eqref{eq:audit-carrier-div}.
 \end{proof}
 
 The counterexample is only two Slaters.  Shared physical covectors lock
@@ -626,13 +1141,56 @@ $r\le\lfloor D/2\rfloor$.
 \end{lemma}
 
 \begin{proof}
-Use the channel label $a$ as the virtual state.  The first core emits
-$w_a u_a$, the next core emits $v_a$ diagonally, and every later $u$ core has
-only strictly upper-triangular transitions $a<b$ with entry $w_bu_b$; the
-following $v$ core is diagonal.  Contracting the final $v$ core with the right
-boundary leaves exactly the strictly increasing channel sequences displayed
-above.  Thus the construction has $\binom rM$ nonzero paths but bond $r$, and
-never enumerates the paths in its core representation.
+Put $p_a=u_a\wedge v_a$.  Each $p_a$ has even degree, so
+$p_a\wedge p_b=p_b\wedge p_a$, while $p_a\wedge p_a=0$.  Expanding the power
+gives
+\begin{align}
+\Omega_F^M
+&=\sum_{a_1,\ldots,a_M\in[r]}
+\left(\prod_{j=1}^{M}w_{a_j}\right)
+p_{a_1}\wedge\cdots\wedge p_{a_M}\nonumber\\
+&=M!\sum_{1\le a_1<\cdots<a_M\le r}
+\left(\prod_{j=1}^{M}w_{a_j}\right)
+p_{a_1}\wedge\cdots\wedge p_{a_M}.
+\label{eq:audit-agp-power}
+\end{align}
+The second equality follows because repeated labels vanish and each increasing
+$M$-tuple has $M!$ permutations, all with positive graded-commutation sign.
+Dividing Eq.~\eqref{eq:audit-agp-power} by $M!$ gives the expansion in the
+lemma statement.
+
+It remains to realize precisely those increasing tuples as virtual paths.
+Use the channel set $[r]$.  For $M=1$, take
+\begin{equation}
+A^{[1]}_{1a}=w_au_a,\qquad A^{[2]}_{a1}=v_a.
+\end{equation}
+For $M\ge2$, define the $2M$ one-form cores by
+\begin{align}
+A^{[1]}_{1a}&=w_au_a,\nonumber\\
+A^{[2q]}_{ab}&=\delta_{ab}v_a,
+&&1\le q<M,\nonumber\\
+A^{[2q-1]}_{ab}&=\mathbf 1_{a<b}\,w_bu_b,
+&&2\le q\le M,\nonumber\\
+A^{[2M]}_{a1}&=v_a.
+\label{eq:audit-agp-cores}
+\end{align}
+Here every omitted entry is zero.  A nonzero contraction of
+Eq.~\eqref{eq:audit-agp-cores} has a unique channel sequence satisfying
+\begin{equation}
+1\le a_1<a_2<\cdots<a_M\le r,
+\end{equation}
+and its physical wedge and scalar coefficient are
+\begin{equation}
+\left(\prod_{j=1}^{M}w_{a_j}\right)
+u_{a_1}\wedge v_{a_1}\wedge\cdots\wedge
+u_{a_M}\wedge v_{a_M}.
+\end{equation}
+Conversely every increasing sequence produces exactly one such path.  Hence
+the contracted FEMPS equals Eq.~\eqref{eq:audit-agp-power}/$M!$.  Every
+internal virtual space is a subspace of $\mathbb F^r$, so every internal bond
+is at most $r\le\lfloor D/2\rfloor$.  The core description stores the
+strictly upper-triangular transitions and does not materialize its
+$\binom rM$ nonzero paths.
 \end{proof}
 
 For odd particle number, a blocked orbital $b$ gives
@@ -781,55 +1339,149 @@ unnormalized rational alternating value $q$.
 \end{theorem}
 
 \begin{proof}
+\medskip\noindent\textit{Functional basis and evaluation matrix.}\quad
 The shifted polynomials have the integer expansion
 \begin{equation}
  \ell_r(t)=\sum_{k=0}^r(-1)^{r-k}
  \binom rk\binom{r+k}{k}t^k
  \label{eq:shifted-legendre}
 \end{equation}
-and leading coefficient $\binom{2r}{r}$.  Put $t_i=i/(N+1)$ and
-$B_{ij}=\ell_{j-1}(t_i)$.  Degree grading and the Vandermonde determinant give
+and leading coefficient $c_r=\binom{2r}{r}$.  Put
+\begin{equation}
+t_i=\frac{i}{N+1}\quad(i\in[N]),
+\qquad
+B_{ij}=\ell_{j-1}(t_i)\quad(i,j\in[N]).
+\end{equation}
+Writing the polynomials in increasing degree expresses $B=VT$, where
+$V_{i,k+1}=t_i^k$ is the monomial Vandermonde matrix and $T$ is upper
+triangular with diagonal $(c_0,\ldots,c_{N-1})$.  Therefore
 \begin{equation}
  \det B=\left(\prod_{r=0}^{N-1}\binom{2r}{r}\right)
  \prod_{1\le i<k\le N}(t_k-t_i)\ne0.
  \label{eq:legendre-determinant}
 \end{equation}
-The nodes use $O(\log N)$ bits.  Equation~\eqref{eq:shifted-legendre} shows
-that all evaluations use polynomially many bits.  More explicitly,
-$Q=(N+1)^{N-1}$ clears every denominator in $B$; the entries of $QB$ have
-polynomial bit length, and Hadamard's bound gives polynomial bit length for
-its determinant and all minors.  Thus $\det B$, $(\det B)^{-1}$, and
-$B^{-1}=Q\,\operatorname{adj}(QB)/\det(QB)$ have polynomial bit length and
-are computable by exact rational arithmetic in polynomial time.
 
-For a 3CNF formula $\varphi$, take the CHSS matrix
-$H_\varphi=(H_{ij})\in\Mat_N(\Mat_2(\mathbb Q))$ from the proof of
-Theorem~\ref{thm:c1}, and define the functional cores
+The nodes have $O(\log N)$-bit numerator and denominator.  Since
+$r,k\le N-1$, every binomial coefficient in
+Eq.~\eqref{eq:shifted-legendre} has $O(N)$ bits.  Let
+\begin{equation}
+Q=(N+1)^{N-1},
+\qquad A:=QB.
+\end{equation}
+For $j-1\le N-1$, the denominator of
+$\ell_{j-1}(i/(N+1))$ divides $(N+1)^{j-1}$, so $A$ is an integer matrix.
+Each $A_{ij}$ is a sum of at most $N$ integers, each with $O(N\log N)$ bits;
+hence
+\begin{equation}
+\operatorname{bits}(A_{ij})=O(N\log N).
+\end{equation}
+If $A^{(r,s)}$ denotes any $(N-1)\times(N-1)$ minor, Hadamard's inequality
+gives
+\begin{align}
+\log_2|\det A|&\le N\bigl(O(N\log N)+\tfrac12\log_2N\bigr),\nonumber\\
+\log_2|\det A^{(r,s)}|&\le (N-1)
+\bigl(O(N\log N)+\tfrac12\log_2N\bigr).
+\end{align}
+Thus $\det B=\det A/Q^N$, its reciprocal, and
+\begin{equation}
+B^{-1}=Q A^{-1}=Q\,\frac{\operatorname{adj}(A)}{\det A}
+\end{equation}
+all have polynomial bit length and are computable by exact rational Gaussian
+elimination in polynomial time.
+
+\medskip\noindent\textit{Source instance.}\quad
+Let $\varphi$ be a 3CNF formula with $m$ clauses and
+$S=\#\mathrm{SAT}(\varphi)$.  Take the CHSS matrix
+$H_\varphi=(H_{ij})_{i,j\in[N]}\in\Mat_N(\Mat_2(\mathbb Q))$ used in the
+proof of Theorem~\ref{thm:c1}, where $N=\operatorname{poly}(|\varphi|)$ and
+\begin{equation}
+u^{\mathsf T}\CDet(H_\varphi)v=4^{3m}S,
+\qquad u=e_1^{(2)},\quad v=e_1^{(2)}+e_2^{(2)}.
+\label{eq:audit-point-chss}
+\end{equation}
+
+\begin{auditflag}
+Equation~\eqref{eq:audit-point-chss} imports the same structured CHSS theorem
+as the squared-norm reduction, including row ordering, characteristic-zero
+validity, polynomial construction size, and gadget coefficient bounds.  This
+external lemma is not reproved here and requires independent source
+verification.  The standard \#P-completeness of \#SAT is also used as the
+source-problem classification rather than reproved here.
+\end{auditflag}
+
+\medskip\noindent\textit{Constructed functional FEMPS instance.}\quad
+Set $D=N$ and define
 \begin{equation}
  \mathcal A^{[i]}(t)=\sum_{j=1}^N H_{ij}\ell_{j-1}(t),
  \qquad u=e_1,\quad v=e_1+e_2.
  \label{eq:legendre-cores}
 \end{equation}
-This mapping merely reuses the rational CHSS entries as functional-basis
-coefficients, so its size and coefficient bit length are polynomial.  Expanding
-the alternating point value at $(t_1,\ldots,t_N)$, and using commutativity only
-for the scalar $B_{ij}$, gives
+Absorbing $u,v$ into the endpoints gives maximum internal bond two.  The
+functional-basis coefficients are exactly the four rational entries of the
+$N^2$ matrices $H_{ij}$, so their number and bit length are polynomial in
+$|\varphi|$.
+
+\medskip\noindent\textit{Oracle value.}\quad
+With the isometric alternating convention, direct point evaluation is
 \begin{align}
- \Psi(t_1,\ldots,t_N)
- &=\frac{\det B}{\sqrt{N!}}
- u^{\mathsf T}\CDet(H_\varphi)v \\
- &=\frac{\det B}{\sqrt{N!}},4^{3m}\#\mathrm{SAT}(\varphi).
- \label{eq:legendre-point-value}
+\Psi(t_1,\ldots,t_N)
+&=\frac{1}{\sqrt{N!}}
+\sum_{\pi\in S_N}\operatorname{sgn}(\pi)
+u^{\mathsf T}\prod_{i=1}^{N}\mathcal A^{[i]}(t_{\pi(i)})v\nonumber\\
+&=\frac{1}{\sqrt{N!}}
+\sum_{j_1,\ldots,j_N\in[N]}
+u^{\mathsf T}H_{1j_1}\cdots H_{Nj_N}v\nonumber\\
+&\quad\times\Delta(j_1,\ldots,j_N),
+\label{eq:audit-point-expand}
 \end{align}
-Indeed, a repeated basis-column choice vanishes, while a column permutation
-$\sigma$ contributes $\operatorname{sgn}(\sigma)\det B$ and leaves the
-row-ordered product $H_{1\sigma(1)}\cdots H_{N\sigma(N)}$.  Thus the known
-nonzero factor is $c_N=1/\sqrt{N!}$ for $J_N$ and $c_N=1$ for the unnormalized
-antisymmetrizer.  The normalized output convention stores the exact algebraic
-number as $(q,N)$ meaning $q/\sqrt{N!}$; $N!$ has $O(N\log N)$ bits, so this is
-an explicit polynomial-size output domain rather than a hidden algebraic-number
-oracle.  One query, followed by rational division by $4^{3m}\det B$, recovers
-$\#\mathrm{SAT}(\varphi)$.  This is a polynomial-time metric reduction.
+where
+\begin{align}
+\Delta(j_1,\ldots,j_N)
+&:=\sum_{\pi\in S_N}\operatorname{sgn}(\pi)
+\prod_{i=1}^{N}B_{\pi(i),j_i}\nonumber\\
+&=\det[B_{p,j_i}]_{p,i\in[N]}.
+\end{align}
+If two $j_i$ coincide, this determinant has repeated columns and vanishes.  If
+$j_i=\sigma(i)$ for $\sigma\in S_N$, then the matrix is obtained from $B$ by
+the column permutation $\sigma$, and therefore
+\begin{equation}
+\Delta(\sigma(1),\ldots,\sigma(N))
+=\operatorname{sgn}(\sigma)\det B.
+\end{equation}
+Equation~\eqref{eq:audit-point-expand} consequently becomes
+\begin{align}
+\Psi(t_1,\ldots,t_N)
+&=\frac{\det B}{\sqrt{N!}}
+\sum_{\sigma\in S_N}\operatorname{sgn}(\sigma)
+u^{\mathsf T}H_{1\sigma(1)}\cdots H_{N\sigma(N)}v\nonumber\\
+&=\frac{\det B}{\sqrt{N!}}
+u^{\mathsf T}\CDet(H_\varphi)v\nonumber\\
+&=\frac{\det B\,4^{3m}S}{\sqrt{N!}}.
+\label{eq:legendre-point-value}
+\end{align}
+
+\medskip\noindent\textit{Source answer and output encoding.}\quad
+The exact oracle returns the pair $(q,N)$ representing
+$q/\sqrt{N!}$, where
+\begin{equation}
+q=\det B\,4^{3m}S\in\mathbb Q.
+\end{equation}
+Since $\det B\ne0$, the source answer is
+\begin{equation}
+S=\frac{q}{4^{3m}\det B}.
+\label{eq:audit-point-recover}
+\end{equation}
+The integer $N!$ has $O(N\log N)$ bits; $S\le2^{n_{\rm var}}$; and the
+preceding determinant bounds show that $q$, $\det B$, and $(\det B)^{-1}$ have
+polynomial bit length.  Exact rational division in
+Eq.~\eqref{eq:audit-point-recover} is polynomial-time.  Thus
+\begin{equation}
+\varphi\longmapsto
+(\mathcal A^{[1]},\ldots,\mathcal A^{[N]};t_1,\ldots,t_N)
+\longmapsto(q,N)\longmapsto S
+\end{equation}
+is a polynomial-time metric reduction.  For the unnormalized antisymmetrizer,
+the same chain omits the known factor $1/\sqrt{N!}$.
 \end{proof}
 
 Theorem~\ref{thm:pointwise} and Theorem~\ref{thm:c1} are independent reductions

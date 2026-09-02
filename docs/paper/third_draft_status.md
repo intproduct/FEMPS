@@ -2,11 +2,12 @@
 
 ## Status
 
-The third-draft structural checkpoint was completed on 2026-09-01. ADR 0028
-supersedes the later two-paper split on 2026-09-02. The authoritative source is
-`math/femps_no_go_manuscript.tex`; the current combined review artifact is
-`output/pdf/femps_combined_manuscript_v5.pdf`. Previous PDFs are retained as
-historical checkpoints.
+The final Paper A content checkpoint was completed on 2026-09-02. ADR 0028
+supersedes the later two-paper split. The authoritative source is
+`math/femps_no_go_manuscript.tex`; the canonical frozen review artifact is
+`output/pdf/femps_paper_a_frozen.pdf`. Previous PDFs are historical
+checkpoints. Paper A is content-frozen and awaits human scientific and wording
+review; no further edit is authorized without explicit user feedback.
 
 The restricted diagonal-path method draft is now an internal working note, not
 a second publication manuscript. Its admitted numerical evidence is summarized
@@ -33,10 +34,13 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
   matrix-valued pair core is kept separate.
 - The odd/even discussion now distinguishes parity from site dependence,
   homogeneity, virtual width, and coefficient-algebra closure.
-- The unnormalized rational-Legendre functional-input transfer now has an
-  internally complete interpolation/bit-complexity proof draft and exact
-  small-order checks, but remains a conjecture in submission-facing text until
-  external human algebraic-complexity review.
+- Exact point evaluation in the unnormalized rational shifted-Legendre basis is
+  now a theorem with an independent CHSS reduction, explicit rational nodes,
+  determinant and inverse bit bounds, and a `q/sqrt(N!)` output convention.
+  Named-human algebraic-complexity review remains mandatory before submission.
+- The Discussion adds a P1/P2 two-mechanism map as an organizing framework,
+  not a complete dichotomy. The signed Hamilton-path cell remains open;
+  containment and Jastrow consequences are strictly conditional.
 - Exact hardness is separated from relative and additive approximation, and
   energy certification retains the positive denominator-interval condition.
 - The bounded Wedderburn--radical collapse now has a detailed appendix proof.
@@ -66,18 +70,23 @@ inside the combined paper subject to the NOCI-equivalence limitation. See
 
 ## Validation
 
-- PDFLaTeX and BibTeX completed successfully for the combined v5 source.
-- Current PDF: 15 A4 pages, 387,182 bytes.
+- PDFLaTeX and BibTeX completed successfully for the frozen source.
+- Current PDF: 17 A4 pages, 409,039 bytes.
 - Current PDF SHA-256:
-  `00B2211664B55471BB093A25CF5C5F0A28A607FFF6774EBFC05F4F3494368EBC`.
+  `D688D4939A389CA50F7B2F130BD24BFA13F4FD901CC0D026ADEC2C7EDE456FD9`.
 - Build log: no undefined citation/reference, overfull/underfull box, package,
   LaTeX, or font warnings.
-- All 15 pages were rendered to PNG and inspected for clipping, overlap,
+- All 17 pages were rendered to PNG and inspected for clipping, overlap,
   table legibility, formula placement, section transitions, and pagination.
-- Standard repository suite: `287 passed, 1 known latticeTN report-path
-  warning` in 624.56 s, using the isolated worktree source and a workspace-local
-  pytest temporary directory. The exact-certificate subset separately reports
-  `10 passed`, and the rational-Legendre verifier passes orders two through six.
+- The four-cell table was separately compiled and inspected in an APS RevTeX
+  two-column full-width sample.
+- Standard repository suite: `313 passed, 1 known latticeTN report-path
+  warning` in 674.52 s, using the isolated source and a workspace-local pytest
+  temporary directory. The exact-certificate subset reports `11 passed`; the
+  shifted-Legendre verifier passes orders two through six.
+- The required 2201 CPU baseline completes 500 steps with final energy
+  `1.8788029184435575`, absolute error `1.0805366005195438e-4`, and elapsed
+  time 11.12 s.
 
 The single restored `N=4,D=8` point is complete and retained internally. It
 failed the registered final CI-error and variance thresholds; no rescue or

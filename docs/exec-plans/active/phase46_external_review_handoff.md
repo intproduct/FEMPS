@@ -20,9 +20,11 @@ new theorem claims, FEMPS physics points, or manuscript splits:
   verifier command, and the required failed-gate wording;
 - reviewer checklists that require named human sign-off and do not treat AI
   review as independent human review;
-- no edit that promotes the rational-Legendre pointwise claim from conjecture
-  or promotes Phase 44 to an overall pass before the corresponding external
-  review exists.
+- no edit that promotes Phase 44 to an overall pass before external
+  reproduction exists. The user-authorized final Paper A framework patch
+  closes the repository-internal shifted-Legendre pointwise proof as a theorem;
+  named-human algebraic-complexity sign-off is still required before
+  submission and is not manufactured here.
 
 ## Prepared handoff checkpoint
 
@@ -48,7 +50,8 @@ new theorem claims, FEMPS physics points, or manuscript splits:
 
 The repository side of the handoff, including machine-readable result
 comparison, is ready. Completion now requires actual external human input;
-until received, this phase remains active and no claim is promoted.
+until received, this phase remains active and Paper A remains frozen for human
+scientific and wording review.
 
 ## Stop rules
 

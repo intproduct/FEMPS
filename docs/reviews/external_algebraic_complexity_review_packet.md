@@ -13,10 +13,10 @@ human peer review.
    3.9, especially the structured output `a I_2+b J_2`, the boundary
    `u=e_1`, `v=e_1+e_2`, nonnegativity, metric-reduction postprocessing, and
    the maximum internal FEMPS bond two.
-2. **Rational Legendre point value.** Check the rational nodes, nonsingularity
-   and polynomial bit length of the Legendre evaluation inverse, construction
-   of the Lagrange functions, normalization convention, and one-query CHSS
-   transfer.
+2. **Rational shifted-Legendre point value.** Check the nodes
+   `t_i=i/(N+1)`, the determinant and inverse bit bounds, the direct basis-core
+   construction, the explicit `q/sqrt(N!)` output convention, and the
+   independent one-query CHSS transfer.
 3. **Bounded-algebra and graded collapse results.** Check whether each claim is
    algebraic or Turing-complexity, whether the decomposition is input or must be
    computed, the rational interpolation construction, and coefficient bit
@@ -44,9 +44,10 @@ human peer review.
   metric reduction in the selected function-output model?
 - Are the Legendre evaluation inverse and constructed functional coefficients
   polynomial in Turing bit length, not merely arithmetic-circuit size?
-- Does the unnormalized point-evaluation convention avoid every hidden
-  algebraic-number operation while remaining a faithful first-quantized
-  continuous FEMPS evaluation problem?
+- Does the output pair `(q,N)` representing `q/sqrt(N!)`, equivalently the
+  rational unnormalized value `q`, avoid every hidden algebraic-number
+  operation while remaining a faithful first-quantized continuous FEMPS
+  evaluation problem?
 - Do any collapse statements currently overclaim polynomial-time construction
   when only polynomial LC--AGP term count has been proved?
 
@@ -54,8 +55,8 @@ human peer review.
 
 Reviewer name, affiliation, date, conflicts, requested corrections, and final
 sign-off must be recorded here or in a linked immutable report before
-submission. Until then, the Legendre transfer remains a conjecture in the
-submission manuscript.
+submission. The repository-internal proof is now stated as a theorem, but it
+remains explicitly awaiting this independent human sign-off before submission.
 
 Use `docs/reviews/external_human_signoff_template.md` for the named reviewer
 record. The separate Phase 44 numerical handoff is in

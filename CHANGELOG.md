@@ -1,5 +1,41 @@
 # Research changelog
 
+## 2026-09-02 - Paper A final antisymmetrization framework frozen
+
+- Added a Discussion-level P1 assignment-factorization / P2 commutative-
+  coefficient two-mechanism map. The four cells are explicitly an organizing
+  framework and partial classification program, not a complete dichotomy.
+- Explained scalar Slater/generalized-Slater/backflow/FermiNet determinant
+  collapse, row-ordered noncommutative Cayley products, polynomial factor
+  evaluation as a base assumption, field Gaussian elimination, and Berkowitz
+  division-free determinant computation over commutative rings.
+- Closed the independent rational shifted-Legendre exact point-evaluation
+  reduction as a maximum-bond-two **theorem**, with nodes `i/(N+1)`, a nonzero
+  scaled Vandermonde, inverse/determinant bit bounds, explicit `q/sqrt(N!)`
+  output encoding, and a one-query metric reduction from the CHSS source. The
+  existing squared-norm theorem is unchanged and neither theorem is inferred
+  from the other.
+- Added the bounded signed Hamilton-path literature result as an open cell,
+  including the even-particle cycle-cancellation warning. Added only
+  conditional exact-containment inheritance and conditional symmetric-Jastrow
+  embedding; rejected neural-class and Slater--Jastrow norm-hardness claims.
+- Added/activated Berkowitz, Hutter, Pfau et al., Lin--Goldshlager--Lin,
+  Zweig--Bruna, and Mertens--Moore citations with their precise roles.
+- The shifted-Legendre exact verifier now checks determinant, inverse, and the
+  Cayley point formula for `2<=N<=6` and is part of the exact-certificate suite.
+- Built the canonical 17-page frozen PDF at
+  `output/pdf/femps_paper_a_frozen.pdf`, SHA-256
+  `d688d4939a389ca50f7b2f130bd24bfa13f4fd901cc0d026adec2c7ede456fd9`.
+  The final TeX log has no undefined references or layout warnings; all pages
+  and an APS two-column table sample were visually inspected.
+- Validation passes: 11 exact-certificate tests; full suite `313 passed` in
+  674.52 s with one known latticeTN warning; 2201 CPU baseline energy
+  `1.8788029184435575` and absolute error `1.0805366005195438e-4`.
+- Archived the bounded final-patch task. Paper A is content-frozen and awaits
+  human scientific and wording review. No further Paper A edit, Paper B/C,
+  solver change, physics production point, or open mathematics search is
+  authorized without explicit user feedback.
+
 ## 2026-09-02 - Combined-manuscript submission state audited
 
 - Reaudited the sole submission source against the revised scope. Structural

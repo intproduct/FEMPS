@@ -9,6 +9,7 @@
 | The 16D concise four-form minimum middle rank is 22 or 23 | **conjecture** with missing provenance; neither alternative is currently admitted. An **exact certificate** gives only the explicit rational upper bound `mu_4^Q(16)<=24`; a 120,000-sample finite-field screen found no lower coordinate-hypergraph candidate | Recover a primary definition/candidate or construct one from scratch; certify rank and complete orbit/chart coverage over an explicit field before claiming sharpness |
 | Matrix-wedge FEMPS is associative and strictly antisymmetric | proved from exterior associativity; small-N verified | External algebra review |
 | Generic nontrivial FEMPS has polynomial exact contraction | conditionally obstructed at fixed maximum bond two: CHSS Theorem 3.9 gives `CDet(H_phi)=a I_2+b J_2` with `a+b=4^(3m)#SAT`; the fixed boundary `u=e_1`, `v=e_1+e_2` makes the one-form FEMPS norm `16^(3m)#SAT^2`, so one exact norm query and a nonnegative integer square root recover `#SAT`; the bond-three scalar-reference polarization remains valid only as a general signed-output recovery; the Phase 13 tagged pair-power and Phase 22 bandwidth-one APG reductions remain independent mechanisms | External algebraic-complexity review; only separately promised restrictions or controlled approximation remain open |
+| Exact pointwise evaluation in the rational shifted-Legendre basis | **theorem** at maximum bond two and `D=N`: for `ell_r(t)=P_r(2t-1)` and `t_i=i/(N+1)`, the evaluation determinant is a nonzero central-binomial-scaled Vandermonde with polynomial-bit determinant, reciprocal, and inverse; direct CHSS functional cores give `Psi(t)=det(B)4^(3m)#SAT/sqrt(N!)` in the explicit `(q,N)` output encoding | Independent human algebraic-complexity review remains required; this worst-case exact result does not constrain all QMC/VMC or approximate instances |
 | Nonbranching diagonal-path FEMPS has polynomial exact contraction | **implemented NOCI-equivalent restricted algorithm / numerical physics evidence**: a conserved global path label gives a `K`-term nonorthogonal Slater sum inside matrix-wedge FEMPS, eliminating `K^(N-1)` branching; E1--E4, N4 convergence, N6 stability and independent D/K convergence pass; Phase 33 batches transitions; Phase 34 truth-free adaptive D12 growth lowers the K4 CI error from `1.047e-4` to `3.202e-5` at K6 and beats a same-budget cold K6 control; Phase 35 passes three fresh K5/K6 candidate-pool lineages with K6 energy spread `4.877e-6`; Phase 36 exposes the externally capped schedule as a versioned public API; Phase 37 starts from a canonical Slater with no historical FEMPS state and reaches N4,D6,K4 CI error `4.883e-10`; Phase 38 passes two fresh clean-source schedules with distinct candidate paths, combined final-energy spread `2.035e-9`, maximum CI error `2.523e-9`, and zero failures | Retain as a numerical chapter in the combined paper. It cannot support a separate method paper without a non-NOCI explicit-correlation D-convergence advantage or a matched Li--Waintal/same-basis-DMRG tradeoff; automatic stopping, novelty, scaling, and superiority remain unadmitted |
 | Symmetric explicit correlator times a `chi=1` exterior carrier separates continuous correlation control `P` from carrier basis `D` | **bounded numerical evidence; Phase 44 overall gate failed**: Phase 40's frozen `P=5`/`K=4` rule passes at `N=2,D=2,4,6,8` and fails at `D=10,12`; clean rerun differences are zero. Phase 43 passes fixed-state VMC validation. At interacting `N=4`, held-out confirmations give monotone combined energies and conservative fixed-K4 advantage at `D=4,6` but not `D=8`; all confirmation/symmetry/resume gates pass. However every Phase 44 blind selection evaluation fails either its SE or ESS threshold, so the aggregate preregistered decision is fail | Preserve the low-D result only as internal numerical evidence. No same-point rescue or Paper B is admitted. Require independent/external reproduction or a separately preregistered matched Li--Waintal/same-basis-DMRG tradeoff before any method-paper claim |
 | Generic sparse-path FEMPS has a relative squared-norm PRAS | conditionally obstructed: on real-PSD paired coefficients, `M! sqrt(n_tilde)` would be a PRAS for the PSD permanent, which Meiburg excludes unless `RP=NP`; an exact-rational conditioning/energy certificate passes | External proof review; entrywise-nonnegative FPRAS, additive estimates with a certified norm lower bound, and separately promised structures remain open |
@@ -31,8 +32,10 @@ shows that the LC-AGP subclass is numerically systematic, but prior AGP-CI work
 precludes treating that fact as the core FEMPS method contribution.
 
 Phase 26 strengthens the generic status from joint-polynomial hardness at
-growing bond to fixed-parameter hardness: exact squared-norm contraction for
-the admitted one-form class with `chi<=3` would imply `FP=#P`. The direct
+growing bond to fixed-parameter hardness. The later CHSS structured-boundary
+audit sharpens exact squared-norm contraction to maximum bond two; the old
+maximum-bond-three direct-sum polarization is retained only for arbitrary
+signed outputs. The direct
 construction preserves row order through site labels and therefore does not
 contradict the polynomial LC-AGP collapse of a repeated homogeneous `Mat_2`
 pair power. This does not apply automatically to additional structured core
@@ -156,8 +159,9 @@ same-basis-DMRG tradeoff.
 
 Phase 39 closes the associated publication-scope correction. The original
 Theorems 1--3 are again displayed separately in the sole combined manuscript.
-The Cayley construction proves hard pointwise evaluation at maximum
-`chi=2`. The structured CHSS boundary extracts the nonnegative coefficient
+The final framework patch proves the continuous rational shifted-Legendre
+point-evaluation transfer at maximum `chi=2`, with an explicit exact output
+model and polynomial Turing bit bounds. The structured CHSS boundary extracts the nonnegative coefficient
 `4^(3m)#SAT`, so exact squared-norm evaluation is also conditionally #P-hard at
 maximum bond two. The older direct-sum reference reaches maximum bond three
 and is retained only for arbitrary signed Cayley outputs. The diagonal-path data are retained
@@ -225,3 +229,12 @@ Gate F D10 against the same reference. The constant-in-N Fourier channel count
 still does not establish continuum or end-to-end asymptotic scaling, and the
 descriptive N=2/4/6/8 trend does not admit N=10. The decision is numerical
 evidence, not a method-priority claim.
+
+Paper A is content-frozen after the final structured-antisymmetrization patch.
+Its P1/P2 table is an organizing framework and partial classification program,
+not a complete dichotomy. The signed Hamilton-path cell remains open after a
+bounded literature search; generic explicit-antisymmetrization inheritance is
+conditional on exact polynomial-overhead containment; and the symmetric
+Jastrow identity supplies no subclass norm-hardness theorem. No further Paper
+A edits are authorized without explicit user feedback. Named-human scientific
+and wording review remains pending.

@@ -1,4 +1,4 @@
-"""Exact small-order checks for the rational-Legendre pointwise reduction.
+"""Exact checks for the shifted rational-Legendre pointwise reduction.
 
 This verifies the interpolation and exterior/Cayley identities only. It does
 not reimplement or certify the CHSS SAT gadgets.
@@ -8,34 +8,20 @@ from __future__ import annotations
 
 from fractions import Fraction
 from itertools import permutations
-from math import factorial
+from math import comb
 import random
 
 
-def poly_add(a: list[Fraction], b: list[Fraction]) -> list[Fraction]:
-    out = [Fraction(0) for _ in range(max(len(a), len(b)))]
-    for i, value in enumerate(a):
-        out[i] += value
-    for i, value in enumerate(b):
-        out[i] += value
-    return out
-
-
-def poly_scale(a: list[Fraction], scale: Fraction) -> list[Fraction]:
-    return [scale * value for value in a]
-
-
 def legendre_coefficients(count: int) -> list[list[Fraction]]:
-    values = [[Fraction(1)]]
-    if count == 1:
-        return values
-    values.append([Fraction(0), Fraction(1)])
-    for degree in range(1, count - 1):
-        x_times = [Fraction(0)] + values[degree]
-        first = poly_scale(x_times, Fraction(2 * degree + 1, degree + 1))
-        second = poly_scale(values[degree - 1], Fraction(-degree, degree + 1))
-        values.append(poly_add(first, second))
-    return values
+    """Return coefficients of ell_r(t)=P_r(2t-1), with P_r(1)=1."""
+
+    return [
+        [
+            Fraction((-1) ** (degree - power) * comb(degree, power) * comb(degree + power, power))
+            for power in range(degree + 1)
+        ]
+        for degree in range(count)
+    ]
 
 
 def evaluate(poly: list[Fraction], point: Fraction) -> Fraction:
@@ -61,7 +47,8 @@ def inverse(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     return [row[size:] for row in work]
 
 
-Matrix = tuple[tuple[int, int], tuple[int, int]]
+Scalar = int | Fraction
+Matrix = tuple[tuple[Scalar, Scalar], tuple[Scalar, Scalar]]
 
 
 def matmul(a: Matrix, b: Matrix) -> Matrix:
@@ -92,20 +79,31 @@ def cdet(entries: list[list[Matrix]]) -> Matrix:
     return result
 
 
-def boundary(matrix: Matrix) -> int:
+def boundary(matrix: Matrix) -> Scalar:
     # u=e1 and v=e1+e2
     return matrix[0][0] + matrix[0][1]
 
 
 def verify(size: int, seed: int) -> None:
     polys = legendre_coefficients(size)
-    nodes = [Fraction(-1) + Fraction(2 * j, size + 1) for j in range(1, size + 1)]
+    nodes = [Fraction(j, size + 1) for j in range(1, size + 1)]
     evaluation = [[evaluate(polys[r], node) for r in range(size)] for node in nodes]
     evaluation_inverse = inverse(evaluation)
     for k in range(size):
         for j in range(size):
             value = sum(evaluation[k][r] * evaluation_inverse[r][j] for r in range(size))
             assert value == Fraction(k == j)
+
+    determinant = Fraction(1)
+    leading_product = 1
+    vandermonde = Fraction(1)
+    for degree in range(size):
+        leading_product *= comb(2 * degree, degree)
+    for left in range(size):
+        for right in range(left + 1, size):
+            vandermonde *= nodes[right] - nodes[left]
+    determinant = Fraction(leading_product) * vandermonde
+    assert determinant != 0
 
     generator = random.Random(seed)
     entries: list[list[Matrix]] = []
@@ -116,21 +114,30 @@ def verify(size: int, seed: int) -> None:
         entries.append(row)
 
     direct = boundary(cdet(entries))
-    alternating = 0
+    alternating: Scalar = 0
     for order in permutations(range(size)):
         product: Matrix = ((1, 0), (0, 1))
         for site, node_index in enumerate(order):
-            # L_j(xi_k)=delta_jk, so F_site(xi_node_index)=H_site,node_index.
-            product = matmul(product, entries[site][node_index])
+            functional_value: Matrix = ((0, 0), (0, 0))
+            for basis_index in range(size):
+                scaled = tuple(
+                    tuple(evaluation[node_index][basis_index] * entries[site][basis_index][row][column] for column in range(2))
+                    for row in range(2)
+                )
+                functional_value = matadd(functional_value, scaled)  # type: ignore[arg-type]
+            product = matmul(product, functional_value)
         alternating += parity(order) * boundary(product)
-    assert alternating == direct
+    assert alternating == determinant * direct
 
     max_bits = max(
         max(value.numerator.bit_length(), value.denominator.bit_length())
         for row in evaluation_inverse
         for value in row
     )
-    print(f"n={size}: exact interpolation and Cayley point value pass; max inverse bits={max_bits}")
+    print(
+        f"n={size}: shifted-Legendre determinant/inverse and Cayley point formula pass; "
+        f"max inverse bits={max_bits}"
+    )
 
 
 def main() -> None:
@@ -141,4 +148,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -44,7 +44,9 @@ particle spectrum of a single Slater determinant.  Second, moving
 antisymmetry into exterior algebra
 removes that representation floor but does not make compact inputs easy to
 contract: exact squared-norm evaluation is \#P-hard already at fixed one-form
-bond two under a polynomial-time metric reduction.  Along a matrix-pair
+bond two under a polynomial-time metric reduction, and an independent
+reduction gives exact point-evaluation hardness in an explicit rational
+shifted-Legendre functional basis at the same bond.  Along a matrix-pair
 subfamily, bounded and selected fixed-state memories collapse to polynomial
 linear combinations of established antisymmetrized geminal powers, while a
 bandwidth-one unique path already encodes a permanent.  A generic relative
@@ -337,15 +339,12 @@ $\Mat_2$ homogeneous pair power below.  The hard one-form cores are
 site-dependent and preserve row order.  Repeating one even two-form instead
 symmetrizes factor order.
 
-The direct coefficient identity is pointwise algebraic and therefore also
-holds when the entries of $M$ are one-particle functions evaluated at a
-coordinate.  A separate conjecture asks whether this transfer is a
-polynomial-time Turing reduction for the standard \emph{unnormalized} rational
-Legendre basis.  It is not used here: a proof must exhibit rational nodes,
-bound the inverse evaluation matrix and output bit lengths, and exclude hidden
-algebraic-number oracles.  In particular, neither this conjecture nor
-Theorem~\ref{thm:c1} says that every $\chi\ge2$ \FEMPS{} is unsuitable for
-Monte Carlo or controlled approximation.
+The direct coefficient identity is pointwise algebraic and also holds when
+the entries are one-particle functions evaluated at a coordinate.  A separate
+reduction for an explicit rational functional basis is proved in
+Theorem~\ref{thm:pointwise}; it is independent of the norm reduction even
+though both start from the same CHSS source.  Neither result says that every
+$\chi\ge2$ \FEMPS{} is unsuitable for Monte Carlo or controlled approximation.
 
 \subsection{Why parity is only part of the mechanism}
 
@@ -728,6 +727,7 @@ proof for arbitrary size.
 Claim & Range & What the verifier checks \\
 \midrule
 Fixed-bond norm & $2\le N\le6$ & Direct Cayley coefficient, four generic boundaries, explicit bond-three polarization, and exact antisymmetry; the bond-two hardness step uses the published CHSS structured output. \\
+Point evaluation & $2\le N\le6$ & Shifted-Legendre evaluation determinant and inverse, and the direct Cayley point formula of Eq.~\eqref{eq:legendre-point-value}. \\
 Tagged pair power & orders $1$--$4$ & Perfect matchings and every pair-factor order against the tagged row-ordered determinant. \\
 Bounded algebra & $T_2$: $M\le6$; $\Mat_2$: $M\le4$ & Exact polynomial powers versus simplex interpolation and LC--AGP coefficients. \\
 Graded algebra & $M,d\le4$; alternating words $M\le3,d\le4$ & Every boundary coefficient, Vandermonde extraction, and nested matrix-power interpolation. \\
@@ -753,6 +753,9 @@ The corresponding full SHA-256 values are:
 \item Fixed-bond norm:\\
 \texttt{1d2208d3e5cb14f5c8e6c875f7fddf51}\allowbreak
 \texttt{c47ce9a3e61be6cedb8246d662b3a016}.
+\item Point evaluation verifier:\\
+\texttt{f2ed7656126cdb408a312b97f6ac9a8c}\allowbreak
+\texttt{bf0f323896ef14919d3c67998456b4aa}.
 \item Tagged pair power:\\
 \texttt{893077be401414cd810fa1154e618d37d8}\allowbreak
 \texttt{3b58e077732801f2482b3716b2c0c0}.
@@ -779,7 +782,197 @@ Alternating words:\\
 \texttt{56fb04cd1fed4df9120d25ef6bc60df}.
 \end{itemize}
 
-\section{Limitations and next questions}
+\section{Discussion: a two-mechanism map for antisymmetrization}
+\label{sec:two-mechanism-map}
+
+Consider exact evaluation at a fixed configuration $x=(x_1,\ldots,x_N)$ of
+\begin{equation}
+ (\mathcal AF)(x)=\sum_{\pi\in S_N}\operatorname{sgn}(\pi)
+ F(x_{\pi(1)},\ldots,x_{\pi(N)}).
+ \label{eq:structured-antisymmetrizer}
+\end{equation}
+Two independent properties organize several familiar constructions.  Property
+P1 (\emph{assignment factorization}) asks whether, after fixing $x$, every
+permutation term has the form
+\begin{equation}
+ F_\pi(x)=\prod_{i=1}^N a_{i,\pi(i)}(x),
+ \label{eq:p1}
+\end{equation}
+where the permutation selects factors only through $(i,\pi(i))$.  The factors
+$a_{ij}(x)$ may depend on the \emph{entire} configuration, as in backflow or
+FermiNet; P1 is not a one-particle locality assumption.  Property P2 asks
+whether these factors multiply in one commutative coefficient algebra.  In
+every cell below we additionally assume that each factor is itself evaluable
+from its encoded input in polynomial time and polynomial bit complexity.
+Without this base assumption, an easy determinant layer need not make the
+complete model easy.
+
+\begin{table*}[t]
+\centering
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}P{20mm}Y Y@{}}
+\toprule
+ & P2: commutative & not P2: noncommutative \\
+\midrule
+P1 & Slater, generalized Slater, backflow, and FermiNet determinant channels:
+the $N!$ Leibniz terms collapse to ordinary determinants. & One-form
+\FEMPS{}: exterior signs accompany row-ordered virtual products, giving a
+Cayley determinant. \\
+not P1 & The signed Hamilton-path polynomial in Eq.~\eqref{eq:signed-path}:
+open cell in the present bounded search. & General explicit
+antisymmetrization; conditional hardness only for a precisely defined class
+that exactly contains the hard bond-two one-form cores with polynomial
+overhead. \\
+\bottomrule
+\end{tabularx}
+\caption{A two-mechanism map, not a complete dichotomy or classification
+theorem.  P1 concerns assignment structure; P2 concerns the coefficient
+algebra.}
+\label{tab:two-mechanism-map}
+\end{table*}
+
+In the upper-left cell, the ordinary Slater determinant replaces an explicit
+$N!$-term Leibniz sum by one determinant.  At fixed $x$, generalized Slater,
+backflow, and FermiNet orbital entries remain scalars in a commutative field,
+even when every entry depends on all electronic coordinates; permutation
+equivariance makes particle exchange act by row or column exchange.  Each
+determinant channel is therefore polynomial-time once its entries are
+available.  Gaussian elimination applies over fields.  Over a general
+commutative ring, divisions need not exist, but division-free determinant
+algorithms such as Berkowitz's still give polynomial-size arithmetic circuits
+\cite{Berkowitz1984Determinant}.  Hutter's generalized-Slater universality
+analysis, FermiNet, the explicitly antisymmetrized layers of
+Lin--Goldshlager--Lin, and the separation of Zweig--Bruna concern
+representation, universality, ansatz design, or expressivity
+\cite{Hutter2020Antisymmetric,Pfau2020FermiNet,
+LinGoldshlagerLin2023Antisymmetrized,ZweigBruna2022Separation}; they are not
+attributed the complexity map in Table~\ref{tab:two-mechanism-map}.
+
+The upper-right cell isolates the second mechanism.  In one-form \FEMPS{},
+Eq.~\eqref{eq:p1} holds with matrix-valued factors, but row order prevents their
+exchange.  The exterior algebra supplies $\operatorname{sgn}(\pi)$ while the
+virtual algebra retains the noncommuting product, producing the row-ordered
+Cayley determinant rather than a scalar determinant.  The following
+point-evaluation theorem makes this distinction explicit without changing the
+squared-norm theorem above.
+
+\begin{theorem}[Exact rational-polynomial point evaluation]
+\label{thm:pointwise}
+Let $\ell_r(t)=P_r(2t-1)$, $r\ge0$, be the unnormalized shifted Legendre
+polynomials, where $P_r(1)=1$.  Exact pointwise evaluation of rational
+one-form \FEMPS{} represented in the basis
+$\ell_0,\ldots,\ell_{D-1}$ is \#P-hard under polynomial-time metric
+reductions, already when $D=N$ and every internal bond is at most two.
+For the isometric convention $J_N$, the exact output is encoded as the
+rational $q$ in $\Psi(x)=q/\sqrt{N!}$; equivalently one may request the
+unnormalized rational alternating value $q$.
+\end{theorem}
+
+\begin{proof}
+The shifted polynomials have the integer expansion
+\begin{equation}
+ \ell_r(t)=\sum_{k=0}^r(-1)^{r-k}
+ \binom rk\binom{r+k}{k}t^k
+ \label{eq:shifted-legendre}
+\end{equation}
+and leading coefficient $\binom{2r}{r}$.  Put $t_i=i/(N+1)$ and
+$B_{ij}=\ell_{j-1}(t_i)$.  Degree grading and the Vandermonde determinant give
+\begin{equation}
+ \det B=\left(\prod_{r=0}^{N-1}\binom{2r}{r}\right)
+ \prod_{1\le i<k\le N}(t_k-t_i)\ne0.
+ \label{eq:legendre-determinant}
+\end{equation}
+The nodes use $O(\log N)$ bits.  Equation~\eqref{eq:shifted-legendre} shows
+that all evaluations use polynomially many bits.  More explicitly,
+$Q=(N+1)^{N-1}$ clears every denominator in $B$; the entries of $QB$ have
+polynomial bit length, and Hadamard's bound gives polynomial bit length for
+its determinant and all minors.  Thus $\det B$, $(\det B)^{-1}$, and
+$B^{-1}=Q\,\operatorname{adj}(QB)/\det(QB)$ have polynomial bit length and
+are computable by exact rational arithmetic in polynomial time.
+
+For a 3CNF formula $\varphi$, take the CHSS matrix
+$H_\varphi=(H_{ij})\in\Mat_N(\Mat_2(\mathbb Q))$ from the proof of
+Theorem~\ref{thm:c1}, and define the functional cores
+\begin{equation}
+ \mathcal A^{[i]}(t)=\sum_{j=1}^N H_{ij}\ell_{j-1}(t),
+ \qquad u=e_1,\quad v=e_1+e_2.
+ \label{eq:legendre-cores}
+\end{equation}
+This mapping merely reuses the rational CHSS entries as functional-basis
+coefficients, so its size and coefficient bit length are polynomial.  Expanding
+the alternating point value at $(t_1,\ldots,t_N)$, and using commutativity only
+for the scalar $B_{ij}$, gives
+\begin{align}
+ \Psi(t_1,\ldots,t_N)
+ &=\frac{\det B}{\sqrt{N!}}
+ u^{\mathsf T}\CDet(H_\varphi)v \\
+ &=\frac{\det B}{\sqrt{N!}},4^{3m}\#\mathrm{SAT}(\varphi).
+ \label{eq:legendre-point-value}
+\end{align}
+Indeed, a repeated basis-column choice vanishes, while a column permutation
+$\sigma$ contributes $\operatorname{sgn}(\sigma)\det B$ and leaves the
+row-ordered product $H_{1\sigma(1)}\cdots H_{N\sigma(N)}$.  Thus the known
+nonzero factor is $c_N=1/\sqrt{N!}$ for $J_N$ and $c_N=1$ for the unnormalized
+antisymmetrizer.  The normalized output convention stores the exact algebraic
+number as $(q,N)$ meaning $q/\sqrt{N!}$; $N!$ has $O(N\log N)$ bits, so this is
+an explicit polynomial-size output domain rather than a hidden algebraic-number
+oracle.  One query, followed by rational division by $4^{3m}\det B$, recovers
+$\#\mathrm{SAT}(\varphi)$.  This is a polynomial-time metric reduction.
+\end{proof}
+
+Theorem~\ref{thm:pointwise} and Theorem~\ref{thm:c1} are independent reductions
+from the same Cayley source; neither is inferred from the other.  They concern
+worst-case exact evaluation and do not preclude efficient approximate QMC/VMC,
+promised subclasses, or particular low-bond instances.
+
+For the lower-left cell, the exact path object is
+\begin{equation}
+ H_{\rm sgn}(W)=\sum_{\pi\in S_N}\operatorname{sgn}(\pi)
+ \prod_{i=1}^{N-1}w_{\pi(i),\pi(i+1)}.
+ \label{eq:signed-path}
+\end{equation}
+Its scalar factors commute, but adjacent vertices couple successive
+permutation positions, so it need not have P1.  This is a path, not a closed
+cycle: summing a cycle over all permutations would cancel for even $N$ because
+a cyclic shift reverses permutation parity.  Hamilton path/cycle polynomials,
+sign imbalance, even-minus-odd path counts, fermionants, and immanants were
+checked in a bounded search; the latter neighboring families have their own
+complexity results \cite{MertensMoore2013Fermionant}.  In the present bounded
+literature search, the authors did not find an existing complexity
+classification for this exact weighted polynomial.  We therefore register
+the cell as open and make no hardness or tractability claim.
+
+The lower-right entry supports only a conditional inheritance statement.  If
+a precisely defined parameterized function class exactly represents every
+hard bond-two instance in Theorem~\ref{thm:pointwise} with polynomial overhead,
+then its exact point-evaluation problem inherits that \#P-hardness.  Universal
+approximation does not imply exact containment.  In particular,
+Lin--Goldshlager--Lin motivate generic explicit antisymmetrization, including
+its factorial sum, but no exact containment lemma is asserted here for their
+neural class.
+
+Finally, if $J$ is fully permutation-symmetric, then directly from
+Eq.~\eqref{eq:structured-antisymmetrizer},
+\begin{equation}
+ J\,\mathcal A(M)=\mathcal A(JM).
+ \label{eq:jastrow-commutes}
+\end{equation}
+If $J$ has a compatible scalar particle-TT representation of bond $\chi_J$
+and multiplication closes in the chosen functional basis or in a stated
+finite extension, tensoring its virtual indices with a Slater carrier gives a
+conditional Slater--Jastrow embedding with the corresponding $\chi_J$ bond
+factor.  This is an embedding statement, not a norm-hardness reduction; the
+point value remains $J(x)\det\Phi(x)$ up to normalization.  The
+Zweig--Bruna separation concerns expressive efficiency relative to finite
+Slater sums, not point- or norm-evaluation complexity.
+
+The table is an organizing framework and partial classification program.  A
+complete complexity classification of structured antisymmetrization,
+including the unresolved cells and internal tractability boundaries, is left
+for future work.
+
+\subsection{Limitations and next questions}
 
 The results do not establish that every exterior family is hard, that every
 tractable exterior family is LC--AGP, or that additive approximation with a
@@ -815,7 +1008,8 @@ The attempted fermionic completion of the 2201 functional tensor network has
 identified two costs that must not be conflated.  Ordinary particle TT pays a
 binomial exchange bond even for a Slater determinant.  Exteriorizing the state
 removes that representation charge, but generic exact squared-norm contraction
-is already hard at fixed one-form bond, while a direct universal carrier
+and rational-polynomial point evaluation are already hard at fixed one-form
+bond, while a direct universal carrier
 factorization fails dimensionally.  The tested tractable matrix-pair memories
 reduce to established LC--AGP structure, and a unique sparse path already
 contains a permanent.  The nonbranching $K$-path calculation is correspondingly

@@ -706,7 +706,7 @@ references/
 
 受限 diagonal-path 路线已经完成其算法审计，但被严格识别为有限 NOCI，因而不再是差异化主路线。当前只选择一个候选：以对称显式相关因子乘 exterior carrier，在保持一阶量子化、连续坐标和精确反对称性的前提下独立控制 functional-basis 维数 \(D\)、相关特征数 \(P\) 与 carrier multiplicity \(\chi\)。小系统用确定性积分作 materialization/AD 真值检查；更大系统只有通过误差、方差、自相关和反对称残差审计后才可进入 VMC。
 
-Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。ADR 0028 明确该路线等价于有限 NOCI，只作为单篇结构/no-go 论文的数值演算章节。ADR 0031 要求的唯一 N4,D8 clean-source 内部数值点也已闭合并如实记录失败，不再扩展小规模 NOCI 点。合并稿 A 已恢复定理 1--3、完成 CHSS \(\chi=2\) 修正和内部证明/引用/版式闭环；未归一化有理 Legendre 逐点困难性在外部人类代数复杂度核阅前仍标为 conjecture，且不得外推为所有 \(\chi\ge2\) FEMPS 不适合 QMC。
+Phase 32--38 已完成受限 diagonal-path 路线的独立 \(D\)/\(K\) 扫描、批处理 transition、公开有界 API、canonical-Slater clean source、checkpoint/resume 和 fresh-seed 稳健性审计。ADR 0028 明确该路线等价于有限 NOCI，只作为单篇结构/no-go 论文的数值演算章节。ADR 0031 要求的唯一 N4,D8 clean-source 内部数值点也已闭合并如实记录失败，不再扩展小规模 NOCI 点。合并稿 A 已恢复定理 1--3、完成 CHSS \(\chi=2\) 修正和内部证明/引用/版式闭环；未归一化有理移位 Legendre 逐点困难性已以显式输出域和位复杂度证明为 theorem，但投稿前仍须外部人类代数复杂度核阅，且不得外推为所有 \(\chi\ge2\) FEMPS 不适合 QMC/VMC。论文 A 内容现已冻结；未经用户明确反馈不得继续修改。
 
 ADR 0029/0030 唯一允许的显式相关 Phase 40 随后按冻结方案执行：对称 Gaussian correlator 乘 \(\chi=1\) exterior carrier 的 72 个 \(D/P/seed\) 状态和 54 个固定-\(K\) NOCI 对照全部通过残差、梯度、积分和重建审计。冻结的 \(P=5\) 对 \(K=4\) 判据在 \(D=2,4,6,8\) 通过，在 \(D=10,12\) 失败；clean-source 全轴重跑逐观测量完全一致。该结果只证明有界 N=2 上的低-\(D\) 显式相关基组效率取舍，不是通用 FEMPS 优势或可扩展收缩。不得据此建立论文 B；下一数值主线只能是预注册的 \(N>2\) 受控随机/混合收缩与 Li--Waintal/同基 DMRG 比较，必须报告方差、自相关、有效样本量、失败概率、反对称残差和独立复现。
 

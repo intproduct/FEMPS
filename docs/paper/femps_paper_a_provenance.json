@@ -1,0 +1,27 @@
+{
+  "artifact": "output/pdf/femps_paper_a_frozen.pdf",
+  "artifact_bytes": 409039,
+  "artifact_pages": 17,
+  "artifact_sha256": "d688d4939a389ca50f7b2f130bd24bfa13f4fd901cc0d026adec2c7ede456fd9",
+  "bibliography": "references/references.bib",
+  "bibliography_sha256": "ff0d7b2a5c715d3f91f17cdee66d7955fed1bbb6f46e21d6598870471f652665",
+  "build_command": "python scripts/build_combined_manuscript.py",
+  "build_diagnostics": {
+    "layout_warnings": false,
+    "undefined_references": false
+  },
+  "content_status": "frozen_pending_human_scientific_and_wording_review",
+  "exact_pointwise_verifier": "scripts/verify_rational_legendre_pointwise_reduction.py",
+  "exact_pointwise_verifier_sha256": "f2ed7656126cdb408a312b97f6ac9a8cbf0f323896ef14919d3c67998456b4aa",
+  "schema_version": 1,
+  "source": "math/femps_no_go_manuscript.tex",
+  "source_sha256": "5a6df7f4d06ec918ff66b04dfe5f78360292a33ce38ed7603c12058d070df167",
+  "validation": {
+    "exact_certificate_tests": "11 passed in 6.60 s",
+    "full_suite": "313 passed, 1 known warning in 674.52 s",
+    "rendered_pages_inspected": 17,
+    "reproduce_2201_absolute_error": 0.00010805366005195438,
+    "reproduce_2201_final_energy": 1.8788029184435575,
+    "reproduce_2201_steps": 500
+  }
+}

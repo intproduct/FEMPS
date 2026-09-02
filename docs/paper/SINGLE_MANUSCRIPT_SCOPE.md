@@ -5,7 +5,7 @@
 The project currently has one publication manuscript:
 
 - authoritative source: `math/femps_no_go_manuscript.tex`;
-- generated review PDF: `output/pdf/femps_combined_manuscript_v5.pdf`.
+- canonical frozen review PDF: `output/pdf/femps_paper_a_frozen.pdf`.
 
 The structural/no-go results and all presently admitted restricted-solver
 numerics belong to this manuscript. The existing
@@ -31,7 +31,9 @@ their scientific content is unchanged.
 ## The chi=2 boundary
 
 The direct Cayley construction gives a hard pointwise amplitude already with
-maximum one-form bond `chi=2`. CHSS Theorem 3.9 supplies the structured output
+maximum one-form bond `chi=2`, and the final rational shifted-Legendre theorem
+transfers it to an explicit continuous functional basis with polynomial bit
+complexity. CHSS Theorem 3.9 supplies the structured output
 `a I_2+b J_2`, `a+b=4^(3m)#SAT`; the fixed boundary `u=e_1`, `v=e_1+e_2`
 therefore gives a nonnegative top-form coefficient at the same bond. Therefore:
 
@@ -41,7 +43,9 @@ therefore gives a nonnegative top-form coefficient at the same bond. Therefore:
 - maximum-bond-three scalar-reference polarization: retained only for general
   signed Cayley outputs.
 
-The combined manuscript states this boundary explicitly.
+The combined manuscript states this boundary explicitly. Paper A is now
+content-frozen pending human scientific and wording review; no further edit is
+authorized without explicit user feedback.
 
 ## Status of the restricted solver numerics
 

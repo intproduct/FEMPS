@@ -8,7 +8,7 @@
 | Direct Cayley coefficient identity | arbitrary field, matrix-valued one-forms | theorem | self-contained exterior/permutation proof | endpoint convention check complete |
 | Exact rational squared-norm hardness at maximum bond two | `Q`, CHSS structured family, metric reduction | theorem conditional on published source theorem | CHSS Theorems 3.5 and 3.9 | external human algebraic-complexity sign-off pending |
 | General signed Cayley recovery at maximum bond three | `Q`, two norm queries | theorem/remark | self-contained polarization | existing exact certificate covers small generic cases |
-| Rational Legendre exact point-value transfer | unnormalized rational `P_n`, `Q`, metric reduction | conjecture with internally complete proof draft | CHSS plus rational interpolation | external human review required before promotion |
+| Rational shifted-Legendre exact point-value transfer | rational `ell_n(t)=P_n(2t-1)`, explicit `q/sqrt(N!)` output, `Q`, metric reduction | theorem with exact check through `N=6` | independent CHSS reduction plus Vandermonde and polynomial bit bounds | external human algebraic-complexity sign-off pending |
 | Bounded Wedderburn--radical LC--AGP collapse | complex algebraic term bound; rational Turing construction only with decomposition supplied | theorem | Wedderburn--Malcev; Veronese/polarization | verify input-model wording and rational decomposition boundary |
 | Fixed-state graded LC--AGP collapse | fixed `w,g`; rational construction with embedding supplied | theorem | Vandermonde interpolation; weighted-automata context | verify inverse bit bounds and quotient lift |
 | Sparse bandwidth-one APG norm hardness | zero--one matrices over `Q/R`; complex absolute-square variant | theorem | Valiant permanent theorem; APG prior art | external normalization review |
@@ -21,12 +21,17 @@
 
 - Exact hardness does not exclude additive, randomized, Monte Carlo, or
   separately promised algorithms.
-- The Legendre conjecture does not imply that all `chi>=2` FEMPS are unsuitable
-  for QMC.
+- The pointwise theorem is a worst-case exact-evaluation statement and does not
+  imply that all `chi>=2` FEMPS are unsuitable for QMC/VMC or controlled
+  approximation.
+- Universal approximation is not exact containment. Hardness transfers to a
+  different parameterized class only after an exact polynomial-overhead
+  containment lemma.
+- The symmetric-Jastrow identity is an embedding statement; no Slater--Jastrow
+  norm-hardness result is inferred from hardness of the ambient FEMPS class.
 - Occupation-number MPS and second-quantized DMRG remain comparators, not
   FEMPS aliases.
 - The selected numerical state is a finite NOCI expansion and supplies no
   independent method novelty.
 - The old bond-three theorem remains a correct general polarization statement,
   but is not the sharp structured CHSS norm boundary.
-

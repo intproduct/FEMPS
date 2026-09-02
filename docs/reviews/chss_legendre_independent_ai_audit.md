@@ -22,8 +22,11 @@ peer review and not the requested algebraic-complexity researcher sign-off.
 4. Construction coefficients, rational nodes, query data, and the CHSS answer
    remain polynomial-bit. No mathematical gap was found that intrinsically
    forces the Legendre statement to remain conjectural.
-5. Submission-facing status should nevertheless remain conjectural until the
-   user-required independent **human** algebraic-complexity review is received.
+5. At the time of this audit, submission-facing status was kept conjectural
+   pending the user-required independent **human** algebraic-complexity review.
+   The later user-authorized final framework patch promoted the internally
+   closed shifted-Legendre proof to a theorem while retaining that human review
+   as a mandatory pre-submission gate; this AI audit is not that sign-off.
 
 ## Corrections identified and applied
 
@@ -32,4 +35,3 @@ three, an equation label was called a lemma, and the certificate table did not
 distinguish the generic Cayley/polarization check from the CHSS-specific
 structured-output theorem. All three were corrected in the manuscript after
 the audit.
-

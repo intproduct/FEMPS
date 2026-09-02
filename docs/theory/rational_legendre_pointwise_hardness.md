@@ -1,131 +1,85 @@
-# Exact pointwise hardness in the rational Legendre basis
+# Exact pointwise hardness in a rational shifted-Legendre basis
 
 ## Scientific status
 
-The statement below remains a **conjecture** with an internally complete proof
-draft. The submission manuscript continues to use that evidence label until an
-external algebraic-complexity researcher has checked
-the encoding and reduction. It is not a statement about approximate sampling,
-VMC, QMC, or all `chi>=2` FEMPS.
+The reduction is now stated and proved as a **theorem** in the canonical Paper
+A source. This promotion closes the final repository-internal proof pass; it
+does not constitute the still-required independent human algebraic-complexity
+review. It is not a statement about approximate sampling, VMC, QMC, or every
+`chi>=2` FEMPS instance.
 
-## Problem convention
+## Exact evaluation problem
 
-Let `P_r(x)` be the standard unnormalized Legendre polynomial, with
-`P_r(1)=1`; no orthonormal factor `sqrt((2r+1)/2)` is introduced. Inputs are
-rational `2 x 2` Legendre coefficient matrices for site-labelled one-particle
-functions
+For `ell_r(t)=P_r(2t-1)`, where `P_r(1)=1`, the input consists of:
 
-```text
-F_i(x) = sum_{r=0}^{D-1} B_[i,r] P_r(x),
-```
+- rational coefficient matrices for site-labelled one-form FEMPS cores in
+  `ell_0,...,ell_(D-1)`;
+- rational boundaries and rational query points;
+- maximum virtual bond two and, in the hard family, `D=N`.
 
-together with rational boundaries `u,v` and rational points
-`x_1,...,x_N in (-1,1)`. The requested value is the unnormalized alternating
-point value
+With the isometric exterior map, every such rational query value has the form
+`q/sqrt(N!)`. The exact output is the pair `(q,N)`, with rational `q`;
+equivalently, the problem may request the unnormalized rational alternating
+value `q`. This explicitly represents the only algebraic normalization factor
+and invokes no hidden algebraic-number oracle.
 
-```text
-Alt(F_1,...,F_N)(x_1,...,x_N)
- = sum_{sigma in S_N} sgn(sigma)
-   u^T F_1(x_sigma(1)) ... F_N(x_sigma(N)) v.
-```
+## Evaluation matrix and bit bounds
 
-This is the coordinate evaluation naturally associated with the algebraic
-exterior product. If a physics convention inserts a known global
-`1/sqrt(N!)`, the theorem should be stated for the unnormalized value above;
-doing so keeps the entire Turing model rational and uses no algebraic-number
-oracle.
-
-## Rational interpolation lemma
-
-For `D=n`, choose
+The integer expansion
 
 ```text
-xi_j = -1 + 2j/(n+1),  j=1,...,n.
+ell_r(t) = sum_(k=0)^r (-1)^(r-k) binom(r,k) binom(r+k,k) t^k
 ```
 
-These are distinct rationals in `(-1,1)` with `O(log n)`-bit numerators and
-denominators. Let
+has leading coefficient `binom(2r,r)`. For `t_i=i/(N+1)` and
+`B_ij=ell_(j-1)(t_i)`, degree grading gives
 
 ```text
-E_[j,r+1] = P_r(xi_j),  0<=r<n.
+det(B) = product_(r=0)^(N-1) binom(2r,r)
+         product_(i<k) (t_k-t_i) != 0.
 ```
 
-The matrix `E` is nonsingular: `P_0,...,P_(n-1)` are a degree-graded basis of
-the polynomials of degree below `n`, and a nonzero polynomial of that degree
-cannot vanish at all `n` distinct nodes.
-
-The explicit formula
+The nodes have `O(log N)` bits. The integer coefficient formula makes every
+evaluation polynomial-bit. The common denominator `Q=(N+1)^(N-1)` clears all
+entries. Hadamard bounds for `QB` and its minors then show that `det(B)`, its
+reciprocal, and
 
 ```text
-P_r(x) = 2^(-r) sum_{q=0}^{floor(r/2)}
-         (-1)^q binom(r,q) binom(2r-2q,r) x^(r-2q)
+B^(-1) = Q adj(QB) / det(QB)
 ```
 
-shows that every entry of `E` has polynomial bit length (in fact
-`O(n log n)` is sufficient). Choose a common denominator `Q` for all entries;
-even the product of their individual denominators has polynomial bit length.
-Then `B=Q E` is an integer matrix whose entries have polynomial bit length.
-Hadamard's bound gives polynomial bit length for `det(B)` and every
-`(n-1) x (n-1)` minor. Cramer's rule,
+have polynomial bit length and are computable by exact rational arithmetic in
+polynomial time. The inverse is not needed by the direct basis reduction, but
+the bound also certifies that passage to point-value/Lagrange coordinates has
+no hidden exponential encoding cost.
+
+## Independent reduction from CHSS
+
+For the CHSS matrix `H=(H_ij)` over `Mat_2(Q)`, define
 
 ```text
-E^(-1) = Q adj(B)/det(B),
+A^[i](t) = sum_(j=1)^N H_ij ell_(j-1)(t),
+u=e_1, v=e_1+e_2.
 ```
 
-therefore gives rational entries of polynomial bit length and is computable by
-exact rational Gaussian elimination in polynomial time. This supplies the
-required inverse-matrix bound, rather than merely invoking interpolation over
-an unspecified field.
-
-Define the Lagrange functions in the requested basis by
+The CHSS entries themselves are the functional-basis coefficients. Expanding
+at `(t_1,...,t_N)`, scalar evaluation factors commute while the virtual
+matrices remain row ordered, so
 
 ```text
-L_j(x) = sum_{r=0}^{n-1} (E^(-1))_[r+1,j] P_r(x).
+Psi(t_1,...,t_N)
+ = det(B) u^T CDet(H) v / sqrt(N!)
+ = det(B) 4^(3m) #SAT(phi) / sqrt(N!).
 ```
 
-Their Legendre coefficients have polynomial bit length and
-`L_j(xi_k)=delta_jk` exactly.
+Repeated basis-column choices cancel; a column permutation contributes its
+sign times `det(B)`. All inputs, the query, the exact output representation,
+and the postprocessing have polynomial bit length. One exact query followed by
+rational division therefore recovers `#SAT`, giving a polynomial-time metric
+reduction.
 
-## Reduction from CHSS
-
-Given a 3CNF formula `phi`, apply the polynomial-time CHSS construction to
-obtain an `n x n` matrix `H=(H_ij)` over `Mat_2(Q)` such that
-
-```text
-CDet(H)=a I_2+b J_2,  a+b=4^(3m) #SAT(phi).
-```
-
-Set
-
-```text
-F_i(x) = sum_{j=1}^n H_ij L_j(x),
-u=e_1,  v=e_1+e_2.
-```
-
-Exact rational matrix arithmetic constructs all Legendre coefficients in
-polynomial time and polynomial bit length. At the ordered tuple
-`(xi_1,...,xi_n)`, the Kronecker interpolation identities give
-
-```text
-Alt(F_1,...,F_n)(xi_1,...,xi_n)
- = sum_sigma sgn(sigma) u^T H_[1,sigma(1)] ... H_[n,sigma(n)] v
- = u^T CDet(H) v
- = 4^(3m) #SAT(phi).
-```
-
-Thus one exact point-evaluation query followed by exact division by `4^(3m)`
-recovers `#SAT(phi)`. The CHSS matrix dimension is polynomial in `|phi|`, the
-nodes, Legendre coefficients, query, and answer all have polynomial bit length,
-and every virtual matrix is `2 x 2`. The construction is a polynomial-time
-metric reduction, hence also a polynomial-time Turing reduction.
-
-## Conjecture under external review
-
-> Exact unnormalized pointwise evaluation of rational first-quantized
-> continuous one-form FEMPS represented in the standard unnormalized Legendre
-> basis is `#P`-hard under polynomial-time metric reductions, already at
-> maximum internal bond two and `D=N`.
-
-The statement must remain marked conjectural in submission-facing text
-until external review confirms (i) the CHSS encoding specialization to `Q`,
-(ii) the normalization convention, and (iii) the inverse-matrix bit bound.
+This pointwise theorem and the fixed-bond squared-norm theorem are independent
+reductions from the same Cayley source. Neither is deduced from the other.
+The bounded verifier checks the determinant, inverse, and point formula for
+orders two through six; that **exact certificate** guards against
+transcription errors but does not replace the arbitrary-size proof.
